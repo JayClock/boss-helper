@@ -1,3 +1,4 @@
+import { isRecentlyActive } from '@/utils/activity'
 import { renderTemplate } from '@/utils/ai'
 import type { HelperContext } from '~/composables/useHelper'
 
@@ -350,23 +351,15 @@ export class TaskRegistry<C extends HelperContext<C, T, S>, T, S = {}> {
       return
     }
     return async (_, { jobData }) => {
-      const activeText = jobData.activeTimeStr
       const activeTime = jobData.activeTime
 
-      if (!activeText && !activeTime) {
-        ctx.helper.statistics.todayData.value.activityFilter++
-        return taskResult.skip(`无活跃内容,如果全失败请反馈`)
-      } else if (!activeText && activeTime) {
-        if (ctx.now.getTime() - activeTime >= 7 * 24 * 60 * 60 * 1000) {
-          ctx.helper.statistics.todayData.value.activityFilter++
-          return taskResult.skip(`不活跃 [${new Date(activeTime).toLocaleString()}]`)
-        }
-      } else if (!activeText) {
+      if (!activeTime) {
         ctx.helper.statistics.todayData.value.activityFilter++
         return taskResult.skip(`无活跃信息,如果全失败请反馈`)
-      } else if (activeText.includes('月') || activeText.includes('年')) {
+      }
+      if (!isRecentlyActive(activeTime, ctx.now.getTime())) {
         ctx.helper.statistics.todayData.value.activityFilter++
-        return taskResult.skip(`不活跃, [${activeText}]`)
+        return taskResult.skip(`不活跃 [${new Date(activeTime).toLocaleString()}]`)
       }
     }
   })

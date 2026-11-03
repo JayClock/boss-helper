@@ -93,7 +93,7 @@ export function useConfigSections() {
                   type: 'checkbox',
                   key: 'activityFilter',
                   label: '活跃度过滤',
-                  help: '打开后会自动过滤掉最近未活跃的Boss发布的工作。以免浪费每天的100次机会。',
+                  help: '打开后会自动过滤掉最近 3 天内没有活跃过的Boss发布的工作（按活跃时间戳判断）。以免浪费每天的100次机会。',
                 },
                 {
                   type: 'checkbox',

@@ -5,6 +5,7 @@ import type { JobStatus } from '@/composables/useApplying/type'
 import { useHelper } from '@/composables/useHelper'
 import type { JobData } from '@/composables/useHelper'
 import { useJobActions } from '@/composables/useJobActions'
+import { isRecentlyActive } from '@/utils/activity'
 
 const helper = useHelper()
 const actions = useJobActions()
@@ -60,16 +61,8 @@ async function showDescriptionHandler() {
   }
 }
 
-function getActiveTimeType(job: JobData): 'success' | 'warning' | 'error' {
-  const activeTime = job.activeTime
-  if (!activeTime) return 'error'
-
-  const now = Date.now()
-  const diffDays = (now - activeTime) / (1000 * 60 * 60 * 24)
-
-  if (diffDays <= 2) return 'success'
-  if (diffDays <= 7) return 'warning'
-  return 'error'
+function getActiveTimeType(job: JobData): 'success' | 'error' {
+  return isRecentlyActive(job.activeTime) ? 'success' : 'error'
 }
 </script>
 

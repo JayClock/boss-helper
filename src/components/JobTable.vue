@@ -10,6 +10,7 @@ import type { JobData } from '@/composables/useHelper'
 import { useHelper } from '@/composables/useHelper'
 import { useJobActions } from '@/composables/useJobActions'
 import { ExtStorage } from '@/message'
+import { isRecentlyActive } from '@/utils/activity'
 
 const props = defineProps<{ jobs: JobData[]; following: boolean }>()
 const emit = defineEmits<{ 'update:following': [value: boolean] }>()
@@ -239,11 +240,9 @@ function jobLabels(job: JobData) {
   }
   return labels
 }
-function activeColor(job: JobData): 'success' | 'warning' | 'error' {
+function activeColor(job: JobData): 'success' | 'error' {
   if (job.boss.isOnline) return 'success'
-  if (!job.activeTime) return 'error'
-  const days = (Date.now() - job.activeTime) / 86_400_000
-  return days <= 2 ? 'success' : days <= 7 ? 'warning' : 'error'
+  return isRecentlyActive(job.activeTime) ? 'success' : 'error'
 }
 function status(key: string) {
   const result = helper.jobResultMaps.get(key)

@@ -11,6 +11,7 @@ import { getRootVue, useHookVueData, useHookVueFn } from '@/composables/useVue'
 import { run } from '@/index'
 import { counter, initCounter } from '@/message'
 import type { FormDataInput } from '@/types/formData'
+import { formatActiveTime } from '@/utils/activity'
 import elmGetter from '@/utils/elmGetter'
 import { logger } from '@/utils/logger'
 
@@ -49,18 +50,6 @@ const initSearch = useHookVueFn('#wrap .page-job-wrapper,.job-recommend-main,.pa
   'searchJobAction',
   'onSearch',
 ])
-
-function formatActiveTime(timestamp: number): string {
-  const now = Date.now()
-  const diff = now - timestamp
-  const day = 24 * 60 * 60 * 1000
-
-  if (diff < day) return '今日活跃'
-  if (diff < 2 * day) return '昨日活跃'
-  if (diff < 7 * day) return '本周活跃'
-  if (diff < 30 * day) return '本月活跃'
-  return '较久未活跃'
-}
 
 function convertBossZpJobItemToJobData(item: BossZpJobItemData): JobData {
   const key = `boss::${item.encryptJobId}`
@@ -356,8 +345,8 @@ export class BossHelperCtx extends HelperContext<BossHelperCtx, BoosJobData, {}>
 
     job.rawData.detail = detail
     const targetJob = job.jobData
-    targetJob.activeTime = detail.brandComInfo.activeTime
-    targetJob.activeTimeStr = detail.bossInfo.activeTimeDesc
+    targetJob.activeTime = detail.brandComInfo.activeTime ?? targetJob.activeTime
+    targetJob.activeTimeStr = detail.bossInfo.activeTimeDesc ?? targetJob.activeTimeStr
     targetJob.jobDescription = detail.jobInfo.postDescription
     targetJob.city = detail.jobInfo.locationName
     targetJob.address = detail.jobInfo.address
