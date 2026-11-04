@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:3f650e7a5e60ee8252f7504a72c04218ef066b623e520895cf185b29222c2d8c",
+  "claims": [
+    {
+      "id": "claim_05314e1826344714b790e89699c04201",
+      "statement": "Boss Helper 的 HTTP 端点全部直接请求 www.zhipin.com 的 wapi/*，用页面注入的 window.Cookie.get('bst') 作为 Zp_token 请求头，各函数在体内重复读取该凭据，缺失时先 toast「没有获取到token,请刷新重试」再抛 PublishError 或 GreetError。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L125-L134",
+          "version": "repo-lines-v1:sha256:e77618ca7e726151dc3afd1c4be58bc20a726dca592a55d633a635a6a85ac868:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4YmU4ODc5MDQyODNmYWY1ZjZhOWVjODYzYjQ1OWUxOWFlMTBkZDMwMTcyZGY3NmIzM2ExZjVlMWY3ZDJiODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhYjY3ZTdjMzU3YzJmMGYxZjA4NWMxZTBhMGQyODllYmNiZjg3MGQ3MThkMzMyMDY3MjUyODBkZDMzNzAwMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkMDYyMGYxM2NhYTQ0Njc4MjBkMDIzMjY3ZmIzMTQ4ZTMxYTk2OGNjMGJhMTUzNTUxMWM5ZGVkMzRmYjNhODQifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L166-L175",
+          "version": "repo-lines-v1:sha256:c5868783fbea793dda6c714b5b3ddd5271879324b55ba096b64227de045a9d40:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVkZDk1ODgxYzE0MGI3MWJmZGFkMTY4NGFiZDllOTFmZDYyNDBlOTMxN2I0MmNkYjcxNDg1NjA4ZTE0ZGIyMzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjMDIzMWNjYmNhNDJlNmM1NzA3MTE1M2RmN2JkNmFhYjVmYzA3MjJjM2M4NWEzMWE4YzljODVhZTJkZTBjMzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhkYTA1NmU1NTY3NzI5MGQ1ZjIxNzA2ZGE3NDYzOTRkNTBhYmU1MjdmODEyOGFjMzRhMzJiMzU2Nzk1YjNiYTYifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L20-L35",
+          "version": "repo-lines-v1:sha256:124bcfe89ef6e587978f0ff9b1a53b77c2c3f3aed771b6635a353b04c26f9708:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZmUwNGFkOTJhZTAwNTdmZDU0ODFhMDRhNWQ1ZGE4YjM1ODgzNmUyNzQ3NDA2YzY4NGExYjQ0NDZjZTViNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlZGFkYTQzZjRiMDM4YTE1MGJlNGYyYzU2Y2I4OWVhMzkyYTA1NzFhZDViNmJmMWZiMmVjMjNhMjBhNzZiMTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiMWNkM2EwNTU0ZWQwMDUzYmI2OGE2YzVkYmJkYTJmODg1NTVkMzA0YjYzODM2MzVmNzliNDM2YjJiODJhM2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ1MWQ1NDFhODk5MjM1YmI5MjYyZjY1ZWNjYjc4NzJjNzMyMGQzNjE3YTMxMjczNDZiZThmNmFjNmM1MTU5MGEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L58-L66",
+          "version": "repo-lines-v1:sha256:2eea547761834e99b497b91e8e209c4e2bc5ae04f4e56344b66b4876c63aea80:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFmYzU3ZmU2YTU4YWEzODM3YTZkNjI4MTg2MjVjNzA5NjRhMTkyM2U0N2Y4YWU3YWRkZWY1OTBkYjIyNDMxMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDE4OGJmMjBkOTA3NDRjNzQ2MGE4MmFlMDFjMmUyNDVhYmE4NWEzNDE0NjBkYmU5MDVkOTVjN2I5MDA2Mzc2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTVkOTQ2OTcwMmYzNDQzZjNjZWU1MjJjZTI2OTc0NDYzYzBkMzhjOGU1NDliNjZmYmIzZTZmNTI2MDJhNDAxZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2UwM2QyNjM2YjVkY2UzYjA4NzlkYWUzMTcxYTNmY2FiMWNmM2VjYmUyNjVhOTlmYWU5MzQ5ZWE5YzFiY2Y2ZiJ9"
+        },
+        {
+          "resource": "repo://src/env.d.ts#L36-L39",
+          "version": "repo-lines-v1:sha256:415f1d955f921a0aef86e7d0056399b5561f1b29c62dcf77662f54bac649b8a1:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmY5ZmIyNTBhZGViNDRmOTlhOTM3ZGY4Y2U5NDgyZjJmODFiZWU2ZjllNmUxNTA0ODYzNjUxZmYyNmMxMWVhZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjAwM2M0MDVlZjA3YWY3YzJmMzc0NjBmNmJiYzkwZjkyYTdjZWJlODk3MTRmOTI2MjljMTdhNjEyYzE4MTA0MiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4f0f4f1a52134c4caea6a2ad20f5514d",
+      "statement": "聊天长连接不用 bst 而用 window._PAGE.token 与 GET /wapi/zppassport/get/wt 返回的 zpData.wt2：token 进入 MQTT username（`${token}|0`），wt 同时充当 MQTT password 和 WebSocket 子协议名，用户 id 取 window._PAGE.uid ?? userId 并校验为正的安全整数。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L27-L70",
+          "version": "repo-lines-v1:sha256:e9eeacbc2d655f708f70f45194b6fbfdc5d7f27f3fb8fdbff0323f1e585415b8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyZDJlYzMzMThiMzFlOGFkODJkNGEwZDQyMjVlZThlODVlNjQ1OGVlNjc2NmM1YzcxMmI3YmQyYjc0NjI2OTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhYmE1ZmM5YzM0NDk2MmE2NTEwMTgxMzZiMTBkYmNkMjQ1YjM3M2QyOWJlMTlkYzIyMjhlNmU4NjQ1MTM2NzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiYzhlYTk1Y2ExMjM4OGM1NGNhOWU4Nzg5NDA1OTdjNWQ4NmJkODM5OWI1OTk4MzczY2EwMTA2NDNmYjJiZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhNzdkNGYxZjUyMDc5YmIxZWRmMjE5YTUxYzAxZmI1YzY4NTU2YjgyOTlmOTA1MTkwMGI0Nzc0ZDkwMDUxYTEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L73-L103",
+          "version": "repo-lines-v1:sha256:da65b0e6456fcfd5e141c959d08e896e1291875ff332df1a751938bb61f30640:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmZjUwYzA3N2IxMmQzYTE5NjhkNDNhMTBjNzAxN2E5ZTgyZWYwYzcyOTIzNGM4ZDUwYjM1OTlmNDFmNTU5MDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2ODYxZjYwOTU0N2IxYjNjNzlkY2Y5YjUwMzgzZGY2ODM1YmYwNzY1M2YxZDQwZjM1NzljMTU3OGM3NDEwM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU3YjYzOGJhMjczMWQ4ZTE3ZWIwNWU1NTE4MGU0OGMyNTg4NTY3YjQ0NjEwMDU0NTVhYzg5MGM2MTFhMGM1MTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2YjE5NzQzYThlNTljNjUxODQwYmQ4YTRkNDU0MWZiNTI4NTA2MTlkZTUwODViNjZhZjk0NDZlYzc1NTU1NDcifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L142-L143",
+          "version": "repo-lines-v1:sha256:0315a12b099d7bdffaedba6e31cbd0e3b0f550257c0152ebb9ef1acbfc78da6b:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzEzNDdhODY3NmM3MTgzYzJiNDQ1ZWJkNTNkYWRjYjNkNTc5YjFiOWNlZTYwMDFmZDc2MjdiY2ZmMWI2MTA1MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGIxNzg4MzNhMjRkYWY2YmRiZmU3MjQyM2Q1NzhkYjAyZjUwNDEwNzM0MWJhYWY0YmU5NjgyZTkxOTcxMjRhZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjM2ZDBmOGI2NmMwM2M4YTQ1NTJiZjIyNTQ2Mzc5M2Y4ZjVhMzhiYjY0OTg4ZGY0Y2VkMDVhZWM4N2U0ZjcwNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTk1MTY5YWQwMDAwZDhjODNlZGY4YTQ4MjVlMTIxODA0NDJjMWQxOTQ4OTE4YjgwMTQ3NjM3ZjA4MWM1MWU1YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_58c7ab968c5e4b23b2e3ead7cfaf6d3d",
+      "statement": "getJobDetail 是唯一不重试的端点：GET wapi/zpgeek/job/detail.json（query securityId、lid、_=Date.now()）带 AbortSignal.timeout(5000)，失败直接抛普通 Error；除它之外 sendPublishReq（超时 10s，默认 3 次）与 getBossData（超时 10s，默认 3 次）都只在传输层错误时递归 retries - 1，BossHelperError 实例原样上抛。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/deliverError.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:8a9f5bff224769daf6e1d2e5db78ba96437001d177de0f7d6b25e3a3488753af:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmM2Q0M2QxYjEzNDA4Njg4YzdlNjlhOTk5ZTc1MzA0MjkyZTc4YjI1YzIxZDQxNzg0N2RmNDhjM2UyNWE0ODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmOGNjMmRlNzc0MDgxNDRmMTQ4MzFiNTA4MjdjMDAxMTU5ODI4ZTBkOWNmYzZiOWEzYTNlODg5NGZkZDZjYTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiOGE2MTg5OTNmOWZhYzhiNjkyYzRmZWUyNTZmOWFiMWMwZTU2M2E0NDA0YmI1MjQwY2Y2Yjc4MDgyOTdiZjUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L115-L165",
+          "version": "repo-lines-v1:sha256:466c60f019bc6fa8a7662ed719b699778ae70d150295c20a5a43053a9cfb6b5d:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhYTgyYzZmYzIxYWNkY2M5OTQwN2VlNjgyNTBhZGY5NzIxNGQzMzIzNzMyOTYwY2MyNmIzZGQzMDlkNjI1ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkOTFiZWQxYjA4OTg2ZmY0OGY5MzliMGI0MzEwY2Y5ZjYxYzk0YTQ3YmQ2ZDM5ZDAxMTBmZmE3MDQ0M2JhNDAifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L20-L46",
+          "version": "repo-lines-v1:sha256:d67502e6bb33dbcc360228b33475723a3c00e1e37d00a548eb93d9626f5dea1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZmUwNGFkOTJhZTAwNTdmZDU0ODFhMDRhNWQ1ZGE4YjM1ODgzNmUyNzQ3NDA2YzY4NGExYjQ0NDZjZTViNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjYTE0ZTY1YTI0Zjk3ZDQ5Y2Q3MDk3YzAzYjg5YzdhZjZkOTQ1YzZiZGQ5ZDRkOTgyZTAwMjZhOTU1YTNmYzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiMWNkM2EwNTU0ZWQwMDUzYmI2OGE2YzVkYmJkYTJmODg1NTVkMzA0YjYzODM2MzVmNzliNDM2YjJiODJhM2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFkZmVlOGUxNTUxMzllNzNlYzk5MTA3YzEyYmQwOTQ2ZjZiMmJiMDBjNmQ0Y2U2M2VmNjQ3ZTA3NTk1YTdkZjgifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L48-L113",
+          "version": "repo-lines-v1:sha256:3093638b426ec822534904ebc582dab41171dc0810b83d80d393b4d731c19818:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxZDYwMGJhNThmYjRiOTRhODg0OWY0YTYwN2YxNmMzMDlhY2I4MTVkODE0MDQ4MTQ3ODYwNWViMWZhNjBkYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjNGEwNGIxNjQ4ZmU5ZDc1OTdmMjMzNDkzZGU2ZTNmNmE0ZjgyMmNlNDUwZmJhNzM1NmY1M2IxOWFiNDZkZTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2YjZjZmU5YTFjYjcxYmExNmJlOGJhM2FlNTRjYTAyZjU5ODg4NTgyMDlkMzBmM2E5NmI5MDMxNzk3NjYzMTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e743baa948f34b12992cd8a0375267c2",
+      "statement": "sendPublishReq 把 friend/add.json 的 code === 1 弹窗文案翻译成四类结果：含「您今天已与120位BOSS沟通」时先 POST chatremind.json（ba + action=addf-limit-popup-c）再以 { cid: 1 } 递归重发并复用同一份 retries；含「您今天已与150位BOSS沟通」抛 LimitError；含「操作过于频繁」抛 RateLimitError；其余抛 PublishError；确认请求本身失败则抛 PublishError「投递限制确认失败」。非 0 且非 1 的 code 抛 PublishError「未知错误状态」。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L74-L110",
+          "version": "repo-lines-v1:sha256:edc6e94f796b72e3d63c895627b50ad2100dca35d03bd8b091fc6e237dcbc881:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMjA4YWQ0ZjYzYTU4MDc2YjJkNzI1ZWJhOWNjMjY1NTg5MzNlZjFiYmJmMjQ1ODkzMGJiMGI4ZjE2YTkxNzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyYmFhZjBkNTk2NzRlYjdkOWVlM2I3OWJmNTA4YzM0YzdlZWE3YmZhNDMwNTMyYTBiYTdkYWY1YmY3M2QyNDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRlZjdiZjUwNjRlNDBjZGEzNWU4NDhhNmZlMzMxMzM4ZDcwZjliMjBkZWFmMmQ5N2NlZmEyNjc2NzRjZWQwOTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c4527b7f6f3f475a925465535aa7de73",
+      "statement": "getBossData 对平台返回的 message === '非好友关系' 有专属分支：不抛 GreetError，而是带该消息递归一次并消耗重试预算；其它非 0 状态抛 GreetError『状态错误:...』，成功时返回 zpData 作为后续打招呼需要的 bossId / securityId / bossSource。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L115-L165",
+          "version": "repo-lines-v1:sha256:466c60f019bc6fa8a7662ed719b699778ae70d150295c20a5a43053a9cfb6b5d:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhYTgyYzZmYzIxYWNkY2M5OTQwN2VlNjgyNTBhZGY5NzIxNGQzMzIzNzMyOTYwY2MyNmIzZGQzMDlkNjI1ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkOTFiZWQxYjA4OTg2ZmY0OGY5MzliMGI0MzEwY2Y5ZjYxYzk0YTQ3YmQ2ZDM5ZDAxMTBmZmE3MDQ0M2JhNDAifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/types.ts#L3-L34",
+          "version": "repo-lines-v1:sha256:7301bf6c1486e27b090559edd805d32df77472974c95029f122b1e64e186f0d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2M2I4YWY2OThmMzUxMjE1ZmRjNWJmMDY3ZmFjNDNhNjQyZDQ2ZmI3OTZkZDJiNDNkMTUwNTAyYTg5MzhiY2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVjNGIxOTdjNDY4MjlhMzUyYTA5YjRiNDEwM2U1NTUxZjkzMjc0ZWQ1YWE4MzJkZDNkMTkyZjVjYmY4MTQyYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2OTBlNGY4YTA4ZjMzZGY4NzhjNDlkMjRjODU3ZTcxOWQyZmJjNzc4NWZjYWYxNDYzNWI0MDg4ZjYzMTFmODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3NGUyOTY4OWY3NzhiMmEyMjg3NDFlMWM3MTFlYTA2MTEzOGNlMjBiYmEyOWQ3ODg3OTQ1MDkxYTFiYWYyY2YifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c6e0004d96ba4d5c89b2968d00c1b602",
+      "statement": "uploadImage 是秒传优先的两段式且完全没有重试：先 POST wapi/zpupload/quicklyUpload（fileMd5、fileSize、source=chat_file、securityId），命中则复用远端 URL；否则 POST wapi/zpupload/image/uploadSingle 上传字节，失败抛普通 Error。两次请求都用小写 zp_token 头（与其它端点的 Zp_token 不一致），返回结构被裁剪为 { tinyImage: 200×118, originImage: 用 metadata 宽高 }。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L166-L299",
+          "version": "repo-lines-v1:sha256:1db376672cb11992003afabbb1b8741d46baebd968e3dac5fb3db5e4ed6a7857:eyJzZWxlY3RlZExpbmVDb3VudCI6MTM0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIwMWJhNDcxOWM4MGI2ZmU5MTFiMDkxYTdjMDUxMjRiNjRlZWVjZTk2NGUwOWMwNThlZjhmOTgwNWRhY2E1NDZiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI1YzAyMzFjY2JjYTQyZTZjNTcwNzExNTNkZjdiZDZhYWI1ZmMwNzIyYzNjODVhMzFhOGM5Yzg1YWUyZGUwYzM1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_b7a46e75018947578f3308275500a81f",
+      "statement": "MQTT 连接成功后立即以 proto type=2 发布 presence（type:1、uid:userId、lastMessageId:0、retain:true、qos:1），clientInfo 填充伪装常量（version '4.92'、appid 9019、channel '-1'、platform 'web'），uniqid 由 __a cookie 分段拼接；整段构造在 try/catch 中只记日志，presence 失败不会中断后续发消息。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L80-L118",
+          "version": "repo-lines-v1:sha256:a04fc5248982154501c977261c7fffc2563d2411eeb7fbe6d48ad76098890b22:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxZGY3ZmI2NTEyZjc4MDc0NTBkYWJiYjFmODNiY2QyNjlkNTVkYzM0NGJkMzkxYTZlMTkwMWI4NTcxYjJkZmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ1Yjg5NjU1N2RmNzQ2OTIyOTQ4MDk5OTA0YTZlYmQ0OWQyNzMyZmM1N2ZmZjdkYWQyNjVkNzMzMmI1ZDc2NGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwNDI0ODZkOWZiZWZhYjU3MmI1NWUxM2JkNTMxZmJmYzQ1Nzk4NGY5YTc3MzdiYmY0YTg2OWQ1NWU5YmExNDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_93f8f5c64cbf48d8b87e0a44f1e6c7a1",
+      "statement": "GeekChatClientManager.connect() 通过 connecting Promise 与 client.disconnected 判空实现幂等，可被 onMount 在每次路由切换时安全重复调用而不建立多条连接；参数为 wss://ws.zhipin.com/chatws、clientId = ws-<随机 uuid>、clean: true、keepalive 25、reconnectPeriod 1000、connectTimeout 10000、protocolVersion 4，因此服务端不会补投离线消息。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L13-L33",
+          "version": "repo-lines-v1:sha256:ff914a925197559cda145f4cc08e93e3fb0a65632b1bace62cec971254177604:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjMGNkYmMxMWVmZjMzYmMxN2QxYmQ5NmMwMzhhNjNhNDc2NDMyMjIwNWM5MWU1OTA4NDI5NzZmNzgyNDMyYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4MGUzYTA2NWY1MGRhOGRjYzFiMjY2OWZkZmY2NmFkNTQ2ZTEwNDI1MmUwM2NjYmI4NzYwYzU1MDg3NGY0ZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYwMTZhOWY0ODEyNDFhMTY2NzQ1NzYwYTg5YTQxOTczNzAyZDViYjAzZWZhMTM5MmYxMTZhMTBhNjdlNDYxOWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzMGVjOTlkZGE3MjY5ODRlNWIxOTQ2ZDg4M2MxMjBkODdiODQ0MjRhYjQwNzdhZDA1MDFjYWQzMGZhZDYyMjIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L58-L78",
+          "version": "repo-lines-v1:sha256:0ad84aa09272504c5345559b4606b4332f506589c836337356e2115b6fa7644d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4OGM4NDhjZTRkZjJmYWY2ZGEwMDA0NzNjZDlkYjhjOTVhMDAwM2M2YzkzZjQ2NTAyODdjZjY1MDI2ZDkyZmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NzhlMjUwM2I4Y2YzN2EwNmY3ZDZmMGEzYTZiNmZlMzU2OTFmYmNhYjUwYjg3NzVjYWI2ZmFiYzcxYzU5MmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk4ODhhYWNkNGI3ZjBlZjZhOGY3MmViZDA4YzM2Nzc3ZjU0ZDlmMTlhODk1ZmIyYjhhMWVhYzEyZDQ5ZDM5OTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4NDQ0MzBmZWI2NGVjOTM2MDM1MmUwMDlhMjY1NmQ5NTcyOGMwNGZhNzg3MjBkMzgwMzQxMWJjYTk1OWQzZGIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L406-L413",
+          "version": "repo-lines-v1:sha256:37d35e736a1c7731b4d5de456f5c86d08be0c5b0c8b4fdd6497281623476a1cc:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTIzMzFiMGI2NTMyZGIyOTYxM2RlMzIxMTQyZTcxZTJiMWEwYWE1ZDBlYjY0YzExYmVlM2Y2YmViNzY3ZGY2YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjk3OGUyNTAzYjhjZjM3YTA2ZjdkNmYwYTNhNmI2ZmUzNTY5MWZiY2FiNTBiODc3NWNhYjZmYWJjNzFjNTkyYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjk1ZjBlYjMyMTA1ZTU3YTFlMzE3MTBlN2MxMWI0OWFmNGYxZWJkZjViNzhkZjZjNmM2NzI0ZTNhNjJlZTAxYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDAxY2U2YTExNjdmNTMzNTI1MzdmNzc5MGNlOWQ0MGQ1MmYxOWNkOTBjNGZjMzQwOGFlMWRkNjU1ZmVmMmU1MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_bfe00c29bf6f4d68ba45ea63c14615ce",
+      "statement": "所有聊天消息经 BossHelperCtx.sendMessage 逐条发布到 topic 'chat'（qos 1、retain true、不等待 PUBACK、每条之间 await delay(2)），并且每条消息在循环体内重新赋 stanza.clientMid = Date.now()，因为复用同一个 clientMid 会让后续消息在服务端看来是重复的。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L400-L410",
+          "version": "repo-lines-v1:sha256:0c9cfbbae1e8cbc42863f8089b3f7c767e08f0621bffe36825e7ecae4e4e4dec:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0NmY4ZGZjOTY5NTdkMGQxODMzNTZhYTM3Y2ExMjM5Nzg2NTI1YTRmMjg5NTc0NjE4YmI1Mzk1OGI3MmEwMjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMGNkYjk3MmE3YmZiN2VkMjQ2ZjlmZjY3MjM4NWU1NWY0OTY4ZmMxMTA0M2RjNWI2ODRkNTFkZmEzMWRiY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NmU2YmUxNGI2ZjdiYmFkMjE3NmQzZDBkMjdjOTA3ODA2MmYzMjFlOGI4MjA2Njg5NWEyMWJmYWYwNDAxOTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5OGRlNWNlZmI0ZTc4M2E1YjVlZmY4N2RlNmY2ZWI3YjA1ZTM5OWVmNWIyOTVjYzMyZjg1ZDc5ZGE0MzA5NmMifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L137-L142",
+          "version": "repo-lines-v1:sha256:cfcaf6c3ffaf86bf5982b28c9cc6c660f04101d6886e54da9130e6f650f0c578:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDFkMmFlODkyZDUwNGQ2MTU5YjY3MWE5ODQyYmFjYmJjNzE2N2U4ODc5MDUzOTQ4MGFiOTlkZTY3MDFlZWEyNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzg2N2ZlNjM0ODQzMTE4NjhiMjU3Zjc3MGQyMTc3NTk1ZmNjZDJlOGIzZmFlZmM0NmE5NjUxMmIzYjNhZjY0ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzc1Y2QyNTFlZDFjNzQyYjM2OGY2MDA5ODg4NGZmYTAxY2EzN2NjMWUzYTVhNzYwNDE4M2MxNGE2NTZiYjhhYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGVjMDVkNTJlNzhlMGJlNThhMjkzYjFlYzg5ZmY0NmRjYzFlMTdmOTdiZWM1YjBmZmRkZWI3ZjBkNzRjYjU1OCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L212-L262",
+          "version": "repo-lines-v1:sha256:f3bca33248502e49f1b9f4f54e78b9592ac6b44c18006c4d4f56081367876bad:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiZmEwNjc4YjA1ZGE3Y2ZkOTZkMDEzNjJjOTBiMDk2MzJjMzBhMjNkZjQxZjNkMDQ3NGUxM2MwZWMwMmU3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2MWFiMTc1MTQwN2ViOTE3NWE3ZGVlYjZiN2MzNmE4ZTMzYTRlN2VhZThmMDhlOTAzMGFhNjg5YmUwZDcxMTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQwM2M0YzA3ZGZkNTM2NThiYzdlNDE5NDY3ZWMwZGJlMGY5YTEwOGRmYTM0MWViZWNhYjYwY2ExYmRiNGFjMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2Yjg4ZTAyZDJiZmYwOGNhYzFhMTM3MTdkYTE2N2U4ZmFhYjg0NGFmYjNlNmMyMGRlYzNkYWJkZDMxZTViMWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7340365d23d74e45bb800db5633412e7",
+      "statement": "图片消息的发送链路是 counter.getImage 从 IndexedDB 取回二进制 → 重建 File → uploadImage 换取平台 URL → createImageMessage(iid: 0, tinyImage/originImage)，因此发图强依赖无重试的 uploadImage 成功，取图失败时抛「图片未上传或已过期」。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L226-L245",
+          "version": "repo-lines-v1:sha256:5052902c6c150353806232e503c63a0609f9f937a2b82d4cecf03fedef78a2de:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNjM1YWI4NTVmYjA1ODIwM2IxN2I3MGYzMDY4MTI4NTY3NTFhNDZmYjVjNzQwMmYxYzk2MTc1OTUyODQzNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5YjE5ODJlOGRkNzQ4MTE4MTQ2YjM5YTJkMDA2MmY0MDgxZTM0Nzc5Yjg2NzVjMjM0YzRmYjEyNGRjMzkzOTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4MTI0ZTJkNjc2MmNlY2ZiYTdjZDMzNTI5MWFlODJiNmUyMDYzZDA4Y2Y1NDAzYWMzZDlkMDkzN2M5ZjIwNWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhlMDJhZmYzZTJiMzMwYWExMGQyNjgwMzU0YmVhZTU3MzQ2MDM2NTgxM2Q0MDlkMTgyZWNjYWRiMDQ4YjEyMDQifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L195-L213",
+          "version": "repo-lines-v1:sha256:a0d5b12bf6b91192c8c88584d7baa8bf0b359a613bffd5721f5f7622dedffebc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhN2QxOGU1MTEyZTJhOGQxZWI2Njg4ZDdlOGI5YzM2OTU4YmRiZWNjYmJhMmVkNmI4ZDFjN2RmMzliNTY3OTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3YmZlMDVlOTE1ODJlOGZmMTdmZGY4YjVlNzFlYTY1M2M0NDg0NjY0NjdmMWQ4ZGFjODhjN2M3N2JiMzhlYjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxNDg2MzdlM2U0NjExODFlZWUxZGZjNzFlYjEwZGFiYmMwYzk3YjYwYTIzZWYyOTQyMjU3YmU4OGU2NjI1NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyYmE4MTQ3NmVlNzg1ZDllODM5MzdhMDFlM2YzMDZkNjQ1N2QxNDlhMWUzOWYzYmZhZTk2MzM3NGIxNzc3M2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2f18d4d95af94d788e6c70a8163bd5e0",
+      "statement": "protobuf 层由 geek-chat-core.ts 内联维护整段 .proto 文本（java_package cn.techwolf.boss.chat），protobufjs.parse 后 lookupType('TechwolfChatProtocol')，用该信封的 type 区分 1 文本、2 presence、3 iq、5 messageSync、6 messageRead，内层 TechwolfMessageBody.type 区分 1 文本、3 图片、4 action、20 表情；文件顶部 @ts-nocheck 且保留压缩后的单字母变量名，属于刻意与上游 SDK 保持同构、不应做的重命名清理。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/chat/geek-chat-core.ts#L1-L7",
+          "version": "repo-lines-v1:sha256:c5ba754aa9516492a5b190411e888db681813e441529268050b214d6d002a45b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmFlNDZlNGNmYWFmMGRlNzhhYzQ3ZWJmMjc2NTBmZDg1OGQ2NmIzNGUxNWM2YjNiM2ZlMzMxMTdmMDJhODg3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWJhNWM4NDVjOGUxMTFlNzMzZGVlZGU3ZTIzZmZlNGM2YmJhMDAyZTE5MjRjNjk3YTJkOWM1MDUxZGM0NjkwNSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/chat/geek-chat-core.ts#L150-L230",
+          "version": "repo-lines-v1:sha256:0acf68007f4139b7ab9f67deb0f2f99050511bfae9d9fffe3e6bd3474adecc2c:eyJzZWxlY3RlZExpbmVDb3VudCI6ODEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllNmNkYTY1MWQ2ZWEzYThjOWM1NWM0MTc5NmNjMzAxMTdiMDRiNTBhNWMzMGRlYmNhZjVkNjVjY2MyMGFjZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE0MmZiMDdkZmE2ZjVhYjUwYzdiMTBiNzU1NTIzYTgzMjA2M2MxMmI3ZmNkMDM0NTQ0YTI3ODQ2OWUwN2Y2N2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM1MDI1ZGE5YTgxMDMzMWVhYWMzMzU0MDI0ZGZkNzk3Nzc5ZGYwYmYwZGNkNTE1ZmZmYTk4ZTFjOWZlMWE2YjAifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/chat/geek-chat-core.ts#L289-L320",
+          "version": "repo-lines-v1:sha256:0805ef6b09a8d0d73e5b74ed407849d14d7952c9a34f655e1fe66bcdc5e77fdf:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMmQ5MDJhNWVlNDM2ODllNDZhNTdiMzIzOTNiOGJjZjc1NTI3ZDczYWQzYzQzZTE3NmM1MjhiZGU3NGEwZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiMjRjYzBiZjk3YzFjZmNiOTM4OTA2NzZkODA2MmYwOTUxYWUyZjMxNzgyZTg1ZjEzYWI2ZjIyODY5M2I2OTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiMTUzNjI4NmFjMzkxZmFkZGNhZmJiYmVhOWE3MDBjYTFhYThkNjc1YWE1OWZlMTc4MmM0MDg1MTE0MjZmODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/chat/geek-chat-core.ts#L331-L365",
+          "version": "repo-lines-v1:sha256:59cad03c5db9e9b1d82228a373fb032bed2ccdd78c804463498f47c289511397:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyMGY1NjUzNmJlMWM1MjgzMTgyMTNjM2RmNDlhNjVkNzZkZGViYmZkOTdkYzY0ZDdjZDdiNTFhYzMzOWY1NTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2NzhlMTM4Mzk2ZWM2NzdlMzQ1ZDNlY2EyNmZkYTVkNjQ5OWMyMzAwOTFhMmY2NGYzNzUzYzY3ODQwNzJhOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhOTQyOTFhOGYzNGZmNDNiOTMxYTNhZTUxNmQ4MjJjY2FkNTMxYTNlMTdmZDg4MzI3OWM2NTkxMTI4ZTE5MGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_edd9b2c2201c4b44adb44d4a36d8e367",
+      "statement": "src/entrypoints/boss/chat/geek-chat-core.2.0.4.umd.min.js 首行标注来源为 static.zhipin.com 的 geek-chat-core.2.0.4.umd.min.js，并不参与运行时（index.ts 只 import 手写版 ./geek-chat-core），其价值是在协议漂移时作为同版本上游对照；文件内含当前 .ts 版本未使用的 pako（用于外部广播消息的 base64+inflate 解码）与 axios。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/chat/geek-chat-core.2.0.4.umd.min.js#L1-L9",
+          "version": "repo-lines-v1:sha256:5a6aa9d6c207769cfd0c529f420d8e5c95bd08c011856ad1cef501dfa2044133:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWM5M2IyMTRlMzVlZmEzZmQ2MGUyZTlhNTMyODI4OTJlMjc3Y2U5M2ViZTg3Njg3ZGZmNWY1YzBiNjZkNzQzMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGZiNWQ4MjViNGQ4YzM2M2RhYTRhYzAyNmNhNmIzMWQ0NmRlODg1ZmYyNjI2ZGQ5NWE0YWY1ZTlkMzliY2E3YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTk1NjIyZTAzYjgyNmYyMmU2MWI0ODRhYzMyZTA2MTMxZmJjOTU0NWI5YTg1M2NhYmJjNzBkZjlkMGEyM2M1NiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L1-L5",
+          "version": "repo-lines-v1:sha256:09399fabd025aee13a4e5f1181d9577c95ae497732dc39f04c62f615f4ad1cf8:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTMyMjViYThiOWVkM2RkNGNkY2I5NjdlMjcxN2UyZTYzNzExMTRhY2YzMTE2MzFlY2Y2MmNlZWYzMTFlZGIzYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTYyOTE1MTdkYmJkODhmZjU0ZDgwYjRmNGEwODhmNDQyOGY2YzdjYzI0ZTY3MGYxNjAxNTlmYWE0NzU2NDkwYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTJmYWRhNTAwNjM2MzMyYzJjZjBiMjJiZTQxMGE4ZmYxMDY3OWE0ZjQ5Njg2MjIxZTAwMTdjM2M0N2Y1NDg1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd41235687184fbf99a8de02751d8f08",
+      "statement": "MQTT 日志层用 { longs: String, bytes: String } 解码载荷以保留 int64 精度，从而能用 clientMid/cmid 对照发送包与业务回执；解码失败时退化为十六进制与文本预览并标注 truncated；收到 puback 时日志明确标注「PUBACK 不代表业务发送成功」。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L119-L183",
+          "version": "repo-lines-v1:sha256:754ec7457d28eb98a65f3528f49d9bce683ff1bfc0625a6660b232672932f827:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhODczMzFkYzhjNTc0OWNmZDczMWI0NTZhOTY1ODZkYmZmMjdjZWE4NzA4MWRkODkyZDVkZGIzMjg1M2EyYzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4MzU1MmFiNTcxNDk0YjM5OWIxODE5OTYyMmRiZTNiMzgyNmViNjFmY2QxZjc0Y2ZiMTJhYmNmODhlNGY3MjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM0NzI2NzVjOTMwMzk0ZGU5ODYzZjliMDlmMTdkYTlkNWM2ODMyMThkYjk2ZDUzMDc5NTBkNDk1NjQwNGI5NmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBlMGY3MjkzZDE1NmE2ZDEyNTI4ZGIxMjkzMzc5ZTUyYTVmODM2NzA0NDI5N2IyMjgyYjk3ZmYyYzg2MDQzOGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_de36330769a346fdb818664985205364",
+      "statement": "protobuf 编码使用固定的 toObjectOptions（enums/bytes 转字符串、defaults/arrays/objects/oneofs 全开），proto 使用 keepCase: false，因此字段按 camelCase 访问且缺失字段在编码时被显式写成默认值，这是与官方客户端帧结构对齐的前提。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/chat/geek-chat-core.ts#L240-L275",
+          "version": "repo-lines-v1:sha256:b2da7ad3f6f2c444418efbdb7c5316a1d11005b706bcfe009da97d02c5bd5ee1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiODk3YWVkNGE2MjkyMTM2NDA3YWZkZDk0NDA3MGFjNzkwY2VkNGVhZDdjMDJlZDhjMzVmYjc0OTQ0YTExZTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxMzJkNjNjNGMzZWE1MWFjNzBjMzE3ZWU3YjA1NjAwYmYxOWY2NzBkMDIwZjMwZjdiMzBlM2UzYzY3ZTJmOWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_decadb881be34522abc1a7e285e4c40d",
+      "statement": "本页记录的 wapi/zpgeek/friend/add.json、wapi/zpchat/geek/getBossData、wapi/zppassport/get/wt、wapi/zpupload/* 以及 wss://ws.zhipin.com/chatws 上的 protobuf 帧均为逆向得到的未公开接口，没有契约承诺；chat/index.ts 中的 appid 9019、version '4.92'、channel '-1' 是照抄官方客户端的伪装常量。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L27-L40",
+          "version": "repo-lines-v1:sha256:ff7d57aea40c48d98e7910ab4d7f6f4de5b3cdf767a6a31d84ac9b5543265b76:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyZDJlYzMzMThiMzFlOGFkODJkNGEwZDQyMjVlZThlODVlNjQ1OGVlNjc2NmM1YzcxMmI3YmQyYjc0NjI2OTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiYzhlYTk1Y2ExMjM4OGM1NGNhOWU4Nzg5NDA1OTdjNWQ4NmJkODM5OWI1OTk4MzczY2EwMTA2NDNmYjJiZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmYzUxYzVlYmVlYzNjMTY3YTViY2Q1YTE2N2Y0NjdhYjY0N2MxNDgxNjFhZTI1MWQ0OTZjNjNkZGMwM2U4MGMifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/chat/index.ts#L86-L103",
+          "version": "repo-lines-v1:sha256:a95495bceb46688b29b2e975e26efe4ac2e64b69f6e05d92cf7283f53368a5ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxMmExZDNkYmYzNWVmYmVkZjM3YWNlMTRhNTlmYmRiMzY5YTI0YTUzMTU5ZmE1MzAzYTRiYzE5NzhkY2Q5NjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2ODYxZjYwOTU0N2IxYjNjNzlkY2Y5YjUwMzgzZGY2ODM1YmYwNzY1M2YxZDQwZjM1NzljMTU3OGM3NDEwM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0NTRlZGI1Y2NlNDQ0ODExOTQ2OGFiOWY3Yzk5OTViMjMxNzgyMGI3Y2NmZDlmOTk5YWJkMTA2OGQ3OWE3M2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2YjE5NzQzYThlNTljNjUxODQwYmQ4YTRkNDU0MWZiNTI4NTA2MTlkZTUwODViNjZhZjk0NDZlYzc1NTU1NDcifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L44-L60",
+          "version": "repo-lines-v1:sha256:fa868f65db935dc67f00a83359258b87e1ff0cfe58dddbbbfd25a33bd529902c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYmY5ZjYzYzc5MjM1YzU5ZTRlZTc2ZDViYTM5OTliMzMxNGUwODYxNTA2MDkzN2U1MTE0ZTc1OTkxOTJhOTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkM2RhMDNjNjVhMjIyNDVkZWI1ZWEwYTI4NmI3M2MzYzU3ZDExMTA3NWNjY2QwNDkxMTc0OGI3NmE1OWQyYWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3ODg4NWM1ZmRiM2Y1YWExODBmZGNiZGU0ODFhZDY2ZGRhMTY2YWI0NTg0ZTZiNjMzY2FiODJjY2MzOWFiOWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJlZjdlMzRmZDYyY2Q1MzliMDY3M2RjZGVlM2EzZGFkNmUxN2FiOWFhNWI4ODAyZDgzMThhZGVmMWNhMjMxNTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0113fae4d1a34b3bb9c3a6cb744a7b86",
+      "statement": "投递与打招呼的工作流顺序保证 getBossData 的『非好友关系』时序抖动成立：delivery.ts 中『岗位投递』(sendPublishReq) 先于『Boss信息获取』(getBossData) 执行，后者再被 customGreeting / aiGreeting 依赖；getBossData 的 bossId 取自 BossHelperCtx.uid，即 window._PAGE.encryptUserId。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L80-L128",
+          "version": "repo-lines-v1:sha256:58d73a490ba25f163d42dfb91b1aaa12dd7379f4457da1b1f08afba09ef6317c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmNWI5NGMwZWViN2EyODAzNTNlZWE1ZGZlNjg1NDYzOTJiZjlkY2E3YWIzZTFiZWMwMGJiNjE1YTQ4MTc2ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzYTg1ZmY4MDVlMjFkYzgyOGUzZDJiMTM0NzRhMDI0MWQ4Njg4MWY2YWM3MWNmZDhjZmFiYzZlMTAxNjY5MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE0OTQyMDE2ZjY5YmU2ZGFjYjM3YTNlNTA4NzEyMjljMzMxNjAzNTRjMWZiNmZjYTU0YWFiMWQ1NGI2MTNjMWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4MTgwY2EzNDhjMWZlZDA1ZmYxNGE2N2RjNmEyZTE2YTRkYzUzZmE1NjJiZjIxZDkyZjRjYTNmZTI3ZjQyNzYifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L168-L175",
+          "version": "repo-lines-v1:sha256:f87926b28f7abed12e69aa67c6d854b5efae3ea687d4fd1be9d23dba0fd2bad2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODBmN2IwMGRlZTE5MTFhNzI0MGQxZjNkMjc5NDcxODMxYTY4Nzg2OGUzOWE4NzYwN2VhZWU0NWRiZTNhNDBjNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFlOTJhZTUzZTRiMTBhNGEyZTNkYTM1Mzc0YjM5ZGIzNDBmZTFlNmM0NzRiOWEwMjY0MDZmMTcyNDA4MjRmYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2Y1YzQ4MDMwNjY0MzhhOGZhYTI4NGRkYWIzZDc5NGI4ZWMwZjA4YmI4MGQ0YWJiMGNmMTE3NmNiNzFiMTBlYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzVjNzgxZGZlYmIyNzQ2MWYzMzg1OTdiNTBlN2VlYTBlMWJhYjg2ZDYyNzFmOGNmYmE2NzE5OGI1NTBkMmQ0NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6c3e3d5fbf214d9789832f0d7df13aa8",
+      "statement": "BossHelperCtx.sendMessage 的 stanza 由三处上游数据拼成：uid 为 Number(rawData.boss.data.bossId)、friendSource 为 detail.bossInfo.bossSource ?? 0、encryptUid 为 jobitem.encryptBossId；aiGreeting 在配置了前后图片时会一次传入「图片、文本、图片」混合数组，逐条发布。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L452-L472",
+          "version": "repo-lines-v1:sha256:3d72c627a143ab65e397c3d2bef61be9f50cc7dbf9d87a1937b40653672e689c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMzNiYmQ1OTc5ZmY0ZTc5YzA3Y2Y3ZDU5NTMyZTFiODBkNDFiM2ViMWY2YzVlNzc1ZGY4OGVkZGJkYjM0MjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2OTM4YWY3ZWVjN2NhMTg5NmFlYmE5NzEyMzBhNjZjYTQ0MDI2ZjhkYTRkYTUwNmM1ZGY4ZDRjODE2N2NjZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3MWQ0YjZmYzI5ZGMyNDRkMmU0ODdiNmRiNzA2ZTU0NzE3MmEzNzExZGIzYzg2NTIwMzIyOTQzMWVmMmNjYzQifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L212-L262",
+          "version": "repo-lines-v1:sha256:f3bca33248502e49f1b9f4f54e78b9592ac6b44c18006c4d4f56081367876bad:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiZmEwNjc4YjA1ZGE3Y2ZkOTZkMDEzNjJjOTBiMDk2MzJjMzBhMjNkZjQxZjNkMDQ3NGUxM2MwZWMwMmU3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2MWFiMTc1MTQwN2ViOTE3NWE3ZGVlYjZiN2MzNmE4ZTMzYTRlN2VhZThmMDhlOTAzMGFhNjg5YmUwZDcxMTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQwM2M0YzA3ZGZkNTM2NThiYzdlNDE5NDY3ZWMwZGJlMGY5YTEwOGRmYTM0MWViZWNhYjYwY2ExYmRiNGFjMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2Yjg4ZTAyZDJiZmYwOGNhYzFhMTM3MTdkYTE2N2U4ZmFhYjg0NGFmYjNlNmMyMGRlYzNkYWJkZDMxZTViMWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_abb756b55d904452ac0f82815b274c4e",
+      "statement": "getMessageStanza 会把 stanza.clientMid 同时写成 tempID 与消息体的 mid/cmid，并填入若干不在 proto 内的构造键（isSelf: true、mSource: 'server'、typeSource: 'newSubmit'、type 由是否有 groupId 决定 2 或 1）。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/chat/geek-chat-core.ts#L215-L250",
+          "version": "repo-lines-v1:sha256:9901d130a8ed44a0736e5506c57f96e91914468745fc4c33909126b0f268bd4e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3ODczOGYzMzc0NjZmM2M0Njk5YjRkZjFkYTQxNTZhMzE3YTcwZDdkNWUwOGM3OTU3ZjdhMWZhYjhlYzA5ODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwOTkyYTA4M2UyNWY3NTdjODI0MWMyMDZhZDdlZTk2NWNlM2Q4NmEwZmNiMDk4OTEyYThiYWJlYmM5OTk5NTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1Mzk0ODljY2M2N2JkNmJhNDY5YTE1OWNkNzY1YTFiNTZiMTcwYWJkNjViZjlmOTQxNTA1NGMyYzAyZWQ4NTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ1ZmJmNjFkMjg0YTNlMjY2OTJkMzA5NTUwZjFmNzQ5ZjgxODE3YjBkYzkxMWYyMzIxOGMzN2JhYmI0ZTZlNmIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/chat/geek-chat-core.ts#L420-L458",
+          "version": "repo-lines-v1:sha256:8b72a6998e1b98da4a9006430660be938fb55a0848c00efcc73be94c14d2eaeb:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhNjAxNThlZTkzYWM4YmJhOWI3MGQ3N2FmODNiMGE1NGQ5Zjc1YTlkMTc2NDM2NzYxNGVkZjlmMWJiMzEzMzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9da8a4881ee74cfea2dfbcb2e04fe03c",
+      "statement": "src/utils/request.ts 的通用 request 封装（默认 18s 超时、isBackground 时改走 counter.request、把 4xx/5xx 与 AbortError 包成 RequestError）并没有被 BOSS 的六个端点使用，后者各自裸调 fetch；修改 BOSS 请求时不能假设存在统一拦截层。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L41-L67",
+          "version": "repo-lines-v1:sha256:dfba36e2b3c00ee9ba0333ea5e3c8d0e5df7484615a07f6384d7e2a72d5105ec:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2MjdkZGFiMjZhZWJiZjlhMDU2Nzk5YjVmZmM0ODRmYTM1YjEzMDgwNzNlYjRkNWQxYjA0NWM1Y2Y5NzNlMjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjYjYwNDA0MzJmNzIyM2RkYjZiZjQzYzk4MTJlYWI0OTBlMzQ5YjA1MjhlNDBiOWYwNjUxZjZmODZmZTU3MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1ZTUyNTQ0M2JmOWNhYjA0ZTVhNDVhZGE1ZjQ5NDgwYWM0NDMwMDY4NWU2MDYzNTUwMjBiMmEyNjY0MGE0MzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg4NDk2ODI3ZmJmM2NhYWI5N2I5YTM2YTVjODdjM2E0MzM4YTZlN2U2MjQ0YzU4YjczY2QwMTlhZDlhYWRhNzYifQ"
+        },
+        {
+          "resource": "repo://src/utils/request.ts#L90-L160",
+          "version": "repo-lines-v1:sha256:eb41217256dc54396790858a539a2b0ffc5bbb04cd006ac9093f4db17ae8a9b7:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmNzA5ZjYwNTk2Y2EwY2RmOWQ0YzY2ZGZkNTEyNTk1YTAxYmZmMjhlZTA0MTgyN2YwZTdiOWNkZDkyM2UwOTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRmYTU1Y2IwYzg5M2Y5NDBmMWQyZGNkYWMzYzI1ZjkzYzI1ZDczZjJhZTg5MDE1MDAxMDI5MTZjNjgxMTc0OTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2OTkyODRjZjIzNWQ1OTk0N2UwZmU5N2E1NTE4ZDkxZGE5N2MzZGE3NmY0NDRiOTU4YTZiZTBmNWZmMDIwM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1Mjk1YzRiMDcwZDhhZjY2NTExZDM3YjEyYzhjZGRmN2Q0MDk5ZTM5ZjViMjE3OTY5ZTMxNWQwY2VhYjUzZjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6ece909a276342c3a551c704b10d076c",
+      "statement": "仓库根的 net-conf.json 由 https://testingcf.jsdelivr.net/gh/Ocyss/boss-helper@main/net-conf.json 远端提供，只承载版本公告（version / version_description / store 渠道链接）与通知（notification，alert 直接渲染、notification 弹 toast 并按 key 记 local:netConf-<key> 去重）、feedback 表单地址，与 zhipin 平台的鉴权或请求参数无关；HelperContext.initNetConf() 在挂载时拉取一次并每 5 分钟刷新。",
+      "evidence": [
+        {
+          "resource": "repo://net-conf.json#L1-L33",
+          "version": "repo-lines-v1:sha256:9902d866ae2621fccc1e28ea0c0d8a3cd0b75143a4ff9a7f65849e6be8583a72:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/App.vue#L127-L129",
+          "version": "repo-lines-v1:sha256:c798de3628e1358b60959e4b2d575f748de6059906f6a8f25cb4540379ddd7dd:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWVhY2IxNmQ1NDZjMDE5ZjYyYTUzNjUzY2YxYmI4ZGE1M2Q3MDZmMTNhYmVhMGUzZWRlMDE1OWFhMjdhODU1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmFiMWI3Y2Y1YzA1YzNiYWE3ODU5MDE0YTZkYTgzZDUzNTRmZWJhNDJjMzkzYzdiMjY5NmI2NTEwYWZkNGQ4OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTNkOGRjYmY0NzJlNWVhMjFkMDQ4NGM1OGVhMGRkMmJmNTY1MjQyZDkzZmIyNDJmZDI2NGY5NDFjNmM4M2M3NSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L180-L195",
+          "version": "repo-lines-v1:sha256:e2d67a36e870d8b7c7c4f5190adbfe14d117e1bc12db51c8e0db9f24e6d63a2f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjODI2Y2E5MWJiYzE3MTM0MjIwNzBhMzFjM2MxZDVjYTZkZWZlMjM1MTRiMWRjZjdjOTJlN2M0MWZlMWZjYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2NjVkMmU2YWIyZjYzOTM3Y2IzYmRlN2Y1ODMyOWE1NTAxMzk3NmRkNDZjNDQwMGVlOWNmODc0NjY4Y2QyNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZlNjk5MDhkMDY5NDJiYTNjNzM2YTQ5YTljYmI0ODNiOWM4ZTcwNzQ3Y2UzOTcxMDZjMmVlYTlkNDQxMTM2ZGIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/netConf.ts#L11-L24",
+          "version": "repo-lines-v1:sha256:6504660b428590ce37e3ed69bc01c286ed403d1a3817a5fe0b4c09bc12cf217a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5ODAxYjY4MTQ4YTIxMzMyMmY5ZmJjMzExYzhhMjNhY2U1NDQxYWIxZWFiOGViMmNhYzdjOTkyNDE3YjNlMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQxZmJhYTJiMDhiYWViMDY0OWFkMDEwMGIzODg2OTQ0ZTg1YzA3ODBhYzU3OWY4NTc5N2VlYWUwY2RmZTM3NTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRkZDZmOWZlNzRjOTQyOTk5NmI1ZGQzNTZmOTFmODE1ZDViZWM2Y2FjZDk3MzdiZTg3NjAyYjUzNDhkNDZmZTgifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/netConf.ts#L42-L79",
+          "version": "repo-lines-v1:sha256:54b4abcb4838bcdfc47fe8dc7cc18407cf72e2504b9324c1d39235aa616bf937:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYjI2ZmE3NDM3NzJlNWY3NTA0NmFkYTAzNDBhODkwOTg3ZjAyYzFhNjI0ZjE1ODQ2ZDUwOGM2MmM3ODRmODMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY1ZmZjM2Y4MjUxNTdmZGZkYTYyZGY2OWM5OTZkZmRkNDU3ZmVhNzNjZWVhYmM5MDMzOGE3MDM4ZTkzOGQ3NzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f9a1698be606478b984af11cf415d865",
+      "statement": "扩展 manifest 的 host_permissions 是 http://*/* 与 https://*/*，而 content script 的 matches 才是 *://zhipin.com/* 与 *://*.zhipin.com/*，因此 BOSS 端点不受 host 白名单约束；uploadImage 的两次请求还显式设置了 referrer 为 https://www.zhipin.com/web/geek/chat。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L214-L224",
+          "version": "repo-lines-v1:sha256:dce548fb4dee3331bff4435e5915b374396fcb803cc2a55c6c30a8fbfe94b70d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwMTMzMzMwZWQwNTlhNjNlYmUyNDU5NjhjZWQxZTI5OTRjNDNjMWI3ZjEyN2YxNDM1MjAzYWQzNmUyZDJkMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0MjA4NGZlMzk3Mzg2NTFkYTVlOWVmYmE0MWMzNTE3OTZlYjI5YjhhZjAwYmQyMTUwNTE5OGVkZThiNDRhMDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhMDdmOGVlZjZmYmQ3Zjc3NGIzMDhmNzRkZGQ1MjMwYTNmZDk4OWRkY2Y4NzcxMjY3M2I4YmU4MDc5MWJiYjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM5NjM2MzkwMTAxNTdiZmNkNmQyY2QyM2I3OTJlMTU3ZmM0YzI2NWMwYTNjYWJmYmJjNmEwYTA3ZDg4NDVkZDYifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L10-L10",
+          "version": "repo-lines-v1:sha256:4be29e6b1e3c330113a3341eb5f25f4b27e49ae3f948943aeba1dea09a9e9267:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJlMjllNmIxZTNjMzMwMTEzYTMzNDFlYjVmMjVmNGIyN2U0OWFlM2Y5NDg5NDNhZWJhMWRlYTA5YTllOTI2NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJlMjllNmIxZTNjMzMwMTEzYTMzNDFlYjVmMjVmNGIyN2U0OWFlM2Y5NDg5NDNhZWJhMWRlYTA5YTllOTI2NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGIwNGEzZDdmNWM2OGU4ZjA2OGJjOGQ2NDUzYjgyYTgxMWZhMTNkOWM5MTA3OTM5MTIxMDYxNDlmYWU5OWY5MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDc3ZDg4ZjYyNDU3YTNmZmExNjNhOTdhZDk1NTVjODQxNWYzOWFhY2QzMjA5Yjk1NTRiM2I2MzMzMjE0NDQ3NCJ9"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L150-L160",
+          "version": "repo-lines-v1:sha256:f1d65dc78126420e3ef1a4faf4ce6a0b00f70f8d4928867ca2cec7d273103953:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhMTNlYzczZDc3YWYzMDFiYTBiODAzZDhlMWU3ZTBlMTYwZjkwYjU3NjFmNTdlNmRiYjM1OGJiOTRlNWUwNzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwZmEzNzgzMzZjMmFhOTliOGVlODgxOWQwMGI4YWY1YTMyNzcyZjE1NTY0YzFmZjExMjIzZGI5N2M3NWE2MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliYzlkNTU5NmJhZDUwNjlhNDExYjRiYmE0NjYxNzAyZmVkODkzMTAxZjY0NjYwYzE1YmMxOTM4ZDAwM2E1N2QifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T11:46:27.311Z"
+  }
+}

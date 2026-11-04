@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:b96cea94112b4f202a3d78b1c1b7dec6b40c11d21c5e72697616178d33385828",
+  "claims": [
+    {
+      "id": "claim_c66e6255cac74e38bc7a029a07141a03",
+      "statement": "BossHelper (boss-helper) is a browser extension (WXT + Vue 3 + Nuxt UI 4 + Tailwind CSS 4, built with Bun, targeting chrome/edge/firefox MV3) that automates job filtering and resume delivery on Boss直聘 (zhipin.com) by injecting a Vue panel into the job-list page and running a task pipeline over the host page's job data.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L9-L13",
+          "version": "repo-lines-v1:sha256:b3d94b309761ee43f232939295309f3b9742631cb66f10d0808289509c7b1efa:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGM3MTc5YjY5NmQyZmIzNjA0YzExZmE0NmI0NjQyYTc4ODQzMDQ5ZDYyNmU3Y2IyY2JjNGE4Y2VkOWY2OGE2MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDBlYjM5YTIyN2JmOWM5YmJhMTI3YjZmNGY1MTVmNjU1OTJjOWNjNTljNWE2NWIzYmI1NTJlZmY0NmRjYTk2OSJ9"
+        },
+        {
+          "resource": "repo://package.json#L1-L10",
+          "version": "repo-lines-v1:sha256:525a51a339b48e6394de5733c4534d330573e2998242932bd27ef2b4714b7f07:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1NmQ4MzA5MGM2ZmI5MzQ2M2FkNGYyZjg1ZjhjYTU1NzZmN2U4NWUxMjFkOTU4YTUzNzE4ZTIxZDlmNzZlNmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViM2EyMmMwY2RiYzRlMmQ4NDQyZDA0NWMyZTdiODkyYTMxZTAyYjBlZjRlYjkzMDFhZTkyMjNjNDI1MGUwODgifQ"
+        },
+        {
+          "resource": "repo://package.json#L28-L35",
+          "version": "repo-lines-v1:sha256:d048b88d135ed7f4c2c3d79ad758e7e6d78c8fcef2ec94e1d055647839450e59:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGRhNTYxNzU0NzAyYzZlZDk3NzJjNGM3ODZhMmFjY2Y3ZWUxN2RlZjc3MmU4ZjAwNjM3ZDI5YzhhNzlkMTEzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2FlZjZiNjRkZWY3ZjAwOWY4YTFiZDMzNDk5NGZkNTEzYWI2ZmQ3YzY4ZjljYjM3OTkzMzg2OTIzNjI0YWMzNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzAwMWNlMTMxYzVjODE5YmI5OTI3NDJlNzA2OGY3ZmFjYWYzZTI3NGQwNjFlYzY4NDVhOTcwNWIwM2Q3ZDQwNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_51b0cd4d8eea4f84a3b7ec782d41efab",
+      "statement": "The extension is split into four runtime worlds with disjoint capabilities: the background service worker owns browser APIs, cross-origin fetch, notifications, storage and IDB; the ISOLATED content script injects /boss.js; the MAIN-world unlisted script owns the host page window and Vue root; and the options page runs the full Vue UI with initExtensionCounter().",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/background.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:2944a75f9d58fb8a225d8a0802ff60537ed99dba5e8b94c1b5490e03f98800fc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwZTFiMzY4YmMwZjM3ZTI3NjhmZDcyYTE1NDA3Y2NmYTdhYzQ5NTE2MTg1N2MwYzM5NzJjZmIwOTgxZjk2ZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L489-L526",
+          "version": "repo-lines-v1:sha256:18f9d4565ab20fc47c834cb553b6672af4562b6f59bf0c6c561f3f01949a634d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1NTRjNGJkMTU0N2Y4Yjk5Njg5NTRhYTgxMTU1YzkxNzQzNGZiYWE5M2YzZjdlNDQ0NGFhNjM0NTZhMDRjODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMWMxOTBmMjMzOGJjM2Y4YTY2NjFkZGU0ZmM2YWU0MDY1MzRhOGE1NzNhNjk0OGYyN2Q3NDBkNmVkZGY3MWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/content.ts#L10-L35",
+          "version": "repo-lines-v1:sha256:1659d65d625a5f6ac735a1a687ded4ec4b38f33bf2e771a3b7cb1a0094780d1c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjYzY5MDdhYjk4ZjM0YjMwZDNhNzY0YTg5Y2YxMzAzZDBiNGY0OWZlNjUyN2MzNTE1YTk3MWI5MmZjMGM0ZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/main.ts#L17-L24",
+          "version": "repo-lines-v1:sha256:deccd2948bdae55577daaf1ff1ad0792ae58e34e4b23a3601e67800edd67174c:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGIxNjkyOTJhMjgzNmY1YzA2Mjk2MWI0YTUxMjMyMWM3YmUzNjM0YTRhZjhlYzRmYTM1YTAzZjAwZDUzZDViZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTdkOWNmZjljZDMzYTRjZDM5NjQyNGU2ODMzMWMyODBiNzZkYzhhMDM4MDNlM2YzOGJmODE0MWU5ZTU3NmUyMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6885e9aaac99477e8a29802126e9fd6e",
+      "statement": "Business code never touches browser.* directly: the comctx proxy façade `counter` in src/message forwards every storage/network call across worlds, with initCounter() wiring the MAIN-world script to the content script and initExtensionCounter() wiring the options page straight to background; the namespaces are __boss-helper-content__ and __boss-helper-background__, accessing counter.xxx before initialization throws, and storage keys without an explicit local:/session:/sync:/managed: prefix fall into the sync area.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScript.ts#L6-L9",
+          "version": "repo-lines-v1:sha256:cd1c9d2b11a7ab2e995bf7b293cc2485a6b0b0c316a723ed623d195d56bb29f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjg5MjljZjg0OTkwZWYxZTIxOTBlNGI5MzVhNDBkYzQzNGEyYmRmMmU5YmQxYWFkZDEwYTNkMzRhZWE5MDRlZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWI5OGNiODI5ODIxMWU1ZTEwMmVhYTA3MGM4NTg2MWE1OTEyMTAxZTkxYThiY2FhYmIyNTEwNmQ1ODEyMTA5YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGYxOWMzZTc2MTc2MmMwNTA3ZmZiZGM4MzFiMzUwNmRhNDAxMDZmNzI5NzZkOWFmNmJiYjU2ZjQ0NDBlOGM2ZCJ9"
+        },
+        {
+          "resource": "repo://src/message/contentScript.ts#L96-L101",
+          "version": "repo-lines-v1:sha256:bd470e7ea282904a9954bdba1e8a5094aa848491ff65a8d72b8059b2adf470a6:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWQ0NjBjYzk3YmY2YjA0NTZiOTQ1M2MyZjA3ZjI4MTQ2MDg4ZmZlNjM4NzIyYjdlMWFiM2E3YjFlZmZlMmI0ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2EwNzJmNTU1ODE0MGViODFlZmI1ZGI3M2I5M2MyZjVlMGRjYWVkMGE3YjJlYjg2MmMxYzJhZmJmYmY1MDM0MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGY3MzlhMDZjMWNiYjEyNDRlMzM2M2QzOGJjZjlmYTUwY2U4NGZlZDM5OWMyMTkzYTNjN2YwOGQ1OTkxOGIyYSJ9"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L13-L36",
+          "version": "repo-lines-v1:sha256:90b671a5e460393e90079bc839817059f0c56713e2fc736016cade384353416f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmYWQ0N2VlM2YwYjMxMDVlODc5OTRjOTg3ZGY2NzRlMDcwZmZmMDkwYjM5Mjk0ZDNlZTYyNDJlMGJmMDQ5MDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2YjRjOTg4MjI2YTg5MDQxYTM1ZDk5Yjk1MmQ5MzdmZTNmM2NhN2E5Mzg5ZDllNmM2MjliOTcwMjgxY2QwN2MifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L39-L56",
+          "version": "repo-lines-v1:sha256:cdb6e1bffc1ace520aaa2437c9446c6168ef56a6db7293d6b16f239a91bbb6e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0MDQ5NzZlOTgyNjRmYjE1OWEwOTNkYjMzNTIzYTQ0N2ExMGNjZjBhYTk0Njc4MTQzZTgxYzJlYzViMDU0ZmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2Zjg1OTM1Y2Y4ZjAzNmIzODRlZjhmMmU5ZTI5NGZjMmZhNWYxYzQ5MWU4MGFiYzg2ZjVlMWRkYWQ3NjViMjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_014a703dd297484b9d7436d967d4ae2e",
+      "statement": "The Boss-specific assembly is HelperContext (abstract: owns conf, accounts, models, statistics, chatModel, HelperCache, JobResultCache, workflow, logs and is injected into the Vue panel via HelperKey) + BossHelperCtx (hooks the host Vue jobList/pageVo/hasMore/jobDetail/pageChangeAction, fetches detail by simulated card click, sends chat via MQTT, then run() mounts the boss-helper-job custom element) + bossWorkflow (declares the ordered task pipeline).",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L25-L52",
+          "version": "repo-lines-v1:sha256:d5bb6709af86ff5c2bb634bb213337f5a6010c1fb3558e28bc454621eda0cb39:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMjYxZThmZTVkYzgxMjUzMmQ4YjM4YjRlOWY3MWZjYTUxNTgzNWQ1YTBmNDMwNjcwZDRlYzJiMGZlOGMyNzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmZGI1M2E5YjY4ZjhhMmFhM2UzODgzZGFkMzA0OTM4YWUxMzlhOWQxOGJhYjY3NDIxYWY2OTlkNTJjZTZlNmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2NjBlODNjZWQ2YzNjYWE1NTBjYTY4YjNhN2ZhZjY1NzRkZWE2NjZlZmUxNmQxYjZkMmQ1NGQ4YWY4M2I0ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1NDY5ZjYyZTM0YjJmNTgyNzc2YWMyNDMwN2EyYTNkODcwZDdmYzEyMTQ3ZjE3MmI1YzJmMTI5ZjNlYWE5ZTcifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L13-L30",
+          "version": "repo-lines-v1:sha256:38f9d5423dfb30e15cd82dcd4d2b100794c602356072ad0f66a6e9e988d10002:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmOGY0NjFiYmM1ZjcwNjNlYjNkZGE3MDJhYjljZDNlMDRiNmFhNGQwODRjNjkzODI3YWMyNmM5MWZhNjg5YWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRlYzE4MmI5Zjc0MzNhM2VlZTMzNGI1MzhiZmU0YTBkOWM0ZGMxMTU1YzlhZWIzMzYxY2JiN2Y2MGZiZDAwMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkxNDA0ZDZjZWFhMTEyNWIwMjVmYTc3ZjRhNDY4NTdiZGZhYTU2ZDQyNzc3NGFmMDBkNDc3YzQxYzdkZDBhM2YifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L496-L526",
+          "version": "repo-lines-v1:sha256:d4449d88f5a5559ed6e4c72f81ac8bec2aef83814259ee291c7be4a7232c2f98:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwOGI2ZWZjMjIxZTZhZjk0ZWIzZDg2ODIyYTVmNTVjODNlYzg3M2I4NmRlNWYyN2UyNGNmYzk2NzA2OGNmNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3NGVmYzJjMWE0YjU1MTQ0MjdjYzM1OTQ1MDVmYjhiNjBmY2Q2NzUzMjAxODQ2YTE1YzExODM4Yzg3YjIxYjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/index.ts#L12-L45",
+          "version": "repo-lines-v1:sha256:38f685ef88fcdd0f8c1664fedc16fb68ab7e4aabc9771711b22c93b9ce2a9dea:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MWVhODg0MTZiODhlZTZlN2UwNmJlYTViMjUwZWMxMGZlOTZlYTBkNjAyZTk0ZDZiMTVkMDUzZDIwZDRkYmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2ZjZiZmViZGI5YjU3OGM4NzFkNTQ5OTdkZGRhMjY2NGFlYzE5ZTA4YWM0ZTE1OTc1ODg2NDJhNDJkN2Q2YTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwMmE4M2VlZDFhNzAyZjI5NzVhNDVmZjE1MjI2N2IwNGZiYTFiNDI0NDAzY2YxOTJiN2RhNTNmOWQwNzVlZTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c2a7bcf0954441b69b87cdcaeab28d84",
+      "statement": "Local development requires initializing the packages/devlog-ui submodule before bun install; `bun run dev` is `wxt` (chrome), Firefox is `wxt -b firefox --mv3`, and because webExt is disabled and outDirTemplate is '{{browser}}-mv{{manifestVersion}}' the unpacked extension must be loaded from `.output/<browser>-mv3`.",
+      "evidence": [
+        {
+          "resource": "repo://mise.toml#L1-L20",
+          "version": "repo-lines-v1:sha256:dee07acb1bc80831b382fd2a39e69bed7d26b298a4605b1775caa0b2eb6b8aa4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExMzJiZTlmM2NjMTcwZDEyNjFmZWFmOTIyN2RkZTI2ZmRiNzJhYzMxYjg2ZDQzZmY2ZmYyMTdjZjUwNzM2YTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://package.json#L9-L14",
+          "version": "repo-lines-v1:sha256:1afdeadc925f53087e03f45ad03ffc403de557188b8343f7b6220f33f48ea83c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTY0ZDhjMDczNDI5ODkzMTAxNTc2ZDg4ZDk5MTI3ZTg5ZDY4OTFkM2IxN2U4OWRmMDJlYzlhZTcwNzA1ZDhiZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTI5YmFlM2QwMWQwMTc5NDQ2MzVhZGRmOThmZTNkOTcxNGMzYzViZTIxMDIwYTEyOTUxYWJjZjc2NmFjNGRjNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTNiNzgxZjU0ZTMyNDlmNTQ3NWY0OTdmYWI3OTcyM2U2YmVmNDUyZmMwMTIzZWMxN2VhZWRiYTQ3ZDEzZWIyYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTk5NmZlNTA0YTIyNzkyYmViZGVlYjVjMmE3MzFhYzUzMzk2YjkwZDg2NzU2MjUxZjY2OWQ5M2EyZjY2YzNhMCJ9"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L161-L163",
+          "version": "repo-lines-v1:sha256:9bc9d5596bad5069a411b4bba4661702fed893101f64660c15bc1938d003a57d:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGIzNGEzOTA2ZWMwNmY1MTJjZmMzN2UyMDAxNjFkYzMyMmY5NTMzM2QyZDAwNGY1M2IwYjE5OTVmMDczOTZlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTUwOTI3NDVlOTY2ZTVkZmU1M2E2YzEyZTEzZWRjYWNmYjlhYjNhYTVmYTc4YmRlZTczMjAyODEwYTRhZTg5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSJ9"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L53-L58",
+          "version": "repo-lines-v1:sha256:b38767b8a5a26297f70eef438f03d507919df953157a9d8e89100be19d276470:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTJjOWE3NjZhODA4YTJjNzM5MDkzM2Y2OTMxODk5NWY5YmU4ZWM3ZjVmM2JkZWMxYzU2MmRmZjdmNWNiMzI5OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWYwY2RiOTcyYTdiZmI3ZWQyNDZmOWZmNjcyMzg1ZTU1ZjQ5NjhmYzExMDQzZGM1YjY4NGQ1MWRmYTMxZGJjYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjg2N2M0MzI1ZDAxM2JhMmQyODQwZDMwZDQ4MzkwMTYxYWY1ZmVjMzE3YzZjYmIzZjBjNTczMDZmNjYxYzI4OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWZhNDc5YzRmMDk2NDgxODZlMDRhNjFiZDQwZDE2NTE1MGVlYWUyNDI0YTk0MzNjNTA3OWYzNTUyYjgyNTAwZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7dd5d8872adc48b1b904892715c178be",
+      "statement": "Tests live in /scripts as bun:test files run with `bun test` from the repository root; package.json declares no test script and the tag-triggered release workflow only runs `bun run zip`, so tests are a local verification tool rather than a committed CI gate.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/main.yml#L1-L30",
+          "version": "repo-lines-v1:sha256:f46821bc1b077ad44652114eedfcd9484333e041231dc657a8761bbc4c36d6a2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4N2I4MjcyZDFhYmZkODNjZjNjNWIzNWJiYzlmYjg2MGE2MjBlZjY0MjQxNDhlMGIwZWUxZWEzZWEwM2I0YTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjZGE5NzRkNGExZWJlZDA3YmNiZWU2NzI0NzJjYjEyNTU3YmQ3M2Q2NDNhMmM1MThhYTIzNTRjMTA5YzQzMjQifQ"
+        },
+        {
+          "resource": "repo://package.json#L9-L27",
+          "version": "repo-lines-v1:sha256:8b3a874f0201b44d62b377b4a16fb3042f0122b939d05665d48f4ed463776606:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2NGQ4YzA3MzQyOTg5MzEwMTU3NmQ4OGQ5OTEyN2U4OWQ2ODkxZDNiMTdlODlkZjAyZWM5YWU3MDcwNWQ4YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmZTc3ZTMxNzBiNmNmMzdhZTU3MzY3ZGY5NTY4MTQzNDAwYWVjZTY1Yzk1NzAwMWYwZTI1ZTBjZWNjZjFjZjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzYjc4MWY1NGUzMjQ5ZjU0NzVmNDk3ZmFiNzk3MjNlNmJlZjQ1MmZjMDEyM2VjMTdlYWVkYmE0N2QxM2ViMmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY0MjkwZjU5MGZmMTM5ZjJkM2Y4NDk0ZjdjYjBlMjU3MDFhNDcwYmJhMTkxNDMyMjc2ZTEzNTJkZjVmMDNjNjYifQ"
+        },
+        {
+          "resource": "repo://scripts/feishu-sync.test.ts#L1-L13",
+          "version": "repo-lines-v1:sha256:e8363df6d9c704de79b12a436954ba359885a40cdb2f7e96cbfd4da4583a875b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NDAzZmRlOGJkNGE1MzZkY2IyMDJjMTA2OTJjMmY0NDJiZjFkNmZiNTZhYzIxY2MyZjc1OGQwMjI5NGEwMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjMmQ3YjBlNmZjNGYwYzI5YjhkZjgzMmIzM2Y1NjJmZmEwMzg1MzQ4ODYzNWEzNDNhZTNhMjQ2NDcxNzRhMjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0ZmRiYmMwNmFjNjJiMWM1NTg3NWI5M2EwMWYyM2Y2MTI2NjgzOGU1YjE2MmU1NmYxODg3MGQ2NDY2ZmEyM2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a12351bbe55d43508d6d5239f683f492",
+      "statement": "This is a Chinese-language codebase: UI strings, comments, logs, error messages and workflow task ids are Chinese (e.g. '岗位投递', '已沟通'), so locating business logic requires searching by Chinese keywords rather than English concepts.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L80-L84",
+          "version": "repo-lines-v1:sha256:d231574f232c5e26061ac4cd07ef2d5ecf4d4d3c333c2f1411194fd50d1d72db:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTJhNGM2MWU0MjI1ZDA1MzM5MGY0NjBkNDBjNDQxYzhlMTEzZjkxYjNjYTJjOWMyMWUyNDIyNWFlMjRiYmQxMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjU3MDQwNmRhMDdjZWNhODM0M2JlODM1NTdkOTVhMmRkZjRmYmE2YTUzMzM4ZTFkYmZlMzYzNmU4ZjQxN2JhNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmJjM2I1Nzc3MTZmY2MzYTI3MmZjMTEzNzIyMjFkYzA5MzU4OTQ5NjdlOWIxZDAyYWQ5NWM3YjU4YjBkMmU5YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzUyZWNiMDI5ZDQyNmMwMTA2MzcxNDgwOTk4NGY2MDYxNjMzZjdhNDNlZDFiNmQyMzVmN2ZhNTM1ZWNkMWMwZiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L18-L26",
+          "version": "repo-lines-v1:sha256:c77adaf6bbfccb2922714d756102308a031c750f422a8278dce6fce847ed20a6:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDRlZGViNmQzNTQxMTViZDcxNjVhMmUyMGI0M2RhZjI4MjJhOGYxNmM0NDdiZDdkNjY1OWQ0YTJlYzkyMjIyNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjljYTg5MWJmZjdhYzFmN2NlYWFlNDBlZjA1MTA2NmJlOWVmZTQ3YjRlNDI4MWU4NmMzMTliZTJjNTVlYmNlNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2JhNTc2MTM2NjdiY2QyZTg5ZmJkYTQ5ZDVjNjQzMTYyNWNiMzIxZmQzZGYwYmYzNWU1ZTdkYTIzM2Q5ZjcxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzkyZTk1YzdjMjg5ZjU2NTZkNzI4MGEyMjdlNDVkZGUwOWRhYjY2ZTU4YzE1YzZlNDIxYjA2YWI3M2NlYjM3ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_93166ed93b034f3ea28efe0ce536672c",
+      "statement": "Storage keys without an explicit local:/session:/sync:/managed: prefix are silently routed to the sync area by genKey() in ContentCounter, which gives a smaller quota and roams with the user's browser account; adding a prefix to an existing key therefore amounts to an un-migrated storage-area move.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScript.ts#L6-L9",
+          "version": "repo-lines-v1:sha256:cd1c9d2b11a7ab2e995bf7b293cc2485a6b0b0c316a723ed623d195d56bb29f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjg5MjljZjg0OTkwZWYxZTIxOTBlNGI5MzVhNDBkYzQzNGEyYmRmMmU5YmQxYWFkZDEwYTNkMzRhZWE5MDRlZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWI5OGNiODI5ODIxMWU1ZTEwMmVhYTA3MGM4NTg2MWE1OTEyMTAxZTkxYThiY2FhYmIyNTEwNmQ1ODEyMTA5YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGYxOWMzZTc2MTc2MmMwNTA3ZmZiZGM4MzFiMzUwNmRhNDAxMDZmNzI5NzZkOWFmNmJiYjU2ZjQ0NDBlOGM2ZCJ9"
+        },
+        {
+          "resource": "repo://src/message/contentScript.ts#L96-L101",
+          "version": "repo-lines-v1:sha256:bd470e7ea282904a9954bdba1e8a5094aa848491ff65a8d72b8059b2adf470a6:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWQ0NjBjYzk3YmY2YjA0NTZiOTQ1M2MyZjA3ZjI4MTQ2MDg4ZmZlNjM4NzIyYjdlMWFiM2E3YjFlZmZlMmI0ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2EwNzJmNTU1ODE0MGViODFlZmI1ZGI3M2I5M2MyZjVlMGRjYWVkMGE3YjJlYjg2MmMxYzJhZmJmYmY1MDM0MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGY3MzlhMDZjMWNiYjEyNDRlMzM2M2QzOGJjZjlmYTUwY2U4NGZlZDM5OWMyMTkzYTNjN2YwOGQ1OTkxOGIyYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_58662e11e42d49f79f694931014a0549",
+      "statement": "The `counter` façade in src/message/index.ts is a Proxy that throws 'Counter has not been initialized...' on any get/set while _counter is null, so initCounter() (MAIN-world injected script) and initExtensionCounter() (options page) must run before business modules evaluate; ExtStorage.getItem is the one exception, polling every 200ms for _counter and therefore pending forever if it never appears.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/index.ts#L13-L36",
+          "version": "repo-lines-v1:sha256:90b671a5e460393e90079bc839817059f0c56713e2fc736016cade384353416f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmYWQ0N2VlM2YwYjMxMDVlODc5OTRjOTg3ZGY2NzRlMDcwZmZmMDkwYjM5Mjk0ZDNlZTYyNDJlMGJmMDQ5MDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2YjRjOTg4MjI2YTg5MDQxYTM1ZDk5Yjk1MmQ5MzdmZTNmM2NhN2E5Mzg5ZDllNmM2MjliOTcwMjgxY2QwN2MifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L39-L65",
+          "version": "repo-lines-v1:sha256:fadadde36980bc540092b268ed385a9181dcddba48359942fb84d4c32a1de5fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3NDQ1YTJlOTU2ZmQ3OTcyZmEzYmE2MmZkNmU1MGRiMjAxZDU4NDk1ZDc1YzQ0YzM1Y2ViYmNmODY5OTQ5NmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0MDQ5NzZlOTgyNjRmYjE1OWEwOTNkYjMzNTIzYTQ0N2ExMGNjZjBhYTk0Njc4MTQzZTgxYzJlYzViMDU0ZmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0Y2JhZWYxNTc3YmRkMGM3MWRiNjJkNDFlOTk0NWExYTAzY2E4NjVlYjE0N2JlYzMyYzMyNTk4ZjQyZjAyYjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_27f291c07a284ec7891ac7789f4a1214",
+      "statement": "BossHelperCtx depends on unstable assumptions about the upstream zhipin.com page that the project does not control: host Vue component/data names (jobList, pageVo, hasMore, jobDetail, pageChangeAction, clickJobCardAction), CSS selectors such as .job-search-wrapper, window._PAGE user fields, wapi error codes and the chat protobuf schema.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L160-L175",
+          "version": "repo-lines-v1:sha256:d004944b718eed3b054994aa329091549219fb939ab987725ef0d35222e44dc6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4MzU1MmFiNTcxNDk0YjM5OWIxODE5OTYyMmRiZTNiMzgyNmViNjFmY2QxZjc0Y2ZiMTJhYmNmODhlNGY3MjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZTkyYWU1M2U0YjEwYTRhMmUzZGEzNTM3NGIzOWRiMzQwZmUxZTZjNDc0YjlhMDI2NDA2ZjE3MjQwODI0ZmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFjZjczMzJmMDU5YjE1ZTk0NDA2MmJkYjRiNmZjMWNmM2QyMGM3MjU1MjIxMTIzYTllODYzMWQzMDI4OWVhYzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1Yzc4MWRmZWJiMjc0NjFmMzM4NTk3YjUwZTdlZWEwZTFiYWI4NmQ2MjcxZjhjZmJhNjcxOThiNTUwZDJkNDcifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L266-L300",
+          "version": "repo-lines-v1:sha256:108bb45beb527f89e1e77a3b8c4a658a03114e08135fdd9c178b3e84bb35d9fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExZGY4N2E0NzMxNmM3MDhjNTUwMjA5OGU5YWY2YzQ0NTM0ZWI4MGJlYWRjZjYwNjMwMjhlZmNhODU5MzdhYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhZjI1MmJhMzVlNDFkYTUwZjRiZjc5YzJlMDA0ZWEzMWM1NTQxZGU0ODA2OTJkY2Q2NDAzMzE1NWUwZDdmZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2Yjg4ZTAyZDJiZmYwOGNhYzFhMTM3MTdkYTE2N2U4ZmFhYjg0NGFmYjNlNmMyMGRlYzNkYWJkZDMxZTViMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU2M2JlZTMzMTRhMDY0NDVkYzhmNzg2MTA2ZDBjOTk5MDliN2IxZWNmMTg4MTM2ZjAxYWMyMWY3Yjg2M2E1NWQifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L394-L455",
+          "version": "repo-lines-v1:sha256:65bb4bed25137166eda44f7d18324fe026a52629841f30659189b16bed3f611b:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZDBjNjEyMWQ5MDI5OGIyMDk1NzZkMjlkMDM4MjZiZjA3MGJhOTdiMDA0ODJhYzg1MGI2ZTkwMDI2OWRhZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2ZmI2NTIxNTFkYjM4Yjg5MzU0NmIyNDAxZGI3ZTY2OTFjYTYxNjE2ODY2OGM2ODA4NGVhNWUyYzdkODM1ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgzZjU2ZWNlM2ExYjc3ZTJmOGY5ZWRiMTc3MjdiYmRjMmVjMjg0MThkOGU3OTZjYmMwNzAzZjM4NGM3OGNlNDUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T12:28:49.821Z"
+  }
+}

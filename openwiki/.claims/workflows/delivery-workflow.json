@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:a2f6e581a90a46b4c68bd92805338dd60be1982383a41e99107e9665bd7196cf",
+  "claims": [
+    {
+      "id": "claim_af176fa253b4414689aef697f4a76f0d",
+      "statement": "真正的工作流引擎实现位于 src/composables/useApplying/index.ts 的 useDeliveryWorkflow 函数；同目录下的 useDeliveryWorkflow.ts 与 useDeliveryWorkflow.1.ts 均为空文件且没有任何模块 import，属于遗留占位。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L58-L60",
+          "version": "repo-lines-v1:sha256:711c4074dd40521af45f2c4c0b5438d4fcf92f6094bb52fa1a1e750dfff38f79:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzc4ZGZhN2NjYTU5MTdmNDgwZGVjZDJkNTBmNjU3ODk0OWM0NjgwZThlNDliYjc0MGIwNWZkMzg3N2E4ZjAxNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTU1NjVhYzc0MzhmYTI1MTRlNWFjZjI4NDJkMTQzMzZlOTQ2YWQ0MDVkOGJmNzQ5MmE0Y2ZjY2ZhMTI4MzVhYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGMwMjI3ODhlMTczMDE3N2FhNzU4MzI3MGE0OTE5MGU2MTQ2NmI4Y2UyYjQ1ZDcwMTAyZjU5ZDY1OThjMzE3NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjU5YTNlNjk1YjJkNWUyNDk1YjUxYWFlNjBjZTJmZTUwNGYyZWI3MTQzY2NiMWRkMWMwZTIzNjQwOTNlYWUxYSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L6-L6",
+          "version": "repo-lines-v1:sha256:7a089f6c7b613840fb6185c9504eea4ca1d8a0b00fa6b098bec5925dc2212db5:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2EwODlmNmM3YjYxMzg0MGZiNjE4NWM5NTA0ZWVhNGNhMWQ4YTBiMDBmYTZiMDk4YmVjNTkyNWRjMjIxMmRiNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2EwODlmNmM3YjYxMzg0MGZiNjE4NWM5NTA0ZWVhNGNhMWQ4YTBiMDBmYTZiMDk4YmVjNTkyNWRjMjIxMmRiNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjMxNzA4NGY4MjgxMGE4NTEzYjQ1MjE5NzZhNjhiNDEyM2NhYWZhNjVmOWE2YmUyMjVlMGJlMTQ4ZWQ3ZDI1ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTJlZjU2ZjkyMTA2NDIwZDQzYzZhMjg4NWQyZTU4NjU2MjVjOGNkYWRjOTBlMTFkOWJiMTFkNzI0ZTAxYjY3NSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/useDeliveryWorkflow.1.ts",
+          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/useDeliveryWorkflow.ts",
+          "version": "repo-file-v1:sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "id": "claim_874f60590cc643dcb8f795f5e97fd8b5",
+      "statement": "defineTaskHandler 把 id、任务工厂与可选项包装成 Task：phase 缺省为 filter、deps 缺省为空数组，调用点 options 覆盖声明时的 opt，而 before/after 是拼接而非覆盖；任务工厂在配置未启用时返回 undefined，表示该任务不参与本次运行。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L169-L185",
+          "version": "repo-lines-v1:sha256:909cdfdb925e27151f00ca8ed84179a7668093d63f864b3b5a138d6a99f8030b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0MTgzNmRiYzUyMmI0ODFhZmMzNzVkNDYyZTY5OTE1ODRlMWMzZWNkYjE3NzFkMjllODVmZTk2ZWEwNDgyNDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU5N2E3NjliMzI3MDAxMzFkNTcwZGNhNjFiMjg5ZTY2NmMxMDQwZmEwOThiZDU1ODg4YzE5NTIzM2I4ZGY5ZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk0MzQzNzg4OTY5ZGMxNDE1M2Q5OTJhMTQ0OWEzNDVlNGU3YjEwOWFjMzQ4MDIyYWY3NDc2NjA4MzZlMmQ2OGIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L121-L177",
+          "version": "repo-lines-v1:sha256:6b61ccc4c7213691f8ba0e63e5f26a729cc63f81fae727b8535e7fea50f1ad86:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmZmRlMTRiZmFjM2IzYmQyYzI0N2E5NDY0YjgzMjU3MDFmMTY2MDAxMTFlMDk5NjBlNDU1ZmY5YWNhZWI2OTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyMzlmMjQ0ZDVlZDVmZjNiMjY3M2UyZWQwNGUyOWUxYmNiOGIzYWFlY2M2NmE2ODA3NWQ2MzY4ZmZlMDQ4NjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3NGUxOGUzOTY5YWI1YTYwNTU4YzhjZDc4NjY5YmMxNTliYTk2ZWMyODM3NzliNzgxMTA0ZDUxMDhjYjczYjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f092e8099ef54e669fab469b3663b33b",
+      "statement": "defineTaskWorkflow 把数组、嵌套数组或惰性 () => Task 展平后返回异步工厂，调用 useDeliveryWorkflow(allDefinitions, ctx) 生成 DeliveryWorkflow；Boss 入口以此声明全部筛选、生成与投递任务。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L179-L186",
+          "version": "repo-lines-v1:sha256:82883903932565327fd04ffa2c7cd6bc86974b4db4e7998d88041915ddfe4420:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTBjMDI1NGNkMzA2NmQ0MjQyMGQwYWE1YWQ1Yjg1M2RjY2UyMzJmMDZjYzllMTg2ZTVjMmNkYzYwNDE5MWRlOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmZiMTQyYWQxYzNjZDVhYzlhOTEyYjZhODNiYmQyZTJlOTRlNGViOGNjMWM1NzAzNzUwOWJlODM0YmE1NTY4NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjAwZTFhYmI0MTMxNjZiZWMzMjI0YjVlOGEwMzBkMmRlZGVlZDAwZGYxZTlhMjRiODU5NDk5YjI3NzZlMDQyZCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L16-L18",
+          "version": "repo-lines-v1:sha256:470249ec0f487d5f69ecf3c119748c0e78e78d4b6e53ceb74fb4097c009ccbbd:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTA5N2E3MWVhZDlhMDg2OWNhZDgwMjIyY2QyOTcxYmI3MDg4ZDc4NThlMGZiNTNlNzNiYzJmZDdmZDAzYjkwZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDRlZGViNmQzNTQxMTViZDcxNjVhMmUyMGI0M2RhZjI4MjJhOGYxNmM0NDdiZDdkNjY1OWQ0YTJlYzkyMjIyNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2Q4Y2M0M2UyYzFjMzg2ZDkxODc5NzYzYzM5MGZjNjE2NWFlMDExYjg2OWMwY2ZmYzdlMWU3N2VmNjllOTQ1MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTk4MjRhMDBkOGE0MGE3NTQ3NTJhOWNlOTk3MjM3YTRiMWJkZDNkZTUwNzI5NzU0Mjg5YTJhZDY3NWNmYzIzNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e45fc5c64eb4472688c02686cde507ac",
+      "statement": "rebuild() 按顺序对每个任务声明调用 task.task(ctx)：返回空则任务不进入 requiredIds；返回 Handler 或 {fn,...} 则登记到 resolvedHandlers 并把 before/after 追加、把 onEnd/onDelivered 组合成先原钩子后返回值钩子；抛错时任务仍加入 requiredIds、错误记入 errors 并注册一个永远抛出的 handler。只有被解析出的任务才把自身 id 与 deps 加入 requiredIds，从而形成依赖闭包。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L88-L170",
+          "version": "repo-lines-v1:sha256:aa24e815fe547a5876f5675ff8c5f91ae4b0ceaab9c57ac587780e048de73d0d:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4MjU3N2FhMTYyODA5MTY2NTQxNDlhYTYyY2RmOGY4YWMyMWQyYWMyYzQ2YjZiMjY0NDQ4M2YxZjgzYTY2MjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjOWU3ZDQ0NGRhODcwZDk1ZjZkNTcwNzE2MDA1OGIyNGRkNzYwM2VhZmEzYWUyZjc1MmQ2NmQyNTc3NTgxNGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3MTE3ODhiYmQyYmE0MjY3MjQ0MDA4NmE4YTY3OTEzNDRjMzA0ZDQ5ZTEyMTYyNTUzY2FhZjEzNWE1MDhmNTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZlZGQwZTBmNDhiNzk3M2RjNWU5ZGYxZWQ0MzIxM2IwN2I0YWQxNDBlMDhmOTJhOTRlMjFlMTNlMGZjNThmYzcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2fd0f5feb79e4a5a853867a14e4e4cd1",
+      "statement": "rebuild() 用 DFS 拓扑排序依赖闭包生成 pipeline：在递归栈中重复访问抛 'Cycle: <id>'，taskMap 中找不到依赖抛 'Missing dependency: <id>'，先递归 deps 再把自身推入 pipeline。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L147-L166",
+          "version": "repo-lines-v1:sha256:14f7db3d91a7c48f9d23c246ec362b40cb399710c7be2e84dd8e74022986d59a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjYTBjN2FkODA4ZWRhZDgxMzhiYTdjYzY3ZDA1MGFjZDBkYzEzYWMyZjQ3ZmYyZmJiNjE1MjAyOTE5YjQwOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViMGM3NDQxMmY0MjRjNzI2OTdlODVmNGU2YjA1ZTlkYmI3ZmM2ZTUwZTEwM2I4MDUyY2YwNGZiMzdjMjg2OTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5MThhY2RkZjQ5MjIyZWMwMDllNTMzMWVlYzY5NjA1Y2ZmMGFlMDk3N2QxYzMxMTJkZGFhMWQ5MWQ2NzIxMGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRlYzc4YjQ0ODExMjQ5YjgyZGQwMGQxYTZiMWJhY2UyY2QyNWIyMmVhNTVlMzA1OWExNTA2Y2IyNmM2MGQ3NDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6ed20074a75041118da4e7eec15351fd",
+      "statement": "nodes 按原始声明顺序给出每个声明的 TaskStatus，判定优先级为 shadowed（同 id 被更靠后定义覆盖）、failed（解析抛错）、active（解析成功）、dependency_only（未解析但被依赖引用）、disabled，其余为 disabled；存在 failed 节点时 rebuild 弹出 alert 并写入 errorMessage，withRun 随即以 error 状态放弃本次运行。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L176-L215",
+          "version": "repo-lines-v1:sha256:43065775bd911c3b5d2ef623a5de0bbb5b2edf3f00d20372ece3ab14c78a436c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExNWViMTY4OTg3YWVkZDlhYjJjZDM0MzEzNDAyYWM3NzAxMzcxNTY0YWRjMzlhYTEwOTg0YzNhYTc0YWVkMzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhNmM3OTJjNjA5YTc3ZjZjYzg2OTAwMmM0M2EyNGQ4MWVmNWI4NThkM2MxNWVjZjM4ZjM0MTZhMjJlMjUwMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxOWU5MDNmNDUwZmFhZDYyMmU2Y2IzOGQwYzZmNTRkYzcwMDg0ZGRmZWQzOGNkZDZkMTU5YWNmOTAyOTQyNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4MDliZmI2YzRlODdlMmYxOTgwZDE3OTM1YjQ2ZTlhMGY1OTAxNzFlMDNkNWM5OWY2NTc3MDlkMzdjNzU3ZTIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L447-L462",
+          "version": "repo-lines-v1:sha256:34d4d7d43ad2bb75d16c731ed143e1ec1e55a3af7ae58e78566d30ebfbf55c18:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2YWYyYzU4ODEwYzVmYWM4NjcxYTgwMGE4YmIwNDM0OGZkZTRiNjRhYjhlOTFhMGQxOTE1NmJhOWQ2ZTdmYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5NjBiODAyZWM5Y2ZmZTQ3MjNlOTViYWIyZDEwMjczMTM4NTI0OTA4NjQ3NTNkZjQwYmQ1MDc3Y2FkMGVlNmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YjE4MzY2MWZlM2M3MDg1MjNkOTliZWQzYjJmZjVkMDFhMjU4Yjg5NDVkNjJkZjA3OTdkNjMyNmVlZDlhY2QifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L1-L1",
+          "version": "repo-lines-v1:sha256:8751145d42b2b4d3acb21044b28c1ea2a3e5088d70de47e08a9d8cb033992b35:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODc1MTE0NWQ0MmIyYjRkM2FjYjIxMDQ0YjI4YzFlYTJhM2U1MDg4ZDcwZGU0N2UwOGE5ZDhjYjAzMzk5MmIzNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODc1MTE0NWQ0MmIyYjRkM2FjYjIxMDQ0YjI4YzFlYTJhM2U1MDg4ZDcwZGU0N2UwOGE5ZDhjYjAzMzk5MmIzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAyMzIxZWQ4Y2U4NGQxZjRlMDk4MmNiMzg0ZWFjYjc1ODgxN2UwYTRhNTI5NjYzOTExYjVhYjBkM2Q5Mzk5NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f68103683746449487211a6c7b60497f",
+      "statement": "runTask 先递归执行 deps（找不到依赖抛 Missing dependency、依赖在当前模式不可运行则抛 Filter depends on delivery），再依次调用 [...before, handler, ...after]，每次调用都包在 runGuarded 中并重新构造 TaskContext，返回结果经 meginResults 归一化后写回 jobResultMaps 并累加 todayData.tasks[id][status]；isSkip 或 error 时抛出 { workflowResult } 作为短路信号，由 runJob 的 catch 静默吸收。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L296-L380",
+          "version": "repo-lines-v1:sha256:20783c9b7e4196b7ec7e55a08b00bfeff3cb57fba87f01a51dd7a57a2003f19a:eyJzZWxlY3RlZExpbmVDb3VudCI6ODUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkNjdkNmMyMGU4YTgzMDdlYjI4YjIzMTkwZDYxNWI4OGM0ZGM1MjRmZDlkZGY1MjgxMWY3MzI5ZjMxMTYwNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyYjk2YzZkMDVhODMxZjIxOTk4ZTE2NzdkNDU0MWQ5NDdiZWM0NWRhMzhmNTc5OWZmNzQ4M2IwY2MyZGNkYzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEzYmZmYjBjNTViM2E2MDMwNmE4ZGU1MWRhODk4OWU4NWVjN2Y1NDExYzQxMGNhMThjMzg0Y2JiN2Q0MjM0NzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY0YjRhODA2NzNlMmY1Y2ZhZDhlMDY1OWQ5YTg1MmEzZjQyMzA1ZTEzZTIwMmVlN2RjZjg0NDI5YzQ1YTJiNzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_86554ae2dcb641949375bc907fa992f0",
+      "statement": "meginResults 合并 TaskResult[] 时 isSkip/isCache 取逻辑或、reason/msg 换行拼接、status 取 jobStatusList 中下标更大（更严重）者、id 取最先出现的非空值；jobStatusList 的顺序 ['pending','wait','running','request','ai','ready','success','warn','error'] 因此具备严重程度语义。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L29-L56",
+          "version": "repo-lines-v1:sha256:f499c7293c56beb63964e27b4a6c677f7914eb5bcb2203b072328f3b70533fea:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA2MjAxMmQ1MWFkMDc3ZTZkYzI0M2Q2NDI5MTFhYWJjZWRkYWY4MmJiMDc1Y2ZhYWYyOGM1YWNiZWIxODdlZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1Nzg1NzQ0ZTU3OWMyMTIxZjU3NmMwYmJiN2VlYzUwY2UxNmQxMTY3MzAxZWI5MDUxMWVlNGQ4NGEzNTI1NTEifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L55-L65",
+          "version": "repo-lines-v1:sha256:afa19996b3d2d13d8164bd8684c08f0302b4da4489e962f456754014f65ff7bd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlNGY4ZmY1ZmU0MjQ3NGMwN2FlYzRjOTE4YmI3ODIzNzg5YTZmMDlmYTRmMTkxZWU3MmQ1NDkwMDliNWU4MTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzMTI1NDE2NmQzYjQ1Zjg2ZDI3OTQzYmQ0ZWM0MjkyZWIzZWQzODhiZTY5Mjc4NDczZWFkNjhlMjI3NTQ0YTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjZTk4ZDViMzhmODUwOGQ2ZjU4M2JlNGQ0YmI4NTQzOGFjZmEwMzIyYjQ2YTBiZTA5ZWI3NDBjNDA3ODlmNTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwY2U1MWNjZDBjODg5NTk5OTcwM2VhMWM4MDk0YmQ0ZDQ0YjZlOTVhZDY1MjVjZGFlNWU2M2YyZDVjM2E1ZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3ca51a9e92814075a955bfa84892fc40",
+      "statement": "runGuarded 用超时定时器与停止监听双向看门狗包装每次 handler 调用：超时以包含 taskId 与秒数的 Error reject，stop() 触发时以 WorkflowStoppedError reject；WorkflowStoppedError 在 runTask 内被原样重新抛出，而超时被当作普通异常最终记为 error / 执行失败。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L231-L256",
+          "version": "repo-lines-v1:sha256:6ae7f762f726f9cf8ba16dc8520ff7849db60748d47217e11260f3fcafc6f47d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNlZmI4MDU1ZTc5MDdjMjkxNWQ0NjNhYzZkZWNjNzEwMGZlMzZhZTBkYmRhYWJjMWFlYmU1ZmZkZGE2MjU2NWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NGFiNTg1ZDIyNGExNzVjODgyMDNkZWUzM2Y4ZWZiZWE2NTEyMWVjOTQxOWM5MzZlZGU5ZTQzMGMyNTkxOGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViM2NiOWRkMjU3ZWZmMzYzMjU5MTQxYmUwNDI5ZDJkNWY0NjM1Y2E0NjA5ZjEzNzFmN2VjMGM2YzI3ZDliZTIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L340-L360",
+          "version": "repo-lines-v1:sha256:ee345745d1e0d90f996ae765eda25f35fe58356297e8dbe836ee9eb68c892a18:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyMDU5NGM1MDdkODQ0YzFjZGVmZjY5ZDNlOGM4Yzc4ZGYyZDI2NmQ3YzQ2ZTNlNjhlODAxNWI1ZDhhZjJlZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczNjc0OTgxZWY1M2IyYTJjOTBjZDNmOTY3OTFkOWRhNTVhODMzMzAzM2RlMjBkNjQ5NTdiZTlhODQzNmM1ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3NWEzNDAxNWE3MzRkYTFjYTBmOTkwMjQ5ZmU5YmYyOWVkNDNkNTQwOGQwNDA3YWY0N2FhMmY1Mzg1ZTc3YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY0MzkwOTRmN2JhZDcyZjBjNzRiMzZiMmZhMTBhM2YwNjk5Nzk3YTRkYjAxOTgwYzVjYjFjNmI5OGNmOGQxNDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_725ea3c9838e4b23902ddcac6eab44e2",
+      "statement": "resolveTimeout 的默认超时为：任务显式 timeout 优先，其次 state === 'ai' 取 120s、state === 'request' 取 70s、phase === 'delivery' 取 90s，其余 30s。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L258-L266",
+          "version": "repo-lines-v1:sha256:6356c1543293c5afe81d142df1fa1adb3f7d5665b50b548bb25a769d24058d23:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzc5OGFiMmVjYzg4OTdmZjg2ZDVlN2RkMDJkOWM5ZjAzZDRiNDI2ZjAwNjFjMzcwMDRkYjY4YWFhNTRiZDEyZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjQ3NWU5NGE5MDRhYzQ5YjMxNTRkNDY3MmE2NmU4NjI5Yjg2ZGFjNzRlM2UyOTM3YmU2OTI3YWUzZGExMWM1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2U1MTg3NDA4YzAxNDYwZmJhNTZmOTFhY2JiOGJjNjcxZTQzMmM4NjAwNWRlMDg0YmE5YmI1MWYzYWVjOWIzMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmFmNGIwYTQxOGMxZmU1N2ZhZjM1YjJjNWVkOWU4YzA5MWM5ZWUzNWQwNzg3ODI3YTVkNGVjZGQzZjQ1MTYxMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_87561f4c2ffe482c897354605246bd45",
+      "statement": "DependencyMissingError 支持惰性依赖补跑：handler 抛出该错误时，runTask 按 taskId 在 pipeline 中找到对应任务，若其可运行则先执行该依赖再用同一 fn 与 ctx 重跑一次，否则原样抛出；Boss 入口正是用 createLazyObject('岗位详情获取') / createLazyObject('Boss信息获取') 让 rawData.detail 与 rawData.boss 在被访问时才触发依赖。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L345-L356",
+          "version": "repo-lines-v1:sha256:aef00fe4702c5471a523c102baf616f78bdb3a242d3db4c32093c447a10297e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5OTZlOTc3ZmYxMjQ4Njk1NWQ4ZmE2MDRlZGYxNjMyNmU2NjI5ODc2ZGM4NzcwOWQ0MTI1ZjQ1ZmJmODhmMmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1NjRmODI4YzNjYmUwYWNiYjhlZjVmYmJkYjgxMjg0YTdlNjk5NjM1YTk5Y2ZjOGY2MDI3ZGY1NTljOGE5MzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMzMzVjOGM0NDZlNDNlNzg5MTVkYWE5YTljMmJiMWI0NjU4ODRmMmZkMzM1OTQwZWJlYTY0ZTIzYzdhNzFkZjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5NTEyODM3MjM0NDFhYmFkYmNkNmIzZmUyZWI2N2FlNDEzZjhhNWM2NGZjNzljMmIxNDg1N2ZlMzdkMjk1YjYifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L180-L218",
+          "version": "repo-lines-v1:sha256:f81b7bbd8abeba457baa751cdfd95dee75c0871c11b943aa05ed17637756400b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NDk2ZDk2YzE3YzBiOWM2ZmZmYjY5NzcyMGU1NmYyNDU1NzgwMjEyNTI4YWJkMDYxNTY4ZDNkZTg4NThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhYjI3ZjJkZjBhZDUzMWQ2YjQxNjgwODc5YWY2NWZlYTY5ZjI0ZGVmZGNiNjVkMzU5MDlkODNhOWRmZDg2ZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNmE2MTgzYzQ3YjJhODdmNThlOWU1YWUxMzFmYTIwNzgzYTM3NzFlOTA5ODA0OGEzNzQ4YjVmZTMzZmZlNTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhOTcxYzUxNjdjMDdiNjE1NmM2NTFkNzBhYmJkZGViMjRmZDFlMzliOTNmNGViNGIzNTllNDNmNmM2NTBmZTAifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L390-L400",
+          "version": "repo-lines-v1:sha256:329173ee075459cd135e4296efedea88b482e65c781223223d15080308abd7d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmMGE2MDMxNzE5ZjY2NGUxZGQ4ZTJjMWZlMzgxYzY1NjVlZTJlYWVmY2QyMTczNjdjNDRlMWQ4NDEyYWY2ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViNGVjZGNiZDI0NWIxZWE4NTFiZTkwODRmMTgxYzU3ZmVmNjEwMTRkMzA1MGY2OTQ4ZTQwNjk0NzUwNjA3OWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4MjlmNjEzYjVkZDM3NzFiM2M2NjNlZGJiMWFiOTM5Mjg2YTQwMjA0NjJjNzEzYWJjNzU4Y2ZlOTM2YjJhNmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxOGViMjhhZjU1N2ZjNDYwNmJjZDI2YjFiYTgzNDU4OTNjZTFlMTlhOTU5NWM2NWI4N2ZmYzEwMWVjYjIxZjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4e547e9731f0448998da00b2778f0db9",
+      "statement": "mode 决定 runJob 执行哪些阶段与终态：filter 只跑 filter 阶段并置 ready/待投递；generate 跑 filter+generate 后把招呼语写入 drafts 并置 ready/待确认发送；delivery 跳过筛选直接跑 delivery，成功即 success；auto 跑完整三阶段。存在 drafts 时 runJob 会把它回填到 state.aiGreeting 并把 AI招呼语生成 标记为 completed 以跳过模型调用。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L300-L310",
+          "version": "repo-lines-v1:sha256:d5481f02f28e51aebb57597585d5bb2b58b93f6ef423afb3a14eb93638376cce:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxODBlOThiOGMzOTY3NWEwYjc5NWEwYjJkYjFlMDVjYTUxOGUzMWI1MGEzZmQ5Y2VkNjFhZDBkZGQzZGE2YjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY1NDk5MWRlYjJkNTFhYjdmY2EwMTU0MjU0ODZjZjE0YmZkNzhiNzVjNDMyZDliOWNiYzcxMzM0NzA5ZjI0NzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2ODIxMDJkZmMwZThjZTY2NzllNDQyZDk5Yzk1YTVjMWY3MGUyZTA1ODM1N2YwNzNkYzc3OGE1MjY5MzQ2MjYifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L380-L430",
+          "version": "repo-lines-v1:sha256:b31e926e471d1e8fd33d62fad1989c3422d75a8cba52a983a59e046b2f020334:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyYjk2YzZkMDVhODMxZjIxOTk4ZTE2NzdkNDU0MWQ5NDdiZWM0NWRhMzhmNTc5OWZmNzQ4M2IwY2MyZGNkYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQyMjJmMDRlOTIyMTA1MDFmYWJlN2RjNjFhNGNjODRhMzA2OTc0ODhjZWJhY2RjMzU5ZThkNDhjYzJkNmQ1MjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNmRiY2Y1NzhhNWU1Zjk2NDg1YWE3Njg1ODI1NzU0MjQxY2U1MDQ1YWM5Y2IwYzczMTliNTliZDQzODkzMzUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ddcff5957c5e40c6b45e4c6ab25053f2",
+      "statement": "岗位投递成功后 runJob 写入 success/投递成功、保存岗位缓存、清空草稿、累加 todayData.success，然后对 pipeline 中所有带 onDelivered 的任务逐个（各包 try/catch）调用；仅 filter 阶段 warn+isSkip 与投递成功结果会写入 jobCache，useCache 开启时 mode !== 'delivery' 会先查缓存并在命中时直接复用结果而不增加 todayData.total。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L268-L296",
+          "version": "repo-lines-v1:sha256:41d33c33fe92cf2efe9464dceb46bea5b93aae847aeec6db60de2cfcd2c00ce4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxOTY5NDQ5OTBjY2JmMjlmMzQ1M2VkY2U1M2EzMzM0Mzg5YWZhZmJkNzFlNmI2YmQ4OTAzYmU4M2QzZDljYzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkNjdkNmMyMGU4YTgzMDdlYjI4YjIzMTkwZDYxNWI4OGM0ZGM1MjRmZDlkZGY1MjgxMWY3MzI5ZjMxMTYwNzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmOTM5MmEyZjlmZTcyZDlhMzM1MjhjMTZlZWZlZjVjMTJkODkxZjlmOWY4ZGM3YzEzMDVhOWJiOTkyMDQxNmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1NDk5MWRlYjJkNTFhYjdmY2EwMTU0MjU0ODZjZjE0YmZkNzhiNzVjNDMyZDliOWNiYzcxMzM0NzA5ZjI0NzcifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L362-L445",
+          "version": "repo-lines-v1:sha256:0c9921e81f0e3b577cd2808fe10ad6f3c3b6d85961a8f2d1470d585231a60d98:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4MDA1ZDU3MTA2YTM2MmViMDAwZGFmM2RhNDY3NGM4MmI1MThmZjVhMmUyZjY3ZWU4ZTc1N2EzMzNjMmFmNjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5OWU4NGIyMTM3MDlhMjk0NTI3MzM4NTJhYTU4MWY5MzFmNjEzNDM3MDYxZWZiYWJiZWE2ZjI2YzA3MWU4ZjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmYzkzMGVkMGU1YzExYmIzNTcwZmFiZTk4YmY5MjZkMmJjMWRiYTk2ODc4M2M3MmYzZDA1MTczNGRkZjU3MTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L56-L66",
+          "version": "repo-lines-v1:sha256:01c08fe8908e0ad0923f7c74173560accee49a7b180b24a6e7b8c5126f1b0fc0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MTNkMWNiNDJmM2MzZjI3OTYxYTA4Mjg5N2RmYWZmMzNhMmEzODg1NDEzNWExMTI0YWVhYzk2ODc2Zjk5ZGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2MWZjNDM3ZmMyMzczNWFjMjg2NDM4YTc0ZmQ0ODY1MDQyOWRkNjg3MGM0ZTcxZDU5ODE2ODU5Mzc3NjA4MWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmODkwZjFlNzc3NGE2MjI4MWUwYjFkOThhNTEwN2NmZDY3MmUxMDM2YzY4ZTg5ZDMzNDQ0MmNkNmRkYTZhMDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0a125d60a80847968fa38deb4a08bd16",
+      "statement": "runJob 的 finally 块保证每个岗位都会 queueFeishu 入队一条快照：手动过滤的岗位重新写入手动过滤结果，工作流处于 stop 时把当前岗位标为 wait/已停止，并在 stop 时立即 flush。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L438-L445",
+          "version": "repo-lines-v1:sha256:df6de96c24ce510b15c8bb4a3f1be580c40642d6955d3c355256d9a9fc01db51:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzVhMzM5M2RmNzRiNDE5YjI4NzYyNDcwY2M2ZDE5NTg1NjNlNWUyZDBlMzY0ZjMzZmU1OTY3ZWQyY2U1YjQ5OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjk5ZTg0YjIxMzcwOWEyOTQ1MjczMzg1MmFhNTgxZjkzMWY2MTM0MzcwNjFlZmJhYmJlYTZmMjZjMDcxZThmMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzZlN2JmYjBjNWExZDIxMGNmZWEyMDVhOTRmYTJlMDA4ODhlMmQ4NGFmMjgzOTVlMTk4ODFiODA1MzM5NmIyZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTdkODYzMmU1NGU5Mjk4YWJiOTU4NzI3ZTJkNTE0MDhhYmFmMTM2NjAzNTM3OTEwMTQwYWJmNjViMzBhYjYxMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_96ab7121d96f4b8caa6d78c01ecc0820",
+      "statement": "withRun 是 execute/executeOne/executeAll 的公共守卫：busy 为真直接返回 false；否则置 busy 与 status='running'、清空 errorMessage 和 usedTasks、先 rebuild（有构建错误则抛错），异常时把 status 置为 error 并返回 false；finally 里只对 usedTasks 中的任务调用 onEnd、flush 飞书、把 running 复位为 pending。manual 与单岗位路径分别由 execute 和 executeOne(data,'delivery') 提供。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L447-L488",
+          "version": "repo-lines-v1:sha256:1ba0b1f3de6ef579b84bc88e33ac0e74fadc0df7f0a56cec5c744d641b4caf16:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmZmRmOGExNTIxMzRiYTI4OTU3MTViYWFkNmExN2UzMDk2YjIyNjNkZTYwMTM2YjI5NTA4YjQyZTU0NGM4YWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5NjBiODAyZWM5Y2ZmZTQ3MjNlOTViYWIyZDEwMjczMTM4NTI0OTA4NjQ3NTNkZjQwYmQ1MDc3Y2FkMGVlNmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJiMTQ5YTM4ODBlNjVlYmZhYzA1NWU3MmE3ZmZlNGUwY2FiMGM0MTU2OTNmNWEwYmUwOTFiMzhhOWE3ZjQ5YzEifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L148-L170",
+          "version": "repo-lines-v1:sha256:8af9ef50c637216e99114d200cb6037ffb066dceab35c85402a2f1137e8c92e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxNmEwZjI1NTI2NDJlNWY5Y2JkOTdkOWNlZDkxMzZhNmQ3ZWFmMTNmYTdiZTQwZjA5N2U0NzNiMjE5ZWZmYmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlZDcyYjAzMjg2NjAxZmM4Njc3OTg2NDVjNDliNmI5NTAxY2JiYzk1MzBkODgyNjAzNDkxYTgyMTg2Y2JhYzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY5MmZiYzJjZmMxYWE5ZjlhOGJiNDJhNjVhMWRiODEwMDA5ZTRjZGEwMjQ2ZjkzNTgwNDMxMzhmZWJhMWE3N2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1NTQyM2VmZjg3YmQ4MTg5NGE4NGQxODJlZTg1ODA2MmJmYWZlYzhmNjc3MmY0ZThiYzhkN2ViNGM4ZmZhMTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd85bc0dea2f4d91915a50778a6bc2dd",
+      "statement": "delivery 模式不翻页，只处理 jobList 中状态为 ready 且不在 drafts 中的岗位，每个岗位执行后等待 delayDeliveryInterval；循环出口是 status === 'stop' 或 todayData.success 达到 deliveryLimit。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L489-L508",
+          "version": "repo-lines-v1:sha256:cb762133c06ebe5993cc052b964ff71bd741905cea745b333f5d5ec9283d642e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjNzU1ODFlNDEwMjBhMDIzZTEyNzYwNmJlZDYxM2M0NmZiMWE1NWFlODFjZTc1MDQ2NDliZTQ1YjRiNmI3MmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNWM4MjYzMmZjODJkNGIyYzM0MGY0MjU1OGJhM2RmYTMxYzc2NTVkZjZmY2MxNjhiNGZkY2U1N2ZhYzYwNDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM3ZjZjNzZhYWM3M2Y4NTk4OGM0M2MwOTIzNjMxYjhjYmI0OGM5YTkwZTA2NzkwZTI0NTY4MzdlYjU3YjExMWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxN2JhOTQ5MzIzOWVmOGFhNTc5OTUyMmM5Njc4OTY4MzcwY2NhYjFhMzE0MGRkYWEyOGRjMWEzNjRlZmE2YmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_212e03250c204d39bd251be0b6f8e8ad",
+      "statement": "auto/filter/generate 模式的主循环先等待 delayDeliveryStarts，然后按页遍历 jobList：跳过已手动过滤、success、warn、存在草稿以及 filter 模式下已 ready 的岗位，每个岗位执行后等待 delayDeliveryInterval，页面处理完调用 loadMoreJob(delay(delayDeliveryPageNext)) 决定是否继续翻页。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L509-L570",
+          "version": "repo-lines-v1:sha256:dac48469e0de00ac0e2538ce44fdd0954f30e7e514f51540ac4bc1ac69990a24:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiZjUzYjYwYzdlOGVhNzUzZGUyY2FkYWJmMWVmNmY1YTFmNzU1NTAyZDA5ZWRkZGM1M2ZjMjc3MTc0ZjZiZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4ODZjNTgzZTU2MDJlMmEwMTMwNTBhZGMxZjBiYzY2Y2Y4YjUxYmM0YmFkMGUzNTdiZTE2YTdlOTZhZTdjN2EifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c54f774055d34befb8b60acabb6a07f3",
+      "statement": "deliveryLimit（默认 120）比较的是当日累计 todayData.success，因此停止后继续运行会接着同一预算计数；auto 模式在岗位循环内、页循环间与分页后都会检查该上限。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/info.ts#L52-L54",
+          "version": "repo-lines-v1:sha256:d923670d3123ab0f7ff8a98b704f88ac1275d9e2e9235887c201083384a6a13c:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmUxNmEwOTZlY2NiMjgwYTdlOWMxYzc4ZDA3ZmNkZDNjZDM4MTMwOGM1ZDZhYWQ2ZGI3MzUwMjZlMzBiNjZlNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDdlYWNkYTJjY2NjNjlmNzhhNGRmODI5MmZhODY0MzY0YWQ5OWVlNzljOTFlM2YyZjI5NzYzMTVhZTYzZDc1NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTBjYTI1NjRkYzM1MmMyN2E4NjEzOTdjN2NhZWMxN2EzOGY3YTFjNGUyZmU2ZTk4MWU4YjVjZmNmNzgwZTZlYyJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L500-L502",
+          "version": "repo-lines-v1:sha256:4ed7733eeabaf60aa0612149dbec3566f5a757bef0fbc761e1de1a939cb7f1f8:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmJlZThmODA4OWU2NTE5YzdkN2E4NjIxZGFkN2E1NDVkNmZmNjE5ZTkyNGQ1NTdiYjUyNTU4ZTM4OWQ1MjIwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDljYWJhMDZmYjBhNmZhYTllYmRmN2NhMmMyOTUxNzM3ZjM2YzNkYWIyZDEwY2E1Y2Y3ZjFlMmZjMjJlMGJlZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjlkZDE2ZGVjZmIyZDMxZmRlZTY5YTlhYzEwYThlNGM4YzcyNmM1ZjIxZDFkYWQxMDE4NjAxOGNiZjc1NDMwYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGQ1YWVlMGQxODg1Njk4NWM2ZTU5OTljOTFjYzE3YTE4OWZhNGZlZjg1OTA4ZWI3NTUxYTg3NWU5ODI4NGM5YiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L524-L528",
+          "version": "repo-lines-v1:sha256:6c465c860c13ebba111411cbbf2144dfd2f0caf93516ab91a9fea64ab1e7e828:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTQxZWY0NDlhN2MzN2U1ZmU5NzI2MzBhOWI2ODQxNjgzYjQ2NWQ2YjM4MTE5NDNjYTgxMDM3MmM5Y2RlZTNmZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjRlNGY0MjI0NTg5YTFiYmVjMWUyN2IwODRlY2RkNWMwM2NmNDZlNWIyM2ExN2ViY2Y0Nzg4YjRmZWYxMzcwMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2FkMGRjODg1MzlkMzVjNWJmNTc4NTc5NDZiNmM4NjUxNzFkMGZkZGY3ZDU5MjM5MTk4NWQzNTY4MTFjYzYxNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGQ3MjAzY2I4Nzc1Zjk3ZjczMmMzM2Y1NTZhNzNlNmU0MWU5YzJlMWQ4YjQ5NmY1YjI0ZDZkMDY0YTk0MTI3MiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L551-L556",
+          "version": "repo-lines-v1:sha256:170ea38e43c5c87c4914ac9ababe81f21dfb90b745af8e7bd4d0077aa6b958a1:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDU0N2Q5OGY2NTgxZjk1YmUxYjQwMmFiZTllODk5MGZjOTI3Yzc5YmY4NzU0MzgwZWQwM2U5MjM3ZDBiZGQxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzE1YmE4MGZkNjg1N2ZiY2Y1NzFkZjVjMzRjMzI2ZTEzZWZmNTMyZjczZTJmMTk1NDFlMjc5MDMwMTQ2NGNhZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTJiNjU4OTZhYzAwYjAyMWRjNDkwNTgwNjJmOWQ2Mjc1OWVlY2QyYjFlNjcxZjk3MzdjZWZjOTJiNzA2NjI2NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTdjMTZmNTRjNGM3Njk2YTJjYzU1ODkxMzIyYzZiMDk5ZmQ1Zjk1Mzg1OTA3YjYzZWM1Zjc4YjhlNzE1YjI3YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6279f43eb20745fc9c1881e28770712c",
+      "statement": "主循环用 seenJobs 统计连续无新岗位的情况：一整轮没有任何新 key 时把本轮岗位数累加到 repeatedJobs，达到 50 时记录 warn 并停止翻页，作为页面反复返回同一批岗位的兜底。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L512-L523",
+          "version": "repo-lines-v1:sha256:abf52d6ae85c3453765cbc6356efe66594df9c6f228638f8f0a6d0b2d8b5302e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjViOWRhOGY4NWU0YzQzNjZmNzY0NDdlZjE4YjdkYWQzZGQwMmE1YTNiYmRmM2ViZTg3NmJjMGFlYWEzYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIxN2JhOTQ5MzIzOWVmOGFhNTc5OTUyMmM5Njc4OTY4MzcwY2NhYjFhMzE0MGRkYWEyOGRjMWEzNjRlZmE2YmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiOTU4MWEyYWUyMTcwNzAwMmE2ZGY2ZTlhN2RlYTVmYzM0YThmYzE3OTRiZDEwYWQzZGY1OTZhMmE3Zjc5NjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8a8490ace7b44afdae72a6bf637b0eea",
+      "statement": "delayDeliveryStarts（默认 3）、delayDeliveryInterval（默认 5）、delayDeliveryPageNext（默认 60）三个配置项都以秒为单位经 delay(seconds, isStopped) 生效，且都传入停止判定，因此暂停能立即打断等待。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/info.ts#L178-L181",
+          "version": "repo-lines-v1:sha256:be522d77350d47c5bf8aa360c8e51b7d1218a3f13126e03fcd99d32cdd4f7944:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Q2MmFhN2U1NWM5MmI4MWU2MjhlNDRlNjJiMzVkNjcyOGJjMjg3OTU0NTBmZjc5NGNkNDc2NjkzZDgyYTg2MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Y2Y2QxNWVjNGUzZjU5OGEwOWJhY2FiYzkwYmJjMjQzMzJkOGQ5MDMzZmEzOTJmZWNjNGUzODBjZjZlYWU5MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGM0MTgwM2FhNTVhM2YwM2UyNmRjMzk0YTZhNjFiOTNkOGQ4ZDVhMmQxZDIzZjBkOTAwNWIyOWM5NTJkMTc3OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjY5M2M3NDcxZGNlNzFkODU2MDYyYWViMzQwMjdhZThmZGQxMzg4MmI2N2MwNWUzMjk0ZDAwZDI2MWYzY2Y0NyJ9"
+        },
+        {
+          "resource": "repo://src/utils/index.ts#L59-L65",
+          "version": "repo-lines-v1:sha256:a56241ad600db404ae78523360d656d4872148ea9c86679422da58b584442a36:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzAxNzg5MGNjZDZhMGRhZmNhMDE1MjVmMGEzZmFiMWVmY2M5ZGEyNzk2YTQ3NjI3MWE1YTJiZDQwMjIwNjc2YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjQxMjNiZTlkM2U0NjY0ZWZkM2U0ZjA3NGIwOGQ3ZjdiZjlkYzZiNGI4ZTA4YzY2MjUxYjRlY2RlNmU1MmQzMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjVmMmYyY2NmNjQ3ZmQ0NGM5ZWU0NTU3OTA4NDY3ODQ0OWE1YTBlNjhkMTBjNjViMjk4NjFhM2UxYTE3Zjc2MiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_442b6b6e5d73450996fb061089afa67d",
+      "statement": "stop() 仅在 busy 时把 status 置为 'stop' 并调用 notifyStop() 让所有挂起的 runGuarded 以 WorkflowStoppedError reject，同时 flush 飞书；isBlocked 以 status==='stop' 或岗位在 manuallyFiltered 中阻断后续执行；reset() 在非 busy 时把 status 复位为 pending，并把非 success/ready/非手动过滤的岗位结果改回 wait/等待中。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L218-L225",
+          "version": "repo-lines-v1:sha256:6c2f1a3cca95214c66563dac7e7be17cf1ad123f3ca1626f70994bcc123faa53:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzBlYWQzNDc0ZTI2ODhiMjZlODY5YTk1NDllOGM3MzhkNTM1YjQzY2U5OWRjM2M3ZDI5YTEwOWZhMDY4YjdiYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjQ3NWU5NGE5MDRhYzQ5YjMxNTRkNDY3MmE2NmU4NjI5Yjg2ZGFjNzRlM2UyOTM3YmU2OTI3YWUzZGExMWM1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDVmYjBmNzJiOGRiMTRlNTcwMDMwNmFhMDRhMDRjYzEwYjdhMTcyYTE2YjUzMjVjNjExMTg3YTZkMzIzZGI4YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODU1M2NmNjY5YzNhZTg3MTRhYzUyZjJhYmRlMzgzYjVmYThmMzQ1NTVkZTExOWMyYmY1MGY4YmI0NzdjOTRmOCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L566-L590",
+          "version": "repo-lines-v1:sha256:9e3e1f2dcc15de75f9565b82066ab96ed9906fe9572d781ebb55f277878d1e1a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4MGU2MWVmNmMzZDM2ZTE5MGM2NzcyODBjOTJkZTZlNTBmNDFmMDRiNzg2ZGMwM2FjMmVmMzc4OTlhNjJlYjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwNjZhNjVhN2EwN2E5NTBjMzY0NDZmZmJjMDhhMTdiMjM3ZTA2MzRjMTg3YzY0ZGRiNzQ5OGUzMmRkNWIzZTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg0MDQyOGIwYjM2Y2QxZTUwOWE2NDJjMjczYzM5N2QyY2FkNGNhZDQwY2YwYjA0MjljNDU1YWFiNjE4YTFjZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwNTk3ODFlNmExZDg1MjRiMDBiYmNkMTJjMTY3ZWU5ZDMxNDBlNmFhYjM3ZTRkZmYxZWFkODkwYmNmOGEwYTkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9d34447f97b34495a8962972170622aa",
+      "statement": "markFiltered(key) 为该岗位写入 warn + 手动过滤（id 为 'manualFilter'）的结果并入队飞书快照（不计入每 5 条节奏），工作流空闲时立即 flush；UI 通过 HelperContext.filterJob 与 deliverJob 调用它和 executeOne。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L218-L225",
+          "version": "repo-lines-v1:sha256:6c2f1a3cca95214c66563dac7e7be17cf1ad123f3ca1626f70994bcc123faa53:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzBlYWQzNDc0ZTI2ODhiMjZlODY5YTk1NDllOGM3MzhkNTM1YjQzY2U5OWRjM2M3ZDI5YTEwOWZhMDY4YjdiYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjQ3NWU5NGE5MDRhYzQ5YjMxNTRkNDY3MmE2NmU4NjI5Yjg2ZGFjNzRlM2UyOTM3YmU2OTI3YWUzZGExMWM1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDVmYjBmNzJiOGRiMTRlNTcwMDMwNmFhMDRhMDRjYzEwYjdhMTcyYTE2YjUzMjVjNjExMTg3YTZkMzIzZGI4YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODU1M2NmNjY5YzNhZTg3MTRhYzUyZjJhYmRlMzgzYjVmYThmMzQ1NTVkZTExOWMyYmY1MGY4YmI0NzdjOTRmOCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L143-L170",
+          "version": "repo-lines-v1:sha256:504b370755c28a3032cf1c80bba87b8a339531b6fd1b1976ed26ea2d1dc403dd:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjZWQ0NDUwZGVjYWE0ZWRmZTE0MTBhM2U2YmJhZjEzYjdlZGNkNDk3NmNlMWU3YTk0ZWZlYmJhYzAzZTMxZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlZDcyYjAzMjg2NjAxZmM4Njc3OTg2NDVjNDliNmI5NTAxY2JiYzk1MzBkODgyNjAzNDkxYTgyMTg2Y2JhYzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU0NDk3MDYzYzU4MGMxZjRkNDMwYWU2OTYwOTZmZTU4OGE1MmI4Njc1OTA4ZWFkMjFhYjFjMDY5YjEyOTAxNWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1NTQyM2VmZjg3YmQ4MTg5NGE4NGQxODJlZTg1ODA2MmJmYWZlYzhmNjc3MmY0ZThiYzhkN2ViNGM4ZmZhMTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2e5cbe0d4cd540d5a9d0f1fb42a61244",
+      "statement": "HelperContext 通过 workflowRunning（workflow.status === 'running'）反向禁用切换账号/预设、拉取详情与手动投递等入口，避免与运行中的工作流竞争；切换账号会清空 jobResultMaps、stateMaps、drafts 与 manuallyFiltered。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L133-L170",
+          "version": "repo-lines-v1:sha256:537c0146f453fd223cfefcc9d99bcdae19aaf36278c393a57e4d513682833589:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2ZDYyYjAwYTEzZTM4OTNmOWZjMzYxYjk5YjlkYTg2NjU4MWYwZTJkYjA3ZmRmY2FmNGZmZTE2NWU2NmM0NzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlZDcyYjAzMjg2NjAxZmM4Njc3OTg2NDVjNDliNmI5NTAxY2JiYzk1MzBkODgyNjAzNDkxYTgyMTg2Y2JhYzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiZDk5ZDljNjE3M2QyYmI0ZDhjOTU1YTQwZDVhOThjMTRiYmQwYjlkN2FlZWFhNTk1MDFjOTQ0ZjdjZGIxMTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1NTQyM2VmZjg3YmQ4MTg5NGE4NGQxODJlZTg1ODA2MmJmYWZlYzhmNjc3MmY0ZThiYzhkN2ViNGM4ZmZhMTYifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L35-L35",
+          "version": "repo-lines-v1:sha256:319fb1be8949d4ebb8110243a0c2585201e3787cb8914389a703ec873dab361e:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzE5ZmIxYmU4OTQ5ZDRlYmI4MTEwMjQzYTBjMjU4NTIwMWUzNzg3Y2I4OTE0Mzg5YTcwM2VjODczZGFiMzYxZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzE5ZmIxYmU4OTQ5ZDRlYmI4MTEwMjQzYTBjMjU4NTIwMWUzNzg3Y2I4OTE0Mzg5YTcwM2VjODczZGFiMzYxZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGE2NTI5OTcyNGRjMTk4ODA5NWUzNDViYWFlNTQwYmViMTNhMjVmYzVlYjQ5MjBhYWQ2NDMyNzJhNGRlYWI0MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTk1MGFiYTdmNDkwNWNiYTMyYzdkOWVmMjUwNGQxNDQ2OTdmYzAzMTRjMDdhZGQ0NTI1NDc3YWQ0OGRiODc2YiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L88-L101",
+          "version": "repo-lines-v1:sha256:28e9794f33b218e9bcfc1112743c4f4d4918b3840527a956ba8e81a4e0b7bb5d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyYjRkNDg4M2M2YTkxYTgwNWRmZjA3ZjhjYjNiZWZjOTVlYjAyMTIwMGJlNzBiZGE1YTRiMDQzOTJiY2Y3ZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY4ZmE0ZTcxMTZlMTBlMWJiZDEyMDgxOWQxOWEzODE1ZTk0MDA1NzJjMjdiMmYzODJhODg2NGYzMjBiNGFkZmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1M2FkNjIwNDFkZTc4ZjNlZDVkMzM0NjYxMDI4MWUzMGIyZTBjZDU5Yzg0ZjA1OWRjYjUwZDc4OGY4YzQzMGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8d9cfab18a0e4ac8a183ecd4268e48d0",
+      "statement": "scripts/feishu-workflow.test.ts 直接实例化真实的 useDeliveryWorkflow 验证 runJob/executeAll 行为：useCache 开启时缓存 filter 阶段 warn+isSkip 与投递成功且不缓存 error/throw、命中缓存不执行任何阶段也不增加 total、stop() 中断挂起任务并只同步已停止结果、stop 后不再处理下一岗位也不翻页。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L142-L242",
+          "version": "repo-lines-v1:sha256:ae0f9177beb2593f54247f551e2482ca3b5d4ebe8d12493fc7402334602d07e7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI0ZGM0YzQwMWJjZTgzMWJhZWRjYjdlOGIxNWFiMjg5MjkwZTNkZGI4YzE1YjcyMGUzNmEzYTU2NjQ1YmUzOWIzIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3ZTZlYmQ1M2U0ZGIzYmI1YTYyM2IyNzkyNTdmZDgwMjM2MTkwODdhMmFhZmNmMjZkNTI3MmZhYjc2Y2E1ODJkIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5MDczODlmNzI5MmYxOTJiYTYyYmY0MDdlMjljODc0ZmFkYjQxNTA3ZjA3ZTdhYjkzYTY3NmZhYjYwMzZjNTUzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxMzBjMTgyZjgxNWY2MDVkY2VkOWI3ODYxZjdiNGY5ODRmYjhhY2IzZWM1ZWY2ZmQ2NzU0M2Q3NWVjNTg0MDRmIn0"
+        },
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L65-L66",
+          "version": "repo-lines-v1:sha256:7f6cfe3bed825e0ac7378f109b0bdf0c7b6b556a7abafa7c8a07fab96e374c45:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjA1NDgyNTdkYzY1YTNiZjQxOGJmN2M5ZGU4MDc0MDM5MmVjMDQ0YjMxOWVkODlhYTAxODY4OWFiNWE0NzY4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDQ3N2M0NWM2OTZiZGJhMTZiOGQ5OGM2N2YwNGZiOWNlYjI3ODRlY2Q2NjdkNDk3NzNmN2Y3OGNhYWQ1MWVhOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmVmYWYxN2IzMDg1N2U3NDA1NmQ1OTYwNzA3ZGQ2ZTE0NjgxZjZiNjZhZDJkMTQ4OTYxODFlNDU4ZDFhYjkxNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTEzNzg1NTNjMWIyOGZkZTc0Y2QwYThkNGM3MDc4YjYwYWFjYzJkNTI2N2JmODhjMDI1OTNhZjE0N2JmYTA2NiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T11:19:15.432Z"
+  }
+}

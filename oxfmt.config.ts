@@ -6,5 +6,5 @@ export default defineConfig({
   sortImports: {
     partitionByComment: true,
   },
-  ignorePatterns: ['*.min.js', '/packages', '/.claude'],
+  ignorePatterns: ['*.min.js', '/packages', '/.claude', '/openwiki'],
 })

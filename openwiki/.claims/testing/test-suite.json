@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:da731cc2227877c13a31fc91ea67ccfca34b6abab2282964210307fe929ac942",
+  "claims": [
+    {
+      "id": "claim_9aa75b1059be4d93b4205f71e3f5bc87",
+      "statement": "仓库存在两组互不感知的测试：`scripts/*.test.ts` 四个文件使用 `bun:test`（需在仓库根手动执行，推荐 `bun test scripts`），而 git submodule `packages/devlog-ui` 的 `src/__tests__` 使用 vitest（`environment: 'jsdom'`、`globals: true`、`include: ['src/**/*.test.ts']`，经子包 `npm test` 即 `vitest run` 运行）；vitest 的 include 相对子包，永远捡不到 `scripts/`，而裸 `bun test` 从根扫描会连带命中 devlog-ui 的 vitest 用例并在 Bun 下失败。`src/` 目录下没有任何 `*.test.ts`。",
+      "evidence": [
+        {
+          "resource": "repo://packages/devlog-ui/package.json#L27-L34",
+          "version": "repo-lines-v1:sha256:f1049ef033fed9165aa2aebab5665e308f234680735a5ebc0fcd48fa5f8ba29c:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTI5YjRiMjE1YjBhYmE4ZWQ1MzZmMTlkM2E5YTMxMTU1MDNjMDRmZTkyZjZiY2FkZDk5NTBhNjhhOTEzNzk2MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmVhOTY3ZDI4YzUwNTEwNDNkYzE0MzUwZGY2YTk0NTFhOTczMDZiNTQyODdkYmFhNTAyNTA4ZjEyYTYzN2MxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWEwNjBkZGY3OWYzZTQ5MDY2NmE4ZGI3N2M2ZjljOGY5MDViMzI4Yzg0NzZiMjI3MTc1YzNhODc5YWI1M2ZlYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTk1ZTQzYTY5ZmE3ZTMxMjQ5NzIwZjE2OGJkOTUyZGY2ZGMzYjkxNTM2NGM4NDNlNWRlMDBjNDM0MjRjODQ1MSJ9"
+        },
+        {
+          "resource": "repo://packages/devlog-ui/src/__tests__/chaos.test.ts#L10-L10",
+          "version": "repo-lines-v1:sha256:4b817051ffa3e6849907a71ccde51d8739b69c0ea471a921287fa1e4ab167752:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGI4MTcwNTFmZmEzZTY4NDk5MDdhNzFjY2RlNTFkODczOWI2OWMwZWE0NzFhOTIxMjg3ZmExZTRhYjE2Nzc1MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGI4MTcwNTFmZmEzZTY4NDk5MDdhNzFjY2RlNTFkODczOWI2OWMwZWE0NzFhOTIxMjg3ZmExZTRhYjE2Nzc1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWFlODE3YzkwZTFhMjU1YTUxOWE5OGYyYWRiMThjMTFiYWYzODM4YWFjMTcxNDQ4OGRlNWQ3MGRkMzk3ZTc5MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTBhYmNkZjI2YThkZmVlODY4OTBlYTdiMDI3MmJjNDUwNGZiNWMyMDQzZDVhMmVlOTQ5YzRkZjJkYjVjYjFjMiJ9"
+        },
+        {
+          "resource": "repo://packages/devlog-ui/vitest.config.ts#L1-L15",
+          "version": "repo-lines-v1:sha256:c5c8008f7f26cdb35722c7058e1caf3f635cc3c8a7daab87783338e774d31e43:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0YTE5MjExYzNhMDNiOTg3OTQ3ZjI0YjY5YmRjYzQ2OWY0Nzk0ODI5YTVmNWE0YTE4OGVhMmUxODE2NTRiOWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L1-L2",
+          "version": "repo-lines-v1:sha256:cce9c784f27d93a5f61940bdabba41da0d65272fa9bf6972156a08660904f140:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjg4MjQ4ZjRlNDAzNmZmMzkyMjYxYzA4NGE4ZjBmNGIyMWQyNGUwYmE5YTEzZjNlZGI0ZWIxM2Q2MDUwMjM3YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTI5NTUzODc4NGZiZTlmYTVkZTViMGJlZjI1Y2FiOWIzNDlhOTM0YTc3MTMwMDdmZTczNzNjN2UzZjNjZDU4ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_40c51bf416f549e4a92e62d4f76f1ad7",
+      "statement": "根 `package.json` 的 `scripts` 中没有 `test` 条目（只有 dev/build/zip/check/fmt/lint 等），因此测试不是 npm script，只能手动在仓库根执行 `bun test`；`scripts/` 也不在 `srcDir` 内、不参与 WXT 构建。",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L14-L30",
+          "version": "repo-lines-v1:sha256:fd7a7ce43b2ecd1b13bdf6685b13c591ccc348d09b6a342d189e031e8b164372:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyOWJhZTNkMDFkMDE3OTQ0NjM1YWRkZjk4ZmUzZDk3MTRjM2M1YmUyMTAyMGExMjk1MWFiY2Y3NjZhYzRkYzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmOWNhODY2ODI1YWQwZjE3NzYxOGRiMWRkMjQ5MTAzZjFmMzM1NWVhMDU4ZDBkNjk5NDEzZmI3YjU3OWU1NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViM2EyMmMwY2RiYzRlMmQ4NDQyZDA0NWMyZTdiODkyYTMxZTAyYjBlZjRlYjkzMDFhZTkyMjNjNDI1MGUwODgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0ZTViMDg5ZDI5NGExM2VhNWVhYTAxOWY1NmU5ZjJhZjhlODdiODgyNTdmYmE3M2I4NWY1OTVmNjA2ODk2ZDMifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L35-L38",
+          "version": "repo-lines-v1:sha256:823f0006ed2490116d30af134abecf907464595a6e0a63e11a0922834189f491:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjJjZWNiMTQ0YTQ2ZjVkY2YxMmE2MTY5ZmNlZWQ3Njk1ZTgyOTRiMDkwZGU3NmYzNjYxY2RkMDI0OTMwMDE0NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmU4NWY2NzFjMTk4MGFjNmNhZGE5MmRlY2YxOTlhMTAxNDk0MTA3OGRkMWJmOTQ2YWMwZDk4MWIxNGE0MmZjOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2Y4Mjk4N2QwMzFmMWQyZDAxNzJiOTliZTI4YzVhZGMwNTMwOTIyMTJhMTJlYmU4ODZlZDg5ZjM2NDhiM2IwZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTI1MjNjNjE0MTVjYzBjNmMzZDU4YTkxMWRjMTk2YzQ4ZTE2ZGEzNjY3OGIwYjRhMTA5ZDRjOWY2ODE3N2MzMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_852bd2a7078c47a4ae525635b81a73f8",
+      "statement": "CI 的 `.github/workflows/main.yml` 只执行 `bun install` 与 `bun run zip` 并打包 Release，没有任何测试或类型检查步骤，测试完全依靠本地手动运行。",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/main.yml#L1-L45",
+          "version": "repo-lines-v1:sha256:dd07b617a4c8685918de20f613a3308341997d08407c252ea77d383a9c8c87e2:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4N2I4MjcyZDFhYmZkODNjZjNjNWIzNWJiYzlmYjg2MGE2MjBlZjY0MjQxNDhlMGIwZWUxZWEzZWEwM2I0YTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzMmUyNTRlMDAzZGRiMzY4ZjUxYWM3NTg0MTc3YjdhY2RiYmZjYTQzYTcyMGJmZWIyYTY1MWYxZTFjNDBjNDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhYmI1ZjE4YWE2NDg5YmYxNjI5NjJmMjYwM2VkZGZmOTczZjYxZjExOGJkYzI3ZTdjZjUxZjQwNmU4OWI1MDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8a708e2785f4e3299a9f1a6372d8331",
+      "statement": "`scripts/feishu-workflow.test.ts` 通过 `mock.module` 替换 `@/message` 与 `@/utils/logger` 两个别名模块：`counter` 只暴露被真实代码调用的 `storageGet`（返回固定的 `local:feishu-config` 配置）与 `feishuUpsert` 两个 mock，logger 用一个 `withContext` 自引用对象替换。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L6-L40",
+          "version": "repo-lines-v1:sha256:bcdefa70ba35be7dc4e58267d894201520c11efeff1966a84bb43d635fd5c7bc:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmN2UzMDBiOGIwNDEzNmIwNDk5MDkxMzY4ZjZiNTE4ODk3Y2M1ZDRkNWVmMTBkMThmMzJmNGExMGFmNzA2MzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUyOTU1Mzg3ODRmYmU5ZmE1ZGU1YjBiZWYyNWNhYjliMzQ5YTkzNGE3NzEzMDA3ZmU3MzczYzdlM2YzY2Q1OGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzZTVhZTdjYmU3MmM3MjRlMDE2ZGI4MTVjZjEzNTk4MmYwZTgwZDhjZmQzNzQ4ZGIxY2QxOGZjMmU4MjE3MDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5abbba744bd04b9ea6756383f768a89f",
+      "statement": "生产代码中的 `logger`、`jsonClone`、`useToast`、`delay`、`computed` 是 WXT/Nuxt UI 自动导入的裸标识符，Bun 无法解析；测试因此通过 `Object.assign(globalThis, globals)` 注入它们，并在 `afterAll` 中按事先记录的属性 descriptor 逐个还原（原本不存在则 `deleteProperty`），以隔离同进程内其他测试文件。",
+      "evidence": [
+        {
+          "resource": "repo://auto-imports.d.ts#L11-L26",
+          "version": "repo-lines-v1:sha256:17b84d0c8a65673d17a90a476780dd372695d1d5a0d9627b29f2942922f117e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhlNDQxNTZlM2M5MTU2NTJjZWNjZjJmZmY3NWEzMTg0ODQ5ODI2MDQ4ZGQ3NzYzMjQzMTUyMWFiYzFmZGM1MmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmOWI3NDRlYjMyNTk2MjljMjFkMTk3ODI2OGFiMzkzNDg1YWJlM2FlZWFiNTY5NTM3YzcwODZmOTJjZGIzMDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L41-L58",
+          "version": "repo-lines-v1:sha256:74c972735accf321578ce4a537f2028b4f6d22d9759e2c5fe34f56318268db56:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3NDhlYzg1YzA4YzJhMmZkZDFhMjk1NmJjODVmZTFkMzNlOWRlNzJiYmQxYWZkODc1ODUyYjM1MTQ1MTQ3ZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiODNjNTlhNGYwMmI2MWVkOTc3ZWZjMWE1ZTIwODU3NmQ1OTIxYjBjMTRhZjBlZTIyMWVlYjY1NjQ4ZTdkMDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNiYTA2ZTgwOTIzZjI5ZDY4NmMyYTU1OGU4ZGI4ZjdkNTM3MmYxODYxODA1MjgyZTM1OTFjNzQyN2ZjNTBkNjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2MjRlMWVmNTQzZTdmYjNjMzJhMDNlZWQyMDUwMDdlNzMyNTZmZDk2Njg0ODFkYWJjMzA1ZTRkMmIyNTQ0ZmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_88a1a2b550d249319d278234935283cd",
+      "statement": "`delay` 的注入把配置里的秒级等待（`delayDeliveryStarts`、`delayDeliveryInterval`、`delayDeliveryPageNext`）变成零成本：真实实现 `delay(s)` 会 `await` 真实的 `setTimeout(s * 1000)` 并操作 `#loader` DOM 元素，在无 DOM 的 Bun 环境中不可用。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L41-L48",
+          "version": "repo-lines-v1:sha256:d3d4a11640654bb67936f518e805b686fcf186b4cfda6427f15e182e2b877a15:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTc0OGVjODVjMDhjMmEyZmRkMWEyOTU2YmM4NWZlMWQzM2U5ZGU3MmJiZDFhZmQ4NzU4NTJiMzUxNDUxNDdlOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjVjZjk3OTY2ZDcyMTg3MTU3NTI3Yjc4ZTM4OWZhNWJiOTE4ZTE3MzkwYjAxZjAxMTlmOWY4ZjdiMmRjZWE0MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2JhMDZlODA5MjNmMjlkNjg2YzJhNTU4ZThkYjhmN2Q1MzcyZjE4NjE4MDUyODJlMzU5MWM3NDI3ZmM1MGQ2NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmEyNTYyMTc5YzNjNDkxYjQ1NzZiYTk4YzNhMWU1ZWQyYWM2ODg4N2RiZDJlZGFkZDI0N2FkY2YyYmEwNWYxMCJ9"
+        },
+        {
+          "resource": "repo://src/utils/index.ts#L58-L62",
+          "version": "repo-lines-v1:sha256:e78b26c8e5001f743b9701410f75beeb0247cd1b371f6166d80b96fb2b4620b7:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjRiYjJjMjQwZjcwYzZmM2M4ZDMwN2RhMDg1NTE0ODViMjBlMjMxMzAyMTI5ZDI1OTA1N2E5Y2Q4OTY1NWQwMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjk4MDIxYjE1MjM0NzFmOThjNDVlMGNmMDRlNzdkY2NiMjFhZWZlNzE2NjA4MWFjNWZjNGRhMjlhZTViZDhkYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDYyMmEzYzhiNDJmMzMyY2RlZDE5YTE3NmVlZGM5YThjNGE0M2RkN2ZiMTYyYWQwYjdlMzU0NjVkMmJmMGM2MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGNmOTVmMmEyZmY0NTQ0MmUxMzVkMDRmNjZmYjI1NGJhNzAxMGVlMzJiZThiM2FjYTAwMjczZTE3N2QwOWYyMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7524e909b84940b59763e65256a8d37c",
+      "statement": "测试对 `@/composables/useApplying/utils` 与 `@/utils/feishuSync` 的处理是“显式放行”：先按相对路径动态导入真实实现，再用 `mock.module` 把别名映射到该真实模块，从而让工作流通过 `@/utils/feishuSync` 取到的 `feishuJobRow` 与 `createFeishuSync` 仍是真实实现。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L60-L66",
+          "version": "repo-lines-v1:sha256:2c3f179c533e8dc976f3e46f4e9ebb368cadc7d7cdfbd18c316f6a4733039516:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWNmNmJmZTZlOTU4ZmI3YzZlZGQwN2Q4ODAxNjBmYWFjY2UwNDU2ZDgxNGVmZjQxNjFlZTM4N2EzYjkyZGM0OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDQ3N2M0NWM2OTZiZGJhMTZiOGQ5OGM2N2YwNGZiOWNlYjI3ODRlY2Q2NjdkNDk3NzNmN2Y3OGNhYWQ1MWVhOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmY3NTM1NmNiNGU1ODkxZjI2MzgwZDJhYTkzNWQ3ODFjN2Y3NTBiODMwNmJhNzkwZGYzZDEwMTJmMDk0ZTAzZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTEzNzg1NTNjMWIyOGZkZTc0Y2QwYThkNGM3MDc4YjYwYWFjYzJkNTI2N2JmODhjMDI1OTNhZjE0N2JmYTA2NiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L1-L4",
+          "version": "repo-lines-v1:sha256:e6c27df7924e8464f84f6ffbd2064d45f8a877a27c93afc6b81aa8ba100536f5:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2U0YTk4OWIxOGMyZjYyMmEyMmQ4NjljMTAzZmM0YzM0M2RkZTI0ZDgxOTAzMWI1ZGJiZjA5NzliMWZlYTk3NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTg4YTlkMjVjOTdhZWU0NmIzZWU0NDIzYzQ4NTc0ZGI3Y2NiNGRiYzcyY2MwMDUyY2M5ZDQ0MWNkNjJlNjMyNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c00228f68b1e47c3a9a0fc691dba0841",
+      "statement": "`DependencyMissingError` 被 mock 成一个同名的 `class extends Error` 占位类，因为真实 `handles.ts` 顶层引用了 `@/utils/activity`、`@/entrypoints/boss/requests` 等重依赖，而 `useDeliveryWorkflow` 只对它做 `instanceof` 判断。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L35-L38",
+          "version": "repo-lines-v1:sha256:fb18453c3bd20f2e38fb5d55a8ef50c1e476dd218ccb2fdb544a6375996bbb83:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTg3NzEyODljNjBkNjcwNDE1MjBjNmQyNmZiOGQ1ZGQ1ZmMzNDQ2YTQyMzFkNzY2MWExZGUwZmM0NTc0OWVkMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2I4NzMwOTc1YWQzMzhlNDBiNDI0OGMxZWQyMWY0ZjVjZTViODk1ZjY2MTljNTViN2Q3MDMyNTQ3OTVkYzIwYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzk0MzNmNjRlOWFkNzczM2E5MjFlOTdmZGUzMDkwYWNhZWFhMWIyZjRlY2M3Njc3YjllODQwMTI1MDgyMTU2NiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L1-L18",
+          "version": "repo-lines-v1:sha256:0bc08943655d54af2a7e435f72c65c46884db90532bd4263353e7f59bc42ad8d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTExMGM0NjgzYmFmZGFlMjkzN2U4NWU0Y2Q0NDY4ZGI5NWVlODQ5NTUzYmYyZWU5NjRkNTU0OGU5MWMyODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwMGFlZWFmZDgzOGE1ODMwNzliNjFiN2QzNTQ3MTg1ODM5YzJiZjY0NDNhMWIzM2UyMzhhNjBlNGYxNGM0MDEifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L354-L356",
+          "version": "repo-lines-v1:sha256:344ea4a481161201d6404918bf1d2b18cc88cdfcbaccb652202e692321300a42:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWNiMWQ4ZTdmMDE1ZDgyMGZiY2M0MTdmNTliMjQxZDFjMWZkMDRiZGQ0NmZmODY5YWE0ZWM3ZjI1ZjgyZDU0YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTU2NGY4MjhjM2NiZTBhY2JiOGVmNWZiYmRiODEyODRhN2U2OTk2MzVhOTljZmM4ZjYwMjdkZjU1OWM4YTkzMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWFhZGY0NjkxNGVlMmZkOWJkMGVkZDI3ZjdmODA3NzYzNzQ2YTE3YWNkNjhhYjE2MWZmNmRlNGM3OGI3NTE0NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODk1MTI4MzcyMzQ0MWFiYWRiY2Q2YjNmZTJlYjY3YWU0MTNmOGE1YzY0ZmM3OWMyYjE0ODU3ZmUzN2QyOTViNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9839b34744a54e0abb2b92fa3299d06c",
+      "statement": "该测试文件的核心约定是“只 mock 边界”：工作流执行（真实 `useDeliveryWorkflow` / `executeAll` / `runJob`）、飞书行快照与批处理保持真实，仅存储/飞书写入、日志、`parseGptJson` 与 toast 被替换。文件里的注释明确写出「Mock boundaries only: workflow execution, row snapshots and batching stay real.」",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L20-L21",
+          "version": "repo-lines-v1:sha256:952f697d370f0b808a94e63592984bdebaa9c5dd0b66b18d38ab4267d0f09eb7:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmExM2ZjMGE3ZTdlMTEzNjNjNGJhMTM3ODhiZDMzMGU2M2VlODczYTFhYjJmMDNjODZiNTFjNGYyNTAzZTEzNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQ5ZGNjM2U3NDFhMGNmNGU2YzI1MmNlYTdlNmYwYzI2NDg4MjRkYzNlMzNmYjdmMzkzMWI1NThjZGE5NDcwNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTkwNzUxODZmMjA5Y2JhYjA3N2YzNDI4MTAzZGIxOTRiOTQ1ZWEwZjczZDVmOGI5Y2E1MWViYTJhZjk5ZTZiYiJ9"
+        },
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L60-L68",
+          "version": "repo-lines-v1:sha256:9b073cb0b66e0ec6d5eded5022506b6971e95c6a78d718364ecc413c36c5014f:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWNmNmJmZTZlOTU4ZmI3YzZlZGQwN2Q4ODAxNjBmYWFjY2UwNDU2ZDgxNGVmZjQxNjFlZTM4N2EzYjkyZGM0OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmY3NTM1NmNiNGU1ODkxZjI2MzgwZDJhYTkzNWQ3ODFjN2Y3NTBiODMwNmJhNzkwZGYzZDEwMTJmMDk0ZTAzZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWJjMTY3MzJhNmM4Y2E5MmNmNGRlMGNiMDc4ZGI1MDNlOWQyMjU0Zjg5MTVhOGVhYmQ5NDdiODc5NWU0OTA5YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_370972eecba2474e85e0374e7ababcec",
+      "statement": "`fixture(count, overrides)` 只实现被测代码实际读到的 `HelperContext` 字段（`jobList`、`jobMaps`、`jobResultMaps`、`jobCache` 的 `get`/`set` mock、`statistics.todayData`、`conf.formData`、`accounts`、`conf.formDataPreset`、`chatModel.states`、`loadMoreJob`），并以 `task: () => handlers[phase]` 的假任务驱动真实工作流；`deferred()` 让用例把某个阶段卡在半路以观察中间态与 `stop()` 语义。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L70-L130",
+          "version": "repo-lines-v1:sha256:f969a742b083836cf17b24a8aa2b35f91a4635c0b9c3ed5368dd32ded0a65784:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOTA1YWYxMzRiNGZjY2Q1YTFjMzk4YmQ1ZTA0ODFmNDZlYWI2ZGZiZmYxNWI2MWU0YThjZmI3Yjk0OTlkOTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3ODIyZjk4MDg3YzNkZGQ3MTdmNGMwZTNjYzJhZjUzMTZhN2U1NWRlNDEzOWQwNDJhYTEzYjMxYjhjMzJkMjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxMzc4NTUzYzFiMjhmZGU3NGNkMGE4ZDRjNzA3OGI2MGFhY2MyZDUyNjdiZjg4YzAyNTkzYWYxNDdiZmEwNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg0N2E5ZGYxZDE5NjRmNmI1NWNjMDEyMjNhYjc2NTRlOGUxNzNlMmM3M2M1Yzk3ZWY1MDE2N2MzNmFmZTI5NWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c5986ec577384f23a49399fc185e386b",
+      "statement": "`settleSync()` 连续 `await Promise.resolve()` 30 次来排干 `flush()` 的微任务，因为生产代码中 `add()` 内的 `void flush()`、`runJob` 的 `finally` 与 `stop()` 都是故意不 await 的 fire-and-forget 调用。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L132-L135",
+          "version": "repo-lines-v1:sha256:4cbbd50e1cab55d53aeef4fcc6269894f70633ab13edd237b837815c01a6c905:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjc1NTU4ODExZDZhY2E3ZTFjMzM0YmI1ZWRjZmJjNzUzOWYzY2ViYTJhOGVhMTU0MDUwZjFlMWIzM2M5NzA1YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDZlZjRjZDgxMjJkNWIzNTEyMDE4ZTgwYjE4ODNhYmVmMmJiMGY4Y2YzM2YyNzk4Zjk0OGI2NmEzZGY0Nzk5MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzAyNDA1ZjE4YjVkNDUyNWIwNmNjMWMyOWM5YTQ1MWEzYjljZjEyODk0NGNmMzFmMDExMjU2MDgxMDAwOTEzOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGNmNWYzN2Y3ZDJjZmU0M2U3ZGM1M2UwZTQ1MDBlYjJmY2E0ZTNmNzhmZWY2ZWY2NjM0ZTAyMTFhYTYwNmM2NiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L476-L478",
+          "version": "repo-lines-v1:sha256:0b5c95591d415fab78416fecd026a029a58b5d6b8d36f0c6ba60a29314c18875:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjRjMjlhYjExZWEyNzZmNDRhOWQxOTE1Y2U2MjY1NjllZWVmOWUzODQ5N2JlZjFjM2VhZGZlNTVkZGI5ZmZmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODNiYTJjMTg0NmY2N2VmODQ2M2M4YjFlZDE1NDk1NWIzOTdiZmVkZTc1ZjY1NjUyMTlmNTQ5ZjMyMjhlZGE4OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmQ5NjAwYTAzMmZhMjIxNTQ5ODNhOTcwNjdlNDU0NWI1NzAzNTlmZjg3ZWQ1MDVhNDY5Mjk2MzlkNzAzMDQ2ZiJ9"
+        },
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L128-L136",
+          "version": "repo-lines-v1:sha256:6d05d7d9ca899558c81d909106b2f4581551bf6a6bb2e0c09f57cf65a832d1a2:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDJlZGNlNWJhNjYyMDNmOTkyMjU1MDViZGVhMTFhMDVhZjBjZGE5YmRhODYwNzMzMjg1ZTQxOTc3NGZhY2ZmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODEzNjM1YjI1ODMwMTQ1ZGQxMjljMjkwMDkyY2UyNWJmMzI1NmVjMTVkMTlhNTYyZWVlZTdjNjU4MDE2NThlYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_dbcdc750cea34b1f98a26e59a1d15310",
+      "statement": "缓存决策的不变量被锁定为：`useCache` 开启时 `jobCache.get` 以配置的 `useCache.expire` 毫秒调用；筛选阶段 `warn + isSkip` 结果落盘且后续 `generate`/`delivery` 阶段不执行；投递成功写入 `{ status: 'success', msg: '投递成功' }`；`error` 结果与抛异常都不缓存但 `jobResultMaps` 保持 `error`；关闭 `useCache` 时完全不读写缓存。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L137-L235",
+          "version": "repo-lines-v1:sha256:c4070f3b48f073f17469d42a2e28d462960272480f3230db3b27c4a7d5aba59d:eyJzZWxlY3RlZExpbmVDb3VudCI6OTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjNWU1MGNjMGRiOTk1MjVmOWNkYjFhZGViNTlkNTMzMGNlNjg5Y2VhMTNiMjgyYzM0NTJjNDliZTk4MWYyODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdjMGE4Mjg0OGQ3NzBmODExYjZiZTM2YjUzNDBlMDVkOWE3ZmY5Y2YxMzQxYmI1ZjJlNGQxZThkOGRjYWIzZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiYjFiN2FiYTljOTNjMTZhNTI3YTcyOWFmMzZmMzdjMjc3YTk2Yzg5ZjBiZWMzMzgxZWQ3YTg1ZGViNzQ4ZGQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L278-L301",
+          "version": "repo-lines-v1:sha256:998e09bf04e3eea07bfe5895f1219e1b5237a32d7e282c9676894de91cc886a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlNGViYzI2NTA3ZGVjZjAwODEyNTcxY2QwZThjZjQyZTcwYzRlNjg2ZmViMmJjZDYwNjYxNzcwOTg5NGM0ZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3YWE5Yjk3MGU3Y2M0NWQzZDU0ZWM0YzFjMTg4MWJmYzU0NjVmZmY3ZTA2MmZlYTJkYmIyZTZkNWQ3ZTVkYjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiNzRhM2JjNzhmMTg0NGIzNTkwMTM1NWJiZGEyMjQzYjVkYTZhMjYyMmI2MjNhNWVhZWI0NDkzZThhNDJhNzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8bf7298e95194a518c7ec3c46c4cdd8f",
+      "statement": "缓存命中路径在 `runJob` 里于 `++todayData.total` 之前就 `return`，测试据此断言命中缓存后 `statistics.todayData.total` 仍为 0——即统计口径的“总处理数”不包含缓存命中的岗位。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L199-L212",
+          "version": "repo-lines-v1:sha256:bd9f50dcac68cd11a4b07b1119e5068bc9891b640eedf563c8912dec83f882ce:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkOTA5ZTQyNzY5ZTViOTIzYWUwODYyMDkyY2FmOWIyN2VjZDEwMzk5MDdmOGM3YTVhYWM4MTY4ZTk0ZTQzYzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlhMGQ1NDlhOTEyY2FiMWVlN2ExNjk2Mjk3ZGFkOTRlZjdiOGZiMmYxOWI5MTllOTZkZWZhOGRiNzY3ZWM2MmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1M2VjOGI5OGQzMTlkMGI5MDM5NmViZWE4MGUyYjNlYzUwZDY2MGYyMTE3NTE4YjliOTJjZjA2NTRkYTU4OWYifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L288-L307",
+          "version": "repo-lines-v1:sha256:3d9bae9da6b7ab541578baf537a0367d3b8af8bdde5d85069e189e2fbd0a73f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJjYTAxOWQ0ODcyZTkwYTEwNDcwMGZmNjQwNDk0N2VkNGY2NDllNmQ0ZjE4OTQyZDExYzZmNGQ2OGYwMTQzZjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1Y2M3YTI1MWEwYWJhZjk3NDI1NzZlNjk4MmE2ZGZjZWE3OGQ4ODEyYTViNWMxNjk2NTFmNGE1NjhmMjlhODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4NTY5MzM1M2I5NzU0ZmVlOWMyNzA1M2UwN2UwOGYzMGQ3YzZkMjQyNmY2NTE1ZGE3YzQ2NmY5MmJiMDgxNzcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e32acb6b0e044a9bbe47a478e4210101",
+      "statement": "三种模式下 `runJob` 的 `finally` 都从 `jobResultMaps` 取最终结果同步到飞书：`filter`/`generate`/`auto` 的 `处理状态` 依次为 `待投递`/`待确认发送`/`投递成功`、`处理状态-类别` 依次为 `ready`/`ready`/`success`，`使用账号` 是账号 `label` 字符串、`使用预设` 来自 `formDataPreset`，且配置始终从 `local:feishu-config` 读取。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L248-L273",
+          "version": "repo-lines-v1:sha256:1da585e55a9d385bf141a8491d182a9af9bc933fc0fb34bc8612bd81451ad9f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjY2ViYzU2OGE0NThjNDI3N2UyMzgyODgxMTgzOGIwZWE2NjQwMWYyNjljNGI5YzE4ZDM4NDQxY2NkMmZhMzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmZDFjMzYyMWZlZWQ3OWIwOTU0YmM3NmJhMzIwMTk3ZWM4M2UzMDk3OTA1YWNiYTU0NGQwM2UzYmE0ZTAxMGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzMDJhNWQwYzY5MzQ4MGZkMmUyY2MzOGY1MzE0MThkOTg0NGRkZjkwYWUzZWQzZGQ4NTkzZWRhMzkzMTM1MWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzY2Q4OTc3ZTkxNWYwZGVlNmEzN2U4MGE4MjE3NzY4M2U2YmJiYWUzODlhNWY0ZWEwOGE2NmZiMDQ2ZTkyMmQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L451-L455",
+          "version": "repo-lines-v1:sha256:9890ae9d0acfd0af09e771d25fd47c8dbb4c4c6e5f01af25eacd78548edcdbff:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTVmNWRiZjI1OGYyNjg3YmYzMDFiOWFiMGRhMGEyMTg1YTM3ZDFiMzRjNWM3ODAwM2M0MGQ1ZGViZjNiMWU2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWU4YmQ2YzZiNDY4MzJkOGNhYmU4NTRkMzlhNGJiNDIzMzA3ZDM3OGI2ZWI5OTE2ZjhiMzIwODQyMjE5Nzg4ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTlkOTY0YmE1MzRlOGE3YWNmYjY4ZWVlZTk3MThlYTY5NmNjZmRkZjkwZjIwZTJjMjBiYjhlMGIwYWViZGM3ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjkyNmZjOTdiODRmMzI0MDQ4NGFmZGJkMDU1MzRmMGI2ZDhlMjVjNGQxYzFiYjRhM2U3MWVhMGE4NzExOGE4ZiJ9"
+        },
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L35-L38",
+          "version": "repo-lines-v1:sha256:0a60c941fc252270ef9ed7e3a013f74fbe2cb47c54d22ff70289f4a6296434c6:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzUxYzFlZDhlNWMzYzc2MzA0OWZjZjA4YjA0YmFmOTM3OTUxNDA4NGIyNjNjMzk2MWRiZDgxNzEyN2E4N2ZjNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzYyNjU0ZjVjYjVlNDFiNTI0ZTgyZDg0N2QzNTk5ZWIzNzBhZmRhOWJjNzE0Mjg2YzczZmNiOTQ4Y2VkOGQ1YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmJjNzQxMTYxMzFiOWZmNWNiMWRiNTNhZmQ0NGRhNGQ5NWFmZjNlYzFiN2I2NmEzMWVhZGY4ZDBlMzgyYTU4ZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd2d39fd913a4b8b93c893f1e4ae1de9",
+      "statement": "错误与跳过路径同样从 `finally` 同步：抛异常的行形状是 `{ '处理状态-类别': 'error', 处理状态: '执行失败', '处理状态-原因': <message> }`，`isSkip` 的 `warn` 结果是 `{ '处理状态-类别': 'warn', 处理状态: <msg> }`；两种情况下投递阶段都不执行。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L296-L317",
+          "version": "repo-lines-v1:sha256:df9c6e89b0e1bd49363a7cf2d9828382e674eac0b89551fbcfd8325850541bd2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVhOWIyOTA1NzE1NjE3MzZjN2MyODQ0NmZhM2YzODQ2MWJjNmYxYTQ3ZjAwNmQ2YTI1YWFiMGFhZGMzOTBkODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwMTkwMzM0OThlOGMxYWIwYzg5NmRlMzkyMjliMTM0ZTc0MTdlYjU2NDg2ZWU5OTNhY2EyMTA5NDg4YzY0YTIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L432-L440",
+          "version": "repo-lines-v1:sha256:4ef70f0d31b3650b816490a1637e79da2089f48ccb3b408edea2837a91144b1b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGZhZTExM2FlMWM4OTE4MmMwMGFjMmMxY2JmNjY1NDQ4YTdhNWFkYjIwZTcxZWRmOTEyNmI4M2Y0MDdlZWI5YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmY1YTI2MDJjN2I4ZjMwNmM1NjBkNTIxNjQyMjk3ODFlNzM4MWQxYWZkMzQ2NGQwMzM1ZjBkYzAwZGRhYTljMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDNkYzI4OGVlMzYzMTg2YzJjYjEyMTI0YzllMGMyMmI5Mjk0M2FhNTQ0NDc3ZTY5MmEyMTZjM2FiMGU5NGQzMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWNhYWRlZTFkOWZkZjBkOGZhZjU1YWI2MjUxMTEyMjA5OWY5N2Y5ZmQxYTk0ZjhhZjhhNWJjOTEwY2JhYjQwMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d2f7229e9e6a4e9e94a82a9095152e9e",
+      "statement": "用户停止时 `stop()` 置 `status = 'stop'` 并通知挂起任务 reject，`runJob` 的 `finally` 写入 `{ 处理状态: '已停止', '处理状态-类别': 'wait', 使用账号 }` 并立即 flush；测试断言下一个岗位的 `jobResultMaps` 不存在、`loadMoreJob` 未被调用、`success` 计数为 0，且 `busy` 复位为 false。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L275-L295",
+          "version": "repo-lines-v1:sha256:787f4c209aba424709ebe99b4938affdc108b368010bdf1bd09ca12991cc36fb:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwMWNjZGIxNzBhZTcxNjI1YTA4NzdmMzM2MDQ3ZDA2NTI3ZWM2ZWQ3YzVlYTdhYTEyOWU3MWFlNDkzN2Q5OWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFjMDhhZjQwMjk4MDg2NTc2NGIyMDQ3M2M1M2VmZThmYWY1ZDJkZTBjMWQ3ZTVhNmVhYzQ3ZWRjODZlMzgzYzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgzODNkMGY4Zjc1ODNjZmY3MGM1MjM4YzhmYmEyMjliMjA0NzU1ZjNkYjFjMWM2MWIxOTBkZDgxMzFjNzIxYjUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L451-L455",
+          "version": "repo-lines-v1:sha256:9890ae9d0acfd0af09e771d25fd47c8dbb4c4c6e5f01af25eacd78548edcdbff:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTVmNWRiZjI1OGYyNjg3YmYzMDFiOWFiMGRhMGEyMTg1YTM3ZDFiMzRjNWM3ODAwM2M0MGQ1ZGViZjNiMWU2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWU4YmQ2YzZiNDY4MzJkOGNhYmU4NTRkMzlhNGJiNDIzMzA3ZDM3OGI2ZWI5OTE2ZjhiMzIwODQyMjE5Nzg4ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTlkOTY0YmE1MzRlOGE3YWNmYjY4ZWVlZTk3MThlYTY5NmNjZmRkZjkwZjIwZTJjMjBiYjhlMGIwYWViZGM3ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjkyNmZjOTdiODRmMzI0MDQ4NGFmZGJkMDU1MzRmMGI2ZDhlMjVjNGQxYzFiYjRhM2U3MWVhMGE4NzExOGE4ZiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L563-L570",
+          "version": "repo-lines-v1:sha256:d360007c22b016933732e9c1f60bfbac8c90d88182f102bb3294753354065af3:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjQ3NWU5NGE5MDRhYzQ5YjMxNTRkNDY3MmE2NmU4NjI5Yjg2ZGFjNzRlM2UyOTM3YmU2OTI3YWUzZGExMWM1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGMzZGI0MWE2NjlhOWE1MWQ4YzFhYjI3Y2MzMjA4ZWUwNTMwNTM1ZDU3MDQ4YzA2NTg3OWU3ODYwNWIwMDA1YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjg4NmM1ODNlNTYwMmUyYTAxMzA1MGFkYzFmMGJjNjZjZjhiNTFiYzRiYWQwZTM1N2JlMTZhN2U5NmFlN2M3YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_00c8815b60a84bc0afa0e8d3b3b3bbdb",
+      "statement": "“每 5 条一次 + 尾批”的不变量：6 个岗位时第 5 个完成即触发一次 `feishuUpsert`（恰好 5 行，key 依次 `job-0..job-4`），解除阻塞并结束后尾批 `job-5` 作为第二次调用发出；对应 `add()` 的 `++processed % 5 === 0` 规则。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L319-L348",
+          "version": "repo-lines-v1:sha256:4664e62874807c800a115e7c87369c7aef4a28596119c285453374ee7ed4401d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4OGZjZTllMzBkYWVhYzllZjE3OThjM2FjNGMzMTI5MGM2Njg0MmU5MGMwZmYzNmMzMjkxNjRmYjA2N2NjMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwZDUyMzI2YTUyN2Y1OWIxYTQzNjUzZjlkYzUzNGZjZjljYzIzMDllNThmYTFjNzJhZGFjNzQ1ZGI3NmRmNjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYWEyMTUzYzljODBlMzE0MjMxODJjZjE2N2YyOTQyZmI1YjIyMTRkZmVkZTczODE1MDA2NjczNTg0OGEzZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzMDBiMzJhNjQ3NjY4MTc2ZmIyY2ZlM2Y3OWU2ZWJkZjczODk1ZGVkMmExZWI4OTNjZGYwZGQzMTRhZjY4ZDkifQ"
+        },
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L128-L134",
+          "version": "repo-lines-v1:sha256:21dd078d40347718c63211e7c467e72c5e1029c791c9ea0ee9b5bc257bdee2de:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTc5MTc5ODBlMTM4ZTBlOGVlMjUzZTM0OTBiMjk2ZTAyNDgwMmExNzQ2ZTNhOWRkMjEyNmZiM2RlZDk0MGJhMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDJlZGNlNWJhNjYyMDNmOTkyMjU1MDViZGVhMTFhMDVhZjBjZGE5YmRhODYwNzMzMjg1ZTQxOTc3NGZhY2ZmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzBkOGQwMDc5N2Y4ZTI1OTA2M2I3ZGEyM2E0NTBhMmRkNzQ4NzJlNzkwN2RkNmIwY2I0NTUzNmExNmNjYThlMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_965e965788ae45de821a333276492676",
+      "statement": "同步失败不阻塞也不丢行：`feishuUpsert` reject 时触发固定 id 为 `feishu-sync-error` 的 error toast，工作流 `status` 仍为 `pending`（同步失败不计为工作流失败），随后 `stop()` 会原样重发同一批行。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L350-L372",
+          "version": "repo-lines-v1:sha256:154a979002d5171ced956204b51712856e53472c1ed302ccb56b69f886a94604:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMzUyNTg5YzM0ZDNjNjA2ODU5MzFiNmVjYzRkNTA5OTFhN2M1NmM4ZmJhMjg5NDExNDY1NzY5MDI3MmNhYzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViNzA0ZTY5NDBkNWY2MzA5NGQ0MWMyZGNjMWE3YzdhNzJjYTdkM2JlNmZjMmE1YzM5MDEzNTYzMTNlMmNhZjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L87-L97",
+          "version": "repo-lines-v1:sha256:96821c422d408917097feda7750620ecc8af1a6de763cba98a593e7e28613fa0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2NjQ3ZWIxNzEyYmM5YTkxNGYzY2ExNGIxMjBiMjZmNmQ5MWVhZjhlMDZmNWM5NGYwZjM4MzA2MDMzNjU1MjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMzZiYmY5MzRkODBiZjliNzNkMWZkNzIyMzE3MzZkNWIxY2JiZWEzOTdkM2QwNGFlNDJmODNjMjFjMmE4M2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBhZWQ5YWRmMjJmYjIxNGM0OTk4MTFmZjk3MzY2OThiZThmMzViMTIyODY2ZTM1YTkyYjlkY2M0NGM1YjFkNTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhYmMyMDBlODMzOGE1MDQ5ZjBlYjUxMmE2YTRjNThhMzhiYTQ4NWZiOTYwMjIxMDFjNmEwZWMyOWQ1ZmJmYzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d797c0dadf804fd4aeeda26d432149bd",
+      "statement": "`scripts/feishu-sync.test.ts` 同样只 mock `@/message`、`@/utils/logger` 与 `parseFiltering`，保留了真实的行构建与队列：它锁定 `使用账号` 映射为账号 `label` 字符串而非对象、前 4 条不发/第 5 条发 5 行/第 11 条单独成批、失败调用 `onError` 且重试用的是最新快照、请求飞行期间 `add` 的新快照在旧请求成功后仍保留并作为下一批发出的行为。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-sync.test.ts#L1-L86",
+          "version": "repo-lines-v1:sha256:0b2a9f6f3803c7800b7ff7a9d3f4e42da933bd0d5b1e252c076ab8cf39dc01bf:eyJzZWxlY3RlZExpbmVDb3VudCI6ODYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NDAzZmRlOGJkNGE1MzZkY2IyMDJjMTA2OTJjMmY0NDJiZjFkNmZiNTZhYzIxY2MyZjc1OGQwMjI5NGEwMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L109-L126",
+          "version": "repo-lines-v1:sha256:a064711e754b735ca2f98dcf83540b326ba21a37bbbeca22b8e288db48b16d2a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5MWIxZGI5YjY2NjNmY2MxNjk4YTdkODg4NTBmODM0NTA2ZDE4NzA1NDY3MGJjYjM2ODYyYmRjMTFkM2I3YjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0NDBkYjIyZWU5NmE0MDM4MTAyOGQ4YTVkZjFkMWVkNjYzNzgwMjFlZTZhZjE4ZDljOGM3OGU3ZDRjZTY3MTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFmZTE4MWUzZmMwYWU2ZmUyY2EzZTkxNTI5OTRhMzZhNDIzODYxZjE2ZGJmNmU1MmNjODk5NmE2MTI0N2RmOGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzYjYwMGJhMzdkZDFkODljNzJjYzQyZmI1YTMzNWU3YTAyNDEyOTY4ZjJiNzJjN2ZiMGE2ZmZjMjc1MTQxNDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_19ade98fb8c047289763b662dbd96af6",
+      "statement": "`scripts/helper-cache.test.ts` 与 `scripts/job-cache.test.ts` 只 mock `@/message` 让模块级 `counter` 导入可解析，然后把基于 `Map` + `structuredClone` 的内存存储适配器通过构造函数注入 `HelperCache` / `JobResultCache`——这正是两个缓存类接受 `storage` 参数的原因。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/helper-cache.test.ts#L1-L25",
+          "version": "repo-lines-v1:sha256:e9d84be8bf1753a1ee43a63db01038596cb240984c41c59dfe59860aba66fa07:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwYTc3NGVjMmUzYWY2ZmNjZjlmNTYxMjdhYTcwMzJmMWRmZDdhZDQ5ZGU0YjA1MjIyNDhhZTU0OTVjZDM0ZmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyY2UxNmE3NTNmYmQ5MjBhMDBlNTVlMmZkNDE5OTA2NzY2YjkwMzUyMjNjOTAzODU5OWE1MjkzZDkwZTA4YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFhZWEyNjVhNWU5ZGNiZjMxZjlmZTMwNmY4ODIxMTBmNmU0OWMzNTE5ZTc5ZTU5NDEwMTI0N2Y5MjY5ZjA1MGUifQ"
+        },
+        {
+          "resource": "repo://scripts/job-cache.test.ts#L1-L27",
+          "version": "repo-lines-v1:sha256:d9d73429730bb5d15849f3466a424b0df2b2642fe23169fefc6cdf731e456fe1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwYTc3NGVjMmUzYWY2ZmNjZjlmNTYxMjdhYTcwMzJmMWRmZDdhZDQ5ZGU0YjA1MjIyNDhhZTU0OTVjZDM0ZmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkZDQ3Yzk1MzU5M2YwZjQzNGNkZDgwZDE1ODNlOWFiYWViYzk4ODIxOTZmMjJkMWVlZjExMTI5NjE2N2U4NjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwMjE5NTc4ZGQ3YmY1ZDAzNzI5MjIwYjA3OTdiNjgxZGMzODc2YzY5NzAwMjY3Mzk3YWVlMmQ4OGJiZGU3OWQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L10-L27",
+          "version": "repo-lines-v1:sha256:870bc3a0ef700f30e5c4394b9cf7722054622a986f429b4d072ca4e8c4fcb443:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0ZWZlNDRmMDVlZjgwYjdiZGJjNmYwMjVjZDk0YmRhZTMwMzg0ZjY0ZjJjNGNiMTg1MmRkYjgwYjQ0OGQxYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwYjAwMzYzMmY5ODY5YzZiMmM0ODNhNmI3YmUzZjM2YmRmYWI5NTViYTEzMDZlZTg5OGMwMzMxMmYzODJiMzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM3OTI5ZTkxZTBmOTljM2U4MjVkZTY5YjQzNWZiNjQ4NGQxYjBhMWRmMmY0NjU2MWFiZjFhMjlmMDQxODhiODgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVhOTI5M2ZkODA1NGI2ZTQ3MjQ4MzczZjM5ZjRkZDc3ODAwMTA1ZWI3NTgzNDg2ODcyNTQyODVjZDEyODJiNzgifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L16-L21",
+          "version": "repo-lines-v1:sha256:41a8165af6dc930fe1b94bdff82ed3876e6a2e1c8ac99021b486a85da6cdd46e:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjBmYWFiNDUzMjRhZDYyMTkxZWVjNzBkN2ViNjhkZWYwNmM1OTg0ODUzOTdiYWQ1OGJhZDI1NWZhOGNiYjA0ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjI4MTFhMzVlODM1NTQzMWM0MGExNTUwMGRmYWNlNTc4OGMwMDhjYTdjY2I1MDM3MTA1MmIzOTYxZjJmZWEyNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjc2ZWZlZTUzMGFmZTA5ZGNmYzc3MzkzZWQ5MmUzYzlhZDAwMWJiODJjYTM1ZGE1ZjJlNjVhMDcxMTE0ZWQzOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b96839ccb12c47fdb866b7fd17e68167",
+      "statement": "`HelperCache` 的用例锁定：账号槽位经 `encodeURIComponent` 编码（`slot/a:b` → `slot%2Fa%3Ab`）；`has`/`add`/`save` 在入口同步捕获槽位，异步加载期间切换账号也不会串槽；只读平铺的 `company`/`hr` key、不回读历史 key；`save(0)`/`save(-1)` 不清理过期项而 `save(1000)` 才删除；切回原账号复用内存（`storageGet` 仅 2 次）。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/helper-cache.test.ts#L28-L97",
+          "version": "repo-lines-v1:sha256:418f7fd00859258f50a6d8ada72bd1970d679d7f7e959a3e797cd40322062459:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyZTMzZGMyNGE4ZjYyZmNkMTJhMGVmMjllYmQ0MTFkNDI5YTQwMjZjNWMzOWM2NGRjZGI3ODlhYmI5NDJjMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2NjYyYThlNzZkZmQ4ZDQ5NGZkYjg1NTk0MGNiOTdhYWUzODEyNDg4ZGNkMjQyMmE5YmNlNTE4ODRlMGUwNjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L28-L57",
+          "version": "repo-lines-v1:sha256:13cefac2b0dce9e4fb3c6e5ac76ff2227fe61444befc4af20068398c6cbfcd98:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRmMmEyZjk5NmYwOGU2ODBiZDI5MjEzNWE2ZmE0OTc4YmRhMjZlNjAyZDg0ZjMzY2IxZDU5NDc3NWQ0MzA0YjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2YTNhMDZlNzJiOWRjMWJiZWFjODZkMjBjZjEwZThhZDFjZDQxM2I2NWY5NmU0NmNkZDg2NjA1ZDM2Nzg1ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk5YWU3OGE5NzY4N2ZmMDlkNGFiMDRlNDllMjZjNTRiNGFiN2I2NjY5ZDExOTA0NjZiYzNlOGEwYTRmNzQ4NGQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L73-L88",
+          "version": "repo-lines-v1:sha256:9aed77f571bf956667691d40f21509c2cc9bdca1e25848d210ffabdb83b4c0a0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlNzExMjdmN2Y1ZjE3MTdiOTZlN2U5NzY5MGE3ZDE4MWE1MDcyMzdmY2FkMTg4NDBiYmIwOTM0MDIyYTkyMGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNkNjI3YzFiYTE2YjkzZTJkNTNlYTk3MjJkMjk4ZjMzODliZThmYTZjOTcxNGUxZmZhZWQyNjRkZTVkOTJjZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b0a07d94404347308e39c31548dedf91",
+      "statement": "`JobResultCache` 的用例锁定：只缓存 `success && !isSkip` 与 `warn && isSkip`，`error`/`ready`/矛盾组合/空对象一律丢弃且不调用 `storageSet`；`set` 不修改传入对象而 `get` 注入 `isCache: true`；`expire` 以毫秒计且 `0` 表示永不过期；同适配器多实例共享初始化与写入顺序（`storageGet` 仅 1 次，最终 key 顺序 `existing, one, two, three`）；`load` 失败 reject 后可重试；`set` 写失败 reject 但不发布未持久化结果、也不毒化队列。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/job-cache.test.ts#L29-L134",
+          "version": "repo-lines-v1:sha256:715f7be3fb351d434c4950b4f4d3adb3d9e478021cbfe8094990be1e8aceb8ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIzOGEzNGU5YTRiOGYzMWY3MjJjZTJmNjJjNTNlYWE1YzQ2ZDRiNjBlYWE3N2U3OTYzMTVmZTY1MDAwY2I5N2ZkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI4NTgwYjc2NTE4ZGFlOTc5ZmFlYmQwMjM2N2EyOTI5MmE1MGQ5NzYwOTIyNTFhMzhhNmNlMzA4ODBiYTQyODI1IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlOWM4ZjAwOGEzNWQwOTgzOWNiMDFkZTgzMmI5M2E4YTE2YTQyNjIwYjdjNzYyOWNjOTkwYTc4NDg2ODNmMGY4IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L44-L73",
+          "version": "repo-lines-v1:sha256:fc705df711bb95091d67bd5faff5004bfd05ebc479e1edb9903e476d856d8746:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5YjE5ODJlOGRkNzQ4MTE4MTQ2YjM5YTJkMDA2MmY0MDgxZTM0Nzc5Yjg2NzVjMjM0YzRmYjEyNGRjMzkzOTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2YWYxZGU4ZTJlMWI5MTc0ODQ2Yjk2OWNmYmYxYmFkOWM3YzVhNjVhNjMyNDllYTRlZWRiMzI5YWVlMjg0NDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6f5916a3a138497baff2fb3435f196b6",
+      "statement": "源码中没有针对 DOM 注入 / Shadow DOM、MQTT 与 `net-conf.json` 拉取、真实 HTTP 与鉴权（`feishuBackground.ts` 的租户 token 与写队列、`backgroundFetch`、`requests.ts` 重试）、AI 模型层、统计跨日滚存、以及 `handles.ts` 任务处理器的自动化测试；这些路径只能靠真机验证。",
+      "evidence": [
+        {
+          "resource": "repo://CONTRIBUTING.md#L1-L60",
+          "version": "repo-lines-v1:sha256:45f357463ba3cdee53a93cb0129ba4cb88882fcfe8dd2f14b0a03e8d808166e0:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4OWY3ZjRiZTIyYjJmOWRiNWJjY2E3ZGYyYmY4OWViNDYwMWU2MmRiNjlmNDUyNzA5ZWUwYzY0MTM1NmVlNDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4YTAzZTEyMmJlMzMxNWM0MTNhMDhmODcxYzZkMDgwZDZiZmRkODE4ZjYxYWZjMjYyODRhZDAyZWE0ZWUxODMifQ"
+        },
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L20-L21",
+          "version": "repo-lines-v1:sha256:952f697d370f0b808a94e63592984bdebaa9c5dd0b66b18d38ab4267d0f09eb7:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmExM2ZjMGE3ZTdlMTEzNjNjNGJhMTM3ODhiZDMzMGU2M2VlODczYTFhYjJmMDNjODZiNTFjNGYyNTAzZTEzNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQ5ZGNjM2U3NDFhMGNmNGU2YzI1MmNlYTdlNmYwYzI2NDg4MjRkYzNlMzNmYjdmMzkzMWI1NThjZGE5NDcwNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTkwNzUxODZmMjA5Y2JhYjA3N2YzNDI4MTAzZGIxOTRiOTQ1ZWEwZjczZDVmOGI5Y2E1MWViYTJhZjk5ZTZiYiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L1-L18",
+          "version": "repo-lines-v1:sha256:0bc08943655d54af2a7e435f72c65c46884db90532bd4263353e7f59bc42ad8d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTExMGM0NjgzYmFmZGFlMjkzN2U4NWU0Y2Q0NDY4ZGI5NWVlODQ5NTUzYmYyZWU5NjRkNTU0OGU5MWMyODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwMGFlZWFmZDgzOGE1ODMwNzliNjFiN2QzNTQ3MTg1ODM5YzJiZjY0NDNhMWIzM2UyMzhhNjBlNGYxNGM0MDEifQ"
+        },
+        {
+          "resource": "repo://src/utils/ai.ts#L1-L20",
+          "version": "repo-lines-v1:sha256:07a7a7b1c0b5048d5194ac4e6783008a47cf29cc1351b6dcc565f1c2a0c90faa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5NmVkN2ZjZjI4NzFiYzA0MzQwYmY1ZDdmNDFkMWM2NjMxZjVkM2VkYjdjYWRmZThiMjUyZmEyMTRkOWU3ZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4NjhhMjM1OTA4MTdjN2MzYWQ5ZTk2MDQ0ZTA2ZDY4MDlkZGIzMjY2NzkzOWM1Yjc1ODg5NmI4YjVjZjc5YjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBkNGRlMjg2YjJhNjA0M2YwMjZjOTc5MTZmODEwNWQzYTRhZTNjOGEwZTBhNThlODQyZjg0M2ExYzExZGU2OTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d3cfea3c68e941078ec99c79a4a6264c",
+      "statement": "`packages/devlog-ui/src/__tests__` 里的用例（smoke/chaos/benchmark/stress/persistence/error-capture 等）覆盖的是日志库自身行为（`logger.configure`/`getLogs`、`ErrorCapture.uninstall`、`LogPersistence`、`sessionStorage`），与 Boss Helper 的业务逻辑无关，且该目录属于 git submodule。",
+      "evidence": [
+        {
+          "resource": "repo://packages/devlog-ui/src/__tests__/chaos.test.ts#L1-L35",
+          "version": "repo-lines-v1:sha256:e0ccb17e82de54f889855c5a5939d5d1253aeb799473b5ec55d881615a8e01c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTQ4NmE3M2QwNDVjY2ZkZDVjY2M2NTkwYmZkOGM2ZTFlMzgyMmVlZGI5YjI4MDkxMmIwZGY1ODEyNTdiNzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyN2EzZTE5ZjFjMTc3NThkN2FiNWVmOTIyMjVhM2EwZDQ4Yzc3MTQzODJiNzE3YWE2MTY0OGQwMTU0YjFhNWIifQ"
+        },
+        {
+          "resource": "repo://packages/devlog-ui/src/__tests__/smoke.test.ts#L15-L34",
+          "version": "repo-lines-v1:sha256:e2fa4d5bf58417e1bbc45343fd1c95a74eea2f1c7b7a19b7d7deb80ac0a43d41:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyZTUyZGI0OTg5ZmY5OTg0ZThiOGY4YzFlNDhjYmZkOGFmNmI4ZjQzNmZkNmJmNTYzZTFjZmNkZTM3ZWFmNzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhOTkxMmIwOWFhMzJlYjMyNGJmNGJiYTQwZWJkNWZjYjA4ZmU5MmMwZGZiMGZiNzRiZGE2MWUwM2ZlYTY3MGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU4ZDZmMjVmMjY0ZGM4OTk2M2VjYzEzNzhiMTllMjBkZWRjM2FiODc2NDczM2RiNGZlNDRjMTM0NzdiZGVkYjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI3ZDZhMjU5ZmY3YTgxMTUyZTEzODdkZTRmZTg5YzgyMDQyNDRiMzEzNGRiM2QzMzJhODcyMjkzMTE3YmY4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_457dc75bbbbe4fdb86bb9368e6e6eed4",
+      "statement": "测试运行方式的运维结论：`bun test` 会扫描整个仓库因而连带命中 devlog-ui 的 vitest 用例（依赖 `vi`/`globals` 与 jsdom，在 Bun 下不可用）；若要把测试接入 CI，需要给 `bun test` 指定路径（如 `bun test scripts`）并另起一步在 `packages/devlog-ui` 内跑 `npm test`。",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/main.yml#L11-L34",
+          "version": "repo-lines-v1:sha256:c591a6f3bda2d8ab609ff2ac78e872dc92503a46452530ff2ddfba4d9171f51d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzMzczMzRhZWMwZGNiMjRlNDBlM2MyMGRjMDlkNTlhZjY3NDNkMDI3ZGJmZjUwYzFhY2EwODk3NDcxMTc2NzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3YzQ0ZjM5ZDI5M2NhOWU4ZmE1N2RjMThjYjQxMDJhMmI5ZTZlODE1OGNlZDEyZTczODAwMmFlNjQwYTY2ZTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhkMjc4ZjE5N2ZiZjhmZGI2MTdlMTdhMzJhN2I0MmRlYjdmOGYzZGYzNzY4NjYwZjM4ZjVkOGJlNTM3NGZlYTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkMzRmNWI1ZTRlMzQ5M2ZmZGJjMWRhYTlhNTRlMTBhMjg1NDIzMzdkZGE3YTg3MGUwZjliN2NmYTk4M2E5YTMifQ"
+        },
+        {
+          "resource": "repo://package.json#L14-L30",
+          "version": "repo-lines-v1:sha256:fd7a7ce43b2ecd1b13bdf6685b13c591ccc348d09b6a342d189e031e8b164372:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyOWJhZTNkMDFkMDE3OTQ0NjM1YWRkZjk4ZmUzZDk3MTRjM2M1YmUyMTAyMGExMjk1MWFiY2Y3NjZhYzRkYzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmOWNhODY2ODI1YWQwZjE3NzYxOGRiMWRkMjQ5MTAzZjFmMzM1NWVhMDU4ZDBkNjk5NDEzZmI3YjU3OWU1NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViM2EyMmMwY2RiYzRlMmQ4NDQyZDA0NWMyZTdiODkyYTMxZTAyYjBlZjRlYjkzMDFhZTkyMjNjNDI1MGUwODgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0ZTViMDg5ZDI5NGExM2VhNWVhYTAxOWY1NmU5ZjJhZjhlODdiODgyNTdmYmE3M2I4NWY1OTVmNjA2ODk2ZDMifQ"
+        },
+        {
+          "resource": "repo://packages/devlog-ui/src/__tests__/chaos.test.ts#L10-L10",
+          "version": "repo-lines-v1:sha256:4b817051ffa3e6849907a71ccde51d8739b69c0ea471a921287fa1e4ab167752:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGI4MTcwNTFmZmEzZTY4NDk5MDdhNzFjY2RlNTFkODczOWI2OWMwZWE0NzFhOTIxMjg3ZmExZTRhYjE2Nzc1MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGI4MTcwNTFmZmEzZTY4NDk5MDdhNzFjY2RlNTFkODczOWI2OWMwZWE0NzFhOTIxMjg3ZmExZTRhYjE2Nzc1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWFlODE3YzkwZTFhMjU1YTUxOWE5OGYyYWRiMThjMTFiYWYzODM4YWFjMTcxNDQ4OGRlNWQ3MGRkMzk3ZTc5MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTBhYmNkZjI2YThkZmVlODY4OTBlYTdiMDI3MmJjNDUwNGZiNWMyMDQzZDVhMmVlOTQ5YzRkZjJkYjVjYjFjMiJ9"
+        },
+        {
+          "resource": "repo://packages/devlog-ui/vitest.config.ts#L4-L10",
+          "version": "repo-lines-v1:sha256:c9b31620500c0631b1276ff72ccbcb06280a42c9993bd1352aeb1ac381ccd1f8:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjJjZWNiMTQ0YTQ2ZjVkY2YxMmE2MTY5ZmNlZWQ3Njk1ZTgyOTRiMDkwZGU3NmYzNjYxY2RkMDI0OTMwMDE0NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODkyN2EzODFhOTMzOGI0MjA4OGRiNWJlYTAwNjk3YjUzNzc1M2FlMmM5YTYwY2QwNTg0N2RmY2M5NTAzNzk0OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDJhNzcwNjAxMjc4NjJlYjI3MTY4Mzc3MTdjZGZkOTQxNDJhOGIyMWI5YTAyYmJkYWQ3ZWEzZTJiMzhkYTFlMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDNhMjRkNjZkOTUwNTg4NjZjNGM0ODE0OWRlYTNiZjZmMjIxZjc0OTllNzVhMjUxZDBlYWI0YjUzNjFhNGY4YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_489441c65dc94587be8a2c35b829d70a",
+      "statement": "`scripts/feishu-sync.test.ts` 不注入 `globalThis`，只 mock `@/message`、`@/utils/logger` 与 `@/composables/useApplying/utils` 的 `parseFiltering`；它锁定 `使用账号` 映射为账号 `label` 字符串而非对象、前 4 条不发/第 5 条发 5 行/第 11 条单独成批、失败调用 `onError` 且重试用的是最新快照、请求飞行期间 `add` 的新快照在旧请求成功后仍保留并作为下一批发出的行为；但 `createFeishuSync` 的配置读取与四个字段非空校验、`flush` 的单飞与失败保留实现只被间接执行，`feishuUpsert` 始终是桩。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-sync.test.ts#L1-L86",
+          "version": "repo-lines-v1:sha256:0b2a9f6f3803c7800b7ff7a9d3f4e42da933bd0d5b1e252c076ab8cf39dc01bf:eyJzZWxlY3RlZExpbmVDb3VudCI6ODYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NDAzZmRlOGJkNGE1MzZkY2IyMDJjMTA2OTJjMmY0NDJiZjFkNmZiNTZhYzIxY2MyZjc1OGQwMjI5NGEwMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L89-L131",
+          "version": "repo-lines-v1:sha256:bec2fadad8e9c1401e86faa6ce165fe94bde8c45ac36462a324b1d28209775dc:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhOWY3N2ZhZTcyMWJiMmI4ODdlMDY5ZDMyZjlmYjgwOTQ0NzM3ZWQxNDI2NDdkYmNhZWViNTg5YzdiNmE4MGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmMmQwMDFhMjhjZDJlZWVhOWY1N2UxZWI1ZGY0NGExNjA1YTYzZjk1ODU1ZjNhYWM0ZGM2YzgyOTI3ZmVlYTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNhY2M3MjljNTI3MTllNGFjZTEzYmIxZDY4ODM3N2JmZmZmNDMyMzczNjYzMjMzMzI2Nzc2YTk5M2Q4ZTQ5Y2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViMGQ3M2I0NWU5NDllZWQ5YTFjYTc2ZjFjYmQyMjdlMTFhOWUwZWY4YzFkMWY5ZTUyMTFhMjc1MTZiNDc4NTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e40d912b9af84ec6bfc9aa345793ac45",
+      "statement": "两个缓存类接受第二个构造函数参数 `storage` 作为可测性接缝：生产代码在 `ctx.ts` 中以默认值 `counter` 构造 `HelperCache` 与 `JobResultCache`（账号 getter 取 `accounts.activeAccount`），测试则注入基于 `Map` + `structuredClone` 的内存适配器。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L22-L27",
+          "version": "repo-lines-v1:sha256:22f63dfb743018fe2a65001baa17c06581441d9d9a217c12d742222d66815202:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODFjZDIxNDU2Y2I0MGEwOWMwZDQwZjZhMGUzZWNjMzk3MzJiNzlhZjBhNjdkNzk0M2JmZTBkZTkzOTE1OWEwYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTBiMDAzNjMyZjk4NjljNmIyYzQ4M2E2YjdiZTNmMzZiZGZhYjk1NWJhMTMwNmVlODk4YzAzMzEyZjM4MmIzNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGEzOWZiNTVkNDYxNzdlZTA1NDgxMjY2NmUzOTFiMjdmNjc5Y2JmOGVjMmUyYTllYmY0NTgwNGRkZTBkN2VhNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWE5MjkzZmQ4MDU0YjZlNDcyNDgzNzNmMzlmNGRkNzc4MDAxMDVlYjc1ODM0ODY4NzI1NDI4NWNkMTI4MmI3OCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L85-L86",
+          "version": "repo-lines-v1:sha256:d0014e300abf97c4fdddee682635174646571d207d84a76a6b7d7923f5bf9c2a:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTNiMWNlYzhhNjhhYTdhYjI5MTZlYzU4OWQyMzEwMGVlZjkyYWIxZjZhMmI0NWRiNGMzN2ZiZDhkN2Y1OTY1NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWRmYjhjYzhiYzdkZWIxMzRiYmI1M2I3OTcwYTQ2NjFhNWM3OWM1ODVlZWFjZTJiNzQyZDZiZmJhOGUzMTE3OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2I0YTI4NWU2YTE4Yzg5N2VmMjQzZGQwZDk5MGFmMzFkMGNjYmY2OWE2MzlkMTQ3MTNlYzY0YzgzNDliNzFjNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTEyN2I5YzIyMTEwNjk3ZmE5ZTNiNzQwNTQzZjdhNTlkNmI3NTYxODdiMzIyNmZjNDk3MTBmYTNlNDc5M2E3NCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L18-L21",
+          "version": "repo-lines-v1:sha256:cdf2d7054655a4d39c6ce4bb86ad8e367ae14cb8d6e26eac6460c762b6ea98b8:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDA3OTk0OTM2N2YzMzU0ODQ1NzFmOWZkZjJmYzBmODUzZjA4YjRkNjE4NmZiMjI2Y2E0N2YxODM1OWI1MDg1ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjBmYWFiNDUzMjRhZDYyMTkxZWVjNzBkN2ViNjhkZWYwNmM1OTg0ODUzOTdiYWQ1OGJhZDI1NWZhOGNiYjA0ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjA3MzEzNWVkYWRiM2UwMzg1ZGU0NzVkYTYxODgwMWFhZTVkNzIwYzE2OWExZjliZGZiOTRkNzFkYmYxZDNjMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjc2ZWZlZTUzMGFmZTA5ZGNmYzc3MzkzZWQ5MmUzYzlhZDAwMWJiODJjYTM1ZGE1ZjJlNjVhMDcxMTE0ZWQzOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a6671d2c566e4d0db86694854d4c3ed4",
+      "statement": "`fixture()` 构造的假任务只提供 `id`、`phase`、`deps`、`before`/`after` 与 `task: () => handlers[phase]`，因此 `rebuild()` 的任务解析（`shadowed`/`failed`/`dependency_only` 节点状态、拓扑排序、循环检测）、`onEnd`/`onDelivered` 钩子以及 `DependencyMissingError` 的「改跑依赖后重试」分支都没有被测试执行。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L118-L127",
+          "version": "repo-lines-v1:sha256:d799475a48a821a434a6a46c1d27a14b6e3aef21997fcf4860fe155ea09a104f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjNTU3YjBmYzA4MzUzOGJkMDBhYjc2ZjIzYTI4YTY1NTNlN2RhZmM2YWVlNzY4NjBlZjM4MGM2YzNmY2Y4MjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjOGI2YjE1NWFiYjE1NmViNjRjMDc2NWEwODc0Y2YxNTQ5ODgwMmRjNTdlOTc4MzU1NGU4OGU5YTlmNmEyOTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxMDI3NmVmYmMwZTJmYjRkNGUyYWEzMTkxMWQ1MDhkYzA4M2NjMmJiZTIyYzRmMmZkMmI1NzJjMDgxZTYzMTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3MjU5ZjFlNzkzNDRhNjgwZjIwYjgzZmQwZWY0N2NkN2VkMGM1YzQzNTFjZmYzZTBhOWMyNTBlMDM0MjUzNDYifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L167-L188",
+          "version": "repo-lines-v1:sha256:06a148f2b852508e440231bb7c9348f898ca5e8b3179af7521c7676a724a383f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzZGJhYWY2NWY4ZDAzMGJjYjA2MTNhMTcwNmU5OTdkZDI0MThmMTBhYzk3NzJhMzNkZjkxMDVlMTdmNGQ2YTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0OTMxMjYxNzdjNzFmOGIzNWIzZTIxM2FjMjc1YzVhODFhYzJhYjJlODk5YmRhOTYxZDI2YzA1YWNjOTQ0MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNzRlZTdhNGVmZjhiNDg5MzM2ZmQyMDA2ZTQ4MmNhZjAzY2ZkN2EzOTg1NjdkMGVkODFjZDg3NTM4ZTVjM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVhMGVjNjI5MzE2OTliNGRhOWZiMjU4NDM4NzkwMzczMzQ3MzNlNTlkNzlkNWRmMzE0NjdiZmFjZmE2MDQ0MWUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L352-L360",
+          "version": "repo-lines-v1:sha256:07ce12ed9dbb534de0c425a559bf44d8de43384bc49b2ae109473f62d923321c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzA4YzJhMzRlNjdhZTczN2YxZThhZDVkM2EzYzYyMzBiNjA3MzdhODdkMDRjZmY1OWU3NTA0YTgzMWU5NGYzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzM2NzQ5ODFlZjUzYjJhMmM5MGNkM2Y5Njc5MWQ5ZGE1NWE4MzMzMDMzZGUyMGQ2NDk1N2JlOWE4NDM2YzVlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWY2ZTRlMTA3NDEyZDkyMTQ2YTQwODJjZGE1OWYzZDFlOTc4MjI2YTQzZmJjZjI4NjlkNGEyYjQ0ZDQzMmEzMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjQzOTA5NGY3YmFkNzJmMGM3NGIzNmIyZmExMGEzZjA2OTk3OTdhNGRiMDE5ODBjNWNiMWM2Yjk4Y2Y4ZDE0OCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e63d03c3dd644fa9b7ce60d8b556fda2",
+      "statement": "工作流的其他入口同样没有用例：`executeOne` / `execute`、`markFiltered`（以 `count: false` 跳过 5 条节奏的飞书入口）、`reset`、`deliveryLimit` 截断与连续 50 个重复岗位的翻页保护都只出现在源码里。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L137-L372",
+          "version": "repo-lines-v1:sha256:d48316b52dfa820eefff36600d42e569b23f1fef421798fb1de67f59b6e1dee1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjM2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiYzVlNTBjYzBkYjk5NTI1ZjljZGIxYWRlYjU5ZDUzMzBjZTY4OWNlYTEzYjI4MmMzNDUyYzQ5YmU5ODFmMjgyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJiMjM1MjU4OWMzNGQzYzYwNjg1OTMxYjZlY2M0ZDUwOTkxYTdjNTZjOGZiYTI4OTQxMTQ2NTc2OTAyNzJjYWMzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI3YzBhODI4NDhkNzcwZjgxMWI2YmUzNmI1MzQwZTA1ZDlhN2ZmOWNmMTM0MWJiNWYyZTRkMWU4ZDhkY2FiM2RhIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MSwiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4NTgwYjc2NTE4ZGFlOTc5ZmFlYmQwMjM2N2EyOTI5MmE1MGQ5NzYwOTIyNTFhMzhhNmNlMzA4ODBiYTQyODI1In0"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L217-L228",
+          "version": "repo-lines-v1:sha256:fd02d1176ec434c1bf84e7933bb8d27eccc6e13ebda9d681457a44e20e3c0838:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1N2Y5YTJkZGNjMGRiYWI5NDM1ZDFhYzNlZTk4MDgxMTQyNzExODg3MmNkOTBmNTU3ZjMxYWQ2MTgwZTViMmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNDE3NmZmZGNlNTgzNzFkOTI5MDMwODczYjc5YzRlOTVkYTNhOTNjYzIwYjhiYWIzMGJlMmUwZjBkZTRhNmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5YWFkMTU0OTQ4NzgyMzIyMjE1MjFhY2MxOTcxYWVhM2QyODk3NjkxZjI2NTc1MzRkNjI2ZmRhZGM5MmQ2MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUxMzVmMjVkYmIxNmZiODljOTg4OTdlNGQxYzkyNzdmZGQ0OTUyZmVkMzEyNGFlNDE5MGY5OTI0ZjkyZDgwM2IifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L461-L571",
+          "version": "repo-lines-v1:sha256:4a5b7a8add573157df553ebdd4a838002328b7bb494cf23de034cb1f0e8eb3ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTExLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiMWI1MWExNjQ4YzM2NDcyNzNlMzcxZGRkYmM2NjA2NDE3NGMyMWMzYTQzMzU4Y2FhMDYyNDVmNjA3NTY5YjkyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmZjNiNmZlOTExZWVjNjgyZjFlYjlkMjRiYzI1ZTM1MDc4MTRjODUxZmE2MzFlNmMyMGJjN2Y1YmY4ZjY3MTRjIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI4YmZmMGRjNjhmZTRlZTMxMDgzYzMxZDY5YTdmNWYyMjQ5MDMwZGMyNmVlNDI2YzcyNDM5MzZmMTgyMDUwOWI2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIwY2Y4NjZhYzk0ZGEwYmUzYzYwOWM5NzJhMjI3N2ZlYjUyZTkwOTc1Nzg1YWVjOTI2YzM0YmY4YTc4N2IzZWYyIn0"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T11:46:27.311Z"
+  }
+}

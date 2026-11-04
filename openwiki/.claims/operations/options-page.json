@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:9d05bd000f4f662254de073aa1b2df5cd435eb5984c3f72aa44f57cf8bf791d2",
+  "claims": [
+    {
+      "id": "claim_4d18e8a4aa4b4ae7911c65e0ded86fa7",
+      "statement": "Options 页的引导顺序是硬约束：main.ts 先 initExtensionCounter() 绑定后台 RPC 客户端，再动态 import('./App.vue') 并 createApp().use(ui).mount('#app')，因为 counter 是 Proxy，未初始化时任何存储访问都会抛错；引导失败时错误文本被写入 #app 而不是白屏。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/main.ts#L1-L24",
+          "version": "repo-lines-v1:sha256:d8a93c2e1c3909348eb52ded718f472875a7f171b0449f2d8e4965d971998066:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwODQ5OTI1ZGI1N2U4OTJiMTMwY2UyMGIwYWU1NmU2MzA1YWNmNmY1ZTE1MzY5M2RlZTNkZGNiYWJkMmMwZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L23-L46",
+          "version": "repo-lines-v1:sha256:70f250621ede80e3b591233d8ae6c31f016f36222a9d41a8a6f2ca21a022adf8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlYjI5ZGQ3OGVjNjk1MTBjNzAyY2YyMWU2NzViYjA3YmE3MjlmNzk0YjY3NWIxY2I5ODJmNTVjODRlZWFlNWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1NGVkMWRiY2RlMGFhZWM2NjY2OTk3ZGYwMTJiMWE5YjJiOTlhZGIxNjBmODNjOWY1MTNmZTI5ODMwMzE5ODAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc2NGYwOTBkMTRhMzQzMjg3YWFlNWFhZGExNGZjZTA2NmNkZTBhNDY0ODc4MGY3MzUwNjIzZWQ2ZjgxYTMyZjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5a7e75e232c64eebbb431ff75ba94d4f",
+      "statement": "entrypoints/options/App.vue 是 Options 页的唯一编排者：它用 v-show 同时挂载 ManagementPage、GeneralPage、AIPage、ProvidersPage、FeishuPage 五个 page 组件而非 v-if，以便 AIPage 通过 ref 暴露的 save()/isDirty 与提示词草稿在切页后仍存活。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L290-L310",
+          "version": "repo-lines-v1:sha256:b7d05f5993e0b78e8247d8dcf526869d5e55af845f0d84d49c314ef952937ec2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiY2M1NjMzMTdkNzVmZTQ4MTRjMzU3MzUwYjcwZmI0NjU5MjE3MjM0NmRlZGU4MzU3N2JjNjgzYzU3OWQzM2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1MTg2ZTU1NTJmNzI1OTk3NjY3Y2Q3MzE2YWQ4ZjJiYmQ2MzU1N2JmZTViMDNmMWE2ZTEwMjU5NzM3NmI0YzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5ZTcxYjNiNmRhNWE2YWI2ZTk3NTgxODM0MmU1YjZlZDA3MjNkNTMyMDlkNjI3ZGMyZDliOGU2ZDFiY2NkZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyN2M3MzUzYjMxY2FlZDE5NzI3NTIyNjhmMGM3ZTI2ZDJhYjFkMzkxN2VkZWNiMzljMzZjMzI1MmJmNjI4YWEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/AIPage.vue#L1-L18",
+          "version": "repo-lines-v1:sha256:af48fa92d82a0b27cf1de398c158e039068e906697902476842952bd98380a2a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmNDMzNTYxNDJhMWEyMzRiMWEwMzE5ZmIyNzYzYmU3ZWQxMDhmYjgxYWM5YzNlNmQyNDQ5NmY5MmVhYjk2YWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1MjI4NDBlZDVlYzU4YTM2MmYyMGI3MWI4YWViNjc1ZDdlZmI5NzQzOWM5MGMzZjYxNTVhZmVjNjUyODU5NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bf041bf29ffc47eabfd920594ab24389",
+      "statement": "Options 页的五个功能页保存语义不同：常规配置与 AI 提示词/模型由页脚「保存配置与模型」统一落盘，飞书页对 local:feishu-config 独立保存，ManagementPage 的预设/账号操作通过 manage() 即时保存。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L352-L372",
+          "version": "repo-lines-v1:sha256:930cf537b828b7eef07298b569002492eaa39a9f981066335c2608c199929501:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzMzVmNTU2ZjFiY2JhZjIwOTRmNzg5MGU4MGE1OTBiYmU5OGYzZGRiMjAzYTk5MzBiYTUxODAyZTdkMDFhM2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYzOWMxZDMzMzA1OGUwODQ2MzAwNTA1NWNiYTA5ZTEzYzQ4YjMyYzI5ODU1MGYxM2RmMDVhN2VjNWIwMjViNDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4ODZlYzZlYWMxOTRhYzczZDQyZjg2NzEyODM5Y2EwNDQwOTQxNzYwNjIwN2EwMzkwYTE3Y2VjZDIzYWNjZjgifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/FeishuPage.vue#L25-L40",
+          "version": "repo-lines-v1:sha256:92bb231ab1c309dc01d4160e89446bb1f3d0e2a3714bc012efe9f64581687825:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkZmUwYzZmZDExY2QxYTM1NTQ4OTg1YzgyOWYzNTlhMDFhMTcyNmNlZTBjZGZiZTVlN2Q0YzZkMDc0ZGE0N2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwNTIyOTI1NDFhOTlhNzVlMDU4NTM3ZmI2ZTNiNWY3NzU3ZTlmMGFiZjc1MTA0OTNjMDM2Y2I5MDZhOWJhMGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg4YjY5NjZjYTVmMjE0MmJkMGI2Mjg5ODJhY2NhMTkxYjIzOGQ3YWI4YjNmZTQ0NmU2YTMyODcyMGM4OGVjYjMifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/ManagementPage.vue#L1-L65",
+          "version": "repo-lines-v1:sha256:a8b8663f2420d23b3ebaff10c8b6f690346779b632695a1f9e888ecf94d9aab3:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmNDMzNTYxNDJhMWEyMzRiMWEwMzE5ZmIyNzYzYmU3ZWQxMDhmYjgxYWM5YzNlNmQyNDQ5NmY5MmVhYjk2YWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhOGU4N2EwZGRkNmQ5MGM2MTEyMmJiNDYyNThmM2Q0YTAzZTQxNzcxMjgzNmI5MjI3NjJhZjBkMmUzNGViMmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjNDk4ZTM1NzUyNDdhNGU2YzM1N2JhNzNhZmNkZjY5YjQ1M2IxMTdkODZjYjUxN2M4MDc5NGQ0N2ExOWU3YjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4bf26771bb3d4eb28d7d03e0ff3f888e",
+      "statement": "配置项 UI 完全由 conf/sections.ts 的 useConfigSections() 声明式描述：它返回 [AlertItem[], (ConfigAccordionItem | false)[]]，ConfigItem.vue 按 item.type 逐层分发渲染；值为 false 的条目（configLevel 门控）必须被消费方 filter(item => item !== false) 或 v-if=\"item\" 过滤，否则会流入渲染层报错。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/sections.ts#L5-L15",
+          "version": "repo-lines-v1:sha256:3a1e52858ca29b37b647b8d7d59e4ebdaf717d9375a04905e47b0811b4448b4b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlNjU1MzViMDQ3ZmE3OTA5MTQ1MmQ5MmU5ZDg2YWVhMTI2NDI3Y2JkM2U2NjljYzI4MWYwOGVhNzM1NDY1ZDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3Y2QyNjNhNWVmZjY5YzkzNmRkZTUxYzVmMjVkN2VjZWQzNTkwMTA1ODQ3MTdkYjcwODUyMzRlZmMzYjc4Y2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZkYjgyZDM0NjFmMDY2Y2U1ZGFlZjE1Yzg2MjE5YjM5ZDJhNjAwZjAxNzVjNzQyNmJmZTliZmYxN2IxODQ3ZDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4MmViZGY2MWFlM2VkNjEwYTk2YzIwNWNlMDEwZDAzZWE4NjBkOTgzOGQ0ZDQ4N2NiNmRiZDM3YTRjNzIxOTIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/type.ts#L124-L168",
+          "version": "repo-lines-v1:sha256:3bba869a84fe3c847d930fa5dfe63a0ad92c8f8b16268b6a0955e0eda60b79a8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiMmViM2IxNDI4ZmRkMzU3NWVlYTNiODQ2ODZiODc4MmMxZTVhNzFjMGVhNzBlMmUwMzFkMjAyN2NkMGJhMWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlMjZmNjgxZGI3N2U4ZjhiMmZkYjI0YjVkNzlmZDkyMzczNjBhNTYzNTE4NzA2N2QxOGViOGZmMTNkMjhlZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/ConfigItem/ConfigItem.vue#L56-L120",
+          "version": "repo-lines-v1:sha256:aa973a56ce3c4010bd32770114f22495a64c6a623d407b9bba413434cfef0b67:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxMTRhMDdiNmQwNWQ3NmFiZmEwM2VkZTE5MjZjMWUyZTc0NzI3MzEyNzlkODU4OGU4YzYzYzU2ODliNTAwNzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1MjI4NDBlZDVlYzU4YTM2MmYyMGI3MWI4YWViNjc1ZDdlZmI5NzQzOWM5MGMzZjYxNTVhZmVjNjUyODU5NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmNzAxYjliMTBlNDAwNGUwODcxMjdjYjc0MzI3YzMyNWYyY2FhOGNlNjY3MzMxNzNkNDJjODVjNzU3NmQ5ZmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_40ea728ec65945a3b12d00ebbe2a0d6d",
+      "statement": "配置项帮助文本通过 data-help 属性传播：options App.vue 的 readHelp() 从事件目标向上取第一个非空且非 no-help 的 data-help，并用 pointerover/pointerleave/focusin/focusout 合成 helpText，从而同时覆盖鼠标悬浮与键盘聚焦；结构化的 select/checkbox 项由 help 字段生成 data-help。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L12-L77",
+          "version": "repo-lines-v1:sha256:d884e51b5aec3c8dc67710ce055b32100bd2545dcd38a72225879edd5a25deb3:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzZmIzYmYxZDZkZTE5NDQyZTdlM2UyNDQzODU5ZDMwMzMxZjg1YjAwOTFhNTY4YmU5OTQ3NTAzZjIzYTcyMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhOTVkYzJkOGY1YjAxMmM1YjIxZGY2ZTUwZDg4ZDdhYTA4Yjc1NTViZDE4Y2MwOTFhMDgzMTFkODIwYTg4OWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVkYzRjM2IzNjhkODdkOTAwOTY4NTZmZmY1MzBkMDI0ZDIyZmJkODE5MjA0Y2NhNzI4NjE4NjZlMTMzNTJlYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1NDAyODljZThkOWI3Yjg0ZWI3ZWVlNzVmMzA0MjVmYmI3ZmY2YzQ1ODYxZDhkMjQ1MTAxNzIwOGUwM2RmZTIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/ConfigItem/Form/FormItem.vue#L1-L20",
+          "version": "repo-lines-v1:sha256:09ccc7bf325d1bbb176ee1d94157cd0c64d41b917ef7c64541854c8dd48cb411:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxNWNmZWQxYWFkN2VjZjllN2Q5ZTY5NzViZmFjYjlhNzg2MjMwYzdhNTQ4MDdmM2NjZGFjNzBkMTM0Yzg3NDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwZTQyMjNkODk2NmUwNGIwZmQxMDFmZDMyODUwOTFjZWRjZmFkZjA0MzY0NjJkNjZiZTdkYTU5MDcwZjQxOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM4ODU0Y2M2NDIxMTE4YTE1YmZlNGJjMjE4NTkwMGIxOTJlODQ3Mzk1YmYzOTlmNTM4ZjJiYTZjYTJmNzU3ZjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3f663656e60e4b1ab5dbaf48cd5652df",
+      "statement": "新增配置字段是一条端到端流水线：types/formData.ts 加字段、conf/info.ts 的 defaultFormData 给默认值（老用户取值的唯一来源）、仅在语义改写旧字段时追加 FROM_VERSION 级、conf/sections.ts 声明 type/key/label/help、必要时才在 ConfigItem.vue 加渲染分支与 ConfigItem 联合类型成员，最后由筛选/投递流程消费。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L76-L150",
+          "version": "repo-lines-v1:sha256:402f245292cc09f68835c9393d0766039b1051abdce08fd74523704c1df66d9b:eyJzZWxlY3RlZExpbmVDb3VudCI6NzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5MWNkZmRhYmY2MWRjMzcwYmY4YjNmMTRhZTFiZWYzNjYzOTM0NWIxZmFkYmIyMmQ2ZDVlZmE5Y2Y0MDYyZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2OTRjMWFjMzQ1NzlkOTk2ODU1MDJkMTJjZTZiOGQ3ZWIzNTVkOGVhNWQ4YWMwOGQxNDhlMzYzZDU4MDYzNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBmMmM2M2NlMjEwOWRhNDMwOGM5NGVkODA5ZDFiMGY1MzNkMWU2ZjhhNmZmMTUxYjYxZjU5MWY5OGQ1YTMwYzUifQ"
+        },
+        {
+          "resource": "repo://src/composables/conf/sections.ts#L16-L60",
+          "version": "repo-lines-v1:sha256:4b3654d140fe069fca86b489b90f2407d1eb97e10630eeb0f04b80df4a245102:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkOWMzYTVhODQ2MTcxNGM3YTAzMWM5NWViMGY2NTE5YjA4NDhkMWUyZDBiOGU2NzliMDlmNjRlOWIyZmQ0ZDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxNWJmNDljMDUxZmJlODIyYTUwOTJkMzljNDQ3ZTUwNTkzYzAwZDcyMjY4ODZkNWI4YWY1NmM2YzQ1ODdiMTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYwNTQ4ZGUxMjNkNDJhY2JkMzc4MDIyNmMyYWExYjUxNzY0ODMzOGE4NTU2MmExOTcwOWQ0YTU1MzgxOTQ5OWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVjNGJmMTRkY2NlNjJiZDNiYTI4OWY5MzU1MTBjMTBhMDUxNzE0NDhhYWU4YjBlYmNmNjNmZDc3YTNjZjAzZDAifQ"
+        },
+        {
+          "resource": "repo://src/types/formData.ts#L19-L70",
+          "version": "repo-lines-v1:sha256:6e7b3c69dc63ac2fe1921d9fdac4590eb52d801ec802c867001c1f40e07cb280:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkMGE0OGM1MmFiYzJhYzNiNDZjN2RjYjZhMzE3NjUyMThhYTg0NTY0YjYyZjY0YzFhZjc3ZTM5YWQzYzRmYTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkZGRiOTIzMzg3MGNlY2IwYzJhNmRkNGVlYzE4MzVkMGFmYWQ2MzQyNWVjZjViNGU4OWYxMGU3YzdhNDY2M2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0NzgyYjgzYjA4ZTJjZDlkMGUzZDE3YjNlMmUwNzdjYzNmOTJiNTQyZjdmNDZmOWI1NjBmNmYxY2ZhZWEyNTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZhZWYwNmMzOTgxZGRhMWZhOGQ3ZjIxMGZlNmU2ZDI2YjhkZWY0ZGZhMWNmMWU5ZjlkYzRjZTIxN2I4YjA0MTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b04ce3e8007e4ab88f05e2af1cd0674a",
+      "statement": "Options 页的脏状态由 baseline/modelBaseline 的 JSON.stringify 快照与 AI 编辑器的 isDirty 共同决定，save() 先落 AI 草稿（返回 false 则整体放弃）再取快照、写配置与模型、最后把刚取的快照记为 baseline；所有副作用经 run() 以 busy 互斥并捕获错误显示为顶部 Alert，dirty 时 beforeunload 拦截离开。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L79-L163",
+          "version": "repo-lines-v1:sha256:3e336c481f0b19e6c281e1fee104339f1cd9575b76349b85b7575a29f81a9679:eyJzZWxlY3RlZExpbmVDb3VudCI6ODUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmNDEyYjgyYjQyNmM0YjAyYzBhY2RmNDk1Y2RjOTllMWY1ZmNlMjMyYTk3M2MwZjUyMzI0YzgyNWQ0YmRhMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0N2I5YjUyZjYyYWM2ZjEzYmNiOWE2MzBlNmNkZGJkNWE5MmJkZWVhN2QzNWFiOWM0N2Q0ZDYxMDNhNTVmYWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5MGYzZTA1NGRiZjg0YWIxYjgzZWE0MmY2OTFjOTBjYWYzMjI3NDUyMzIyYmI1MDhjODZlYjQ4NTRiOWY1OTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwNThhNmYwMTBlMjA5NGUzMmY4YjdkMmE2NWNjY2M3YjU4NmMwMmUxYTZmODU1NGUzMzQzMzBmMzFiY2M0MGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_56d7e9f6435b425a80f16873a7d4a015",
+      "statement": "Options 页通过手工构造一个 as unknown as HelperContext 的 stub 上下文并 provide(HelperKey, ...) 来满足组件内部 useHelper() 的硬依赖，其中 workflowRunning 恒为 ref(false)，使基于它禁用的控件在设置页恒启用；该 stub 是结构性占位而非真实 HelperContext 实例，新增依赖 helper 成员的组件必须同步补齐 stub。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/index.ts#L1-L19",
+          "version": "repo-lines-v1:sha256:22b1a3b538ae3eecc6329c05974e52f27baa7bc50cfa7967569927d4ebdc5302:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyNzc2ZTNhYjc5YmEzNDk0NTExNzdiNTA1MTg0ZTk1YmQ2MzgzZmY5MGFjYTdmMjVlNDU2MzBlN2FmMTIwYmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L84-L102",
+          "version": "repo-lines-v1:sha256:bcf5aff80d66368c3b63288498f160cb93239f739f671329d759d581e7d77fdc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExZDY3Njg0YjVjZjliNjNkNTc3MzVjNzA5NTAyOTAwNjY2ZjQ1NjU1YWUyNWUwZTcxNWU5ZjAwYTE2MzVkY2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwNDgzNmEzYTg3OGNkYTAwYTc0YzMyYTg0MzE3NDU1YmFiMjdlNTNjZGNjZWUxZTQxOWNmYTBiZGQxZmFlY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0MDQ5OWNmZWI3ZjQ4NTk0MmRhYTM3OWZlYTUxNTM3NjNkMmYxZjQ1MzcyYmJkN2NhMWVkOTljOWIyZGU5NzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY0YzQ2MGM1OWI5NjczNGQ3YTkyMzdiMzMyNTVkODY4NDBiYTE0YjYwY2ZlOTc4OTZkNGFjMjY0Yjk1ZWY1MjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7711bf51421c42b897690cc9600f612b",
+      "statement": "manage() 包装把管理页操作变成保存前先检查未保存修改、前后各 initialize() 一次、再递增 revision 作为主区 :key 以强制重建所有 page 组件；createPreset 传 reload=false 以避免不必要的重载。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L164-L180",
+          "version": "repo-lines-v1:sha256:9e9562308b125dad683eedcd67812c8d39e17ea3439fbe5b9d3101dfa785b9dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiYjNlNTQxOGExNDY2NWUyYWRmYzVhZGVhZTFiZTEzZjZhM2ZmNjYyNTI5NmMxZTNlNTExMGUyZDNmZGQ1MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ZjNlYzgwNDdmMDEwZDBhZTAzZTdjYWRiZTE2ZjA0ZGRiMDk2Yzg4NGZlNDliNTM4MTYyNzQ1NTM1MDE2N2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhNGRjOWIyOTY3MWZjYjI3ZDkzNmQ3ZDE5NTE1OTZiNTUwYTQzNTY5ZDY5Y2EwNGI0YzM4NTM2ZDc4ZTNjOTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFhMjMyMWM2OGY1NGFjNWJjNzUzNGMyYmM3MGNmMjc0MjdlYjE5MjEzMGM1YWQzNGVmMjlmYzgwYjlmNzk0NjMifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/ManagementPage.vue#L20-L30",
+          "version": "repo-lines-v1:sha256:43d9fdb8464c0c4160800c15f8ffd86b31236c1441183fe37457cc2a2fe5f8a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3ZDU5Yjc3ZjU3Mjc0ODg3OGRhZTY2ODA0MjlmODQ4M2U3Y2RmYWM2MmI0MTg4MmE2YzU0M2MyNmNhN2MwN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiYjY1MTc4ZjNhNWU4MmRkMjQ3OTBjYWVjMDcyMjRlMGE5NDBjYTU5MjhkMGQwMWNiNzdiZmU3MjQyZDQ3MTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ4NGUyNWQ4MGEyMjU3NTY1ZjZjYTM0NGI1MWY5OTY0MTdlYmNlMTdiN2NkOWEwYTI2ZDEwNzBmNmY5ZjE1MjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhiNDQ5MzE3M2E0Y2MzNmZhMDA0NGJlMzA0YjA4MmM4NDU4MDViZDJlN2I3MGJmM2QwODRlMTY0YjA1MDk5OGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7cf8bac305ed4d39b5efe5ef8a6c2958",
+      "statement": "飞书配置与 FormData 完全隔离：FeishuPage 在 onMounted 读取 local:feishu-config 到本地 reactive，save() 写回同一键，从而让密钥不进入可导出的 FormData；「自动创建」先落盘当前表单再调用 counter.createTableBoss()，并要求 enabled/appId/appSecret/appToken 全部有值才可用。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/pages/FeishuPage.vue#L1-L95",
+          "version": "repo-lines-v1:sha256:8cef18542b7422dc48c3d0bd50a83ac14d225808b22ae90f201191a803687360:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmNDMzNTYxNDJhMWEyMzRiMWEwMzE5ZmIyNzYzYmU3ZWQxMDhmYjgxYWM5YzNlNmQyNDQ5NmY5MmVhYjk2YWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5ZGUzZmQyYjUxMzFlYzdiOTlhMTY5MzVmNzQyZTgzNGIzZGY3NDM0YTc4YjgyOGVmMGY5ODgwZjlmOGMyZmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY0MTBjMDBiOTBiOGE0YWIzYmE1MGExMDUxYjY1N2YwNzQzMjEwNDY4MGVhZTAyMmZmMDQ2N2E4YTQxYTlkMDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f693bcbc29444be09d8db80538f72bf1",
+      "statement": "注入面板 src/App.vue 提供 statistics/filter/appearance/logs/about 五个页签，使用 unmount-on-hide={false} 保证切页不销毁组件；header 通过 counter.openOptionsPage()（→ browser.runtime.openOptionsPage()）打开设置页，容器宽度与偏移直接绑定 appearanceConf。",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L186-L250",
+          "version": "repo-lines-v1:sha256:aa126d797874a00249a0e3077398ed82ad332e1450562e60a31bf2cc1dba2b5b:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ2NmU2YWZkZGQzMjA4YTdkMmM1MDIwMDE1ZDk5ODRmY2Y4NDdiNzM5OGUzOTEyYzg1YmEwOGJkMjk0MTA4ZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0ZjEwNTczYzA5NzYwYzdjMmZkOWJkNjI5OGE1MTA5MjMxN2U5OWY3ZjBlZGYxYmFhNTdjMjkzMGM2NTVmZTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVkNjIwZjU1ZTZlOTA3NTYyMWQxMjdlY2Q5MDBhMzkzMTEwN2UxNTllNWEwODMwYWEwNzY5NmExNDE0NGQ3NDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4ZjRiMmRkZTJlMDc1ZmRjZTliZDg5N2M4Y2U4MGIzNDhiZmU0NDY2NGEzZDE1YmVmMTAxNDY0MDI0ZTUyNDAifQ"
+        },
+        {
+          "resource": "repo://src/App.vue#L90-L150",
+          "version": "repo-lines-v1:sha256:d8c5ebb7e49c52b76945336d895b5da452b6e09234b1192d5961ec9149644d68:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMGNkYjk3MmE3YmZiN2VkMjQ2ZjlmZjY3MjM4NWU1NWY0OTY4ZmMxMTA0M2RjNWI2ODRkNTFkZmEzMWRiY2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhNmJjM2U1YjQ4OWU2YTIwYjMwNmZiOTMyZDZiZGM5NTc0MmM3OTBhNGVjYjc3YThjODE3NjIzZTY0OGYyYWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdkZjVmNTdlYzVjZmY2NDk3MWJmM2ZhZDQ1YWYyZjc0ZDI3ZWViN2QwNmI0OTg5YmNhOGYwMjcyMTQwZWIxYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2NTJkZjZkZDczMzMyYjRiZTY4OTAxNGI0NjYxNmQ4MjFhZGJmNWVkNGRiOGRkYmNiYTlmNWU2OTFiMjU0YjkifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L30-L37",
+          "version": "repo-lines-v1:sha256:78e8cb44bde7b5ced0ef8f694345076ab32e9430912e236217dc834880c7cf20:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODMwZTM0ZjU3MTc3OTZhMWZmMzY1YTNlYWE5MmExZjAwMThiMDE2MjQxODc3MDI5ZGMzMjVlY2M4MzJkMDgwNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2QxODM2ZWY2MTVjMmE4NzJlMGM5NzQ0ODE5YmQ0YjcwMThhMTA2MWE4MjM2NThkMGUxYTgwN2M1YTNlMzliZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjY5MzM1ZjA5YmQ3N2QxNzcyYmVjYjNjYjdmYzc2MDBkMWU0NzAzMWRmOWNiNDUzOGJlYTEzYTc3NWZlM2U5YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODVlNTI1NDQzYmY5Y2FiMDRlNWE0NWFkYTVmNDk0ODBhYzQ0MzAwNjg1ZTYwNjM1NTAyMGIyYTI2NjQwYTQzNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b8573c48b6654630b39a07beb123f43b",
+      "statement": "注入面板以 helper.workflowRunning.value || switchingAccount.value 作为 switchPreset、switchAccount 与 refreshConfiguration（挂载及 window focus 时触发）的前置守卫，对应按钮也按 workflowRunning 禁用，因为 conf.switchPreset() 会在 init() 期间就地覆盖共享的 formData，工作流运行中切换会让筛选条件中途换血；这也是保存成功后提示「回到投递页面记得手动刷新」的原因。",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L220-L245",
+          "version": "repo-lines-v1:sha256:1cb5f4784921ad5e7cca39934fc3c87f0f4b35657098cb070303e4e70063c1fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4YjNjNTQ1NDBjZTEzYzRkODgxMGZkYjFhY2QzZjRhYzRjZDAwYWVhZWVlOWFlZDQ5MTY4Njc1MmE0MDdmZWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyNjYyNDZjZWJkNmM1OTI2YzhhY2U2ODliNzkwMTMxN2ZjMzkxYTliMDkzYjExZmY0MTlmNGU2NDFlOWYwZDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ1ODA5NDZkZjhiZDQ4MmE1N2YxYjQyZmU3ODQzNWEzZDlhYjVlOGQ5MWZlN2I5OGY1ODgwNjg2NjYzNDEwODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmMjBmNjc5NjBlOGJiOGEzMTY4MjYxODQzMWEyYTg0NTJkMTFkOGE1ZTRhMGEwYTU5ZjM4ZWJhMDFhZjlhZmMifQ"
+        },
+        {
+          "resource": "repo://src/App.vue#L44-L105",
+          "version": "repo-lines-v1:sha256:1d7be3321b9ff2bae1f6a4db009f748581297ac5693eda0a8212c179305ed658:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZkNDk3YmNhNjlmOTk5ZTM3MDlhMGI4YmFjMDZjM2JhMDdiNmIxMzJiZjFjYTI4ODFiMjBkOTA0ZDlkNTM1N2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4ODMwMjNiYWY1NGNjZGZlYzBmZWJiMGZiMGEzYjk1YWI4ZjkzMDE5ZDI3NjJmZTY3ZmM1NjU3YTJjZTliNWYifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L138-L150",
+          "version": "repo-lines-v1:sha256:2c73cf30a66478cfb3538e8ff07d854c474a959325e3c82e0ea97b1b19f6ed07:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1YzBjYmU0MDg3Y2ZhM2IxMDhhNzYxOTQzOWIxMDI3NzRkMmJhZWYzOGZjYTJjMzgzYWMxMDYyOTE5NTIzNGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1ZTM2Yjc2MjA4Y2IzMjJjZGIzYjc2YmI4ZjkwNGM4YjJmYjk0MDcwYmJkODI2YjEyNmExOTE2NjZhMTYxNmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyYWUxNWQzYTc3NTQzOTBiYjA3ODkwNGQxNWYxZTA1NGZjN2E0M2QyMGY1MmIwYTliNDY5N2VjZjBkMGZiNjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwNjZlYTk0MGI2ODhlNWZhZjAyNDRkZGFiY2RmNmI4MGMxOTFjODY3MzU4YmU5MmJiOWZiMDM2OWViZmJmYWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bea70e44a65a4f599812d13fb682ab2d",
+      "statement": "注入面板的协议同意门用 storage key 'boss-protocol' 存储日期字符串 protocolVal（当前 '2026/10/21'）并与本地值比较，不等就打开不可关闭不可 dismissed 的 UModal，「了解并同意!」写入该键后关闭；修改日期字符串即可让全体用户重新阅读并同意协议。",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L112-L125",
+          "version": "repo-lines-v1:sha256:4d5c4a1335878e13dd66d27504e9539d0a9455852b0366c34533aedbeaf27f68:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiNTg3NTg2NDIxYmUwMDU5NDM2OWNkN2UzZWRhZjcyMDY1NGY0N2M2ZWEwNjc0NDNkNWZjZDI0MjcxMTgzM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNkMGU4MjRmOWI4MmQyMzAwMTlmNjRlYjAyZWZhYWJjMzkxZGMxYTZhOGM1OGU0OWNjYjcwZmNlYTNhY2Y4ZDgifQ"
+        },
+        {
+          "resource": "repo://src/App.vue#L22-L35",
+          "version": "repo-lines-v1:sha256:fa44d5c392d04cc9d6ebfef3bf83e61a68c98aff465bf3845fd22d20c9257bac:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhMjNjZTAzYjBhMTM4ZWQ5YmY5NzNlMTdmYjUyMGM5ODE4MDIyN2NjNDM4MjlmNzk4M2Q0ZWQzMWE5ZWY4OGYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwNmQ0NTllNzcxNWFkNmMyNTljODUyZmVhZDRmZDMxODZmY2QxMTAzOTY3MGJmZmE0YTE5MzMyMDJmYjIyNzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1NzE2MTI2ZDBkOGRhYmZlODBiN2FiZjExZGExNTJjYTQzNTk3YjM1ZTBmZGQzZTQ3ZDA0OWU0ODNhZjljYzcifQ"
+        },
+        {
+          "resource": "repo://src/App.vue#L255-L275",
+          "version": "repo-lines-v1:sha256:487cc2cb39f668777a3cd8624304f7dc98e4aff99bad53aecd17b00cd7a5edb1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4YjNjNTQ1NDBjZTEzYzRkODgxMGZkYjFhY2QzZjRhYzRjZDAwYWVhZWVlOWFlZDQ5MTY4Njc1MmE0MDdmZWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjN2M0OWZiNDU1NTQ5NTZmOWU2MWExNjM2ZWM3NTdjMTFiZTZlNDRlMjA2Zjk4MDZhOTdiNDg1YjUwMGQ4ZTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQyNDZjZThhODIyOGU5YTg2MTZlYTZkZTRiM2NmOTI5Nzk5ODM4Y2M5Y2YzMjFhMWM4M2M1ZjBjNDg5OTFmMDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlNmUzYzQ1NDkzZjZmNjBmNTlkZjZmNDMzNDU2MzJkZjE3YjI2OGUxMjEyYmE3NjEwNzBmMDE4MGQwNzk1NDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b907e3da420749289c8d2fe7a0d2e076",
+      "statement": "统计页统一起始/暂停语义：主按钮文案按 workflow.status 与 lastMode 在「开始投递/继续投递」间切换，另提供仅筛选、仅生成、重置筛选、暂停入口，并在 running || helper.jobActionBusy 时全部禁用；进度条以 todayData.success / formData.deliveryLimit.value 计算。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/Tabs/Statistics.vue#L1-L40",
+          "version": "repo-lines-v1:sha256:4980ba8d2da4e0f01fca5e53df622b8a6e69e6b01bb0b3125ba0d30d0d87fe0e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxNWNmZWQxYWFkN2VjZjllN2Q5ZTY5NzViZmFjYjlhNzg2MjMwYzdhNTQ4MDdmM2NjZGFjNzBkMTM0Yzg3NDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjMGEyMDQ4NmFmNjlhOTdiOTgzOGMyZGIxM2NiMzdlYWI3YjFjOTQzY2NjODk2OTVjOGNjMDRlNWJmNDY0YzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwYTQ5NzhlNTQ1YWExMDNhZjIzNGVmM2Q5NjU0YWFhYmVkMjEwNzhhYWVmNjVjZjU5NWNkYmQyOTFmOTU5NWUifQ"
+        },
+        {
+          "resource": "repo://src/components/Tabs/Statistics.vue#L141-L185",
+          "version": "repo-lines-v1:sha256:3a7f32cf160d3e0f060df44e7ceda560d5b83ca3539c2552d18960b409ab00d0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmMjE1ZmQwM2NmYzJiZWViZjgwNGExN2FjNWU5NDc5NTFmN2NkMmRjMDU2MDUyMjQ5OWM2MDZmZGJjZDcxODUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5Mjc4MjkxNTI3NzRmMTYwZGM0MDUwZWMwYWQ0YjAwOWMyNmVhMWQ4NGQyZjA0NTI3YTQ3MDNhNmU4NWNhY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwYTFhNDE2ZWNiMTJmMTFmZDM0YzY3M2NiNWMwYjBiYjY2M2Y5OWI0MzE2NDNlODdhMDdhMGU2MmM5ZGI1M2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMxYjA5NGEyOGZiZjVmZTgxNTNkZWVhNjM4NTllOTc2ZmRhZGY0YzcwYTQ1MmEyZDQyMmExNDE0NzI2YTM5ZWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a2dbed31674e4e27b4ba885d09fcf8f9",
+      "statement": "JobCards 依据 appearanceConf.jobView 在 JobTable 与横向卡片流之间切换，并按 helper.jobResultMaps 的结果状态与 checklist 决定显示哪些岗位；following 为真时在 currentJob 变化后滚动定位对应卡片。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/JobCards.vue#L50-L130",
+          "version": "repo-lines-v1:sha256:63148219de84e6639a62953853bdbe471748e53e55305a9d88ee35d2a8c23b37:eyJzZWxlY3RlZExpbmVDb3VudCI6ODEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmOGQ1MzUyYmRjZmMwNmUxYmQ4YjFiMWRkNzE3NWE5NDNlNjUwZWYyYjE2YTc5NGJhZGEwYTNlMDZjNmMwYjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxOTU5OWU0YjdmYzJjNzE2YTY1MmUwZTYyMGFkNmZlNGU5MWViNmRhNmQxNjAyNDYxMDM4OGRiMWVkMWU1OTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNiMzlhOGFiOWJjZjM2NTEwYmYxZGJmYjI5NjFkMTFhODViMTA1NmIyZmMxY2U0MTNjZDk5NDQ3MmEzZjQ5MjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhNjc1MzBmN2IwZTQ3ZjZmMDAzMTAxMDAxOGQyNTEwYWU2MzNjOTY5ODk2ODg5MWVhZjAxNmVmMWFkNTkxMzUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a5516b934bca44469140494e5f9e07d2",
+      "statement": "JobTable 的列可见性、宽度与顺序保存到全局键 job-table-layout-v1（与预设/账号无关），index 与 actions 列不可隐藏也不可拖动，表格高度取 appearanceConf.tableHeight * 10 像素，行右键菜单由 useJobActions 提供并在工作流运行或操作中禁用。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/JobTable.vue#L260-L320",
+          "version": "repo-lines-v1:sha256:4775f9e3309e2fa75d220c6e6e3db828e30164ab6f872f009a9a58d018aac2a5:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxMTRhMDdiNmQwNWQ3NmFiZmEwM2VkZTE5MjZjMWUyZTc0NzI3MzEyNzlkODU4OGU4YzYzYzU2ODliNTAwNzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2NGUzM2MyNWNhNjBiNWU0ZTc2NDNjM2U1NTAyYmUzMjA0ZjdiOTZkZDFjZjQ0YWQ1MjY1ODVkYTdmOTYwNWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5NWEzNmZhMGE5NmI3ZDdjZjNlMDE1ZDc0YzE3MDZjODAwY2JlM2Q2MGVkMzNmOWZkOGJjNjI3OGMyMTY3OTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM5MmM4ZmI2ZDUxNDk3MTQ5MThiMDhmM2U1YjljZTcwOGJhNmNjMzFkZTU4MGEzMTJmZDIxYjQ4MzRjOWUwMTUifQ"
+        },
+        {
+          "resource": "repo://src/components/JobTable.vue#L31-L140",
+          "version": "repo-lines-v1:sha256:3a8c1ad9b3776cebe2c425056bceae6f567a438e978827a2f66f2bc8e5626506:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5Yjg5ZGNiN2Q4ZTkwMWQxZTIyYWM5MjM2ZTRkMjQ5NTBiYTZjYjBkYjIxZTg2NzZjNGEwMGFkNjZiZTYxZmY0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI1OWVjMTRiOWI0ZDRmMzBkNGQwOGNiOWM4YTE5OWI2NDEyMmYxOGU5NjAyYmUzOTE1ZGQxYWUwMTNiYTEwMzExIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI4MzI3YWQyNmJhNDcwNTgxYjM0ZjY2MDAyMDU4ZjM0YzY2NmJlYTc0ZDA4NTZlMTM0Yjc4YTliZmM0NGRiMzIyIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJhZTdhNzEwYTA5NWQwNTQwOTA0ZTA5MmQyZGZhOTRlODE2NzU0ZWUwMmRjNTllZTViYmUzOGRkZTAzODVmMzEwIn0"
+        },
+        {
+          "resource": "repo://src/composables/useJobActions.ts#L8-L50",
+          "version": "repo-lines-v1:sha256:50df3f55e8625cfdf1276a8856bde7220c6f10eb880d78b0dfbe26c392919e14:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5Y2Y5YWJmNzk5ZjA0NmU2ODFlNWRmZTQwODE2NDVmMjMwMTkwMTQ2MzM2ZTg2OTM3ZTA3Y2YzMWFjZmFkMDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyYWRjMjY0YjRjYWUwNDdjYTUyOWY2YmMxZTZhNjAwMzYwOTNkZTgyZjA3NDk2ZmE4MDg4MDE5OWQxZDc2MzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyMmM5MmRlMzM4YzM1ZjhlYjE0OTQ3M2ZjYjQ2MDdmNzY3Y2I2ZGU2MjQwYzNmZGEzZmQ4YjcwMzRjZGFjNmYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c53c4be5ed474b51984cb430a2dda10a",
+      "statement": "筛选页把 BOSS 原生筛选 DOM 节点搬进注入面板外的固定容器（不改变其原生行为），并提供「存储岗位数据(最大20个)」按钮把当前页面已加载岗位抓取到 local:prompt-test-jobs 供设置页提示词测试使用。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/Tabs/Filter.vue#L10-L50",
+          "version": "repo-lines-v1:sha256:79f40f9ad6cedaffee4b932e7a321f9d31b8e25d003f1232f91ff488ddbaa4ad:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MGQ4YTRlMGZhMWEzNzVjZDFjNzEwMDIwYjE1ZTQ1MTA5ZmZiZWY3MDVjNDhiODA0OTQ1NjYxMDIzODkwNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2YjlhYmYwYmEyZTFiOTFjN2Q4N2EyODM2NDE3MTU1NzU2NjIyYjBlZjljYzEzNmFlYTY4NWU3NGIzYjE4MjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0Y2UxMjdlMWE4ZjlmN2FhNTY4NzRjNDJlZDFjNTlkNWI4NzE2MTI5M2FhNjIyMjQ5ZjNlYmE0YTFkODhlMTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdmOTllYTg5NGZjNmYwOTc4ZjhiNWY3OTkxNjZjODcwMWE0MjZlMmU2MmMwYzM2N2UyMjY3ZDQzNjE2MDhhNDQifQ"
+        },
+        {
+          "resource": "repo://src/components/Tabs/Filter.vue#L122-L150",
+          "version": "repo-lines-v1:sha256:ab7cc187ad9a97c14f1a0d6ce2d1c7f0fd7506b8598db71d635e5c180ec18fe0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3ZmYzYjEwMmY1ODIzNjc3MmM2NjhkZGM2MDgwOTBlNGMzY2U4YjFmNjIwMzhmY2ViNmQwY2ZlNzBlZTNkMzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJlODA2NTgyOWQyMzlhOWQ2MjIwZjhjN2VmNDg5NjhjOTBmNDE5MDg1OWNjMDBjODZjNGQyNmFhMWQyZGU3ZjMifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T11:19:15.432Z"
+  }
+}

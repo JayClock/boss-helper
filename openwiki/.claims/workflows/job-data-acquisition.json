@@ -1,0 +1,356 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:89ef67116ebba56767a7249d0e1e51ae9a1a67c66fad86ec4fd62cf9c3dfa240",
+  "claims": [
+    {
+      "id": "claim_a3dad4d8442f4e8a8184a06cc4cf8563",
+      "statement": "进入 Boss 直聘页面后，插件通过轮询元素的 `__vue__` 属性定位宿主 Vue 组件：`getRootVue` 每 300ms 查询 `#wrap` 并要求 20s 内命中，`useHookVueData`/`useHookVueFn` 每 100ms 查询给定的多候选选择器并要求 20s 内命中，超时分别抛出 `未找到vue根组件` 与 `未找到对应元素`。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useVue.ts#L35-L53",
+          "version": "repo-lines-v1:sha256:d8a37a484bc68eb84a56c56aa6748788e75c5325af5b5d37d46a6ea08d5fe113:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4NTgwNGZmOGJmZDBmYzc5ZjJmMThlZTNiNjZkYTExM2M1ZjVkNmE5MWQyZjgyOWI4YzYwYjYzMTFlNjAzZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxZWZjYTQxNWU3NGY5YjYwNmI5OWNjYzU1OTExMDYyNmJiYTRmZTk3ODY4MDZmNGVjYzFhODI0MmI5YWU4ZGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlkNzk3OWQ5NWJlZTk5N2UzMjU0MzM0YjcyMWI1ODMzZTllMzMyNGZiNzczYjBlNjFkNjc4MTViYjE4MzVlMzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiMjEwMWU3MWUyMzNhYjU3OTZjOGVlMDZmOTk4N2RmYzJjMDJjMjgxOTZkZTAwZDhiMmZmMDkzZDBkZDMxZWQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useVue.ts#L5-L32",
+          "version": "repo-lines-v1:sha256:8277b49d44c2e0cb9b264fca696e772094d5db0d04fa6c703b93eef706ae7687:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiODVjZDU1ODVlYWYwMDZhYTEwMTYzOTA4Y2U3ZDMyNTY4OTdmODM0YzBmYzE3MTIxNDUwM2FiMjc0YzI0NDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmOGYzZDlkODY0MTJkMjUxZGQ5ZWNiNjkyZTViM2Q3ODNhZDVlYzk5NDY3YjM5Y2ZhZjc1MDE2MjIxZWEzYmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwOWYxMGYwOGE0NGUwNmY5NjJiNjc2MDdlZGUzYmY1ZGE2ZTY4NGFjYWNhMjE0ODdjZjljOWEwOGI3Yjc0Y2MifQ"
+        },
+        {
+          "resource": "repo://src/composables/useVue.ts#L69-L95",
+          "version": "repo-lines-v1:sha256:1b986321deafa2e1ab56ff61f081ab9f8848dc82973e8469f027caebdaeb15b1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI2ZDVkZjQzZmRiMjlhNmRlODM3YWMyZDcwMWQyZjY3ODUwODczZTM0ZWVkZjUyYTYxNjUyYzNkMmQzZTAxNmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2226f355b4ff4efc8ec6bd84a867d1f2",
+      "statement": "`useHookVueData` 先抓取 `jobVue[key]` 初值，再用 `__lookupSetter__` 保存原 setter 并通过 `Object.defineProperty` 重写该属性的 setter，使宿主后续每次赋值都先同步到本地 ref 并调用 `update` 回调、再调用原 setter；`_jobList`、`_page`、`_pageHasMore`、`_jobDetail` 的持续刷新唯一依赖这条通道。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useVue.ts#L35-L67",
+          "version": "repo-lines-v1:sha256:4e07b8d2d88bd050ad82160754d4b2aee8bdd064dc8304902fac60c8ade5f3d9:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4NTgwNGZmOGJmZDBmYzc5ZjJmMThlZTNiNjZkYTExM2M1ZjVkNmE5MWQyZjgyOWI4YzYwYjYzMTFlNjAzZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlkNzk3OWQ5NWJlZTk5N2UzMjU0MzM0YjcyMWI1ODMzZTllMzMyNGZiNzczYjBlNjFkNjc4MTViYjE4MzVlMzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L370-L435",
+          "version": "repo-lines-v1:sha256:9508cee7d91e039969fe60ab190891f32ea235efdd45b3222d240bbd855e22cc:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZjVmM2Q0MDFkYjE1Y2Y2M2U5NDBjN2NlM2QxZWVjMjA0Y2E4ZDg0NjFkZGIxNTJmNWJhMGM0NjNkYzllMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxZDZmZTM4NWZkZmJhNzllN2ViNjhmYTYxMmE5NTBjMDZkOGZjNzFiZjUzMzY2NmRiNDJjYTNjNGQzYjA2NzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4YjcwZWMzNjg1NGQ4NWJiYzE3YmEyNjA0NzE4NTQ3ODg5MmRmMGI2YmI5OGZmNTU3NmEyZTg3NDNlNzE5ZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0MWQzNjZjZWNkMGM1OTFhZTUxMjMyZDNkNjhjMDZlZGFiZDUwMjY3Y2I5ZDUyYmIxY2QxZjc5MWE5YTdkNDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4835da06d0d49c695ab770ae272c6a8",
+      "statement": "`BossHelperCtx.onMount` 依次以 `pageVo`、`hasMore`、`jobDetail`、`jobList` 为 key 钩住宿主状态（`_initPage`/`_initJobDetail`/`_initJobList`），随后 `_initPageChange` 按 URL 分流取 `pageChangeAction` 或 `searchJobAction`/`onSearch`，`_initClickJobCardAction` 取 `clickJobCardAction`；取不到翻页函数时抛出 `pageChange is undefined`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L269-L292",
+          "version": "repo-lines-v1:sha256:292c58077f58500dca0300b10ef35b6484cf302be4875cc231f5cd4179992634:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjMjhjODM1ZTYwMzVhODVjZjRhODhkNDIxYzQ1YmJmMTM3ODllZTY3ZGQyZDVlZTZlMTM3YjQ3Nzc2Njk2MDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3NDg2YTE2NDg4MzFlMmVhNmYzNzU3ZjU4ODMxMjQxMThmYTQ5YWE1M2NmZDRkZGU1MTliOGIyYjg2MjZkYjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZmNGZjOWE1MTAzNjc1NmVjNmE0MzAxMTkzMjg3N2IzOTViOTU4NzIxY2EyYTcwNjM2MzY0ZjMzZTllZDNkMGIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L370-L455",
+          "version": "repo-lines-v1:sha256:ee4b5fecc20ef0399e3e1047609a1bda2cd3617925e70a7f05de0dbcb59ce8d6:eyJzZWxlY3RlZExpbmVDb3VudCI6ODYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZjVmM2Q0MDFkYjE1Y2Y2M2U5NDBjN2NlM2QxZWVjMjA0Y2E4ZDg0NjFkZGIxNTJmNWJhMGM0NjNkYzllMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4YjcwZWMzNjg1NGQ4NWJiYzE3YmEyNjA0NzE4NTQ3ODg5MmRmMGI2YmI5OGZmNTU3NmEyZTg3NDNlNzE5ZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgzZjU2ZWNlM2ExYjc3ZTJmOGY5ZWRiMTc3MjdiYmRjMmVjMjg0MThkOGU3OTZjYmMwNzAzZjM4NGM3OGNlNDUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L47-L53",
+          "version": "repo-lines-v1:sha256:8f9f8fc190da65183200c9c2886569655452faaab59905eefc10e311c61ce0d8:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDk5Yzc4MjliMTU2MTFjZDI5ZTgxMjE4MzZlMjYyYTE1MzAyMjQzOTRmNmQ4Nzc2Zjc1ZTcxNDZiYTY4ZGE0MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzc3OGI0NTdkMDA4ZjU5ZjI4NThiYTQxZTI1YzgwZjNkYjRhYzRmNmY2NTQ4Y2EyOGU3YzhhMDk3YWFhMTAyNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7c4f4b1e2a944960ad1405e3ceba25e0",
+      "statement": "`_initJobList` 的 update 回调按 `encryptJobId` 去重、复用 `jobMaps` 中已有的 `jobData`，并以 `` `boss::${encryptJobId}` `` 为联合主键同时维护 `_jobDataMap`（新条目附带 `createLazyObject('岗位详情获取')` 与 `createLazyObject('Boss信息获取')`）与 `jobList`/`jobMaps`，从而无需注入新协议即可桥接插件状态与宿主 SPA 的响应式数据。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L370-L413",
+          "version": "repo-lines-v1:sha256:d8e4d9f1e17a241e772bb2dca7c1de0f5c1390a0b5efab4fd6bd74f07ed7bad1:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZjVmM2Q0MDFkYjE1Y2Y2M2U5NDBjN2NlM2QxZWVjMjA0Y2E4ZDg0NjFkZGIxNTJmNWJhMGM0NjNkYzllMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NzhlMjUwM2I4Y2YzN2EwNmY3ZDZmMGEzYTZiNmZlMzU2OTFmYmNhYjUwYjg3NzVjYWI2ZmFiYzcxYzU5MmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4YjcwZWMzNjg1NGQ4NWJiYzE3YmEyNjA0NzE4NTQ3ODg5MmRmMGI2YmI5OGZmNTU3NmEyZTg3NDNlNzE5ZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQwMWNlNmExMTY3ZjUzMzUyNTM3Zjc3OTBjZTlkNDBkNTJmMTljZDkwYzRmYzM0MDhhZTFkZDY1NWZlZjJlNTAifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L53-L133",
+          "version": "repo-lines-v1:sha256:65f892b918e0d12c62274d65f5ad6f5e9c4a529eef3e48b327f13ed8d72a08a2:eyJzZWxlY3RlZExpbmVDb3VudCI6ODEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxODQzNDZmZWM5ZDZlMzEwZGUzMjJiMmQ2MjY0MmI5MjdmYWMwMGJlODc4YjUxNWY5OTA5NjVhM2FjZjgyZDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM0MjhmOTRhZjgzYmIzZDA0YzU1YTk3OWI2OGIyMzYwMTA2MjQ0YjliNDBjNGVhYmNmOGU3MTk3ZjcyOTg1NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1MmIwMzRmMTNmMTJhMWE3ZDExN2IwYTRiNjQxZGZmOGFiNDU0YTMzMGRjMzczODU0M2I5MjFiMTFjOTcwNTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6cab573f3e6e4c7bb6187a6b475f4d3e",
+      "statement": "`createLazyObject(taskId)` 返回 Proxy，在未初始化时对普通命名属性读取抛出 `DependencyMissingError(taskId)`，但豁免 `__isProxy`、`__initialized`、`__v_` 前缀键与 symbol；首次 `set` 即视为已初始化。`isInitialized` 只对带 `__isProxy` 的代理读取 `__initialized`，其余值一律返回 true。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L14-L19",
+          "version": "repo-lines-v1:sha256:21a1f5183a7a7cbc4f2beb0aefd4a3dde16ab62ae22e110f7b46a3404000d216:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGE4N2YwNjQ0OGIwNjg4YzcwN2M5MzE0ZDIwNzMwYzM4ODY1YjYzNTZjMzA4NmZmMDRmYzliNDBlNmJhYWU0ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTg0MWZlNzYwYWQwNzc3NjgyOGVjMTU0NzI3MTVkMjI5NjAwMDYwZDY4NDU5ZmQwNjg2YWU1Zjg2ODI0MGFlNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTQxNjcwMmQ1YjQ2NzIxMGQ5ZDQ4MWQwMDg3NjE5NzM3NTllMjNlYThlYmQ2MDRjYjRmZTcyMWRkMzk0YmNkYyJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L180-L228",
+          "version": "repo-lines-v1:sha256:55b5f1afbfcb0069d7ffdc467996ff7da52c5536a2eda77f3bf5a79b8653199b:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NDk2ZDk2YzE3YzBiOWM2ZmZmYjY5NzcyMGU1NmYyNDU1NzgwMjEyNTI4YWJkMDYxNTY4ZDNkZTg4NThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNGFjZGE5NmUxZjY0MDBkNWMzNmI1YzYwZmE4MjFlOWMzYTc0NDAyN2I0ODFlYTIzYTYwOGI4ZGIyMTk1ODMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNmE2MTgzYzQ3YjJhODdmNThlOWU1YWUxMzFmYTIwNzgzYTM3NzFlOTA5ODA0OGEzNzQ4YjVmZTMzZmZlNTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRjYjJmYjY1MGFjYzQwZTFiMzJhMTRkMTMwZDZiOWRkYzVhNjRlYjRmYzY1NWYyOWQyM2MzMTgyNTUxMDg1YzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_89889e6aadf9417eb184fd94e2e1c661",
+      "statement": "工作流把 `DependencyMissingError` 转换成依赖调度：`runJob` 捕获后按 `e.taskId` 在 pipeline 中查找任务，找不到或该任务在当前模式下不可运行则原样抛出，否则先 `runTask(dep)` 再重跑同一处理函数；因此 `createLazyObject` 的 `taskId` 必须与 `delivery.ts` 中的任务 id 逐字一致，这是一处纯字符串耦合。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L322-L362",
+          "version": "repo-lines-v1:sha256:475de65df6fd3e1aa4f98c4e986e709b6c3f75be08f58604d02afed34b87b844:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NjYzMTA4M2Q1NWEwYjA3NDVlNDQyMmRlNGNlMGJlMWRhNjA3MWZhMzY4NTNhNGJkMWYyYjcxNTllNDFjMDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4MDA1ZDU3MTA2YTM2MmViMDAwZGFmM2RhNDY3NGM4MmI1MThmZjVhMmUyZjY3ZWU4ZTc1N2EzMzNjMmFmNjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMzZjAwMjBjMWU2MDI5NTMyYWFiY2JkMmEwMWZiNzBkOTAzMmY4OTBmMWZlOWZlM2FmOTUwNjVlMzRiYTY5MDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5ZGViZDRlOGRkZTJlZTEwNmFlYTI5ZjcxMWE1OWQ3ODdhMDI1ZDYzMzRlZTc1NjRlZDRiNTMxOTE2YjU5ZjEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L40-L48",
+          "version": "repo-lines-v1:sha256:034c54735f7726a66d2523c757467de025f534bb512c3389f65a73daf7fa5ef5:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTg1YzRlOTc0NDZhMWIwMjQ1YmNlOTcyNjllZDI2MTIxZDllMWYzODA4YjE3MmJmMTFiZGVhMTcxOGQzZjgxZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg4NTE0MGFiNzQ5ZmRlOWMzMzViNmUzZTI2ZTQ1NjNhNjhmNzNkZTI2MjJkZjJmZTI2MWMxMTRiMDQwMTlkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjQ3NTQwNTM5OTYwNjBlNmEyYWQ0ZjEyNjc1OWEyZDk4Yzg4ZmEzMTZiNTg2MzU1NjVkNDE1NmU0MGQzNTljZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDE0ZGFiY2MwMjc3YTNmN2UyY2Y3ZDU4ZDYwNmU0MjViOGNlNGE1MGNkY2VkNjI0YWY0MTVjZDQ4OGUyZGM3NCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L391-L399",
+          "version": "repo-lines-v1:sha256:90bad6612c1d1bceea644af4ca66dc5d6e360b7340522e07bc934628db572f6c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTdlNjNiOWI1NzBkZmM1Mjc0ODg3ZmRiMjdkMGUwNmE2MDg4ZDVlMTdjZWQ2ODk5ZjMyZTIxZDY1MTlkZWY2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyMmM0MmNkMTljNmQwM2Q4MDhjNDUyNzIwNTUyODI1YjdlYTFjNWI0OTFiMjE4NTExY2FjNzQxNWNmOWQ5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmJjMmIyNjBiNmQ5NmE0ODhiMjVhNTI3NmExZWNkMTAzMmQ5YjdmZmExMDUwOTc1MzA3YjUwM2VhMDFjNDFmNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGM5NzNmOTQ3NjdjMzIwYWU0OWQ0ZWNiMTA1NmZjMDQyM2M4YjU1MzE0MmVjZWYzMzQ5ZmQ5OWUxN2VlN2YwNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_50f39d6445e94d58953f428a19c93d76",
+      "statement": "`loadMoreJob` 不以 `hasMore` 为停止条件：它记录翻页前的 `_jobList` 长度与首条 `encryptJobId`，调用 `_pageChange(page + 1)` 并 `await delay` 后比较两者；仅在 URL 含 `/web/geek/job-recommend` 或 `/web/geek/jobs` 且二者均未变化时返回 false（日志 `翻页: 内容无变化`），异常被吞掉并同样返回 false，其他 URL 一律返回 true。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L556-L562",
+          "version": "repo-lines-v1:sha256:217c63ecb0e9c961c59e2be678484162b2a30818a673017b66206b74587f49b5:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzE1YmE4MGZkNjg1N2ZiY2Y1NzFkZjVjMzRjMzI2ZTEzZWZmNTMyZjczZTJmMTk1NDFlMjc5MDMwMTQ2NGNhZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWI2MmY2MGQ4NTkwYTU3OWNmNDZmOGQ2NzM3OGM0YzU3MmI5NjJjZWNjZGI5MGM3YTVmN2I0MmI5NjA3ODJhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmM3ODk4N2EyMGJlZDliMmZkMmRiN2YwYmQ4ZDQ3MjFlMTYyMmYxZTFjYTU1NWQ3MmVlYjQwNDllNmUwNjUwMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODQwNDI4YjBiMzZjZDFlNTA5YTY0MmMyNzNjMzk3ZDJjYWQ0Y2FkNDBjZjBiMDQyOWM0NTVhYWI2MThhMWNlZSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L180-L201",
+          "version": "repo-lines-v1:sha256:21af3a02e3fec3cc7244d96a1eb28cb27a9c2c2184b65c56190bef78ce1c3a0b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYTdjM2FmYzEyOGQ5YjZhMGVkNWI0ZjE0ZmRhZWM3ZDA1NjFjMzczNWRlNWRlNmI5ZmQ2NTAwMTA5ZWM2NjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwZjNiODU5MTRiMjZhZjlhNDg2ZjIxOWY4MmM0Y2U5MjZjMzY1NGVmMTU0NDY3ZmQzY2NlMGUxYTBjODExY2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmOTMzY2I2MTEzMjQ1OTczYjRhNzcwYjY5ZmRlY2JkN2RjYjRiODk0ZGY3OTllN2M3ZTIwZDc3NWEwYzhlMzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQxZWNhMmJkY2NmZGM5NjBkMTNjYjhlMjRkNGY0NzI5MDZmZWIxM2E1ZWNhMjZmMGQzZjBhYzBhZDhlMzFkMTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_622a2e5aa8364d15b85ca4cb6db50541",
+      "statement": "`onJobCardClick` 通过模拟点击宿主卡片获取详情：若 `job.rawData.detail` 已初始化则直接返回，否则调用宿主 `clickJobCardAction` 后每 100ms 轮询 `_jobDetail` 直到其 `lid` 等于列表项的 `lid`，60s 超时抛 `bossZpDetailData获取超时`；成功后写回 `rawData.detail` 并就地回填 `jobDescription`、`city`、`address`、`addressCoords`、`activeTime`/`activeTimeStr`、`boss.isOnline`/`isCertificated`、`brand.labels`/`introduce`/`stageName`，最后 `jobMaps.set`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L314-L366",
+          "version": "repo-lines-v1:sha256:0d4cf0ebce677113575f41cda228c12b6b53566a928d4509f139579399527407:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3OWY5ODE2YTZkMDJlY2RmYjZmYTBjZmY1Zjk3MzhjNzAxNjZjNjNhMTFiMjA0ZjQ4NDk3NTE1MGJhZjhhODgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMxYjdmN2NkZDMzODIxNmVjNjc5NjgyODg2MjBlYjE4ODUxY2MwMjdlZWQ0ZDE3NzBkZjc4ZjM3NDY5NGUyZmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4YjcwZWMzNjg1NGQ4NWJiYzE3YmEyNjA0NzE4NTQ3ODg5MmRmMGI2YmI5OGZmNTU3NmEyZTg3NDNlNzE5ZTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e666698d1df54e8aa999187f24919dbd",
+      "statement": "`onMount` 插入面板后调用 `removeAd()`，用 `elmGetter.rm` 删除订阅浮层、侧栏、悬浮条、登录按钮以及新版页面的求职工具、热门职位、面包屑与详情引导等节点；它依赖 `elmGetter.get` 的 MutationObserver 回退才能删除稍后插入的节点，且 `rm` 不 await 失败，因此选择器失效时表现为静默失效。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L27-L46",
+          "version": "repo-lines-v1:sha256:06c6cc4e68f880bd6de2ce637e1fdbbd0c05009bf19e780b4ff88ff64e848548:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2OGQxODU1OTMxYTE0M2M1Y2UyZGY1OWNkYTI1NzIwZjJhYzNiZGRlZDVmZDhkYTgyNTQ1MWEzMmE3MjNmY2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzYmNkNmU4Yzc1NmRjMTE0YzVjODg0MjI5ZDhkYzcxOTYxNzY2N2IzZTAwNDJlODNmNjkwN2M3OTYwYzRmYTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0ZTU2ZjkzYjZlNGIyMDYxMGNhMjQwZWI4OWRhZjRkYzNkZWFiMDVhZjVjYzZlNjQ2ZTU1ZWUyMmYwMmFkYWIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L274-L292",
+          "version": "repo-lines-v1:sha256:538ecb73199bffba2a88379562d45289f8388e0cfb5590d7bf21c6269e758607:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzNDkzNDlkYWRlNTQ4OGFiOGI1YTZlNTUwMmRhZmMzMzU4ODhjZDkwYThjNWQ2MzlkMTZmZjFkNWU2MTY2NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjMjhjODM1ZTYwMzVhODVjZjRhODhkNDIxYzQ1YmJmMTM3ODllZTY3ZGQyZDVlZTZlMTM3YjQ3Nzc2Njk2MDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxMWY3NmY0NTRiNDExZDhiMmFmMzA3ZGJkYzA5YjA1MWMzNTA4MGUxMzJlOGQ2MTcwY2ZkMjkyNjk3NGE3ZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZmNGZjOWE1MTAzNjc1NmVjNmE0MzAxMTkzMjg3N2IzOTViOTU4NzIxY2EyYTcwNjM2MzY0ZjMzZTllZDNkMGIifQ"
+        },
+        {
+          "resource": "repo://src/utils/elmGetter.ts#L139-L166",
+          "version": "repo-lines-v1:sha256:d84de88c6af5a80d62779c7f19bf8792e45c49b8b7c686e02edd9d214f6c0d1f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5YzBjMDlhY2MxY2EyM2U2MGNjNDRmMmM5YWUzYzcwYWU2NTY5ODBjOTgxZWMwNzc1MTdmMDhiNzk4ZDcwYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQwNWJiYTQ1NGRjOWZhY2E3ZWE2MGQ4NWUyMGZhOWZlZjA5YWQ5MmRjMGRiZWUwNjk0YTU3NWVlMzVlYWJiMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8b500b9494f643bc9745a65c1d48b615",
+      "statement": "岗位数据获取层完全建立在宿主实现细节上：`__vue__` 是 Vue 2 的 DOM 挂载约定，`onMount` 中的挂载点选择器、宿主属性名（`jobList`/`pageVo`/`jobDetail`/`pageChangeAction`/`clickJobCardAction`）、详情关联字段 `lid`、以及翻页 URL 判定字符串都是硬编码；宿主站点改版时这些点在多数情况下会静默失效或只以 20s/60s 超时暴露。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useVue.ts#L12-L28",
+          "version": "repo-lines-v1:sha256:e74413e7ef65a9dc49c18c1b3c7d9bed7e9c6bb4fd840c0d364943f14e7c2a07:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2Y2U1MWUwZDkyYTkxZDM4MjljN2Y3ZjJjOTM5ZDdiMzI1MDE5NzhkZWQ2MTk3ZWYyMjBkYTZlZWViOWY4MzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlYTdjNGU1NzM1NjBlNTA2NmVkZDMzNzhkNDNjOTlmYThlOWEyNTdlZDBhZTUwZjVmZjkxZWRhZTUyYjU0ZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4NDA2MTE1YzdlMjAwOTMzZWE1ZjcyYzUxODBiMzY3OTRhNjliYzZkNDI3ZjhhOGU1ZmYzY2EyYTVkM2M4MDkifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L184-L190",
+          "version": "repo-lines-v1:sha256:e2fa42740fd9edfdd6f1b9698243a4f5778ad71c17db235c5b6c0046bb24b3a2:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTcwMGQ5YTZlZWQyMmI2ZjA2NWRkY2E2YTEyNWFlZjZhYTQxZGM0YWQxZWQzYmRmZTM0M2JjMzI0MWQ1OTZkOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzRiYmU2M2JiMjQ5MTE3ODU2ZTJiYzFkNTYxMDVhNDU0N2M0NTMzMzliMmFkMDkxYzZhMmQ1NTkzZDA2MWMyYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWU0NDQxZGMxYmI0Yzc0NmJiYzlhODZmOWEzMDEwM2Y0M2ZhYjdhMzE1NzQyODVmM2Q0ZGZhZTUyODA4ZTE4MCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L278-L280",
+          "version": "repo-lines-v1:sha256:0e2f381ab77219f85166cb94a5b0f2f3b687bab671fa2de1db8e3800e9c091cb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2RlZTQyNmYwMzEyMDBmZmM5M2Q2Mzc4Y2YyMzgxNzM2OTA4YWRlMWUyNTI0NTQ2MjEzNTRjYWRiMDJlOWM3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTI4YTQ4M2ExMmUwYWFhYWY1MTk5YWQ1YmEwZDFkNGE0YWY0NDQyNjYyNmQwNTk3OWY4YTJiZmI4NDdhNWMxNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzdkMzM1YmMxOWU2NWQzZDFhNmYxODEzNWQwZjkxNTkxOTNlOTVhMTgyZDA0YjE4ODdkYmUxODVlMzliNWQyZCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L47-L49",
+          "version": "repo-lines-v1:sha256:b4e56f93b6e4b20610ca240eb89daf4dc3deab05af5cc6e646e55ee22f02adab:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWU1ZjQyN2ZlZmE5YjU5NTEzNTEyNGY3MzlhODUxMzA2MDRkMDI3ZDgzMTBlODFiY2NmODg5NTM3ZTk5NmYxNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDk5Yzc4MjliMTU2MTFjZDI5ZTgxMjE4MzZlMjYyYTE1MzAyMjQzOTRmNmQ4Nzc2Zjc1ZTcxNDZiYTY4ZGE0MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzQyOGY5NGFmODNiYjNkMDRjNTVhOTc5YjY4YjIzNjAxMDYyNDRiOWI0MGM0ZWFiY2Y4ZTcxOTdmNzI5ODU3MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6096f4902c8a4737893ce73466c0845b",
+      "statement": "岗位列表、分页元数据、岗位详情与翻页/点击动作全部来自宿主页面：getRootVue 每 300ms 查询 #wrap 的 __vue__（20s 超时抛 '未找到vue根组件'），useHookVueData/useHookVueFn 每 100ms 查询候选选择器元素的 __vue__（20s 超时抛 '未找到对应元素'），不走任何网络层列表接口。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useVue.ts#L6-L83",
+          "version": "repo-lines-v1:sha256:849bd51c49f0183589ce7914b15411aeb56f4080da66708adebd7470ee2e1f52:eyJzZWxlY3RlZExpbmVDb3VudCI6NzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4M2Y0NTQyOWVkNDA0MDYyMDcyNzY5ZGYzMmFjODE4ODU2NzJlN2RlMDc5OWI1NWFmOTA2NmY1NmU5NGJjNzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZmQxNzkzMTU0Y2RiMTVkMDczNzllYWEyNzEzNDhlZTY2Y2JiM2E4OGRlY2I4Zjk4MWI1NWE4YzExMWNkOTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlNzI0OTNjN2RkMzgwMmYyZmRlMDc5Y2E0ZGYxNjJhNjcyMTQ3OGVkZDU3NzJmYWFkNjcxMDM4YTk0ZTA1ZjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE3NzhlZjRiM2JiYzAwOGY4ZTQ5MTQyNzk0NGFmMDY5MGIyODQ2MTBlYWFiMGRmOTFlYzBmNGNlMjIwYjU2ZGMifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L268-L289",
+          "version": "repo-lines-v1:sha256:1351eadfecc00ce1fb92e691b04fab6d082409afa95fde678b60d8b73a8a154b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNWM4MjYzMmZjODJkNGIyYzM0MGY0MjU1OGJhM2RmYTMxYzc2NTVkZjZmY2MxNjhiNGZkY2U1N2ZhYzYwNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1OWMyYTY3NWNmNDUyNzFmYmIzYjY5MjU5ZjIyYTk2ZWI3YTFiZTM3ZjBiYmNiNDFkYzhmZmNhYTg3ZDBlY2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY1NzljYjRmZGIzY2QzM2I1NmIwZjI5MzUzYWU1ZGJmMjFlNDk1MTEzYjI1YTYwN2MyMjg4MTFlNzY3NDhjYjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViZTFjMzQ4MzUyNjUxZWNjNWIyMjkwYjQ2MmQ0MTA5MWQ1NmM5Y2Y2YTk5NzdmOGVjMWNlNjIyNWVkNDhlMDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_529ba52847a64048b2302a75873394b5",
+      "statement": "useHookVueData 装钩子的方式是用 __lookupSetter__ 保存原 setter 后 Object.defineProperty 覆盖同名属性：新 setter 先同步插件侧 data ref 并调用 update 回调，再 originalSet.call(this, val) 调回原 setter，因此宿主响应性不被破坏；但该属性在宿主组件上变为访问器属性且未显式设置 configurable/enumerable（默认 false）。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useVue.ts#L35-L68",
+          "version": "repo-lines-v1:sha256:9ae62a09d1ec354cf5e634a00bec88f331157cef5bfe1d1c8a1ed97e66c52718:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4NTgwNGZmOGJmZDBmYzc5ZjJmMThlZTNiNjZkYTExM2M1ZjVkNmE5MWQyZjgyOWI4YzYwYjYzMTFlNjAzZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlkNzk3OWQ5NWJlZTk5N2UzMjU0MzM0YjcyMWI1ODMzZTllMzMyNGZiNzczYjBlNjFkNjc4MTViYjE4MzVlMzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwZTU5OWYxMTQzOGM0ZGE2MDEzMDUyNTE2NWEyYzk0YTkwYmRjZjA2NTlmYjAwNmEyYzkwNDFlNTAyYzZlNmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b7a319362e4842dea3e04db1ea515e42",
+      "statement": "onMount 依次初始化 pageVo→_page、hasMore→_pageHasMore、jobDetail→_jobDetail、jobList→_jobList；其中 hasMore 仅被镜像记录，翻页停止条件并不使用它，只有 jobList 带 update 转换回调。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L150-L163",
+          "version": "repo-lines-v1:sha256:1df717b86f45b0fbfc4ae8efa0d851b0c7ba9c291e3206b4f68d2c1223eea08d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU5Mjk4MGFjMWM1ZDI0NDg5MjU2YjRiZmZlOGU0ODUxYzQyOGE3MGExMmQ4ZGFhZDQxMzcyNDkyMzVlNjliNTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM2ODNjOGNkYTU4NGRjNzhlNWIxNTcyNmU5YTQyZjAzMDdhY2E4MDg4YzZjY2U0NTlhZTU0NmVmZDIzMGFlNmYifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L284-L289",
+          "version": "repo-lines-v1:sha256:5e1936c0ef870bd577782cc14b750dc4a16f707833561684d24ad634e827c5e0:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjk5NGEwZTI5ZWE4YjA1MGFiY2YxMzJlOTE0OTI5ZDlhYTk2NGQ5YWY1NzUyMWQ0MWZmMWM1NTkxYTI0ODA5MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzU5YzJhNjc1Y2Y0NTI3MWZiYjNiNjkyNTlmMjJhOTZlYjdhMWJlMzdmMGJiY2I0MWRjOGZmY2FhODdkMGVjZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzdkMzM1YmMxOWU2NWQzZDFhNmYxODEzNWQwZjkxNTkxOTNlOTVhMTgyZDA0YjE4ODdkYmUxODVlMzliNWQyZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWJlMWMzNDgzNTI2NTFlY2M1YjIyOTBiNDYyZDQxMDkxZDU2YzljZjZhOTk3N2Y4ZWMxY2U2MjI1ZWQ0OGUwNSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L414-L439",
+          "version": "repo-lines-v1:sha256:93e23a0180d6355ee3badb1fd316b4dcb2a1a5b99383fc5f684a94e369d99b30:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxZDZmZTM4NWZkZmJhNzllN2ViNjhmYTYxMmE5NTBjMDZkOGZjNzFiZjUzMzY2NmRiNDJjYTNjNGQzYjA2NzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlNTJkNWQ5YWQwOTQ3ZGEwZTFjNmY5MGQzNjJmNDBjNjFmOTM3MjI1YmI1MGY4YTgxZjczODRlNDE2ZTAxMzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYzNTU3MDljN2UzMmQ1MzQ5ZWVhYjgyNDA0YzQ0YjEyMTY3NmYxM2QzOWJiNzNjZTYwZjdkMGIwYWU0ODU1MzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwNDgzMmE1YzYwOWMzMDcyNDM4MDY3YTc4MTIxMDg4ZmNmMTA4OTgxMzI0OTM1NjU1NTY2OTY0MTcyMGQ4YjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4876619a755f42dc90046d3c02d00281",
+      "statement": "jobList 的 update 回调以 `boss::${encryptJobId}` 为统一主键：先按 encryptJobId 去重，再复用 jobMaps 中已有的 jobData（保留已回填详情）或调用 convertBossZpJobItemToJobData；同时维护 _jobDataMap（老条目只替换 jobitem，新条目填入 detail/boss 两个惰性代理），最后对每个 key restoreJobCache 并重建 jobMaps 条目以保留已有 state。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L370-L413",
+          "version": "repo-lines-v1:sha256:d8e4d9f1e17a241e772bb2dca7c1de0f5c1390a0b5efab4fd6bd74f07ed7bad1:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZjVmM2Q0MDFkYjE1Y2Y2M2U5NDBjN2NlM2QxZWVjMjA0Y2E4ZDg0NjFkZGIxNTJmNWJhMGM0NjNkYzllMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NzhlMjUwM2I4Y2YzN2EwNmY3ZDZmMGEzYTZiNmZlMzU2OTFmYmNhYjUwYjg3NzVjYWI2ZmFiYzcxYzU5MmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4YjcwZWMzNjg1NGQ4NWJiYzE3YmEyNjA0NzE4NTQ3ODg5MmRmMGI2YmI5OGZmNTU3NmEyZTg3NDNlNzE5ZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQwMWNlNmExMTY3ZjUzMzUyNTM3Zjc3OTBjZTlkNDBkNTJmMTljZDkwYzRmYzM0MDhhZTFkZDY1NWZlZjJlNTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f1169161651f48d7a1671e04960a950a",
+      "statement": "createLazyObject 返回的 Proxy 在未初始化时对命名属性读取抛 DependencyMissingError(taskId)，但豁免 __isProxy、__initialized、__v_ 前缀键和 symbol 查询；isInitialized 只对带 __isProxy 的代理读取 __initialized，BossHelperCtx.hasJobDetails 与 useJobActions 用它决定是否展示「拉取信息」。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L180-L219",
+          "version": "repo-lines-v1:sha256:5f6e346f88a09dc3f5ba78bfd4505208a827b56fcae071168d4b29bbaa555dc7:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NDk2ZDk2YzE3YzBiOWM2ZmZmYjY5NzcyMGU1NmYyNDU1NzgwMjEyNTI4YWJkMDYxNTY4ZDNkZTg4NThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMGNkYjk3MmE3YmZiN2VkMjQ2ZjlmZjY3MjM4NWU1NWY0OTY4ZmMxMTA0M2RjNWI2ODRkNTFkZmEzMWRiY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNmE2MTgzYzQ3YjJhODdmNThlOWU1YWUxMzFmYTIwNzgzYTM3NzFlOTA5ODA0OGEzNzQ4YjVmZTMzZmZlNTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0OTFlYmQ1NzAzMTU3MzJjMmRhNWM4MDkxNTc2ZTFhMzBjOTE5YTQ3YzdlYWI3YzRjZTI3N2E3ODljZGE0ZGUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useJobActions.ts#L23-L46",
+          "version": "repo-lines-v1:sha256:1dfdc13de0edc74f44d80c6fbf195be040e8136415cb11c12c2c9b29258d0027:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4MzU1MmFiNTcxNDk0YjM5OWIxODE5OTYyMmRiZTNiMzgyNmViNjFmY2QxZjc0Y2ZiMTJhYmNmODhlNGY3MjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxZGNjYzBlYTMzNGRiZTUyYzBhYTlkMTY2OTNlODdjNWM4NDVmMDkyYzQ0MWEyMWM0ZmQ1N2U1NzMyMTViM2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NWNiZWIwOGIzYjA2MWVkZmM2YjRiZWMwOTJjMjlhMzNhZjAyMDBjNWFmN2I4NjExYzc0YTFmMmZmYTJhYjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwN2JmMTE2Y2IyNGM4MTU1ZTYxYmQ0YTAwZDJiN2EwZTcwZmVlYzFhNTFhOTk0ZWE2NjczNTM3ODRiNDliMTEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L314-L317",
+          "version": "repo-lines-v1:sha256:898c2f7fa4ab1506623b609f750b50c82a155db173cae46c8049fd352869d004:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTc5Zjk4MTZhNmQwMmVjZGZiNmZhMGNmZjVmOTczOGM3MDE2NmM2M2ExMWIyMDRmNDg0OTc1MTUwYmFmOGE4OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzFiN2Y3Y2RkMzM4MjE2ZWM2Nzk2ODI4ODYyMGViMTg4NTFjYzAyN2VlZDRkMTc3MGRmNzhmMzc0Njk0ZTJmZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGNmOTA5YmEyZjE2MzVhM2I2MjdjZDZiNjc1NjllNGY1MmFmOTYwYTk2ZDg3NWE5NTM3YjU2MTFlMzliNDQ5MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_991827b487c341f9a1fc44f948ca9b5a",
+      "statement": "runJob 捕获 DependencyMissingError 后按 taskId 在 pipeline 中查到依赖任务并先执行它，然后重跑同一个 handler；若找不到依赖或 canRun(dep) 为假则原样抛出，因此 createLazyObject 的 taskId 必须与 delivery.ts 中 defineTaskHandler 的任务 id 逐字一致。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L348-L361",
+          "version": "repo-lines-v1:sha256:716105123edb63b3dbd6e51911864796a02826224521d4165fa20e2082296d21:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzYWI3OTg4YmU4NDZiNDhkZjcwZGUyM2I5YjI3N2FmNGQzNjQwMjdmMjAwMGJkMWM4MDE0ZmI0MjFjZWU4MjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmNmIzMWZlYzlhNzA3YzkxMjQwZTVlOGUxNjFiNDA0NzIwYTk1MTc2NDUxMWExZmM1OTNiNWE0ZjIxNThjZDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhNDYwOWUyMDk0NjMyYmMxZDk0MzkzMjdlMjdjYmE0ZWM5ZDliNTNkMjJmOTI2MDIyNjI1OTIzNDdmYWU2YzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3ZjBlZTVkYjViNmFjMDg5NGYzYjkwM2IyMTczMTVmYmFjZGQwNjg0OTVjOTZkN2RiZWI5MzU5NTE4YTJiYTkifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L35-L43",
+          "version": "repo-lines-v1:sha256:5fd2185be59e8c0d26755c0075e1158ef798f48fa84e70d184dc53cee5cb960b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzUwODlmNmIzNzEyOGRiYWRmZDk4YTUxNTI5ZWY1YTFjM2ExNTM4NzYzZWQ0YTc5NDk2NmJkODJiMWZhZjJlZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDJmYWJiMTU2MDZlMmIwZmIzZjA0ZmQxMWJkNGE4YTEzYTRmMGFjODg0ZDBkNjlhZTkzMDk1MWJmMzY5ZmRjOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDBiNjBkM2IxNDZjM2FlY2UxZDJjYTExNzA5MWUyMTU5YzlmMWFlYWRmYTgxMmUwOGM2Y2Y1MGQ5ZDgwNDUwZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzZlMjM4NWFlZWIzNzRlNzdlZjVlOTEwYTdkMmQ2YjliODEzNjFjNWJlYmUyODc5NjgyMmUyNmRiYzNmMjJkMCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L394-L398",
+          "version": "repo-lines-v1:sha256:00f42e603f875ded637ed4111c07df4a678514cf14e8ad42d20855e94924adcd:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWFkMGM2MTIxZDkwMjk4YjIwOTU3NmQyOWQwMzgyNmJmMDcwYmE5N2IwMDQ4MmFjODUwYjZlOTAwMjY5ZGFlNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDM4MmYyNTI0MDExMmI2MTE0ZTNkMzE1ODhkNTY4MDE2MDVjZjExYjY1YWUwNzNmOTQ5OTRhM2JjMGE5OGYzMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTZmYjY1MjE1MWRiMzhiODkzNTQ2YjI0MDFkYjdlNjY5MWNhNjE2MTY4NjY4YzY4MDg0ZWE1ZTJjN2Q4MzVkNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDMyNGE2MDk1ODg4YjMyZDYzYThkMGRmYzNhMTZjMzM0ZDVhOTk4MjJhM2QwMDljNzg1ODAwNzkxMmMyY2JkZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0850dee0f5b24f19a939e35903199578",
+      "statement": "onJobCardClick 先校验 jobMaps 条目与 isInitialized(rawData.detail)，再用 useHookVueFn 取得的 clickJobCardAction 模拟点击宿主岗位卡片，然后每 100ms 轮询 _jobDetail 直到其 lid 等于列表项的 lid，60s 未命中抛 'bossZpDetailData获取超时'；成功后写回 rawData.detail 并把详情就地回填 jobData。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L319-L369",
+          "version": "repo-lines-v1:sha256:c5c00bda233ae50e379cecbfe918f95d429666f35eb7668dfec39c536b0c50aa:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3ZDA0ZTk2NTkyMjZkY2MwZDg0OTljMzVmNTFkYTE3NzVkZTBmYWMyNzJiNTE0OTIwZmJkZTI3NDJhYmIwOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzMGJjNjhiZTA5Mzg4OTI5MDM3MWYzNzc1MWRhYWI5Mzg5ZDNlNWUzZmQ0ZWY4Y2I2MGIzOGE5ZDExZmY1NzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEzZWI3ZGEwYzU2YWNkZTY0OTQ4MDdlZGYzNDJjY2IyNzJjODYxM2NjOWViNTI2ODhlMGIzNWEyMjQ2MmYzOGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b26fe88928d74b109bf5202ed8626c79",
+      "statement": "详情回填中 activeTime/activeTimeStr 用 ?? 保留列表值兜底，而 address、city、jobDescription、addressCoords 被详情无条件覆盖，boss.isOnline/isCertificated 与 brand.labels/introduce/stageName 合并自 detail.bossInfo 与 detail.brandComInfo。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L350-L368",
+          "version": "repo-lines-v1:sha256:98b0812bfc0af9cf35802a3bac4f5ae0fc0024832024ffafb0ddab76eee5fb7b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyMDIxZDBmZDViZDY3MGYyZjRiMzlkNDMzN2U0MWQ0MzBlYjdlYzE3ZGZiMWI1NzcwMDZiYmJiMjZlNmU2MGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY5ZTEyODFhMWM4MzMxYTAxMGRlY2ZhNWM2YTQyMjljZGZiMjExMGYyOWVmMTJiMmM4N2U0MTExMzIwMWVhMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkODA0NmIzNjFlODgxMmIyM2E2YmYzNDdkOWUwZjNhZmYxZDQzNzMyYzQ0ZmM5YmYxZDAxMmQ0MjM5MjQ5YTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_351929918cef4d33a4deb94dc9e16678",
+      "statement": "详情抓取存在两层并发控制：基类 fetchJobDetails 用 detailRequests Map 复用同一 key 的进行中 Promise 并在工作流运行或 jobActionBusy 为真时直接拒绝，而工作流的「岗位详情获取」任务直接调用 onJobCardClick，绕过 fetchJobDetails。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L131-L145",
+          "version": "repo-lines-v1:sha256:29a2d36e07abb5cd6ab48b72ecb7703547052a0c505fcf202182b7bdb92dc738:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5YzVkNmQ1MDM1NzljY2Y1Mjg1NzI1YjAzOGJiMTA5YTQxZThkMTVlZTg4Y2IwNThhM2QwMGM5ODM4MTE5NWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1OWMwMGNkYzRlOTkzOTdhY2MwMmJiODUyMzg3MWUwMjA3NTY4YjVmODY0MGE3YTI5NTYyMDM4NjU4MjdkYTkifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L35-L43",
+          "version": "repo-lines-v1:sha256:5fd2185be59e8c0d26755c0075e1158ef798f48fa84e70d184dc53cee5cb960b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzUwODlmNmIzNzEyOGRiYWRmZDk4YTUxNTI5ZWY1YTFjM2ExNTM4NzYzZWQ0YTc5NDk2NmJkODJiMWZhZjJlZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDJmYWJiMTU2MDZlMmIwZmIzZjA0ZmQxMWJkNGE4YTEzYTRmMGFjODg0ZDBkNjlhZTkzMDk1MWJmMzY5ZmRjOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDBiNjBkM2IxNDZjM2FlY2UxZDJjYTExNzA5MWUyMTU5YzlmMWFlYWRmYTgxMmUwOGM2Y2Y1MGQ5ZDgwNDUwZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzZlMjM4NWFlZWIzNzRlNzdlZjVlOTEwYTdkMmQ2YjliODEzNjFjNWJlYmUyODc5NjgyMmUyNmRiYzNmMjJkMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_137c69357dcc4477a36587f915d42ec2",
+      "statement": "翻页函数按 URL 分流：位于 /web/geek/job-recommend 或 /web/geek/jobs 时用 initSearch（候选 searchJobAction / onSearch），否则用 initChange（pageChangeAction），两者都通过 useHookVueFn 只取值不装钩子，取不到则抛 'pageChange is undefined'。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L444-L453",
+          "version": "repo-lines-v1:sha256:6b0b9ba233bd6c1a507df14e8a26699d636d8fc96878d3a376ac529a2f176715:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMzYxZTJhYjdhMDdmYmIwNGQ1ZjUzMTVhZjU0ZDI0NWM0NDA0OGU2MDk5ZDYxM2Q4NTBhZjNjYTIwYjMyNWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxZDZmZTM4NWZkZmJhNzllN2ViNjhmYTYxMmE5NTBjMDZkOGZjNzFiZjUzMzY2NmRiNDJjYTNjNGQzYjA2NzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViYjI0Y2E1ZGI5NjMwMzQ1MmU1OWE3NzI4ZTA2NzAyNmYzMDg5YTMxOTAzZjJhY2ViMGMzZjA2M2U3MzVlMjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L50-L54",
+          "version": "repo-lines-v1:sha256:bcc70d505fdde6788c8a676802fa444e4070048e488df57cf12c43d0e63cac96:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmZhYzM0OGRlYjY5MmZmYmJlNjhhMzkwNmVlYmE4ODVjY2VhYmVjZGJmNDhkODA0MGE2ZTMyZTEyYzBiYWU5ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFlZjVlNjY3YjJkNmFmYmI2MzczODYxY2UzNTFjMzk3NzgzODQ2Mjg1MTVhMTdiYmI5ZTAyY2I3N2MyMmQwNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjRlNTZmOTNiNmU0YjIwNjEwY2EyNDBlYjg5ZGFmNGRjM2RlYWIwNWFmNWNjNmU2NDZlNTVlZTIyZjAyYWRhYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjY0NDI1OThmNzQ3MTdkNTExMzBlMTZkZTE4NjUyODQyOWU4NDE5M2MwZDA4YTQ4OWQ2MDBmOTE4ZGM5MTcxMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_07af47776e734246a6d0c86ed6025d05",
+      "statement": "loadMoreJob 的停止条件不是 hasMore，而是翻页并 await delay 后比较 _jobList 的长度与首个 encryptJobId 是否都未变化，且该判定仅在 /web/geek/job-recommend 或 /web/geek/jobs 下生效；异常被吞掉并记 logger.error('翻页: 下一页错误') 后返回 false，使工作流正常结束整批。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L555-L562",
+          "version": "repo-lines-v1:sha256:e86ee3f22ed67fe1f21fa613a14de873f61bcc3042e1345c38d45760c3fd3296:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTkwOWE1M2E2MThkMDI4ZTFkMzAwMGMwYTdhYmNlZWNiZTVmYjM3ZjRlNTExZWZlNDY2NDNmYWQ2ZTY2ODcyZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWI2MmY2MGQ4NTkwYTU3OWNmNDZmOGQ2NzM3OGM0YzU3MmI5NjJjZWNjZGI5MGM3YTVmN2I0MmI5NjA3ODJhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzY3YTUwOWUxOTcxNjI0MTFmMjI1NGU1ODA5OWEzMDQyYTdkOWU2M2IwZDI4YjQwZTM4MzVlZDFhNmM5NGIxZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODQwNDI4YjBiMzZjZDFlNTA5YTY0MmMyNzNjMzk3ZDJjYWQ0Y2FkNDBjZjBiMDQyOWM0NTVhYWI2MThhMWNlZSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L180-L204",
+          "version": "repo-lines-v1:sha256:9c1a0ed9dfb48dcd6b1c978692c8ae4c1f93d6fa60086fd9aad3f4be1cde1a8b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYTdjM2FmYzEyOGQ5YjZhMGVkNWI0ZjE0ZmRhZWM3ZDA1NjFjMzczNWRlNWRlNmI5ZmQ2NTAwMTA5ZWM2NjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5OGFjNDUxODc1M2ZiMTEzZDZkZDI3YTEwYjhkM2I0OGViYzU0ZDIyYzQ4NTA5YWY0NmNmYTczNWIxOGNhZGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmOTMzY2I2MTEzMjQ1OTczYjRhNzcwYjY5ZmRlY2JkN2RjYjRiODk0ZGY3OTllN2M3ZTIwZDc3NWEwYzhlMzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2MTg3NzcxZjczNzk4OWY1OTk2ODY3NWI3NWVlMDg5ZDJmZjJjMTY5MTYzOWU5MGNiZWYzNmYzYmQzZWRmMDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5d974bee83f344e599fa309b7518033b",
+      "statement": "elmGetter 提供 get/each/rm：get 先同步 querySelector，未命中则挂共享 MutationObserver 等待后续插入节点，默认 timeout 为 0 即永不超时；onMount 用它以 3000ms 超时探测面板是否存在、以无超时方式等待挂载点后 insertBefore 插入 <boss-helper-job>，removeAd 用它删除渲染后才出现的浮层节点（失败静默）。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L21-L45",
+          "version": "repo-lines-v1:sha256:98622cebfd4ea3bca583fccd8aebde5570c359b8abeca1a0b228ec1cafad516b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjNGQzM2Q4ZTlhODdhMTVlM2Q4MDUxMWUwYmNlYzY2ZTMwZTcxNTBjNjM0ZjY4YmRjOTZmOTEwY2RkOGY4MDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkODdkMjAzODQ2N2ExNjAwNGY5ZjUxZTIzYmU2MGQ4ZDRkNDZjZTYyNTNmYjYwYjkwNDEzMWEzMDg2ZDE2ZjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViOTBlNDQxYmI5NjMxYzEyNTQzYzdiZjEwZDgwMTkyYWU0NzYyMDA4MWI0NzA2YjFiNDE4NWNhZjhiYWFjYzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1ZTg2NWNhYmEyNDM3YWNjZDJlY2M2M2JkMWQ4YTdlNjYyMjk5YmJkZjQxYWI3YzM5MDAwMWIzNmU2ZjY3MWMifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L260-L283",
+          "version": "repo-lines-v1:sha256:f2879f26ee36bd4b6a15eddf85f8ba2d29cab143b230d63e382aa8ae2b0efee4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyN2RiNGM3OGUwYzAxNGM2OWM0MWUwMzg0ODE0ZWE3OTIxZTA3MDYxODQzZmFmNWE1ZGM0OGYwOGYyYzIwMTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdkNDhlMTg2NjJlMTI5MzkyMzkzNDlmMWQ1OWYyNWMyZmY5MzZkOTlmYWQyZjNmNjBjNTdkMjdhYTFkZDhkZTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNzc3OTFkNzA5YTQ4YzczMzc4YmU2MGYwMjRhMTIwOThkNGQ0N2ZiN2I2ODBhNGZmOTVjY2ViMTJlMzMxYWQifQ"
+        },
+        {
+          "resource": "repo://src/utils/elmGetter.ts#L24-L165",
+          "version": "repo-lines-v1:sha256:1316af59f4bc3751c83841e9c60afc298b83d6ccece905d6f4b18c12cd79471a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3NjliNmQ2ODZjNWRhMTJmNDJlYzFkMGY3YjdmYzBmODg4NDc1MDg0NmUzYzQ3YTQ3YjU0M2FlYzI5YzViNGY1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIyNDY4MThiNjQxNmQ2NzkxMGQ3ZGQwYjY0Y2NlMWJkYjY5YjU2ZTZhNzQ5NjRlZjU3N2Y4ZTRmZjA4ZGQ1NjMyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI0ZGIxMjE2NDI2MGU5ZjIwNzI3NWQzY2IwZjg3NmI5OTAwNzFmOWY4ZmVmODRkMjZkYmU1M2JhZTZiZDg5ZmJiIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MSwiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_65df2bfba98c4b1c8ef75c51e14793d9",
+      "statement": "rawData.boss 与详情抓取解耦：它由 delivery 阶段的「Boss信息获取」任务（deps 为「岗位投递」）调用 getBossData 网络请求填充；requests.ts 中的 getJobDetail（/wapi/zpgeek/job/detail.json）在仓库内没有任何调用点，onJobCardClick 里对应调用已被注释。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L98-L117",
+          "version": "repo-lines-v1:sha256:3d0e5b6029205215e6a98cd250a368430c418405aab0a0aa399376009e9f8255:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1ZTQ2MGIyZjFlODY5YWY1OGQ5NzZhNmU0NjU3MDc3OWMzMTg2NTBhZjQ0YWFlN2Y2ZTE2ZDViYTRhYmFlNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmN2Q1MTc2OWU0MmQzODZkM2EwYjA5ZWFkZWMwNmRhNWUwMGY5Yzg5NTgzY2ZjZTg5NjFjNmViZjAwMGM3NmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4ZGY1NjdmZjliNmNlMjgzN2ExZDg2MWRkZTFjY2RhNjI1NjRhNWRiZjkxZjIwOWQyZGY2NDE3OGExOGNlMGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJlZGYzN2FmNWY5OWQ3NjBhNDZhNzVmYjFmZDQ3YmVkYjY3Mzc0YTc0MDllYWJiNDNjMGRjMTE2YjUwZTUwODEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L320-L323",
+          "version": "repo-lines-v1:sha256:dc6df997db1bc8339e4973ca152b25fb563bfa643950061651a53cd9e7294b7f:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2U4ZGQ2ZWFjZmNiNjViZDdjNDJlMTZiZTM0NjhlMDA3NTQ4M2MwYjJjZTI4ZDM2OTkxZTgzYzJmM2QyMjAyMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTIwOTY5YmFjNTM3Nzg2MTJmM2ZmMTJmYzA5NjQyYTMxMzExMGU2MmZjOTAwOGZlYmJjYzFkN2E4YWIwODE2MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGM2MjYxY2Q4Yzg0OGY1YjgwMDQ5N2Y3MjNlZGUyMmU5OTVlMWQ0ZGIyMTFhYmZmYmJiMzQ4YjFkNWIwYjRkYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjVlYmUxNzE4MTFhYmY1MTM0ZjE5ZGFkYzQ4MTZhOTUxZDg0NDhkNTI5ZGU4ODA1ODQ1OWY0YTZjY2NhOGQxMCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L20-L45",
+          "version": "repo-lines-v1:sha256:e52eb3b3215cef04702046ce11a68b1158efbfd483f0f810bb2f618d5e70533c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZmUwNGFkOTJhZTAwNTdmZDU0ODFhMDRhNWQ1ZGE4YjM1ODgzNmUyNzQ3NDA2YzY4NGExYjQ0NDZjZTViNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxZDVhODdjNjdmNTliMjA2NTk2ZWRjYzkzNWYxYjhkZjA0NjIwMjYzZjYxZWEwZjI0MjAzZTFlNzQ0ZGYyY2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiMWNkM2EwNTU0ZWQwMDUzYmI2OGE2YzVkYmJkYTJmODg1NTVkMzA0YjYzODM2MzVmNzliNDM2YjJiODJhM2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4OWQ4NTAzZGY2MzRiNWVkYmRjMTAzZDNhZGVjZmFmMjJiYzIyOWUxZDdmZGM1NzZiMmM3NzM2YWEyYWM1ZWIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T11:46:27.311Z"
+  }
+}

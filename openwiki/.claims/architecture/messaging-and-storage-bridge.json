@@ -1,0 +1,758 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:b0dd983c5835cd61f44848f70f99b3f3f985467620c2af7c33573237f9b51ddd",
+  "claims": [
+    {
+      "id": "claim_5d4633d306cc494698210e6693178a80",
+      "statement": "src/message/index.ts exposes a module-level `counter` Proxy that forwards get/set to a lazily initialized `_counter` (a ContentCounter) and throws \"Counter has not been initialized\" for any access before initCounter()/initExtensionCounter() runs; returned functions are bound to the underlying instance.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/index.ts#L12-L57",
+          "version": "repo-lines-v1:sha256:97664bad62b3481aa408850eff3ecabcb93bcb6f9a54d82d9a0d67fcbc093595:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkMmQ3NDU2YjAyZjUwZmFlMWY0YzUyNjc3MzUzMTIxNmUzYjJhMTFkY2U5ODI3Y2QzODcyNWZlZmJlMGM1MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmYzg2YzI4NzQyODZiOWVhODg1NWRhODgwNzRjMDJkMWExYjA0ZmQzOWI1NDgzMDEzYjcyYjVkZjUxYzgzOWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmNDM3MTNkZGM3ZTA2YTc5MTgwN2M4YWExM2FmNTJjOGVjOGYzYmQ4ZmJmMjYzMmZkYjM0YmIwNzgwZDUyNDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7ac839f4990d457f97b589e692f057cb",
+      "statement": "Initialization has two forms: initCounter() injects the '__boss-helper-content__' proxy over ProvideContentScriptAdapter bound to document.currentScript for the MAIN-world injected script, while initExtensionCounter() injects the '__boss-helper-background__' proxy with InjectBackgroundAdapter('popup') and wraps it in a real ContentCounter for the options page.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L496-L500",
+          "version": "repo-lines-v1:sha256:75ea475a6abcc8dc6425cbd89595f92d55c117ed15c12bb85d858c4c1fbfc79f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzA4YjZlZmMyMjFlNmFmOTRlYjNkODY4MjJhNWY1NWM4M2VjODczYjg2ZGU1ZjI3ZTI0Y2ZjOTY3MDY4Y2Y0OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTBiNDc3NGU5MGU0MTcxMTY5OTM2ZDFlNWVlNTRjOTNkNjQ1Nzk5MWFlMTBkNmMyOTY1ZmYzY2UwMjQ0NTBhYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTc0ZWZjMmMxYTRiNTUxNDQyN2NjMzU5NDUwNWZiOGI2MGZjZDY3NTMyMDE4NDZhMTVjMTE4MzhjODdiMjFiMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjkzYjAwOTRhMGQ1NDkyNTE4YjFhNzg3OWY0YmEwZGJmMWI0ZmRlMjY2NDQ5Y2ZmYmQwZTgyYzBkNjM2ZDJhZiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/main.ts#L17-L18",
+          "version": "repo-lines-v1:sha256:a47be3d9752e8188086f41641b1d568d7df6b786eecfb57a58403c1c4e3b329b:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGIxNjkyOTJhMjgzNmY1YzA2Mjk2MWI0YTUxMjMyMWM3YmUzNjM0YTRhZjhlYzRmYTM1YTAzZjAwZDUzZDViZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTdkOWNmZjljZDMzYTRjZDM5NjQyNGU2ODMzMWMyODBiNzZkYzhhMDM4MDNlM2YzOGJmODE0MWU5ZTU3NmUyMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2U1MmI4MmI5N2Y5NDdiMWY3M2U1Yzc5YzcyMjM5NzNjODVmOGFjYTlhZTk1MjkxYWZmYjdjZmRmZmRkYzNkOSJ9"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L14-L28",
+          "version": "repo-lines-v1:sha256:abc2652e36c80d5ddeff1fb7d4c863783ff54f0395c3b7817a50f62a3091522a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MGExZjg2ZWVhZjU5YjUwMWVlYWIyMTI4NmYzY2JmOWE5MzNjM2I5ZTA5NDAwNmJkMzk3NmFjZWYxNTY4MTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImExMzcxMWVkMTQzNTcyZWI0Y2FhZmNmNmY1ZTAyMzE3YWI1MzJmNTQ4ZTRlMmNmMzUxNjg1ZmRjZmIzYmM5MmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjYzk4MmQ2Zjg5ZTU0ZDFkNzhlN2FkNGI2NTA5MTgxMWE0MTBiNDA3YmIxMDcwODNiNjI1YWI1MDIxN2EzYjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d01ddb13ad194dbca7b9468d1ba760f0",
+      "statement": "ContentCounter implements storage access locally via WXT `storage` and normalizes keys with genKey(): keys already starting with local:/session:/sync:/managed: pass through unchanged, every other key is silently prefixed with `sync:` — so unprefixed keys land in storage.sync (this is why most call sites write explicit `local:` keys).",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/index.ts#L10-L30",
+          "version": "repo-lines-v1:sha256:34eaf589aa8b5de3d43fdd993eb7548059fc6395838c68a1c6afea46e903de8a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjMzI5YTViYzg0ZGMwNjA2YjA4MWQ0NWVjZDNmNjZkZDVlYWYyNDQzZTgxMDA5OWJkMTg1MGVjMTkzMTM3MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzNmJkN2VhMjMzNzAxMGE1ODEwNDMyNDlmNzIyM2EwY2RkNTc2ZDMyZmU3MGYxNGFmNWI1MzQ1ZDc3YTZhYWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRkOWJjYTllYjBjODQ4ZTRiZTMwYmFiZjYzMjQ1YWYxZTM1MjNiN2M0MzRjYzRiMTJkYzYxODYxMGQ4ODVmZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1YTRkZTc5OTJkYmFhZmExOTIwYTYyODU5NWUzNTVjN2Q5YmE5MDQ3ZTJiYzlmNTc5OWE1OWU1N2FkNDI4NjUifQ"
+        },
+        {
+          "resource": "repo://src/message/contentScript.ts#L7-L10",
+          "version": "repo-lines-v1:sha256:4d88e92594a27064d67c5271eab51890277facd5caa33f4603b5c0edcca0fcdd:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWE5YWI3NWU5MzM0ZDYwNWZlZjNhNTVkMWU1NDk0YjYwNmQzNTgyOTdjMjc4YmQyNzFmNjZlYWZhMzhlNzYwZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2QzY2ViN2VjMGYwNDUwYWU3ODU0Njc3ZGNjZWJjZjU3MTY0NGMwOWJiYjkxZTM1M2EyYzNiZmE2MDhiMDgyZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTVkNjZlYTcyNzg1MGI2ZDM1OGViYThiZTg2NDU0NWM1N2JiNTNiZjExNzg3ZTI2ODdmNjNkZjMwZWI4Zjk5OCJ9"
+        },
+        {
+          "resource": "repo://src/message/contentScript.ts#L80-L96",
+          "version": "repo-lines-v1:sha256:377e431a5ca34aba74e023d26a1cbed91a4ba8916be45d647d55f0339eaae115:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyNzM3ZTIzNTBjOTFlY2RhYWQ4NzVkYTZhNjFkMzAyZGNjYjE0OWI4ZDJhN2Y3MjYyNmJhMGMyYjY1NzgwZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZmOThkYWYyMjU5ZDEwYmEyNzhjZGQ1M2RiODg3YzgzYmE4YzkwNTkwMjdkOWRmMjFlMGE2OGMyZDYyMGQ1ODcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6ae83c38ea5f418088d1fdb81f314a0d",
+      "statement": "ContentCounter implements BackgroundCounter by forwarding every background-only capability (request, fetch, fetchStream/fetchStreamAbort, getImage/setImage, notify, openOptionsPage, feishu helpers, backgroundTest) one method at a time, so the two method tables are kept in lockstep by the type constraint; only storage* is handled locally.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScript.ts#L12-L98",
+          "version": "repo-lines-v1:sha256:3c02824c91a2aa603a6ae12869d15cc7d03ba0f594ed1431c9c5cab3ec2b8000:eyJzZWxlY3RlZExpbmVDb3VudCI6ODcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMzY1NjY2YmM1ZTg1MzBhNmMwMmFmNzY3OTU5MzUzZjhiNmE5MmVmOTc0Mzk3ZDdlNmFlY2Y0OTFjMTczMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4NDdhYWY5ZTlhOTY3ZGE0ZjNhZDVmNWJiMmRjMDVlYzc2MzZhYjI2ODBkNGFmZjdhNDBjZDJhZDQxMmJkODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2Zjk5YTQ1ZWQ1ZTgxNDllZjRkZGI4Yzg2NmJhNDU4NzVhMGRjNzdlZjdmYTY3YzhlMWIyNGFkOWYyYzFlOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM1YWI3YzQ5YTIzODU0OGQyMTBkOTY2MWU2MjY0MTM4YTNhYjAyZjMyYWFhMWI3OGE0NzU5ZGVlMDU1NjZjYzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_efbb4255c211433ab27fce2f2d29f08b",
+      "statement": "BackgroundCounter.request performs the fetch in the background worker with AbortSignal.timeout(timeout*1000), mode cors and credentials include, and rejects non-2xx responses with an error carrying status and body text; src/utils/request.ts routes to it only when isBackground is true, otherwise it fetches directly in the calling world.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L40-L77",
+          "version": "repo-lines-v1:sha256:e11e9170b113dc92eaeadba17e37e449715f09b777c93bcd2e32397797f01d52:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzODAzM2ZjMmE1MTdiZTAxZDVjYjM0Mzk2MGZjM2FhYzQxM2I5ZDcyNzI1ZWYxOWNiYjU1MjFlMDhjMDAyY2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4NDdhYWY5ZTlhOTY3ZGE0ZjNhZDVmNWJiMmRjMDVlYzc2MzZhYjI2ODBkNGFmZjdhNDBjZDJhZDQxMmJkODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQxOTQ0ZWIyOTQ2N2VkM2EyNDRiOWExNDNiMzJkYmEyYzg3N2M4NmQ1ODI4MjRiYjY0OGUyOWZmZDY0NThiZWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1NGIyYzRiOGQwYmU5ZDA0MzdjNjAwOTIxMTk1YTUyMGNjZGYwNDU0ZjExMDQ2NjRjODYwM2M1NDI4NTMxNjMifQ"
+        },
+        {
+          "resource": "repo://src/utils/request.ts#L118-L170",
+          "version": "repo-lines-v1:sha256:9edc9798d8d8bb405e6e59183b6a4551ef14a7a94ccd2d6dfb99b3e13bef115b:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NGY0YjI5MGZhZWM4MWJhNWEwMTZkNDEzMjBiYzQ4ODY2MTVmMjQyYTc2MDdmNjhjN2RlMTA3NzhlYTliMzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNjNmNzc4NzVkNTY2OTA2MWExNmNjOTU2ZTM2ZTM0NDYwM2Q4ZDM1YzJlMjIxZWMyZWQ1ZDYwZWZjNGU3MDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRjZjk1ZjJhMmZmNDU0NDJlMTM1ZDA0ZjY2ZmIyNTRiYTcwMTBlZTMyYmU4YjNhY2EwMDI3M2UxNzdkMDlmMjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dbb4e939ae7944c2b3ad188081b76953",
+      "statement": "ProvideContentScriptAdapter transmits over a CustomEvent named '_boss-helper-message_' dispatched on the injected <script> element with detail = JSON.stringify(message) and JSON.parse on receive, so all payloads crossing MAIN ↔ ISOLATED must be JSON-serializable.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L52-L71",
+          "version": "repo-lines-v1:sha256:14cea56684544fc510ed1b85425719521742148e4e49e427dcf75ecd40bb3417:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiNWYzMjVhOWI4OWZiMDQ1ZWZkN2RhZGU3NWY4NDk5MTk3Zjc2MTNlYzNjNTJiNjkxYTZlMTUwNjNlYzA4YTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4NWFiODBjMGQxMTEyODdmOTljZDg1YzBhYzBmNTllZWRlMTA1OWEwZjQ1MzQ0ZGU2YzQ5YzlkYzQwZjY3NjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_14afbb29e34643ffacb1bc3665d2f3b9",
+      "statement": "ProvideContentAdapter is the document-level variant of the same '_boss-helper-message_' channel and includes a Firefox fallback that calls the global cloneInto(message, document.defaultView) when available, otherwise passes the object unchanged.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L1-L25",
+          "version": "repo-lines-v1:sha256:28698245450295ca5d8531a869284b7425be79ee87ac27743ac5d4798a8546da:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTM5M2EyOTI3Nzk4MDZhYTIwNDA2ZWJmMGJlNWEzZTc2YTBmNzMzODM2YjY3ZjY2NjQ1NGIyYzRhMzJkZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlZmEzMjU2NGFmYTEyMzIwNzk0NjJmNGQ5ODQ5MzM4NDU3NTg1YWI4YWZkODY2ODNjMDcxMzUwMzI1ODBkMDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_53ae3ee4ee9c409996c85e0a344b4b61",
+      "statement": "Background routing depends on meta.injector: InjectBackgroundAdapter('content'|'popup') sends browser.runtime.sendMessage(browser.runtime.id, ...) tagged with {url: document.location.href, injector}, and ProvideBackgroundAdapter rewrites injector from message.sender.name, replying via tabs.query({url}) + tabs.sendMessage for 'content' or runtime.sendMessage for 'popup' while swallowing 'Receiving end does not exist'.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L160-L216",
+          "version": "repo-lines-v1:sha256:efb48bbaa780ed3fff1849f3abaad259ea9b85ba0f682743b9156c17d248b3df:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkYzZlMzg3OThjYTUyZTdlMDA4NWY5ODY5MTUxYjg1M2QwOGVlY2NjZTM5OWVhZTM3NzhlZDY4NmNjYjM5NjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4ZTg1ZWQ0MzY2OTJiNmY0ZWU5Y2MxYTUxYTk1MzE1NTYxODcxZjkxMGVhNjVkZmFmNTIwMDk2YmFmYTMyOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d8ee4154970b41e885f924435424d654",
+      "statement": "fetchStream registers an AbortController per requestId, awaits the full response as arrayBuffer and returns {status, statusText, headers, body: number[]} — it buffers the whole body rather than streaming it — with AbortSignal.any([controller, AbortSignal.timeout(120_000)]) as a safety timeout, and cleans the controller up in finally; fetchStreamAbort aborts the controller for a requestId.",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L83-L125",
+          "version": "repo-lines-v1:sha256:52752562643e63a12d4de0a24ded41c0fcc94491fe5e535e1eebbb5eb2e5386c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzZjVmZGRjMjk3NmVhNmY0NDlhZGU3Yzk2YjIwODdkNDQxOWU5MmNjNjEwOWIwNDFhNjliMzhlMDhkOTgwNzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxZjYyNWI2ZmE1NTIxYWVhZDA5ZDAwZGJhMWI3NGY5NzdlNDA1ZDI2NDMyYzg0ZDJhYmI1Mzk0N2FkNjE3NDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwNmU4ZDgxZmUzMmNkMjIyMDc2YjIxNTMwY2VjZTAyNzhjYjAwOGJmYTY0ODRlNDQ4Mjk3MzExMmNmNmFhZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQxZWY4NGY4OTU3MTY4ZTkyYjNmODQyMDEzZDBlMTk2MzA2YzEwM2RhZDlmZWJmOTY2Y2Q0YTFmNzI5NzBkOGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_db70edb78d5a497d946878c2f629f5ea",
+      "statement": "src/utils/backgroundFetch.ts wraps fetchStream as a fetch-compatible API: it generates a unique requestId, rejects immediately with AbortError if the signal is already aborted, forwards later aborts to counter.fetchStreamAbort, forwards only method/headers/body-as-string/credentials(default include)/mode(default cors), and rebuilds a Response from the returned byte array.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/backgroundFetch.ts#L17-L67",
+          "version": "repo-lines-v1:sha256:f9b55bb6e082fc8545e27154b1d625562a8d49f3b5733e466d6f6d85f8f7bbf3:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3NTc5NzA2ZjU0NGI2YzdkYWQ3NjIwOTAyZDBhZjYxMGMwMWY0ODUyZjU3MTZhZjk3ZjBmNzliY2Q5ZjhkOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjNTBmNTdkODYyZmI5MDFmYzY4MmM1ZTQxODg2MzQ1NTFhMDE4YmYxMWQ0NTgyNWYyYWQ0OTNiMmNhZDBiMzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7c3424b283c946669b83848554e26f24",
+      "statement": "AI model providers are configured with createAdvancedFetch(conf.advanced), whose default transport is backgroundFetch, so model requests are executed in the background worker via fetchStream rather than in the page.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/providers.ts#L7-L21",
+          "version": "repo-lines-v1:sha256:da10b99b95c45e98b98a78ec28340d5c88e0b6a5f4929c01ffa2332df333d282:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUxYzNkMTI3OTI2MGM5YTljZmYzN2MwMWJiMzBhNWFjMjNkNTk5YzA1ZWE3N2ZlYTcxYjk5ZDI0NmM4ZjJmMGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/utils/modelRequest.ts#L1-L32",
+          "version": "repo-lines-v1:sha256:d3ebd44cdd4a816af8e95728b6a635b66e62a294b5d2d66b9b335e85a9527551:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0NzY0MDc2MDI2YjYyNDgwNzM2NDUzZmQ0Y2I1ODQyNmI2ZjlmNDYwMDNmODExZTQyOTYzYzkzYWNhNzkyZWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_892f87ef53b8494ba7ea7d21608ba7f1",
+      "statement": "Images live in a separate IndexedDB database 'ExtensionGlobalDB' (version 1, object store 'images'): setImage rebuilds a File from the byte array and stores it under key `img-<md5 of file content>`, so identical uploads dedupe; getImage returns {success:true, name, type, buffer:number[]} or {success:false} when the key is missing, and callers translate that into 'image not uploaded or expired'.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L226-L233",
+          "version": "repo-lines-v1:sha256:a2d36ee45667b41b1100122f9103fcc877bb040853bbe38ef1e45e3f3b912620:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODI2MzVhYjg1NWZiMDU4MjAzYjE3YjcwZjMwNjgxMjg1Njc1MWE0NmZiNWM3NDAyZjFjOTYxNzU5NTI4NDM2YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTgxMjRlMmQ2NzYyY2VjZmJhN2NkMzM1MjkxYWU4MmI2ZTIwNjNkMDhjZjU0MDNhYzNkOWQwOTM3YzlmMjA1YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmVjNzc4ZTllZTMzNTU0ODc4Y2RmZjUzYzY0ZDU3ZDAzNjNlMTFlZjMzNGMzYjJmZjI0ZGE4NzI2MmIwNWJlZSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/ConfigItem/CustomGreeting.vue#L60-L98",
+          "version": "repo-lines-v1:sha256:a7976a2e60f53c0121a5634580590272ae36954787813667249cc94f45f9676d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkMGY3MGRlMGVmMjc5MTkyZTgwNjk2NDc5MTZmZGFhMDZmYzgzNmM4ZTQ2ZTNkMzdlODllZWM2OGNiOWFiNWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUzMjhkN2E3MDA0MTU2ZGE2ZmVmOGE1NmM2NDM4MWU4MmQxNTViZTZiYWU2MDNhYjk5MzI0MzNlYjZhYmE0MjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjMDZiMzgwZDViZDJiZjkyMDE2ZmY3ZGEzNWU4YTc4MmVkOTk1NzljNGMyZjk4ZGU3Njc4ODFiZmIwMTJjZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmNGY1YWM1MzI4MWFjYjk5NzU0MDVmNGRjZmRlNTFiZTA3N2NmNTQ4OWJjOWNmYzRkZWI0YmU4MTgzNDUxNTMifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L122-L158",
+          "version": "repo-lines-v1:sha256:0326c9c97bdb38aaa3927c6e8f9e36a41e9c06807ff7303c05fe22e2bbfcd6e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4MzQ3ZGI2ZWE5MTg0ZjZhMzdkMTRkYTliNGI2Y2U2NTIzMjZiMzRjYzJjN2U5MzJmYzM1ZTM2ZmE0MDczOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMjNjNWUzYTAxOWIzMmUxZmYyYmZjZjQ4MjI2NmNiY2IzMjhhYTVkNDMzNGExZmQ0YTE0MTQ4NzQ2Yzk4NmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVhYzE3NTA0ZDZiMDFkNTA3NDgxOWNhZjA4YjVjYmMyNjZlY2Y4NGM5MjI0M2E4NzM2NjE1YWU4MWJkNTRhZWQifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L13-L27",
+          "version": "repo-lines-v1:sha256:f9ee94f67ff3ccd42d83bb6a1c0c37ba5370bbd2e35d76a24df562114842faa7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3ZWZlMjQ2NDEyMTM1OWVjZjA5MWQzZjVjN2ZlM2Q3Y2NiZDRmYzQ0ODFjZmMxOTgyNDlkNzc4YmIwNzczNWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBhNjZmN2VjOGEwNzliMjE4Njg3YjY1ZTg1ZTRjNzI0MDI4MmFmNmY0NDhjMDIxYjA3MTJkZmI4YzNmNWJhY2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjYTFhZDVmNzU2MDdlOGMwNGFjMDk5ZmNkZjY2NWFhZmVhOWQ1MTczNTQwYjFjYWU1ZDJjNWUzMmY2OTM5MTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_40e1c12a35d9440298988c99a1e40117",
+      "statement": "Configuration only persists image keys (string) in storage — the bytes stay in IDB — so clearing extension site data or an IDB quota failure breaks stored image references even though the storage configuration still points at them; the manifest requests only `storage` and `notifications`, without unlimitedStorage.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/GreetingImages.vue#L16-L60",
+          "version": "repo-lines-v1:sha256:0948cabfa114747cecf02c9241a8eaac1a3f4b781976fd226516e00ad1e0fd72:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyYTk1YzNlNTUxMjBlNjY5ODgyYTY1Njg2NDE4MWM1Mzk2ZGU4ZTI0MjdlYTQ0N2UzYWVhM2Y5MzFmZDBmYWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3ZDM2OGNkZDRiZDdhYzE3ZTRkZGYzZWE0YmRmOGU3MDkwOTViZjA2ZWQxNTQ0NWEyNDI5NjA1MjBiMGEyYTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQyNjY3OWI0NDAwZmQzOTAxNDU2YzIzOTc0YTgxOWI3YTU2MmYzMGVmNzhlMmQyZTNkYzBmYWU5NThlNjIxMDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQyMWJhNWE5MzY3NmYwZTM0N2JhNWQwZThlNGRiZDQ1NjZhZDI4MmJkNGU1ZjliYjI5MmVkMmMwMDBjOTcxZjMifQ"
+        },
+        {
+          "resource": "repo://src/types/formData.ts#L121-L132",
+          "version": "repo-lines-v1:sha256:cdcf0109108380d2d795585e1b753c12f2266b9ce4ffc221b5838623525cb4be:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNDZjNmM5Yzc1ZTlmMmI0ZjgyODE0MzkzMDg5MTgxODI4MDNhNDRmODczYzM5OTNlMzQ3NTkyNDcyZDg5MWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjYTQzYTVjOGExMTM5OTFkOWJhYjQ1MjE3OGIxNzc4YTBiZGZjMjBmZTYzMTdkOTNmOGVkNmI1ZDZjYjA4OTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4OTliNmFlZGVkODkyZTQ1N2U0MmVlMTAxMzA3M2Y2ZWQwNzMyYzc3ODY5ZDA1ZTJjYjllNjgxM2JhNjRkNzAifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L150-L160",
+          "version": "repo-lines-v1:sha256:f1d65dc78126420e3ef1a4faf4ce6a0b00f70f8d4928867ca2cec7d273103953:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhMTNlYzczZDc3YWYzMDFiYTBiODAzZDhlMWU3ZTBlMTYwZjkwYjU3NjFmNTdlNmRiYjM1OGJiOTRlNWUwNzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTZmY2RkNGQ3Mjc0ODdlOGI4ZDdhNDM3N2YwNjJjZDFiY2U1OTQ0NGQ2ZDczYWE4OGNhNTg0OGY5NGI0ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwZmEzNzgzMzZjMmFhOTliOGVlODgxOWQwMGI4YWY1YTMyNzcyZjE1NTY0YzFmZjExMjIzZGI5N2M3NWE2MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliYzlkNTU5NmJhZDUwNjlhNDExYjRiYmE0NjYxNzAyZmVkODkzMTAxZjY0NjYwYzE1YmMxOTM4ZDAwM2E1N2QifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4b30074a21d44fc2a098d56b7f1097cb",
+      "statement": "ExtStorage adapts counter storage to VueUse's StorageLikeAsync: getItem polls _counter every 200ms until initialized (so reads made before initialization hang rather than fail), while setItem/removeItem call counter.storageSet/storageRm; useStorageAsync with ExtStorage backs appearance-conf and job-table-layout-v1.",
+      "evidence": [
+        {
+          "resource": "repo://src/components/JobTable.vue#L37-L45",
+          "version": "repo-lines-v1:sha256:e9e00ef18da3155cc291b7b29d6b1c3a262aa0f2adc47f0b6733aed72e1818e4:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTg2OTAzMzM1MmI3NGY1ZjFlMjllYTViMTBlZjZkYTUxMzE1NTE1ZmQ0YzE3NWMwMDRhYjUwYjRmM2Y1NDFiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWYwMmFhY2YyODNhMDlkOTJhNTFlNmMyNDZiOTIxMDg1M2YzNTllNmUwMTAxYmVmZDg0OTk0YTA3ZmFiNDUxNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWM5NDAxYWQ3ZjllZTI3ZmQ5N2E0MDU0ZDc4NGFlMmVhNjgxZDQwYmVjZGU5OWExNWE3MzlmMGNkZGRmMzdmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTY1NTliYzJjY2M3OWQxNWNlMzQ1YTMyYTM2Yjg5NTRlMTFlOWNlNmJjZTc0OWUyZjNhNmI3Nzg4NDZkMjJlYyJ9"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L15-L34",
+          "version": "repo-lines-v1:sha256:5a110163fb4dbee14373f3fe07f045a236639f7ac2faed928392e9e54f1faf54:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3YmYxN2EyYjUyYWZjM2U5NzBiNWY1ZTRjODJjYTA1ZDE1YjY2OTA1YzI2ZjExOTExZjE1NGUyYjUzYjI2NzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3OThlZTMxOTA5NzRiNmM3ZDI0MmIxMDAwMjBmZWRiYWI2ODg4OWFjNmZmMjc2MWNkNjhhNjgxZTlhMDMwYmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2MWI4ZWQ2NTcyNmU4NjNkODdhODNjNDFjYWMzMTk4YmRmMjQxYjI5Y2UzOTQ1NjBjOWIyYWE1Mjg4MWQ1NTQifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L59-L78",
+          "version": "repo-lines-v1:sha256:04bc23683153a303c6398127103ca734ac9f0f5ab4367228f3eeaf93a277b4f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMDI1ZWM2ZGIwODYyMWEzZGNlY2FkNmU5M2NmMDM3ZTdlMTE2NWQ4YmMxYjc2YThhNTIxOGMwNWY2YzVjNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzZjA0MWEzOTEwMTU3MzUxMTZmMzZhMDliYzg0Y2VmYmIyNDU5NzBmYTI2ZWQ0OGFkZWQ4NmQxMDdhZGE1NDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4b7dae1f7a6f42d9882bd0415f204290",
+      "statement": "HelperCache and JobResultCache accept counter as an injectable storage adapter (default parameter) and only depend on storageGet/storageSet, performing in-memory caching, write serialization and expiry themselves.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L1-L28",
+          "version": "repo-lines-v1:sha256:1f4a47bd4b0270e68d172e802afd29e210db856c8fedbb1e3414943cbbba6535:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmNGMxMjk0NDlkZWU2OWIyY2ZiZDFmOGZjYzRhZTQ5MzNhOGZmM2VmZDZiN2Q1MWZjYWVlMDI0NGRjYzMwNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5YjI3YTNhNWI5NmFmZDM1Zjk0M2QzNDVhOWRlOTQ1MDIzMGRhZmI3NDE5OWJjNjNmMTlmN2VlNzhjZDUzNzIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L1-L33",
+          "version": "repo-lines-v1:sha256:c62ceba3cd1ae81fe7ae6b2351e62dd7e21072699f926f901de5168c625194d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmNGMxMjk0NDlkZWU2OWIyY2ZiZDFmOGZjYzRhZTQ5MzNhOGZmM2VmZDZiN2Q1MWZjYWVlMDI0NGRjYzMwNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhZmRmOWQ3NzdmZDQ5YjA3Njc3NDg0YjBjOGI0YjlhZDcxMjIxM2E3MWY4MGZhMTZjNDBjYjJiODFiN2VkMDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5NmFlZWIyNWZlMDA5MTE1NTc5MWY1NmExZTQ0NDEyMGU5MGM3MDcyZGYwY2U4Yjc1NDZlMTdhZGY5ZTFhZmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ebd802ff507447c68e1df5a6e5e9cce9",
+      "statement": "Adding a new extension-API capability means implementing it on BackgroundCounter and mirroring a forwarding method on ContentCounter; payloads must stay JSON-serializable, the namespace strings '__boss-helper-background__'/'__boss-helper-content__' and event name '_boss-helper-message_' are coupled across background.ts, content.ts and message/index.ts, and content-side replies depend on tabs.query matching document.location.href.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/background.ts#L7-L13",
+          "version": "repo-lines-v1:sha256:1a949d74ad6ae7ec23f6f0a67dc0b218456710c108c6206a4d0e90cd66e82d0e:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTMzMjNmOTJmYzU1OGVmMDViNzZhZWFhNGMxZDYzMDk4NzY0OGViNjFkYzQ0ODczYjJjY2VhZGM4ODA5MDk4ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDBmODlhMTJmYjRkNGU1MmE2YmY0MjdkYzZmN2E3MzU1ZWJhZjY3MjVjNjQ5ZGM0N2Q0ZWQ1YTQ5YjE0MGQ5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/content.ts#L15-L30",
+          "version": "repo-lines-v1:sha256:45570e71c17dae2f36cd410ad9c1fcbfc50f1b7eee9fed1e31402b6a368e1b1f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5OGQ0NDNlODFmYjc3NDg0NmJmMWVkYTk0MTUwY2RlMGQ5ZjA5MzE2NTA2ODQ3YmVkYzczZWViZWU4YTZmNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyNWEyMDdiNzFlZWI3MmI5ODA2ODhjYmQxOGIwMjk1MjJlZTliMTY2ZWRhMTQ0ZjVmZWViYjc0YmU5YjA1OWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk4MjIwODIzNjI2N2FjMTNkOWE2ODc4MGQ3ODI0Yjk4MTU2M2QxZjcwZTY4NjkyNjliMDRiY2M5ZWQ4YzkwNjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwZTFhNTVkNmFkOTZlNjc5M2E0NTY0Njg3NzliZjE0OGI1YzI3ZjhmYTJhYTE1YjYxMzMzODRjYTA3M2JhMzkifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L160-L180",
+          "version": "repo-lines-v1:sha256:7573899091cd0e7576946b09fee3e90eede8ee3fd2495b85597966e3caf4bc3b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkYzZlMzg3OThjYTUyZTdlMDA4NWY5ODY5MTUxYjg1M2QwOGVlY2NjZTM5OWVhZTM3NzhlZDY4NmNjYjM5NjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4ZTg1ZWQ0MzY2OTJiNmY0ZWU5Y2MxYTUxYTk1MzE1NTYxODcxZjkxMGVhNjVkZmFmNTIwMDk2YmFmYTMyOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJiMTg2MWVjNWE1OGY4NDM1YjRiNzY3MWUwNTA5OTE3OWRmOWZlYTlmMDE3MTE0M2ViMTBmYmZhNmViZGYyNmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_298da8e417ea4124bde00a5c44434b0e",
+      "statement": "src/message/index.ts 用模块级 `_counter: ContentCounter | null` 加一个 Proxy 实现 `counter` 门面；`get`/`set` 陷阱在 `_counter` 为空时直接抛 `Counter has not been initialized. Call initCounter() before using counter.xxx`，`get` 对函数值返回 `value.bind(_counter)` 以保留实例字段。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/index.ts#L12-L57",
+          "version": "repo-lines-v1:sha256:97664bad62b3481aa408850eff3ecabcb93bcb6f9a54d82d9a0d67fcbc093595:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkMmQ3NDU2YjAyZjUwZmFlMWY0YzUyNjc3MzUzMTIxNmUzYjJhMTFkY2U5ODI3Y2QzODcyNWZlZmJlMGM1MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmYzg2YzI4NzQyODZiOWVhODg1NWRhODgwNzRjMDJkMWExYjA0ZmQzOWI1NDgzMDEzYjcyYjVkZjUxYzgzOWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmNDM3MTNkZGM3ZTA2YTc5MTgwN2M4YWExM2FmNTJjOGVjOGYzYmQ4ZmJmMjYzMmZkYjM0YmIwNzgwZDUyNDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_68b326cb87c541cabdb90f209b7a70b8",
+      "statement": "初始化有两条路径：MAIN world 的 `initCounter()` 用 defineProxy 以 `__boss-helper-content__` 命名空间和 `ProvideContentScriptAdapter(script)` 建立注入端（工厂 `() => ({})` 只是占位）；options 页的 `initExtensionCounter()` 先以 `__boss-helper-background__` 注入 background 代理（`InjectBackgroundAdapter('popup')`），再包进真实的 `ContentCounter`。实际调用点只有 `entrypoints/boss/index.ts` 顶部与 `entrypoints/options/main.ts` 的 `main()`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L497-L501",
+          "version": "repo-lines-v1:sha256:26d92431e96ad49dca4d2a12a387e495f596989fee4683f5b9a58ea1bb02baca:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjM4ZjM4ZjQ2ODFkYzJiOTg1OTM3YWFkYzdmYmEyNzRiZDVmY2QwN2FjNGQ2YzQ3NjMxNzcyMDYzNzljMzgwNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjg5MzMwM2QwNTA3MzJkNjA0MjAxNTlkOTRiNmNkM2VjMzQzODkzMGUxZjE5NDVkYTQyYjVlZTc5Yjk4MmZkMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGVjZjE5MGFlYjI3MDY4Y2E2NWJiZmJmMzQ0ZWFjZjRjNTdkNDdjMjg0MmFlMmVhYTU4NWEyYzk0ZWJkYTZkZSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/main.ts#L14-L18",
+          "version": "repo-lines-v1:sha256:c6646c96c653d5a022af4df2bee92d56da9b4ef54392c19b8ef65ef64795480d:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2U4MjAwZWJkMTcwOWI2YTY3NWJlY2IzYmU5ZjM5ZTUzYmJhYzAyY2M5MjcyMzQ2MmMwNTQ2OGViMGRhNmExNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWY2ZjI4OTRiY2UyYzZkZDJmZjVjZDI4MmE2ODAwNzA0ZTU5NTJmYjhhM2VlNjQ2YzU3Y2I2MDI0MzNjZDBmMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2U1MmI4MmI5N2Y5NDdiMWY3M2U1Yzc5YzcyMjM5NzNjODVmOGFjYTlhZTk1MjkxYWZmYjdjZmRmZmRkYzNkOSJ9"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L14-L27",
+          "version": "repo-lines-v1:sha256:80698943c42e0f14e2c3069515f6ed184f604313cc5b30d990b2d276de3314cd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MGExZjg2ZWVhZjU5YjUwMWVlYWIyMTI4NmYzY2JmOWE5MzNjM2I5ZTA5NDAwNmJkMzk3NmFjZWYxNTY4MTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4NjE2NTBlNDc4MGZkMjIwYTk3ZDY5ZTJkYWMxODdjMGNjOTM4NzRhYzI4NGYxOWJiMGMwMWM0OTdjNTRhZGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImExMzcxMWVkMTQzNTcyZWI0Y2FhZmNmNmY1ZTAyMzE3YWI1MzJmNTQ4ZTRlMmNmMzUxNjg1ZmRjZmIzYmM5MmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlZWNlNTA0MWM3MzFiZmU5YTRjNjRlMzkzYmQ4NmY5ODY3YzdlY2UxNjJjZTQ0ZTA2YTc3MzY5N2YzYzY3OGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c755dfb377ff4138b088c511694d6a59",
+      "statement": "background 入口以 `__boss-helper-background__` 命名空间 provide 一个 `BackgroundCounter` 实例并挂上 `ProvideBackgroundAdapter`；ISOLATED content script 在 zhipin 域名、`document_start` 下同时 inject 该命名空间并用 `ContentCounter(injectBackgroundCounter(new InjectBackgroundAdapter()))` provide `__boss-helper-content__`（`heartbeatTimeout: 3000`），再通过 `injectScript('/boss.js', { keepInDom: true, modifyScript })` 把 MAIN world 的适配器绑定到注入的 script 元素上。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/background.ts#L7-L12",
+          "version": "repo-lines-v1:sha256:3db061250b8422eaf69b83144c3c08114d64263351f3297edef73f969a7488e1:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTMzMjNmOTJmYzU1OGVmMDViNzZhZWFhNGMxZDYzMDk4NzY0OGViNjFkYzQ0ODczYjJjY2VhZGM4ODA5MDk4ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTNiZmU5ZWExYmE5OWMyMzIzYTNkYjRmYTM5YjhiMjc1NTU3MGIzZjljY2MxMGU2NWIwYzg4N2JiMTE0OTc1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDBmODlhMTJmYjRkNGU1MmE2YmY0MjdkYzZmN2E3MzU1ZWJhZjY3MjVjNjQ5ZGM0N2Q0ZWQ1YTQ5YjE0MGQ5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDY2NDhlNjEwMTI0ZjliMzZkMDcyM2Y0ODc1NjBkMzcwZjhmNzgwNTczNTUwYjY2ZTZmZTUxMTBhYjlhZTk1MiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/content.ts#L10-L33",
+          "version": "repo-lines-v1:sha256:6e5a9c9bebeb7f9bb3af502528793afa4b996c3393b029c29ee67d826aca7f99:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjYzY5MDdhYjk4ZjM0YjMwZDNhNzY0YTg5Y2YxMzAzZDBiNGY0OWZlNjUyN2MzNTE1YTk3MWI5MmZjMGM0ZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2NjQ4ZTYxMDEyNGY5YjM2ZDA3MjNmNDg3NTYwZDM3MGY4Zjc4MDU3MzU1MGI2NmU2ZmU1MTEwYWI5YWU5NTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4a9a9d6a6d964976a90f408cdb0de8a9",
+      "statement": "存储语义在 `ContentCounter` 本地实现（使用 WXT 的 `storage`），不经过 background；`genKey()` 识别 `local:`/`session:`/`sync:`/`managed:` 前缀，无前缀的 key 默认落到 `sync:`，而 `storageRm` 同样过 `genKey`，删错区只会静默地什么也不删。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScript.ts#L77-L93",
+          "version": "repo-lines-v1:sha256:82f46fe0ef6728a4704bd1af589a133379559387494d9c347f64146b1097f8ef:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljMGU2NTNiYmE0ZjI4YjVmMzY2YzJiYjNjYmE4NjA3MDFmMzJhMTA0Zjg5ZjAxMTc2YzgyOGJmOGEwZjMzMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4NjA4ZTc2ZjRjMjNmYjJkOWVhM2ZjMDdlOWEzNWEzMDM2NDlkMmI2ODViMTVhZjQ2OTllYTQxYzk2ZGU1ZjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjZTczYzRjMGQ3NWMzOTc1YzI5ZWZhZGVhMDM0MDU0YjJiNzUxZDA5MGRmOGFiMzAzYjI5ZjhjY2M5NDQxMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzNWZlZTk1M2YzN2ZmM2M1NTkwNGQ0ZThmMmRhYWMyMjJkMDZkZDE3NjlmZTZiZTU0OWRlOGQxNGY0MTFiYzIifQ"
+        },
+        {
+          "resource": "repo://src/message/contentScript.ts#L8-L12",
+          "version": "repo-lines-v1:sha256:eace4010fb3cb41cb31ed8f2f2afb40a146ee50e27091dcf3acdf14aa07013dd:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDBjMDMzOTYyYjgzOWJiOGY1YzBlN2Q3MjUyMjRhYzA3ODRhMjZhMTAxNDllMzgxNzY5ZDEyOTI1MGFkMjllYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTAzNjU2NjZiYzVlODUzMGE2YzAyYWY3Njc5NTkzNTNmOGI2YTkyZWY5NzQzOTdkN2U2YWVjZjQ5MWMxNzMxNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmM1OTc3Y2MzYTBhMDU1ZjdkZjk2MjgzODI2MDQyZTE5YWM1NzYzZTg1MWZlMzgwODljOGU5ODg3NWI5MjhlZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODdhNGU5Y2M1ZGVmOTNiZjYwY2E3YTBiZTY1YzcyYmY2YWJlNzA3ZjNlNGQyOTJiYzhiYTkyNmI4NzlhMjYxOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_482409ad493649b98901f402f40eccc2",
+      "statement": "`storageGet<T>(key, defaultValue?)` 转成 `storage.getItem(genKey(key), { fallback: defaultValue })`（带默认值返回 T，不带返回 T | null），`storageSet`/`storageRm` 成功后返回 true。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScript.ts#L82-L93",
+          "version": "repo-lines-v1:sha256:704a7da5148e3990e6ad8ace728b8626a62cce3c5f131b20e01a1b403f88e7ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmYmFkYWE3YzE2YTgzOTMwZmExY2QyNjNiMTM3MzY5MzQ2YmYyYmViZGIyOWZkZjBjMWI5ZjM5OWZjZGQ1NmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4NjA4ZTc2ZjRjMjNmYjJkOWVhM2ZjMDdlOWEzNWEzMDM2NDlkMmI2ODViMTVhZjQ2OTllYTQxYzk2ZGU1ZjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmOGMxMTk5ZGI1MTRmMTU4N2I4ZjhiYmE5YmQxMjA4NjVhNTA4NmYwZWEyMTJmMTc4MWNkMTU5OGMyNTJmYmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzNWZlZTk1M2YzN2ZmM2M1NTkwNGQ0ZThmMmRhYWMyMjJkMDZkZDE3NjlmZTZiZTU0OWRlOGQxNGY0MTFiYzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_185ed2e46dff4739af97f47b35167922",
+      "statement": "`ExtStorage` 是 `StorageLikeAsync` 适配：`getItem` 用 200ms `setInterval` 轮询直到 `_counter` 就绪才调用 `counter.storageGet`，`setItem`/`removeItem` 转给 `storageSet`/`storageRm`；它服务于 `useStorageAsync(..., ExtStorage, { mergeDefaults: true })` 的 `appearanceConf` 与 `JobTable.vue` 布局偏好，初始化永远不完成时 `getItem` 会永久 pending。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/JobTable.vue#L38-L46",
+          "version": "repo-lines-v1:sha256:02873b165c073f68a317e0979028bfd402a2796e31bcc7061b7a2e7566039e16:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ZjNzc1MDVkNjIwODQ4ODU1MjE1OGQ2ZGIzZmQ4OTEzZTM4NDlhYzRhZGY3MjIzYTBiYjg1Mjg0Zjk3ZTE1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzdiZjE3YTJiNTJhZmMzZTk3MGI1ZjVlNGM4MmNhMDVkMTViNjY5MDVjMjZmMTE5MTFmMTU0ZTJiNTNiMjY3MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTg0ZDAzMmQ3OWUzYjk2ODhmNTlhNTNmOTEwMjJlODQ4MTIwZmJlZDkyOTMwMzhiYmZkYzI0NTlhOWRkMTQxZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjcwZWE5MjI0ZGI4NTRkMDEwZmQyOTViMzlmOWYwYWEyNDliMzI2OTAxNmUxNjc4MzkzZDgyOTk0ODk0Zjc2ZiJ9"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L16-L31",
+          "version": "repo-lines-v1:sha256:4b42991771bdebd9a2d1088f0e90a8b6a3a2986701b481c2b2e2790e0e68fd89:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwOWQ0ZmQ5MzEwNWJlZGU2NDRkZGZmYjZkZjE5ZjQ2Y2QwMmM1NGY2YWZhZjA2MDYyMWYyZjRiNjEwMzg4NDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4OTkzYzg0MDFlYTZjM2EzNGNjYjEzNWJlYTI1MjQ2YTE0NjI1ZmI4ZTRjODVjZDhlMTM0ZGI5NzM1OTVkMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4MDcwNDk2M2NiYzk1Y2M0Mjg0ZWI0ZjRjODcyZDQ1MWRjNjgzNzllNGRhYzdkNTMwMTY5ODM5NDllMjI3YmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVjZTU4YjJiYmU4NTU5OWZlZWUwYWQyZWFmODJjMWM5Y2NiYTk0MjAyZGNlNWMzN2ZjNDI3NGUyZmI3YTI5ODcifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L59-L77",
+          "version": "repo-lines-v1:sha256:c9764e33137651cd031f52005ff0562b4f68cb13d37f418e4386ad8b5173b5be:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMDI1ZWM2ZGIwODYyMWEzZGNlY2FkNmU5M2NmMDM3ZTdlMTE2NWQ4YmMxYjc2YThhNTIxOGMwNWY2YzVjNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzZjA0MWEzOTEwMTU3MzUxMTZmMzZhMDliYzg0Y2VmYmIyNDU5NzBmYTI2ZWQ0OGFkZWQ4NmQxMDdhZGE1NDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_193481ea842a44c6bce6b6a636037ac1",
+      "statement": "`BackgroundCounter` 承载只能在 background 执行的能力：`fetch` 直通、`fetchStream`/`fetchStreamAbort`、`getImage`/`setImage`、`notify`、`openOptionsPage`、`request`，以及以字段形式直接挂载的 `feishuFetch`/`createTableBoss`/`feishuUpsert`；`ContentCounter implements BackgroundCounter` 并逐方法用 `Parameters<...>` 转发到 `this.background`，因此两端方法表必须一致。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L26-L33",
+          "version": "repo-lines-v1:sha256:ce3080061ac8ad386e828d1854f98ffdb09001683fabeb6bb39facee9019fd82:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQ3MjQ5MTk4MmEyNGJjNGNkMjdjZWUzNGE3ZDczMTE1MGI4NTM2MjA5Y2IzYmIzYTg1ZWYyNWY2YzI2OGQ0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjIwNThjM2NhNGZhNzVmNWZmN2UyZmMyMGQ0MTExNDY4NjI0ZWJjMWU5MjA4Mzk5NTAyOTliMWRlMDdiMzhkYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGNmOTVmMmEyZmY0NTQ0MmUxMzVkMDRmNjZmYjI1NGJhNzAxMGVlMzJiZThiM2FjYTAwMjczZTE3N2QwOWYyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWFjMTU0NDRlOWI4OGZlMjA5NmZhNzkwMGFhMmYwYTRkYjcwNTdhMzczMTgwYjRmZWFhN2RmYTIwZDAzZTA2NiJ9"
+        },
+        {
+          "resource": "repo://src/message/contentScript.ts#L14-L76",
+          "version": "repo-lines-v1:sha256:ddd4dbae23561a8fe025ed23834516a41a8c2f603b8e2e05b525452efcde6cb5:eyJzZWxlY3RlZExpbmVDb3VudCI6NjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM1YWJkMGRkOThkY2EwOTVmZThjMmYyZTJjMTA4YThkNDJjMjcxNjk0OTY0MWFkMDhiYzgzMmIzZWRiN2Y2YjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1ZDY2ZWE3Mjc4NTBiNmQzNThlYmE4YmU4NjQ1NDVjNTdiYjUzYmYxMTc4N2UyNjg3ZjYzZGYzMGViOGY5OTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyNzM3ZTIzNTBjOTFlY2RhYWQ4NzVkYTZhNjFkMzAyZGNjYjE0OWI4ZDJhN2Y3MjYyNmJhMGMyYjY1NzgwZjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7d6832f67d2043918cd734de31e7dd5d",
+      "statement": "`backgroundTest` 与 `contentScriptTest` 是各端各留一个的诊断探针：传 `'error'` 时抛带时间戳的错误，否则返回 `Date.now()`，用于验证消息往返以及异常能否跨世界传回；`BackgroundCounter` 上没有 `contentScriptTest`，`ContentCounter` 上没有 `backgroundTest`。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L63-L68",
+          "version": "repo-lines-v1:sha256:0fbd121bc922ab8755bb2d2c3cd5f4f551feea84c49ba131a3c6cea7f97e7dcd:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmMxOWI0MGY3MGM0MzYyYTQyYmYwMjAwN2M0YjE2MjdiMTc5MTAyMTY2YzA3MDZlMDIzYTU4MjM2NDk2ZmFiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNkNGRlMTQwNjg4Nzc5MmIwNmVhYjZkZTk3M2FlMzcwYmZlOGQwNmJlNGRlN2IyNzA2YTYyYzVjOTkzNDI1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTc0ZmYwN2M3YzQwZmE1ZGY3ZjhmZjYxMzNiOTA1NTAzNjkzZDYwMTdiOTYwMjE1MTM5OGNmZWU3ZTAxMDQwOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzJmOTEzODFlYmZhMzFlZDBiN2I4NTVlNjU1NmRjN2Y0ZTdkZGYzOTExMTU5NGMyOTk1NWQ3Zjg4MjEyYTg4MSJ9"
+        },
+        {
+          "resource": "repo://src/message/contentScript.ts#L95-L101",
+          "version": "repo-lines-v1:sha256:c420c2c32bea9fa36226d24aa8984971722e80ee4c7134fafa3a493b078a9494:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWQ0NjBjYzk3YmY2YjA0NTZiOTQ1M2MyZjA3ZjI4MTQ2MDg4ZmZlNjM4NzIyYjdlMWFiM2E3YjFlZmZlMmI0ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjQyNzhhMjdlNTU2Yjg2ZWZiYzk3NmExNDY2M2VjM2IwODljNjM1YjNmZmI4MDBmZDdlZDk3ZjQwM2Q2MWE4NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGY3MzlhMDZjMWNiYjEyNDRlMzM2M2QzOGJjZjlmYTUwY2U4NGZlZDM5OWMyMTkzYTNjN2YwOGQ1OTkxOGIyYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9b7a92ad1f5d4fb284e78be73ddf6c0f",
+      "statement": "`ContentCounter` 的 `routerHooks` 与 `_addRouterHook`/`callRouterHooks` 不在 `BackgroundCounter` 接口契约里，属于本地状态、不参与 RPC，当前仓库没有调用方。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScript.ts#L14-L36",
+          "version": "repo-lines-v1:sha256:b34f42595391f61bae751be522c704292039d9ba7cbe25e220dcdc351326182d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM1YWJkMGRkOThkY2EwOTVmZThjMmYyZTJjMTA4YThkNDJjMjcxNjk0OTY0MWFkMDhiYzgzMmIzZWRiN2Y2YjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1ZDY2ZWE3Mjc4NTBiNmQzNThlYmE4YmU4NjQ1NDVjNTdiYjUzYmYxMTc4N2UyNjg3ZjYzZGYzMGViOGY5OTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk0OGNmNjEyYWQzYmNkNDQ5N2E1ODJlM2YwY2RiYzQxYzhmYzEyMWQxMjQ3YmIwOGJiNDUzNThlMWI3MGZkNTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_169cda9f1ad24839a2222ed103037eba",
+      "statement": "`BackgroundCounter.request` 在 background 内用 `AbortSignal.timeout(timeout * 1000)` + `mode: 'cors'` + `credentials: 'include'` 发起请求，非 2xx 抛 `状态码: <status>: <body>`；`src/utils/request.ts` 在 `isBackground` 为 true 时走 `counter.request`，否则在页面内直接 `fetch`。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L37-L61",
+          "version": "repo-lines-v1:sha256:5041a376d6ca877c2910d0e5e67990280ac0e788c00f62da15a8f50d14c362f8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkMTgzNmVmNjE1YzJhODcyZTBjOTc0NDgxOWJkNGI3MDE4YTEwNjFhODIzNjU4ZDBlMWE4MDdjNWEzZTM5YmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmMzA3YzRkZmQwNGM3NmY1MDFjNDE3MGY3ZTg2ZjJlMTkwZjU1Yjc0YWJjMTE1YmI0NjcxYzRkZmY3MDNiYjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlhYzE1NDQ0ZTliODhmZTIwOTZmYTc5MDBhYTJmMGE0ZGI3MDU3YTM3MzE4MGI0ZmVhYTdkZmEyMGQwM2UwNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY4NjhhNjI0ZmMxZjQzNGViYThlNGY4YzNjZGJhZTU0MDNhMzc2YjExNjU0NTJkZjNiMjZhMzg4NDgzNmI1ZjcifQ"
+        },
+        {
+          "resource": "repo://src/utils/request.ts#L122-L135",
+          "version": "repo-lines-v1:sha256:1045e4390908a70bacbe425d6df6c2eb65bb758ccf2894bc8de75fb6bbfd08d9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5YmVhNGQxMzNmMjdhMGMwOTY5NjYyNzgxMjA5ZDAyZmZmZmRiOWNkYTAwZjFlNjM1ZDI1OWYzYjNiNGVjNzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMTE5NzAwYjc4Y2E1M2U3NDg2YjU5MzA1YWEzYTY5Y2ZkMGY3ZTIwZDAzOWQ5NWE1MzI1NTg4YWRhNDNmOTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyZGVlYzdjNWMyMWVmZDBkODhmYTVkN2M3ZDQ0YTgwZjM1YmFkNThkODE5ZjY2NTZiM2YxYTkxOGZkMzliNzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4NjkyZDYxMDcwZjliZjM2ZDBhZjk5OTZmOGNjNzZmNDQ5ZDcxMThhYTg2ZmIyNmNkMDBiY2QyYjQ1ODRhOGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_55667279e2104567a16a72bba19d5ff4",
+      "statement": "MAIN ↔ ISOLATED 的实际通道是 `ProvideContentScriptAdapter`：在 `<script>` 元素上派发 `CustomEvent('_boss-helper-message_', { detail: JSON.stringify(message) })` 并用 `JSON.parse` 还原，detail 为字符串，因此 `File`/`ArrayBuffer`/`Response` 等不可 JSON 表达的值必须转成 `number[]` 之类的结构过桥。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L53-L71",
+          "version": "repo-lines-v1:sha256:84785e3e4133ef76648eed221d205d08675526dacb414d649ee148af70209e08:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3MmE3YmFiZjk3NzNmMTVjNjQ3NTM2ZDMyNDc2ZDg0ODkwOGUyZjgxNzE0YzhjMTM3ODE5OWE3MzVjMGVlZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4ODUxNzI1MDQ1NjJmZTQ5ZmEzZTBmZTVkMjgyMjFmZjAyNWNmODYyYjBlMDMwNGY5NjMyMTU1ODYwYmJlMTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L8-L8",
+          "version": "repo-lines-v1:sha256:cf5fd30cad160f270739b412d10698719cbd371d95e6280e6c38261504413ad0:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Y1ZmQzMGNhZDE2MGYyNzA3MzliNDEyZDEwNjk4NzE5Y2JkMzcxZDk1ZTYyODBlNmMzODI2MTUwNDQxM2FkMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Y1ZmQzMGNhZDE2MGYyNzA3MzliNDEyZDEwNjk4NzE5Y2JkMzcxZDk1ZTYyODBlNmMzODI2MTUwNDQxM2FkMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODUzMDM4N2M1MjRlM2UyMmI5OTUyYzVmOTg4ZjE2N2Y2NjM3ZjZjNzc2ZTAwNmUyMTNjNDU0M2FkZGNmNzA3OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGZjODZjMjg3NDI4NmI5ZWE4ODU1ZGE4ODA3NGMwMmQxYTFiMDRmZDM5YjU0ODMwMTNiNzJiNWRmNTFjODM5YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_03be60d1a93544d18f3520307a82b5e8",
+      "statement": "`ProvideContentAdapter` 是同一事件的 document 版本，detail 直接传对象并带 Firefox 兼容分支（检测到全局 `cloneInto` 时用 `cloneInto(message, document.defaultView)`）；它是当前链路的前身（同类实现的 script 元素 + cloneInto 版本已注释保留），当前未被接入。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L1-L26",
+          "version": "repo-lines-v1:sha256:1d91f986ef467b159f5fd789146288324e87efb2a5589e83180935614e387d2c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTM5M2EyOTI3Nzk4MDZhYTIwNDA2ZWJmMGJlNWEzZTc2YTBmNzMzODM2YjY3ZjY2NjQ1NGIyYzRhMzJkZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlNjg4ODA2YWJiZjE0NzA0MzAzOGRmZjE1ZmYwY2NlNmUwN2M4OTA1MDQzYTk2OGVkNDkwNTgxMWY4ZjBhMzIifQ"
+        },
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L28-L51",
+          "version": "repo-lines-v1:sha256:1edf324cafa89a2d42c84538774489f15d14daffeb720845707b9eed6f0cac70:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlYTk0MTgzYzM0MDZlMmU0NzRlOWVlZmRjYjI2NWI0ZjYyMTc0ZmYwZDE2OTFmYmVkNTEzZjI4OWQ4NjI2YTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiOGQwYTJmOGFlMmY2OTgzNzMwY2I5ZmFhNjZjODYzMTMxNGQ0M2NmM2FiMGFjM2M4MjA4OGNmNDQ3ZDdmODgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFmMWIzNzMzYWNmMDU2ZTQxM2VlYTNhOTQ3MWQ0N2ZmMWFmNDAwYzBiZDAxMTVmZjc2NThkZTM1NTU0MmNiMmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_945feff2781c4dc8b5ad6b83ca92ec28",
+      "statement": "`InjectBackgroundAdapter(name: 'content' | 'popup' = 'content')` 用 `browser.runtime.sendMessage(browser.runtime.id, ...)` 发消息并补上 `meta: { url: document.location.href, injector: this.name }` 且不等待回执；`ProvideBackgroundAdapter` 在收到消息时用 `message.sender?.name` 覆盖 `meta.injector` 作为路由依据，回复时对 `content` 走 `browser.tabs.query({ url: meta.url })` + `tabs.sendMessage`，对 `popup` 走 `runtime.sendMessage` 并吞掉 `Receiving end does not exist` 之外照常抛错。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L157-L215",
+          "version": "repo-lines-v1:sha256:2f41c871d1db3510fee605fc6e6405ccbef101bf1885e3d903aa87465cc4c622:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljYzAzZjY0ZDUyNWNjM2UzNTEyN2U2ZThiMTQ5NjJlMzYzYTUxZWJlMzBhMTA4NzllMTlkODMxYmU4YWRmYzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_08da3fc12388408fbf29f95528e0e870",
+      "statement": "因为 `ContentCounter` 内注入 background 使用默认 `injector: 'content'`，回包依赖 `tabs.query({ url })` 精确匹配；URL 不存在对应标签页或页面 URL 变化导致未命中时回包投递到空集合，调用方永不 settle，这是 background 侧 `fetchStream` 加 120 秒 `AbortSignal.timeout` 兜底的动因，也是 options 页显式传 `'popup'` 的原因。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/content.ts#L21-L26",
+          "version": "repo-lines-v1:sha256:832dc30be229d0c9a5ae52a044baae6770fb145e16182fd5a0db1af8ba6543ab:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTBkMGM2NjA2MDkyZDBmOGE1Y2VmMTQ2ZjM5MGYyNjFmODMyNWY0Y2U4M2RhMjRiZGEzNTgyN2U4YTJjN2VmZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzBjMWYxODhmMTQyZWQ3YTgyNDY4MGIyMDcxNzJjNTUxOWJjNjE0YTQ4ZmRhN2NmMTY3ZWRiOGRkZjc5OTU2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDBmZDk1NzE2NjY0ZGIxODU5Mzg5NmJjYjYyNmViYWUzYTQ5NzdmYzA3MWQ5ZGYxMGMzMTU4Y2I0ZTk3YjBkMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTc1OTY3M2FhMjE0MDlmOTcyNGEyMzU5MDMwNjlmNzM5ZDkwYmRmN2EwNTJlMTM5M2EzODAzNzUyYzJhNGNlMyJ9"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L167-L180",
+          "version": "repo-lines-v1:sha256:8ec07c3630faa5f5783218b40bdc719fe0125a1f8f2990a04bf8278cd3a9e71d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzNGYxNjY3YTgzZDZlMmM5NWQyMDI1ZWI1MjFhNTcxOTQ2MjE2NTZiN2VlMzY4ZjgxMjFmNjBmZmRmZWFmNTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJlOTA1MmZlN2ZiMjU1M2M1NmYxYTVjZTU0ZmFmZjI3NWZkOTc1OWI1ZDUwNTk4Mzk1MDQxMGM3ZjM0NjhlZmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJiMTg2MWVjNWE1OGY4NDM1YjRiNzY3MWUwNTA5OTE3OWRmOWZlYTlmMDE3MTE0M2ViMTBmYmZhNmViZGYyNmEifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L88-L114",
+          "version": "repo-lines-v1:sha256:272c62ba77b41364aed6633dfc42a82a590c7f75b1f8290442a349ac85a9ada1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5NTM3ZTNmMzlhNjgwMThjMmM0OWM1NDU0MzBlZWIwZGRkN2Y1MTBjY2U1Njk3ZGJiYjljZjFlZTlkZDRlMjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxMDhkYmEzNmYwMzMxZDhhOTViZjY3OGE4MjM3ZjNhM2I2ZDZhOGFkNGIzMDVkNTFjYWFiMGU3NGMxMmFlNGYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVkZDc4ZGFlNmViNGY1ZTc2ODVkNWFkMTczZjAyNzgwNDc0ZDg2NWQ1YWZlYjM2YTU4NTg2NmE1MmFkODVkMjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L23-L27",
+          "version": "repo-lines-v1:sha256:b6c8906c41ca52026c44d89ab2e0d0212a8642e9f2de3718cb84caf214674b7a:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmViMjlkZDc4ZWM2OTUxMGM3MDJjZjIxZTY3NWJiMDdiYTcyOWY3OTRiNjc1YjFjYjk4MmY1NWM4NGVlYWU1YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjg2MTY1MGU0NzgwZmQyMjBhOTdkNjllMmRhYzE4N2MwY2M5Mzg3NGFjMjg0ZjE5YmIwYzAxYzQ5N2M1NGFkYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzU0ZWQxZGJjZGUwYWFlYzY2NjY5OTdkZjAxMmIxYTliMmI5OWFkYjE2MGY4M2M5ZjUxM2ZlMjk4MzAzMTk4MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWVlY2U1MDQxYzczMWJmZTlhNGM2NGUzOTNiZDg2Zjk4NjdjN2VjZTE2MmNlNDRlMDZhNzczNjk3ZjNjNjc4ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ce7cf377ae7547dfba28d4556f0a9108",
+      "statement": "`fetchStream` 在 background 用 `AbortSignal.any([controller.signal, AbortSignal.timeout(120_000)])` 发起请求，把控制器存入以 `requestId` 为键的 `fetchControllers` Map 并在 `finally` 中删除；`fetchStreamAbort(requestId)` 通过该 Map 触发取消，请求结束后再 abort 是安全空操作。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L25-L25",
+          "version": "repo-lines-v1:sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTA5MWJkOWYzM2Y2MDA3ZWIxNjliYTI3Nzk5OTk2NTAwZDk2YmUwMGFhZWZiMDcwNjc0YjgxYmQ0OWMzOTg3YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmE1Y2Y0ZWJmOWQwZDlkYWM3YjhlZWJmZWMzNjBkMjgxOTFjZWY2ZWQ0MTM0NmZiM2E2YTY2NzA2MTRkMzczZiJ9"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L72-L119",
+          "version": "repo-lines-v1:sha256:2ab38d0195aa81ef171c168138619459d52000245a75036adfc303a8c340b69f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmNDkwM2YwNTEwMTNkYzc2ZDBlNTU5NGFjOWRiNDhhODViNzdlMWQxZjAxMjA2NjdjZTU5OWQwYjgzNTcwNTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMyZjkxMzgxZWJmYTMxZWQwYjdiODU1ZTY1NTZkYzdmNGU3ZGRmMzkxMTE1OTRjMjk5NTVkN2Y4ODIxMmE4ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiYmI3YjA3MzExYWI2ZGJjZDMwMTE1ZmY0YzI5NjNkNDM2ODNiYTlhYzYzYjQwZWZlZjk1OGQ1MDFhOTZjNzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fff4d4837c0546bfafce935a587ffea9",
+      "statement": "`fetchStream` 并非真流式：background 用 `await res.arrayBuffer()` 读完整个响应，返回 `{status, statusText, headers, body: number[]}`，调用方 `backgroundFetch` 再用 `new Response(new Uint8Array(body), ...)` 还原 Response，因此 SSE 类响应拿到的是完整结果而非增量。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L88-L110",
+          "version": "repo-lines-v1:sha256:9ce9c17889ff5ef4b2545500e9d28d72fe7f1a2b8ed593250f66c6a96511f01b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5NTM3ZTNmMzlhNjgwMThjMmM0OWM1NDU0MzBlZWIwZGRkN2Y1MTBjY2U1Njk3ZGJiYjljZjFlZTlkZDRlMjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4MWFjNmVhMWM0ZGJiYmJhMTZjZWMxODgyOTFhY2ExNDZmMzMzODBlZjc0YzYzN2UxNTY2MThmN2NmNzY4NmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVkZDc4ZGFlNmViNGY1ZTc2ODVkNWFkMTczZjAyNzgwNDc0ZDg2NWQ1YWZlYjM2YTU4NTg2NmE1MmFkODVkMjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1YmFhZTJlM2EwODc2OTYwYzEwYjA0NjA3MWNmYzc0ZThjMjMxZmY3ZmMxMTMxOGFhNzM2YzBiY2NiYjkwMmIifQ"
+        },
+        {
+          "resource": "repo://src/utils/backgroundFetch.ts#L1-L11",
+          "version": "repo-lines-v1:sha256:5ed12e3ebe1573494e5d17658ef959d7458f9a90ade5115a524ea23cd53189e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmNGMxMjk0NDlkZWU2OWIyY2ZiZDFmOGZjYzRhZTQ5MzNhOGZmM2VmZDZiN2Q1MWZjYWVlMDI0NGRjYzMwNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4MjMzODEyMDgxZjllZjc2MTFkMmMxNjRlY2YyZTM4ZTQ3ODlkZDhmYjkwZGM5YjhkYmJmNWQ1NmNkNjhkNWQifQ"
+        },
+        {
+          "resource": "repo://src/utils/backgroundFetch.ts#L57-L67",
+          "version": "repo-lines-v1:sha256:572537571467ee6a0daf85612ac428d650d06b0f53360ba686d47339cc49ee7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5ZGE5MDAwMDEyMGRjN2M1YTYzNjlmYmQzMTgzZmU5YmE5MzkzZGVjN2U4NGU5ZDcwZTg5NmEzMzdmNGU3YTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBlNTJlNDc2ZGExMDJiNDEzNjU2OWMyMDlkYzQyMGQwNDk4ZGQwODNkMDdmMzljNzYyMzM0ZmI4ZDZmNjBlMGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bce9c59df376473092a012c0e375ba63",
+      "statement": "`backgroundFetch` 用 `bgfetch-${Date.now()}-${seq++}` 生成唯一 `requestId`，在 `init.signal` 已 aborted 时直接 reject `AbortError`，否则监听 abort 触发 `counter.fetchStreamAbort(requestId)` 并在 finally 中解绑；过桥的 init 被裁剪为 `method`、归一化后的 `headers`、仅字符串的 `body`、默认 `include` 的 `credentials` 与默认 `cors` 的 `mode`，`FormData`/`Blob`/流式请求体不可用。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/backgroundFetch.ts#L17-L56",
+          "version": "repo-lines-v1:sha256:abefd8887bb37c99415f6d8dd77474579d2fd5922236531f7c38b436c3bd79c9:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3NTc5NzA2ZjU0NGI2YzdkYWQ3NjIwOTAyZDBhZjYxMGMwMWY0ODUyZjU3MTZhZjk3ZjBmNzliY2Q5ZjhkOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjNTBmNTdkODYyZmI5MDFmYzY4MmM1ZTQxODg2MzQ1NTFhMDE4YmYxMWQ0NTgyNWYyYWQ0OTNiMmNhZDBiMzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4MGQxNDM2MjRjYjNkMDdlNjk3YjgxMWUwYWYwNjE2MWFmM2NmOTQyZGZiM2QyNTBiYmZlNzEwMDIzYmE0MjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9a39716db71a4279b35bfd2905cad0a1",
+      "statement": "`backgroundFetch` 接收 `Request` 实例时只保留 `method/headers/credentials/mode` 并让 `init` 覆盖，不读取 `Request` 的 body；`createAdvancedFetch` 因此在需要合并 `advanced.body` 时显式 `await input.clone().text()` 再 deepmerge 序列化。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/backgroundFetch.ts#L21-L33",
+          "version": "repo-lines-v1:sha256:16a0c7fe65932157568b24017974b7235c879e7b4bef000487d1ed9a2a37d12d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhNjg5YmQzMjNiOWMyNmQ1ZjYyNmQyZmFmMDA3NDY3MDI4YWRjODAzZWZiZmY1YTJjOTE0ZWI4ZWJmMTIxMzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlZTcwZDcwMDg5Y2FiOGQ1MjRjNDcyZTA4MTY4ODgzNTIzZjg2YzZhMzQ5NDQ4ZWY4N2EyYzUyM2Q0ZTM3NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhlNTBmMzU1YTgwOGY3ODNiZTY3ZmMyODg2Y2UzOGY1OGY3NmQwYjU4MGIwNjg4NGZkNDBiZDBlODI2ODEyYTYifQ"
+        },
+        {
+          "resource": "repo://src/utils/modelRequest.ts#L6-L31",
+          "version": "repo-lines-v1:sha256:37f2a42ed6e6b3ce3ed86a88bdae0dc3989a49203e6d9a76f7e6db555c3ab12d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4YmRhZDdmNTM2N2ViMmM3YmFkZjdkNGQwYjA4NjJmOTFhZDQ0YTAwYTI0NmYzZjkwODZhYWIyODI2YzYwNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjNDUyYmFkMDZiMWE0NjBiZmNkY2MwZmRmYzhkMzljZjA1MTg5ZGM5ZDJiNGFiZGVlOTc5OTk3OGVmZmIzNTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_57119b1f76b84778bc86bbe3594d7206",
+      "statement": "`getImage`/`setImage` 在 background 操作 IndexedDB `ExtensionGlobalDB`（版本 1）的 `images` store（无 keyPath、外部 key）；`setImage` 用 buffer 重建 `File` 并以内容哈希 `img-${calculateFileMD5(file)}` 为 key 去重后 `db.put`，返回 `{ success: true, key }`。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L14-L24",
+          "version": "repo-lines-v1:sha256:5d1e41cac7cdd56981ae51b1cac63a2923267cbbba60699643d52833b55db627:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzZGM2MjdlNGZmMmVjNjk3NDAxMTI5MGFhZjNiNzUyZGVlMmU5MDNjNWU3MTU4N2EzMGUxMjdiM2JkYzA4MTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYwNmQ0NGYwYjgwZjBjNjc1OGMyMmEzZWYyMjJjZTViNjE4ZDc0MDk0Y2IwNGI1NTVjNDkwMDM5YjgyNTEzZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4MGRiYTNjODVjMzAzN2MwYTAzYWYyZmMwMDM2NmY1ODFjNzlkODJkM2QxZjU0ZWVmNmZmNmY4MDQzOGRjN2YifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L143-L155",
+          "version": "repo-lines-v1:sha256:6dc39ef16ce96f4f298949de3bd55710f5da38d32d6d261a9a9709942c8782eb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyMzVmNTU2YjliMjBhYmI3MmMyYWM2YmU4ZjFiMGRkOTg0OGVlZGRmMmJhMGMwNzNkMzIyZjZiMDgwN2Q1MjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwYTlkY2FiMDJhMTkwOWMxNTE5YWEyZmU1YzE2ZGM0NTkyNGUwODgxNTZjOGQxNGViZTFiMzkwNmU0YTcyODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEifQ"
+        },
+        {
+          "resource": "repo://src/utils/file.ts#L1-L18",
+          "version": "repo-lines-v1:sha256:d268945bac3d1f82c6a11fc95dfbc5876aa36ed1b8120ebc5710cee61d73be78:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlY2JkZWY4MDFjY2MzODNhMjRmYTRiZDI3NzhhMTE1ZDk4MzJiM2Q5NzVjNDMzMjY2ZGU1MDVhMWEzMDU0MTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8dff8dc7ba9149d49665af11582541c0",
+      "statement": "`getImage` 命中时把 File 转成 `{ success: true, name, type, buffer: number[] }`，未命中返回 `{ success: false }` 而不抛错；配置里只保存 key 字符串，因此 key 失效在业务侧被翻译成重新上传或抛 `图片未上传或已过期`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L230-L235",
+          "version": "repo-lines-v1:sha256:011b5209c2410b8f402c0e3fdb4f7b4cdb512da171e560b0e71c73aea73637d4:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzA0Nzk2YzczMmI2Y2RkYTFiYTIzNjIxNTVlZTY5NTdlNDcyNTc2ZTQ1MDkwNGVhOGY0MTI2YjQ0Yzk5MDRjYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTU5YTA0N2EzNzk1YjQ3OGIzY2I2Njc0ZDRhYmExOTJkZDI5OTJlN2JhMjJkYmYyOGRkZjY5Mjk3YzFlYTkyMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTExNWQ2MzkwZmNmM2Q0YjIwMTI4NzJiMzdiMzc5NTViMThlZGI3YjYzMzdjMzdjYjNmYzFhMWM4ZGFiOWEzNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWNjNDZmYTZmNTYxN2NkYThjYjljZTdmMDVhM2EzNDYzODFiMjg5YTc3ZDdmZjlkOGExNDY2YjIwNzkwNTJiNCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/ConfigItem/CustomGreeting.vue#L62-L74",
+          "version": "repo-lines-v1:sha256:e11db0bef8a6c49152561f7307e0a4d8c09fe8c1cc8a713b4dee701dd2411cd6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMzUyNTg5YzM0ZDNjNjA2ODU5MzFiNmVjYzRkNTA5OTFhN2M1NmM4ZmJhMjg5NDExNDY1NzY5MDI3MmNhYzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MDE4NDdjODAwODk1OWZhZTE2M2RkNzdmOGQ3ZDE0NTZhMDM4NjMwYzk4NDRlMzhlZTgyM2QxNzU2OGQ0YmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwYTEyYWM4ZjdmYWJiNTM0MWY4OGNiYjNlMGM4YTdiZWEwMjZhMWViNWFkY2U3NWEwZGMxM2JiZDUyOWFiZDMifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L122-L141",
+          "version": "repo-lines-v1:sha256:a09bfe86a57786e1e8f7d08a1e189a5706b64361fe36c3526449d1194e9b0655:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4MzQ3ZGI2ZWE5MTg0ZjZhMzdkMTRkYTliNGI2Y2U2NTIzMjZiMzRjYzJjN2U5MzJmYzM1ZTM2ZmE0MDczOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2ODZlNWYwNTJhMDNiMTFmNWJmODc4NWMzMWE4NmUwOTJkMjM5ZTUxZTkzZDAyM2FmNTYzM2Y2OGEzYzRlOWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMjNjNWUzYTAxOWIzMmUxZmYyYmZjZjQ4MjI2NmNiY2IzMjhhYTVkNDMzNGExZmQ0YTE0MTQ4NzQ2Yzk4NmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyYmU4NTI0YzZjMWQ4NWZiYTRjZmNkNDY2NWIzNmZlYzNlNDExYjE5ZGMwNTViMDI4MjUxNWE4OWM1YzA1ZjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cdea8208fbc144ccb96a9f4ad2fcf114",
+      "statement": "`CustomGreeting.vue` 保存自定义招呼语时，若某条图片项的 `model` 是 `File` 就调用 `counter.setImage` 并把返回的 key 写入 `item.image` 后清空 `model`，体现“配置只存 key、字节存 IDB”的调用契约。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/components/ConfigItem/CustomGreeting.vue#L76-L100",
+          "version": "repo-lines-v1:sha256:d5a81bbc52a4ec73db365cd8499becda941c8cf3616c682439c0ddad0af0beed:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0MjE0YzBiMTEwN2FmY2E5MThmZTU5YTY1YWM0MDI5MzJlNWY5Nzg2ZDE3NzM4ZWY3NTNjN2YyMmZkZDk5ZDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmYzhjZGI5NGU0OTUxMmFiMTkxNWMxYTNhMTRmMDFiZWRkOTYwYTNlNTUxMTU4YTAxMDUzYjU1NzdmNWNkOGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxYmQzZWUwYTZmN2I3NDIzMDI5ZTdiZWM1MzUwYmRmYzAyYjA4MGQ4NmU1NzUzYjdjNTRiNTg4Y2Q3NGUzM2MifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_80c3c96f15ec4c33a458692ea87b2aad",
+      "statement": "manifest 只申请 `storage` 与 `notifications` 权限（无 `unlimitedStorage`），并声明 `host_permissions: ['http://*/*', 'https://*/*']`，后者是 background 侧跨域请求（含飞书）成立的前提。",
+      "evidence": [
+        {
+          "resource": "repo://wxt.config.ts#L150-L161",
+          "version": "repo-lines-v1:sha256:8f78efb48cc52c25e657a8885d3fef707169f8c14fca56a1019a9bd074d0013f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhMTNlYzczZDc3YWYzMDFiYTBiODAzZDhlMWU3ZTBlMTYwZjkwYjU3NjFmNTdlNmRiYjM1OGJiOTRlNWUwNzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiMzRhMzkwNmVjMDZmNTEyY2ZjMzdlMjAwMTYxZGMzMjJmOTUzMzNkMmQwMDRmNTNiMGIxOTk1ZjA3Mzk2ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwZmEzNzgzMzZjMmFhOTliOGVlODgxOWQwMGI4YWY1YTMyNzcyZjE1NTY0YzFmZjExMjIzZGI5N2M3NWE2MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0OTA0ZmE4ZWRhYjJkODhjNzY0OThmNWY3N2IxOTdlYjQxYTJiM2JmZjNjZDkyZTJiNWM0ZTA3ZTVlZjZiNTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6ea767150c134f3fb8f26c9e0f297afa",
+      "statement": "组合式函数普遍直接使用 `counter` 存储接口：`useConf.init()`/`confSaving()` 读写 `formDataKey()`（`local:web-geek-job-FormData[-preset]`），`useAccounts` 用 `local:HelperAccounts`/`local:HelperAccount`，`useStatistics` 用 `local:web-geek-job-Today`/`-Statistics` 并串行化写入，`useModel` 用无前缀的 `conf-model`（因此落在 sync 区）。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L167-L199",
+          "version": "repo-lines-v1:sha256:4e8dd8479798d606226b29e5723e448f09be113a6d4d977529d1fda3b8bbd7ab:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiYmI2ZWRjODUzN2JlYzAzYTY5YmIxYjU2MzZlMjIzYzg1OTY2ZTNhYjlmYWIwYjc4YjZhNDdmNmRiNTkxMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2Yzk1NjJlODA2NzMwYWIzOTE2MGQzZjQ5MjAyNjBhMmNkZWY4OThjNzk4ODY1N2M4NzI5NjVlNDYxMDc0M2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA1NGE4MzQzMTYzY2E4ZjBmMjdhOTBhYTAyN2MzNDY3ZTc1NDI3OTI1YjQ2NWM5ZDQ4NjdlNGNjZTY4Zjk0MWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI4M2E0NjdkZWNhMTkxNzNkMzZjNzAwOTc2Y2I1MzRhZjk2MGU0ZGI5OTFmMThiNzE5MjBmY2E1OWMyZDkwMWMifQ"
+        },
+        {
+          "resource": "repo://src/composables/useAccounts.ts#L10-L18",
+          "version": "repo-lines-v1:sha256:5a17c98b29f83633d780e63789b3e9a39b0060b00a2110f5c4f8bf3550bb7279:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzg5OGQ2ZDc5NjkzMzE4ZDY2MGViOTc2N2YzNzc4NjQ2NWUyNTA2NWI1Mjc1M2NiYzJiMWI0YjZkYmU1YjAwNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTlmZDhlNjBiMzIxOTljYmM3ZWZiNDI3MWQ3ZDgyYzdkOGE0OTllZDkyNDRmNmMxYzdmZDk3NjU5ZWRlOGNiYiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useModel/index.ts#L30-L38",
+          "version": "repo-lines-v1:sha256:bcdf48e7fcbc301e74af12baeef2c4704ede04067aa9e05d7097dfbc49561890:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTM2YmQ3ZWEyMzM3MDEwYTU4MTA0MzI0OWY3MjIzYTBjZGQ1NzZkMzJmZTcwZjE0YWY1YjUzNDVkNzdhNmFhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmVjMmY5Yjc5OWZmZmQ2ZjY1YzBkNzRmYWM4ZjUzYTg1YzU4Yjk2ODY4Zjk2MWUxMjA0M2YyZWYyMzFiODBkZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGIwMTJlODMwMDJhNzdlZGQxMmIwNjRiMDE3YTNkZWQ1MGM0NzMzNWViMjQ3NTVhYjAxYTJiYjJkZDcwM2ViOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzhlN2I2NTJiNDgyNDI3ZWRhZDNhMDIzNWI3Mjg1ZTA2YmI3N2FjMWQzNzcxOTVjM2Y1ZmNkNmM3MmYwNDM0YSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useStatistics.ts#L9-L63",
+          "version": "repo-lines-v1:sha256:02a260867ed35dca3b946227c55aed7d90c69c58d0f622623a0db6ee073f6a39:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmNWEyNjAyYzdiOGYzMDZjNTYwZDUyMTY0MjI5NzgxZTczODFkMWFmZDM0NjRkMDMzNWYwZGMwMGRkYWE5YzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVlYzNlNzczMDU2YzE4OWYwOTM3OTEyMTQzY2ZhZTQxNTQ4OWQwZjc3YzkzM2Y5OWJhZTU1MzcxZTU1YmZiYjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5MmZkMzZmMGFhNzU1MTE4NjE5NTJlOTRiMmU3YzM1NGJjYmM0YTkwYjAzNWI2ZGRmN2Y1NTU0NzA0YzVlMmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4b61622f436349c08a265d856b446ad3",
+      "statement": "`HelperCache` 与 `JobResultCache` 以 `counter` 作为构造参数默认值（只依赖 `storageGet`/`storageSet`），因此测试可注入内存假存储；`scripts/helper-cache.test.ts`、`scripts/job-cache.test.ts` 即通过该契约替换存储。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/helper-cache.test.ts#L1-L31",
+          "version": "repo-lines-v1:sha256:662dc3f71f08f537f73fb2eecc3ad2b34ac68fe275db928b3c0c796757583785:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwYTc3NGVjMmUzYWY2ZmNjZjlmNTYxMjdhYTcwMzJmMWRmZDdhZDQ5ZGU0YjA1MjIyNDhhZTU0OTVjZDM0ZmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiMjY4ZjY0MmM3NDA1Mjg3NzFkNzg2ZGNjODIwZDQwY2NlNzJlOWI1MGJlNjg1ZWY0NzYzNjM0ZmEwMDU0NGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1MTJjZTMxNmE1ZTA0M2QxYTRlZDgyOGRjYjU4OTBiNjMxNGU1YjZlOWFhOWRkMmNhMmFkZGRhODYwZTM3NGUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L3-L25",
+          "version": "repo-lines-v1:sha256:eb834e0614e2c27658d9f4b3bb2072f0d6b1a98269a70ed5908815db499bff68:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxZmNkMzVlN2U5M2RhNjhiYzdmZmM2NGZjNTU1NjA1ZjZjMjk0ZGM5MzVlZDM5ZDhiZDZlMGQ4MjgwM2FmOWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcyZDYzNDRhMGVlNDQzZTdhMDk5YmYxNDllZWQ5MmUwNzdhNzA0MTE3MjliOGYxZjZmM2U5OWFlMDcwYzRkMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyYWFlMWY3MTRiZGM2MDlhOGI5YWE3NTczNmYzMDk1NTQzZmMwM2M4ZDEyZWEwMjMxYjYxNTEzMGE5NDQyYzQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L22-L25",
+          "version": "repo-lines-v1:sha256:d876744b617c1b2bd9ed5403a3c8fcd3f0d632866a86b098b453dd6cc92a0190:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE1ZGY4MjY4YTlmNzAwMzg5NDUxNzk1NDQ3ZGViNTJlNGQyMGI3NTEyMzI2MmFhNzI1MDYwZGRlZmIxOTZmYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTJiNzc1YjU0NTYwZTQ0MTdkZDUwOTUyYmU1N2U5M2QwM2RlYTk0YWE1NTRlNTFmNzQ1N2FiOWUyNDEwZDhmMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjgzZWU1Mzk4Yjg5NmYxNTA5M2QzMzAzOWViZDY0OTE3NzA0YjQyZWI5MDZhM2RkNzZhY2NlOTA5NDBjZmNiNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDAyZTIyYTM1MWQ2ZDkzZmYzODM3YzE2N2JhZThiMzM3MmJjOGU2MGY2ZDJiMjNiYTc0NjJjNTUyYzMwN2RhYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8d56b244296b4723b0a2c69d2d8c617b",
+      "statement": "`notification()` 统一构造标题/类型/图标后调用 `counter.notify`，飞书同步在 background 内部用 `counter.storageGet('local:feishu-config')` 读配置（`scripts/feishu-workflow.test.ts` 断言了该 key）。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts#L255-L260",
+          "version": "repo-lines-v1:sha256:3ef42e6a12c12b1ebe589da9a360285c078f74804e6f9703a708646e1e361192:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmM0NWM3MzE0NmRjNjExYTA5NDIwY2U1MGUwMDM3MWJmYmNjMWJlOWYwZWJlOGQzNTAyOWNiMmU5M2NmMzBiZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODllMzc2NmZjZDhkNGRhOTg1MjQ0NDUxZWQ5OGE1YWRhMWZmM2FlMDIwYjkzZGI0ZTg5YmQ2MDEwYTJjZWJiYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjc5ZDNiY2ZhMWFiZjEyNjdlODU1YzQwOGNjMjFkYjFlYmIzYWI5ZThmMmJmM2Q1OTljYTBhNzYxNGFmMjdjMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODExNGQzMDQ2NmVkZmUyMDIzNzUxN2IyZWEzYWUyNDQwZjg1YmUzNzc4M2QwNmFhZmJjNWNlODAyMWNjOTNjNyJ9"
+        },
+        {
+          "resource": "repo://src/utils/index.ts#L3-L19",
+          "version": "repo-lines-v1:sha256:a91710f352158624e6dbc068811081b2316c941bdca2bec471b176ef38d1c3d6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyYjEwYzY0Mzg4NzA2YzFhYTAzZDA4NzcxMzNmMGY0YTc3YWYyZWRjM2ZmYTY4NjdhNGI4MTkxMmQ4MmVmYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcyZDYzNDRhMGVlNDQzZTdhMDk5YmYxNDllZWQ5MmUwNzdhNzA0MTE3MjliOGYxZjZmM2U5OWFlMDcwYzRkMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM1ODY0OTI4YzkyYWFhZGI3ZWQ1OGE5NGM0ZWZmODE0MmNlNzhiZWRlMWZmZDVmNDVkZTg4YjllNzIwOTNjODgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2471513362384bbe9933d3386b533a10",
+      "statement": "新增一个 RPC 方法需要同时改 `src/message/background.ts`（实现）与 `src/message/contentScript.ts`（同签名转发；TS 的 `implements BackgroundCounter` 会强制），并统一通过 `counter.method` 调用；若引入新 namespace/事件名或改变 `meta.injector` 取值集合，还需同步 `src/entrypoints/background.ts`、`src/entrypoints/content.ts`、`src/message/index.ts`，新权限则改 `wxt.config.ts`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/background.ts#L7-L12",
+          "version": "repo-lines-v1:sha256:3db061250b8422eaf69b83144c3c08114d64263351f3297edef73f969a7488e1:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTMzMjNmOTJmYzU1OGVmMDViNzZhZWFhNGMxZDYzMDk4NzY0OGViNjFkYzQ0ODczYjJjY2VhZGM4ODA5MDk4ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTNiZmU5ZWExYmE5OWMyMzIzYTNkYjRmYTM5YjhiMjc1NTU3MGIzZjljY2MxMGU2NWIwYzg4N2JiMTE0OTc1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDBmODlhMTJmYjRkNGU1MmE2YmY0MjdkYzZmN2E3MzU1ZWJhZjY3MjVjNjQ5ZGM0N2Q0ZWQ1YTQ5YjE0MGQ5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDY2NDhlNjEwMTI0ZjliMzZkMDcyM2Y0ODc1NjBkMzcwZjhmNzgwNTczNTUwYjY2ZTZmZTUxMTBhYjlhZTk1MiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/content.ts#L17-L29",
+          "version": "repo-lines-v1:sha256:5625d5f2444811c3021a98a806b707eec5cf9b61952c5ffceb635a8ce6b6e30a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0OTIwMTlkZjQzYWQ4NWNhMzNiODYyNWM0NWUxMWJjNWFhNTBjMGI2Y2FmNmQzYjg5MDkwNDZlOGI0YmE0Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExY2M1MjM0YWU0YzM0ZjEzZWYzNGMxNTU2NDVkMTZjMjE4ZjJhODY1ODgyM2M5MTFhZmUyMjRjNjMzODljZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjliNWJmY2FlMWM0YjY1OTAyMTYxMGZkZjI0ZmIxZTczZmE1OTMwNGFhN2E4ZjkwYzJmNmNlZDFjNTRiNmZmM2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkzYWIyODIxZjg3Y2MwYzFhYTliZjMyNjk0NTBjMzlkNzEzY2Y5ZWQ4YWY4YWIyMjA1YmVkZWU0ODVmY2NhZTMifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L26-L33",
+          "version": "repo-lines-v1:sha256:ce3080061ac8ad386e828d1854f98ffdb09001683fabeb6bb39facee9019fd82:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQ3MjQ5MTk4MmEyNGJjNGNkMjdjZWUzNGE3ZDczMTE1MGI4NTM2MjA5Y2IzYmIzYTg1ZWYyNWY2YzI2OGQ0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjIwNThjM2NhNGZhNzVmNWZmN2UyZmMyMGQ0MTExNDY4NjI0ZWJjMWU5MjA4Mzk5NTAyOTliMWRlMDdiMzhkYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGNmOTVmMmEyZmY0NTQ0MmUxMzVkMDRmNjZmYjI1NGJhNzAxMGVlMzJiZThiM2FjYTAwMjczZTE3N2QwOWYyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWFjMTU0NDRlOWI4OGZlMjA5NmZhNzkwMGFhMmYwYTRkYjcwNTdhMzczMTgwYjRmZWFhN2RmYTIwZDAzZTA2NiJ9"
+        },
+        {
+          "resource": "repo://src/message/contentScript.ts#L14-L76",
+          "version": "repo-lines-v1:sha256:ddd4dbae23561a8fe025ed23834516a41a8c2f603b8e2e05b525452efcde6cb5:eyJzZWxlY3RlZExpbmVDb3VudCI6NjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM1YWJkMGRkOThkY2EwOTVmZThjMmYyZTJjMTA4YThkNDJjMjcxNjk0OTY0MWFkMDhiYzgzMmIzZWRiN2Y2YjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1ZDY2ZWE3Mjc4NTBiNmQzNThlYmE4YmU4NjQ1NDVjNTdiYjUzYmYxMTc4N2UyNjg3ZjYzZGYzMGViOGY5OTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyNzM3ZTIzNTBjOTFlY2RhYWQ4NzVkYTZhNjFkMzAyZGNjYjE0OWI4ZDJhN2Y3MjYyNmJhMGMyYjY1NzgwZjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_77b40c4972854f4f8daef3dd53fe7942",
+      "statement": "`counter` 是一个 Proxy：读取或写入任何属性时若模块级 `_counter` 尚未初始化（initCounter / initExtensionCounter 未调用），会立即抛出 `Counter has not been initialized...` 错误；读取函数属性时返回绑定到实例的副本，因此解构调用仍可用。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/index.ts#L12-L57",
+          "version": "repo-lines-v1:sha256:97664bad62b3481aa408850eff3ecabcb93bcb6f9a54d82d9a0d67fcbc093595:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkMmQ3NDU2YjAyZjUwZmFlMWY0YzUyNjc3MzUzMTIxNmUzYjJhMTFkY2U5ODI3Y2QzODcyNWZlZmJlMGM1MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmYzg2YzI4NzQyODZiOWVhODg1NWRhODgwNzRjMDJkMWExYjA0ZmQzOWI1NDgzMDEzYjcyYjVkZjUxYzgzOWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmNDM3MTNkZGM3ZTA2YTc5MTgwN2M4YWExM2FmNTJjOGVjOGYzYmQ4ZmJmMjYzMmZkYjM0YmIwNzgwZDUyNDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_966fb4c1c75f4e8988dc955664e174de",
+      "statement": "`ExtStorage` 的 `getItem` 以 200ms 间隔轮询直到 `_counter` 就绪后才调用 `counter.storageGet`；若 `_counter` 永不出现，该 Promise 永久 pending，使依赖它的 `useStorageAsync`（appearanceConf、JobTable 布局）的加载状态永不结束。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/JobTable.vue#L40-L49",
+          "version": "repo-lines-v1:sha256:c592585a1a40244b705f02bc1bfcbc591bc6428bc814152a6995c5e92adf46f7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxMTFmMjM5YWM2NWM5ZmVjZDRmNzk3NWQ0ZWUwYzY3N2I1OGE4ZWE2Nzg1MmVhMjVkMjc5MjM5MjUxOGQyZjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljMWQwNWFiY2JlZGNkMGM4ZTgxMTBiMDFmZTBmMGEwYzQ3ZWI5ODc2YzRkZjYyOTI0NGJlNDdkZDI4NTU5OTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFjY2E2MzNmMmFhNWYzM2IwYjViMzZlY2NlNDY1N2I1NmI0YzYyOGUyNjc2N2JkODliM2VhNzAzY2MwOWNiZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNhNWI3NmJjMDg5MDc5ZWMzZDNkYmZhOTc1ODAyZDFiNThkNTc5YTIzNzhjMjg5MDliYzVlOTI0M2Y2NTBjOTEifQ"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L17-L35",
+          "version": "repo-lines-v1:sha256:315cce88b9fffa36c12e844aaf634b8e84355ef8ec993cdcd55d2fc8c4c738ea:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNGI1MzhlZTFlNTRjZmI1YTRmMjk3MmVlNjg5MzRhZmI3ODE4ODFlMjhkMmE5ZTI2YmRhZDY3MGJhOWM4MjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFjMjI0MGJlOGI1NmFmNmZlMDExZmZkM2FjODA4MmMxNDE2YjM3MmZiY2YyYmRhMDIyMjY5MWJmOTdkYTIwNWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI0YzkxNjQzNWY2MTYxYWUyZjhjMmM0NThjMjFhMDBkM2VhN2QzYzQ0ZDc4ZDFjOTU3YmZmNDFlNmRmZDU2NTMifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L59-L78",
+          "version": "repo-lines-v1:sha256:04bc23683153a303c6398127103ca734ac9f0f5ab4367228f3eeaf93a277b4f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMDI1ZWM2ZGIwODYyMWEzZGNlY2FkNmU5M2NmMDM3ZTdlMTE2NWQ4YmMxYjc2YThhNTIxOGMwNWY2YzVjNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzZjA0MWEzOTEwMTU3MzUxMTZmMzZhMDliYzg0Y2VmYmIyNDU5NzBmYTI2ZWQ0OGFkZWQ4NmQxMDdhZGE1NDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_768c1dada0284373a179db07f03c9ce4",
+      "statement": "选项页入口 `main()` 先调用 `initExtensionCounter()` 再动态 import `App.vue`，因为 `useConf`/`JobTable.vue` 在模块顶层就构造 `useStorageAsync(..., ExtStorage)`；`main()` 失败时以页面文本兜底显示启动错误。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/main.ts#L16-L24",
+          "version": "repo-lines-v1:sha256:33d2bc3ba9ce15e2f6306e3b6dc64a8aaeafafdf79a185e36dc8ba8d541e47b7:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmQ1Yjk3MWI3NDJlNTA1MGEwNzQ3ZmVjOTM5ZmZmYmY1ZDU5ZjJiNTE4OGI5MTc3NzFkZTQ3YmU3YjYxZDk3MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTA3N2ExMDU4NzBiNzE1MWI0MzM4MWVkOTdkYTNhMDQxMTlkOGIxZGIzMTYxY2UzNDE1YjIyMTJhZDliZjVkYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5ff0f53ee2ad4bdb80bc552a45eb351c",
+      "statement": "图片以“配置存 key、字节存 IDB”的方式协作：`CustomGreeting.vue` 保存时把 `File` 交给 `counter.setImage` 并写入返回的 key，打开面板时用 `counter.getImage` 重建 `File`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/components/ConfigItem/CustomGreeting.vue#L62-L97",
+          "version": "repo-lines-v1:sha256:d890c732f93c4b500c449dd3d1d7f3b65dabe7644e7f084ae2bdb84ec0c26d9e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MWRiZDY5ZTlhMGE2ODFiODdiODhmMzgzMjg1ZTY5OGE3NWY3YzJjOGY1MTRjZTllMGE2YzVjZmM4MjM1MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MDE4NDdjODAwODk1OWZhZTE2M2RkNzdmOGQ3ZDE0NTZhMDM4NjMwYzk4NDRlMzhlZTgyM2QxNzU2OGQ0YmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5OTIwYmI0ZTI2MmY3MDJlMmEzYWUwNDIxYjcxZmNmYmNlODgyOGE4ZTI1NWViNDg0MzYxODkzMTdlODA5N2YifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_525a191a7ede48d3b1bc34a3f1823077",
+      "statement": "`src/message/contentScriptShare.ts` 中被注释掉的历史实现展示了 `ProvideContentAdapter` 与 `ProvideContentScriptAdapter` 的前身关系：旧版把 CustomEvent 派发在 script 元素上并带 `cloneInto` 分支，现版本改为把 `JSON.stringify(message)` 作为 detail。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L27-L69",
+          "version": "repo-lines-v1:sha256:dd0270b4b647c327c763953b64d70c882266389f2cd70ee95773996e1d84266c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyMzFhZDJlNjEzNmU2ZmViZGUxNjk2MjU5ODQ1N2ViMGEyODc2N2U4NmRmZTJiNWE3NTI1NGY1YWY0MTdjNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlM2Q4ODJlOGJmNjNlOWNhMDNhNjY0NzI5OWU2MWE5NjZmNzc2M2YxNzUwOWI4MTM1Y2FiNjQyYTQ3OWFkYmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmNzM5YTA2YzFjYmIxMjQ0ZTMzNjNkMzhiY2Y5ZmE1MGNlODRmZWQzOTljMjE5M2EzYzdmMDhkNTk5MThiMmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9fd7949f5b4b414a9993cbec4eecd0b9",
+      "statement": "`createAdvancedFetch` 以 `backgroundFetch` 作为默认 transport，并在修改请求体时显式 `await input.clone().text()` 后再合并——这正是因为 `backgroundFetch` 不读取 `Request` 实例的 body。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/backgroundFetch.ts#L22-L34",
+          "version": "repo-lines-v1:sha256:72c058d8535c093ea64c6636675357214caa3c8695332b7be1bea5e2da340730:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjYzFjNzBhYThlZDAwOWZhMjcwYzA0OGYxODkzOWQ2NGVkYmY3ODc5ZDc4ODFjNjlhMDc4NzYxZWE5YThmY2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5MmNhMTM0ZDIwMTgzY2I0MmI5NGExNWQzMzFhZGIyNWZlOTVjZDQ1MjkzZDdmMjk4MzEzZGM5NThjYzU5NWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiMWE2MzFlNmVhZjZjNzZhMDA3ZjUwZTI2NGFkMjM4MTU5OTcxNWIzOWJiODNmMTBiYWFkMjBiODFhZjg3MDUifQ"
+        },
+        {
+          "resource": "repo://src/utils/modelRequest.ts#L1-L32",
+          "version": "repo-lines-v1:sha256:d3ebd44cdd4a816af8e95728b6a635b66e62a294b5d2d66b9b335e85a9527551:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0NzY0MDc2MDI2YjYyNDgwNzM2NDUzZmQ0Y2I1ODQyNmI2ZjlmNDYwMDNmODExZTQyOTYzYzkzYWNhNzkyZWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f50d69637ef843e3acc84e99a52334cb",
+      "statement": "`boss/index.ts` 的 `sendMessage` 对图片消息先 `counter.getImage(msg.image)`，`success: false` 时抛 `图片未上传或已过期`，否则用返回的 name/type/buffer 重建 File 并交给 `uploadImage` 上传。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L212-L246",
+          "version": "repo-lines-v1:sha256:70313c1c6715a6847edd9f3a7e51e3b3d452ef7332dd56fefed8a22da2199cfe:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiZmEwNjc4YjA1ZGE3Y2ZkOTZkMDEzNjJjOTBiMDk2MzJjMzBhMjNkZjQxZjNkMDQ3NGUxM2MwZWMwMmU3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmNDBkZTVmOWFjMDJlNjBjNjk2MGNjZGJhNGI5OWVhMTBiMTkyYTdlZjdhNDI0YTg1OTg5ZDc2YWVlMTgzZGYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQwM2M0YzA3ZGZkNTM2NThiYzdlNDE5NDY3ZWMwZGJlMGY5YTEwOGRmYTM0MWViZWNhYjYwY2ExYmRiNGFjMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc1ZTQxMzRhNDRiODNhMzQzNzc1ZjdjNzY0Y2UyOGFkNWJlOTEwNmUyM2QwNzU0OWZkYzRlZDRlYTJlMDc4ZjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_97561b494c474e5790d2fbcfea3f30e9",
+      "statement": "`scripts/helper-cache.test.ts` 与 `scripts/job-cache.test.ts` 通过 `mock.module('@/message', () => ({ counter: {} }))` 替换门面——因为缓存类的存储依赖是构造参数默认值，从而可以用假存储隔离测试。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/helper-cache.test.ts#L1-L5",
+          "version": "repo-lines-v1:sha256:089807effb71943ac6edb62896c96ad82374f9917aae017bd3553334b289e76b:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTBhNzc0ZWMyZTNhZjZmY2NmOWY1NjEyN2FhNzAzMmYxZGZkN2FkNDlkZTRiMDUyMjI0OGFlNTQ5NWNkMzRmYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDg4MzYzZDFiZWVhYjYyYzJiMTEzNGE5Y2I3MmNhNzA5NGY0ZDUxZGM1Njk1MzZjZmUzNTlmZDI1MjFjZDhiYSJ9"
+        },
+        {
+          "resource": "repo://scripts/job-cache.test.ts#L1-L8",
+          "version": "repo-lines-v1:sha256:1ec0d2329aafc004f30b25cfbe1ccdbccc35c6a5a347aff7617c081161b6da52:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTBhNzc0ZWMyZTNhZjZmY2NmOWY1NjEyN2FhNzAzMmYxZGZkN2FkNDlkZTRiMDUyMjI0OGFlNTQ5NWNkMzRmYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzAzZGE3NWRjY2NkZjJiNjE2ZTU4YmYyNDlkNGM4YjU1Y2M4ZmFjNWRjYTY2MWQ3MTgwZTA4YTMyZWQxOTdmMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWEzMjZlNTYzMTAxMTFjOTk3ZjBkOTliNzc4NTFlMDQwMTUzZDRkOTM2NDk4N2JjYmFjZDkwYjBkNmNmNGZlNCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L20-L25",
+          "version": "repo-lines-v1:sha256:013c372d65e83c2027b8ca2c61ad41d59fd239a0054ef2c93537636ab6f33cfb:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzJmOTRlZDk4ZDc4ZWNiZDJkODdmMGMwYzViODNlOTY5OWFlMTFhMDBhZWYzMWU0ZWEyNDEyNTVjYzNkNmQyMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzJhYWUxZjcxNGJkYzYwOWE4YjlhYTc1NzM2ZjMwOTU1NDNmYzAzYzhkMTJlYTAyMzFiNjE1MTMwYTk0NDJjNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_874bc49663134919a5745f38ba31f976",
+      "statement": "`useStatistics` 的写入经 `pending` Promise 串行化：深度 watch 触发的 `counter.storageSet` 都挂在上一个写入之后，避免并发写造成顺序错乱；非 default 账号在 key 上追加 `-${account}` 后缀。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useStatistics.ts#L24-L60",
+          "version": "repo-lines-v1:sha256:c7ec4f0e6720c3468752b81c1324525f925d6122f4a97915949558ce5173224a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmYzNiN2RmMGMyYzEwODNkYjc0YzBlNTBjYWQxODQ2MTA1ODdjOWNmYWQyMzkxYjhmZWFlODdhNWFiZjAzMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3YTEwZDc0NGE1ZTcwMDZlNThkZmU4ZjIyZTU1NDBmNzFhOTc0NDdjMzlkNTE2NzBlNjIyZGNmZGNmMDg4YmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRkY2ZjZTVjN2NiMmVmN2IwN2M2N2Y2ZjZlZjNlMzg0M2Y2ZmUyYzcyNjhmNzBmZGQ5ODgwOTYwNTk3Y2E5MjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA3Y2M4NzI0ZmUyZWQyMTMxMjI0M2U4MWZkMDkyNjFmMGU2OTMzNjFmMTI5N2VlMDZmMTYzMGM4NjAzYWMwZjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9f9d9d46799342e19dff86a6f2d591c9",
+      "statement": "通知门面 `notification()` 以固定 iconUrl、默认标题 `Boss直聘批量投简历` 和 type `basic` 包装 `counter.notify`，业务侧不直接调用 `browser.notifications`。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/index.ts#L1-L19",
+          "version": "repo-lines-v1:sha256:ca3226bce0b33de46ae299229eb1020853ce4e7206227848cd438f9bc19bb324:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmNGMxMjk0NDlkZWU2OWIyY2ZiZDFmOGZjYzRhZTQ5MzNhOGZmM2VmZDZiN2Q1MWZjYWVlMDI0NGRjYzMwNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM1ODY0OTI4YzkyYWFhZGI3ZWQ1OGE5NGM0ZWZmODE0MmNlNzhiZWRlMWZmZDVmNDVkZTg4YjllNzIwOTNjODgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_36abf20ed2294a819c8b0a323f8998a4",
+      "statement": "`request()` 在 `isBackground: true` 时把 {url, data, timeout, responseType} 交给 `counter.request` 由 background 执行，否则在页面内直接 `fetch` 并用 `AbortSignal.timeout(timeout*1000)` 与 `RequestError` 包装错误。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/request.ts#L111-L169",
+          "version": "repo-lines-v1:sha256:dc71135d699967fae369ad5704582093618ae33e6aa879deced244ed933ffbc6:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4MzAyOGI0NzlmNmY2MmNkOTMxNWViMzFiODIxMDQyYWFjZjU1YTc1ZjJlOTRmY2YwMGQzOWZiNjllZDYxYjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5YjE5ODJlOGRkNzQ4MTE4MTQ2YjM5YTJkMDA2MmY0MDgxZTM0Nzc5Yjg2NzVjMjM0YzRmYjEyNGRjMzkzOTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEzODNhM2NmZDgxNTAwYTAzNWQ2MTM4ZmI0Mjc0Yjc1YWI4M2Q1ZmVhYTAxNzUxYTRiZTAyOTJhYTFhYjRlOGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBmYzhjZGI5NGU0OTUxMmFiMTkxNWMxYTNhMTRmMDFiZWRkOTYwYTNlNTUxMTU4YTAxMDUzYjU1NzdmNWNkOGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ca8cc896152343aa85eeb4bb2d77338b",
+      "statement": "背景侧 `createFeishuSync().flush()` 用 `counter.storageGet('local:feishu-config')` 读取飞书配置并以 `counter.feishuUpsert(rows)` 批量写入，失败时保留待同步岗位以便重试。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L86-L128",
+          "version": "repo-lines-v1:sha256:905b907b89e3c20486880f6a9eac65a26286c89366847d93b6218c2688a519d2:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MGZkOTIyYzM2MTAwYjJlYzBkNDJkNjQ2NmFjMTQ5NDg0MjNkMWY2OTUyZDZhNTY4MzA3MWIzOWYyNWMwMzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU5YjkwZmJmY2FiMjQ3OGVjNjI3NTVjYjNjYjM2MWY4ZWU3M2M4YmJkZmY5ODI4ZGJmNGRlYWI2YzcxZTk2ZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1NjRiODRjYmM1M2VkODg2NzE2NjBjZjM4NGI3NzQ4YWZkMzMxOTUxMGU3ZGUyODliMjE3MjQ4OTkzZjE2NzMifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T12:30:35.415Z"
+  }
+}

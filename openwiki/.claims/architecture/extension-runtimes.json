@@ -1,0 +1,492 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:383b5dd43f1ab513e40b3491926b519cd89233b9c1d0f64062bf80b015cc20e4",
+  "claims": [
+    {
+      "id": "claim_dd811a88c1b2487fab30e2005a4aff2f",
+      "statement": "options 页面是不经过 run() 的独立 HTML entrypoint：main.ts 先用 prefers-color-scheme 设定 documentElement 的 dark/light 类与 colorScheme 并监听变化，再调用 initExtensionCounter()（以 InjectBackgroundAdapter('popup') 直连 background，而非 initCounter()），然后动态 import App.vue 并 createApp(App).use(ui).mount('#app')，失败时把错误写入 #app。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/index.html#L1-L26",
+          "version": "repo-lines-v1:sha256:5e4c66dc368d997a545c1d6354f9b67974c0fefe3282596f533990dd0d4a2f6a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzNWZjYTg1NzRmMDYwZWVhMjRlYmNkYWU2Yjc4ZjMyNDE0ZjVkZTAzZGExMDg0ZmQwZTczZDcxMDc2OGUzYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzZWQ4MWNkMTZkZjg4ZDY5MjE2NjQ2ZDhkYWRhNzYzNGIzM2E2OTg2ZTljMjNhNzI2MzFkMTkzM2I2MzVhNTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/main.ts#L1-L24",
+          "version": "repo-lines-v1:sha256:d8a93c2e1c3909348eb52ded718f472875a7f171b0449f2d8e4965d971998066:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwODQ5OTI1ZGI1N2U4OTJiMTMwY2UyMGIwYWU1NmU2MzA1YWNmNmY1ZTE1MzY5M2RlZTNkZGNiYWJkMmMwZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L23-L27",
+          "version": "repo-lines-v1:sha256:b6c8906c41ca52026c44d89ab2e0d0212a8642e9f2de3718cb84caf214674b7a:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmViMjlkZDc4ZWM2OTUxMGM3MDJjZjIxZTY3NWJiMDdiYTcyOWY3OTRiNjc1YjFjYjk4MmY1NWM4NGVlYWU1YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjg2MTY1MGU0NzgwZmQyMjBhOTdkNjllMmRhYzE4N2MwY2M5Mzg3NGFjMjg0ZjE5YmIwYzAxYzQ5N2M1NGFkYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzU0ZWQxZGJjZGUwYWFlYzY2NjY5OTdkZjAxMmIxYTliMmI5OWFkYjE2MGY4M2M5ZjUxM2ZlMjk4MzAzMTk4MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWVlY2U1MDQxYzczMWJmZTlhNGM2NGUzOTNiZDg2Zjk4NjdjN2VjZTE2MmNlNDRlMDZhNzczNjk3ZjNjNjc4ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_22269f41062e4ab89508d6f6e8e19253",
+      "statement": "options 的 App.vue 构造一个替身 HelperContext（固定 key 'boss'、空 jobList 与 jobMaps、workflowRunning = ref(false)）并 provide(HelperKey, context)，因为配置组件统一通过 useHelper() 注入上下文，而设置页既无网站会话也无岗位数据。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/index.ts#L9-L19",
+          "version": "repo-lines-v1:sha256:a7f359295b55340cdac995d30b98d4900e24f061a856b0a926df845809e244de:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ2MmFhMTNhNWM1Y2U2MDk4NDhkYjAwMmUxNWNhZjlkMGE1MDQ0NTM4MWMwYzMwYTgzNWQxODAxZWRlMjc3OTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZkOWZhZDBkODUxNjI3ODY3Njg0OGVhNjIxMmQ4NDkyNDFkOWMyNTZhNzg2YWQyYTIzZGMzNjRlMGFiNTQ2YTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L84-L97",
+          "version": "repo-lines-v1:sha256:1921b51421b4b63e3edbd5039f496d9623b8e234e6beb068b50b6b6e0d0b2ea5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExZDY3Njg0YjVjZjliNjNkNTc3MzVjNzA5NTAyOTAwNjY2ZjQ1NjU1YWUyNWUwZTcxNWU5ZjAwYTE2MzVkY2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0MDQ5OWNmZWI3ZjQ4NTk0MmRhYTM3OWZlYTUxNTM3NjNkMmYxZjQ1MzcyYmJkN2NhMWVkOTljOWIyZGU5NzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhlYjVhMmRkYjcxNDQwODc4YTkyZDYyODYwMDM0MjUwZDRkYzNiNWUyZWU0NjI2N2VmZDQyMzZmZGI3NjIzNjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_98cfe296185c4e42895e9680f7b9c2ad",
+      "statement": "manifest 声明 default_locale 为 zh_CN、name/description 走 __MSG_ 本地化、权限仅 storage 与 notifications、host_permissions 为 http://*/* 与 https://*/*，并把 boss.js 登记进 web_accessible_resources 且 matches 与 content script 共用同一组 zhipin 匹配模式；webExt.disabled 为 true 因此开发时不自动拉起浏览器。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/content.ts#L11-L12",
+          "version": "repo-lines-v1:sha256:92c93c54a2e88a2881cae0f2112657e6484a0b10b6d1b0d86c79f1f12eb7aa87:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTkwNzE4YTIwNmQ4ZjRhMGIwMjFjYmQ5MGIxMzlhMzViN2M0MGI3NTc2ZWI3YzFlNDZiOTkwY2JlYTFiYTVjMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE2OGIyZDVlYzQ1MzQwMDQ5MjJlM2YxNzliMmE0NmM4ZTEyYmI5YWY2ZDdhMjFhOTkwNzQxMzM2ZjlmYjViNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmZmYzUwYzEzNmZkYTc0MDc3N2U3MjY2NmUxZTUxZTlmODZjYWJlOGE5ZWQwZmY4OGNlZGIwMzY3YjhjZDEzOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2Y5ODZiMGU4NzQ2ZGFiYTlkNGE2NjEwODZhYjYwNDQ0NzNhZmJmNjg3Y2JlMWVmODhhYThhOTA5OWFhZjE4OCJ9"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L137-L151",
+          "version": "repo-lines-v1:sha256:80267ea9f58ce2715a887624bb2db1c96c21623ac59875ec0be6ebaca1e24b6d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxZTRhNWY5M2YwMGZjZTBlYTZiNzk0NjdiNzA2NDRiZjJhNDYxMjFlNDQxNGNiOGU5MGFhMDdmNjg1MDVmOGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkYzhmMzUyZGIzODc4NTBlMDNjZmMzMmViZDVhMDMyYjRiNzhhOTQ3M2I0ODY3YTFiYjZmYjA1ODE2ZjNmZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmODA3YTA0YTBlYTBkNDYyNjI2ZjU1NjVhMzc4ODk3ZWRjNTlkZmUyNzFlZWFhOTE0NDJmNTliYWZjZjkxOWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxYmYwNmRhNzM5MjQ2M2U5YjExY2IxNWI5ZDg2NzU2NGZlZDE3M2I2NWZkNTg0YjFmYTdmYTdlZDFmYmE1NmIifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L152-L154",
+          "version": "repo-lines-v1:sha256:c1bf06da7392463e9b11cb15b9d867564fed173b65fd584b1fa7fa7ed1fba56b:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjMwNWI2YjJiNjZkZWU3OGY4M2Y0YzdkZjk4ZGEyNTUyZGMyODYxNzBiNmFmYjIwMDNiNjU0YmI5YzEyZGFmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDk1YjhjNWJmODYzNzQzNjcxZGVmM2Y2MzBlYjIzMmQ1OWE3YTYzNGEwNzBmYzQzNmVlYzM3YTg2NzRlNmMzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjA5Y2I2MjM3ZGI3YWQ2YWI2MDdmNTQzYTYyY2MwMTVjZDlmMWZmZTEwNjMxNzNlYWE2NGEwYjBiMTJjZmQ2YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDJlYjhiYmM0MTc5ZjliYWFlYTgzNGZlMDYzMjAxN2FiYmNkNmEzOGNkZTMzZThiOTY3ZDBhOTQzZTliZDk2NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_381c77c83806493fb6a01a8ba4bb0186",
+      "statement": "firefox 目标强制 MV3：package.json 的 dev:firefox、build:firefox、zip:firefox 均追加 --mv3 flag（chrome/edge 脚本不加），而 build/zip 用 run-p 并行覆盖 chrome、firefox、edge 三个目标；npm run build 并不包含 typecheck 等门禁。",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L14-L26",
+          "version": "repo-lines-v1:sha256:76b699388dd33da77d125d6ba3d3a051d477c9e0075946b58508c145b24b5e98:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyOWJhZTNkMDFkMDE3OTQ0NjM1YWRkZjk4ZmUzZDk3MTRjM2M1YmUyMTAyMGExMjk1MWFiY2Y3NjZhYzRkYzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1M2Y4Yjg5ZThhZTBmYTZhMGFlYzJhOGZiZWQ5ZTRmNTdhMjYwNmYxZGZjZWQxMGY2ZTE0OGE3MTg2NDgzNzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViM2EyMmMwY2RiYzRlMmQ4NDQyZDA0NWMyZTdiODkyYTMxZTAyYjBlZjRlYjkzMDFhZTkyMjNjNDI1MGUwODgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjMzE0MWM2YjFhNzc0OWFhNmU0NWE4ZmQ3MmMyZjUwZjA3ZDYyY2EzNzQzYTA1MDkwYTkwNTkxNjZmMmEzOGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dc5933863d3e4eeabaefea0502ae2309",
+      "statement": "background 只做一件事：用 defineProxy 以 namespace __boss-helper-background__ 提供 BackgroundCounter 实例（经 ProvideBackgroundAdapter），后者实现跨域 fetch、流式 fetch 与中断、notifications、IDB 图片存取和 storage 代理。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/background.ts#L6-L13",
+          "version": "repo-lines-v1:sha256:cdcaade2de5c56a252ec98a17b29b6f1f3ea75da6ad93d262f17f1daa21367b2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVkYzg5NzE3ZjEyMjEyMTk3MTU4NWEyMTBkNjg1MzBkMjk5ZjkxZDJiMzg2MWI4N2FlMTQ5MDJlNmQxNWI1OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWIzN2NmOGIyNzk1MzA5NTE2ODMzY2RmY2U3ZThmMjUwYzY1MmMxOWViNTQzMmViMmIxY2IzOGFkNjI2YjFiNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSJ9"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L29-L132",
+          "version": "repo-lines-v1:sha256:ff11a998614ece03a6236d18a849baaa2993aa4da2468376cd9fda38a1cec1c8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlYWU3MWJjNzJmODUxZTZlNTNkNTBiZGI0NmM3NzA2M2I3ZTRiMzRmZDNhNjZjMWQzZjMwY2M4NjAzMDUxYzZlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJjN2RlM2RlOGRmNWE2ZjNjYmY2MTU3MGVhNTdiMDI4NjhhMTcyZmQyNWZlNDEzZTEwYWFjZTg4ZjlhZGI5YjRkIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJiYTVjZjRlYmY5ZDBkOWRhYzdiOGVlYmZlYzM2MGQyODE5MWNlZjZlZDQxMzQ2ZmIzYTZhNjY3MDYxNGQzNzNmIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI3ZmQ1YzhkZmUyY2YyZjdkYTY1NmRmNDFhNWRhNjY2ZGIzNjhlMzM4ZjE4MGIxNDQzZmZmYzNmMjA4NDU0NWZhIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_2f365d339b654c91ae07146bfa8d03e8",
+      "statement": "扩展有四个互不共享内存的运行时世界：defineBackground 的 background service worker、runAt document_start 且 world 为 ISOLATED 的 content script、defineUnlistedScript 的 MAIN world 页面脚本 boss.js，以及作为 HTML entrypoint（index.html 加载 main.ts）的 options 页面；入口文件通过 WXT 生成的 #imports 取得 defineBackground/defineContentScript/defineUnlistedScript/injectScript。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/background.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:2944a75f9d58fb8a225d8a0802ff60537ed99dba5e8b94c1b5490e03f98800fc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwZTFiMzY4YmMwZjM3ZTI3NjhmZDcyYTE1NDA3Y2NmYTdhYzQ5NTE2MTg1N2MwYzM5NzJjZmIwOTgxZjk2ZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L496-L523",
+          "version": "repo-lines-v1:sha256:796c43760b0ef9de450628065e6be347a53254f13c83966743c629c7e05ce8fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwOGI2ZWZjMjIxZTZhZjk0ZWIzZDg2ODIyYTVmNTVjODNlYzg3M2I4NmRlNWYyN2UyNGNmYzk2NzA2OGNmNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MjY3OTM1ZmM2MzM0NjVkODQ4YjQwYTRlZDY5NjdlN2I3YTMyM2Y4MWNkNTNjMTEwYWUyMTAyOTY4N2FhMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3NGVmYzJjMWE0YjU1MTQ0MjdjYzM1OTQ1MDVmYjhiNjBmY2Q2NzUzMjAxODQ2YTE1YzExODM4Yzg3YjIxYjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk0N2NlNzM0ZDFhYTVlMGUyOThhN2I1MzMyM2Y3NDNhZTlmMmI2ZTZjY2NmMzI1ZDZiYzAzMTI1MWNjZGJiMDkifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/content.ts#L1-L35",
+          "version": "repo-lines-v1:sha256:156cbc11456d508d22b9e15d98933fd7de64666113529c03d9215c83ef4f272e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwZTFiMzY4YmMwZjM3ZTI3NjhmZDcyYTE1NDA3Y2NmYTdhYzQ5NTE2MTg1N2MwYzM5NzJjZmIwOTgxZjk2ZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/index.html#L1-L26",
+          "version": "repo-lines-v1:sha256:5e4c66dc368d997a545c1d6354f9b67974c0fefe3282596f533990dd0d4a2f6a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzNWZjYTg1NzRmMDYwZWVhMjRlYmNkYWU2Yjc4ZjMyNDE0ZjVkZTAzZGExMDg0ZmQwZTczZDcxMDc2OGUzYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzZWQ4MWNkMTZkZjg4ZDY5MjE2NjQ2ZDhkYWRhNzYzNGIzM2E2OTg2ZTljMjNhNzI2MzFkMTkzM2I2MzVhNTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/main.ts#L1-L23",
+          "version": "repo-lines-v1:sha256:d4324c95aa1b8f9c564181ab8792d479392efca1a22fc79d290eb11e2aa30937:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwODQ5OTI1ZGI1N2U4OTJiMTMwY2UyMGIwYWU1NmU2MzA1YWNmNmY1ZTE1MzY5M2RlZTNkZGNiYWJkMmMwZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxNmY2ZTdlOTZkYzI2YjcyMjNiMGQ2ODA5MDVkZTZhMjQzMjU4OTNhZmVhZTAwMzQ2MTMyYTVjZDhhZWQyNjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd53fb16929945829e531753c8051301",
+      "statement": "content.ts 的加载顺序是：先用 namespace __boss-helper-background__ 建立指向 background 的 RPC 客户端，再用 namespace __boss-helper-content__ 与 heartbeatTimeout 3000 provide 出 ContentCounter，最后 injectScript('/boss.js', { keepInDom: true, modifyScript }) 在 <script> 元素被插入 DOM 时通过 ProvideContentScriptAdapter 把 ContentCounter 服务端绑定到该元素；页面脚本侧的 initCounter() 用 document.currentScript 作为载体。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/content.ts#L13-L32",
+          "version": "repo-lines-v1:sha256:526a97cae99809fbc95df108109c9878c3a6799effe12a882d5c35c9a2c6c75e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MjIwYTFiMzg5ZTQyYzc5NjZkZTY0M2JjNTUzZGNmZTVlOTI4ZjU3NDkwNDBhZjcyZDIxOGZkNjc5ODI0MWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NzhlMjUwM2I4Y2YzN2EwNmY3ZDZmMGEzYTZiNmZlMzU2OTFmYmNhYjUwYjg3NzVjYWI2ZmFiYzcxYzU5MmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhMTNkNGJiNGVlMzU5YWEwN2RhN2U1M2ExN2U3ZjlhYWYxZTk5MjFiNjIwNGEzMDM0MzcxNDlkNTY4NDc4OTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwNTAxOTFjZWQ5NTgyM2RjNDZjZTlkM2NiNjczYmIzOWUxOWEwZjk3NWJkN2Q4Y2MxMDZhYjNiZTYyYzMwN2MifQ"
+        },
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L48-L71",
+          "version": "repo-lines-v1:sha256:b439d1677eedfc360a156d6fcc8696272a60bf34b284acc888e50373d2872b4d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMDFmNTYxMTNiYzgwMDQyMGFjMjU5NDhjNjRhYjE4ODYzNWU5ZjFjYTUzZTFlNDZhOTgxYjUxMDkxMGU3ZmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YTNjZDkzY2MxZTBkMzQzYzBkYjljYjBiOGU5MTI3NTgwOTBhOTYyYzU0YjkzYzA3MzY3NDY4MzljY2RjOWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L13-L20",
+          "version": "repo-lines-v1:sha256:839405e80822c9337c63a15c11976d522185ae90320b5a606066a04b5af12187:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ0MGExMWRhOTI5MjI4Mjg1MzA2NjQzYTcwOWM0MDcxMWZiMTZkMWIyY2Q2ODY2MmNmNmNlOTJiYjA3MDg1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWZhZDQ3ZWUzZjBiMzEwNWU4Nzk5NGM5ODdkZjY3NGUwNzBmZmYwOTBiMzkyOTRkM2VlNjI0MmUwYmYwNDkwNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGRjZWFlNzBhMzg0YjEzNDRiYzI1MTJhOThmNTdlNTE3ZTQ2ODFhZmFkMjc4YjkyMGJiNTNhMjBiZmRjYmEzNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2e796f97cb0b4c83adbd3b81f6bddc70",
+      "statement": "ISOLATED 与 MAIN world 之间只能通过 DOM 事件传输：当前生效的 ProvideContentScriptAdapter 在 script 元素上派发 CustomEvent('_boss-helper-message_')，detail 为 JSON.stringify(message)，接收端 JSON.parse；因此所有跨世界消息字段必须可 JSON 序列化。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/content.ts#L24-L29",
+          "version": "repo-lines-v1:sha256:19e565ef94a5ccbaecf0c0422e471ee419be6ffd0d2137bc5d827e441db1d47c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDBiNzE3ODZlYTg4ZjY0MzJhMGYzMTk4NTZiOTA4MWU4YWQ2YmI2ZWU2ZDk5ODgwNDdiY2QyZDMyNmI0MGM5NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFjYzUyMzRhZTRjMzRmMTNlZjM0YzE1NTY0NWQxNmMyMThmMmE4NjU4ODIzYzkxMWFmZTIyNGM2MzM4OWNkZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDc5NmIzNWE0YjY2MTFhY2QyMGZiMWZlMTc2NDNjYzQ1NzcxNjQ5MGI3NmI4MTBmYTUyNjJiOTcyMmM5MDJlMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTNhYjI4MjFmODdjYzBjMWFhOWJmMzI2OTQ1MGMzOWQ3MTNjZjllZDhhZjhhYjIyMDViZWRlZTQ4NWZjY2FlMyJ9"
+        },
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L48-L71",
+          "version": "repo-lines-v1:sha256:b439d1677eedfc360a156d6fcc8696272a60bf34b284acc888e50373d2872b4d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMDFmNTYxMTNiYzgwMDQyMGFjMjU5NDhjNjRhYjE4ODYzNWU5ZjFjYTUzZTFlNDZhOTgxYjUxMDkxMGU3ZmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YTNjZDkzY2MxZTBkMzQzYzBkYjljYjBiOGU5MTI3NTgwOTBhOTYyYzU0YjkzYzA3MzY3NDY4MzljY2RjOWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_246cc1582df74459a8b7317408be2898",
+      "statement": "src/message/contentScriptShare.ts 中的 ProvideContentAdapter（挂在 document 上、在 cloneInto 可用时用它克隆到页面上下文）虽仍被导出，但没有任何调用点；另有一段被整行注释掉的旧版 ProvideContentScriptAdapter。因此实际生效的跨世界传输只有 script 元素 + JSON 字符串一条路径。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/content.ts#L24-L29",
+          "version": "repo-lines-v1:sha256:19e565ef94a5ccbaecf0c0422e471ee419be6ffd0d2137bc5d827e441db1d47c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDBiNzE3ODZlYTg4ZjY0MzJhMGYzMTk4NTZiOTA4MWU4YWQ2YmI2ZWU2ZDk5ODgwNDdiY2QyZDMyNmI0MGM5NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFjYzUyMzRhZTRjMzRmMTNlZjM0YzE1NTY0NWQxNmMyMThmMmE4NjU4ODIzYzkxMWFmZTIyNGM2MzM4OWNkZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDc5NmIzNWE0YjY2MTFhY2QyMGZiMWZlMTc2NDNjYzQ1NzcxNjQ5MGI3NmI4MTBmYTUyNjJiOTcyMmM5MDJlMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTNhYjI4MjFmODdjYzBjMWFhOWJmMzI2OTQ1MGMzOWQ3MTNjZjllZDhhZjhhYjIyMDViZWRlZTQ4NWZjY2FlMyJ9"
+        },
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L1-L50",
+          "version": "repo-lines-v1:sha256:21aaadb2fd127c919ba6e3674069b9f7f68983c37f75d164514db123389fceb7:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTM5M2EyOTI3Nzk4MDZhYTIwNDA2ZWJmMGJlNWEzZTc2YTBmNzMzODM2YjY3ZjY2NjQ1NGIyYzRhMzJkZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyMjViMGNjYTIyYTI2YTlmOWQ2MDFhNTZlOWU5ODA2YWZiMjQ3MTI0NzBjMmZkZTdkMDlkNWZiOTE0OThiNmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI3OTJiOTI3NjExMTA1MzExNjdiNWJhYjdjZmRkM2U4YzM3YmNkODBmMmZkOGUyMjE3NDRlMTZlNDQ4NTIxN2IifQ"
+        },
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L48-L71",
+          "version": "repo-lines-v1:sha256:b439d1677eedfc360a156d6fcc8696272a60bf34b284acc888e50373d2872b4d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMDFmNTYxMTNiYzgwMDQyMGFjMjU5NDhjNjRhYjE4ODYzNWU5ZjFjYTUzZTFlNDZhOTgxYjUxMDkxMGU3ZmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YTNjZDkzY2MxZTBkMzQzYzBkYjljYjBiOGU5MTI3NTgwOTBhOTYyYzU0YjkzYzA3MzY3NDY4MzljY2RjOWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7bcf0c2c6bff489b8f852664f6761476",
+      "statement": "MAIN world 的 boss.js 无法访问 browser.* 扩展 API，而必须依赖 ISOLATED 世界的代理，因为 MV3 下扩展 API 只暴露给扩展上下文，且 ISOLATED 与 MAIN 只共享 DOM 而不共享 JS 对象。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L496-L523",
+          "version": "repo-lines-v1:sha256:796c43760b0ef9de450628065e6be347a53254f13c83966743c629c7e05ce8fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwOGI2ZWZjMjIxZTZhZjk0ZWIzZDg2ODIyYTVmNTVjODNlYzg3M2I4NmRlNWYyN2UyNGNmYzk2NzA2OGNmNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MjY3OTM1ZmM2MzM0NjVkODQ4YjQwYTRlZDY5NjdlN2I3YTMyM2Y4MWNkNTNjMTEwYWUyMTAyOTY4N2FhMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3NGVmYzJjMWE0YjU1MTQ0MjdjYzM1OTQ1MDVmYjhiNjBmY2Q2NzUzMjAxODQ2YTE1YzExODM4Yzg3YjIxYjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk0N2NlNzM0ZDFhYTVlMGUyOThhN2I1MzMyM2Y3NDNhZTlmMmI2ZTZjY2NmMzI1ZDZiYzAzMTI1MWNjZGJiMDkifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L199-L216",
+          "version": "repo-lines-v1:sha256:5b509471afddbffafe7f3325d184e0144adfc571946435084bd976951fb9a65d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3M2UyMjZkOWNmMzIyZDQ2M2RiYWI2OTdlZDFlZTJjMGUzZjYyNmQ1NzBlM2Q1OTQ5YmE5NTE2NmIwZDIyMjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/message/contentScriptShare.ts#L48-L71",
+          "version": "repo-lines-v1:sha256:b439d1677eedfc360a156d6fcc8696272a60bf34b284acc888e50373d2872b4d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMDFmNTYxMTNiYzgwMDQyMGFjMjU5NDhjNjRhYjE4ODYzNWU5ZjFjYTUzZTFlNDZhOTgxYjUxMDkxMGU3ZmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YTNjZDkzY2MxZTBkMzQzYzBkYjljYjBiOGU5MTI3NTgwOTBhOTYyYzU0YjkzYzA3MzY3NDY4MzljY2RjOWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ea5406d6ac7e42a8a3bbfe71ae98849d",
+      "statement": "boss/index.ts 的默认导出是 defineUnlistedScript：它不出现在扩展 UI 上，只通过 wxt.config.ts 的 web_accessible_resources 登记为 boss.js（matches 与 content script 共用 zhipin 域名），从而可被 injectScript 注入页面。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L496-L523",
+          "version": "repo-lines-v1:sha256:796c43760b0ef9de450628065e6be347a53254f13c83966743c629c7e05ce8fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwOGI2ZWZjMjIxZTZhZjk0ZWIzZDg2ODIyYTVmNTVjODNlYzg3M2I4NmRlNWYyN2UyNGNmYzk2NzA2OGNmNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MjY3OTM1ZmM2MzM0NjVkODQ4YjQwYTRlZDY5NjdlN2I3YTMyM2Y4MWNkNTNjMTEwYWUyMTAyOTY4N2FhMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3NGVmYzJjMWE0YjU1MTQ0MjdjYzM1OTQ1MDVmYjhiNjBmY2Q2NzUzMjAxODQ2YTE1YzExODM4Yzg3YjIxYjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk0N2NlNzM0ZDFhYTVlMGUyOThhN2I1MzMyM2Y3NDNhZTlmMmI2ZTZjY2NmMzI1ZDZiYzAzMTI1MWNjZGJiMDkifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L146-L158",
+          "version": "repo-lines-v1:sha256:c511a40fd53576ffb3efc099f677f84c3fbd351155063d57951af6975b4dcec2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2NmQwZTYxYjYyMGUxYjU0MTViNDYyMTdkOThmMDE4N2JmNTFiMGNmYTEzYzRkMzZmYzQ4MTNjNTY4NDlhOWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM2M2Q1MzVjZTM4MDYzZDZiNGM1MWQ4YzM4NmE3ZjliM2U1ODBhMTRhMTBjMDdiMTk4ZGZhZjE5YzkzYTNiZmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiN2JjZjc0NmEyZGMzMDlhYmJjNWJmNzE2YTdiMTkxMWU1ZGJlOTJkNmUzN2QwZmVmMzJlZDAxOGFjMjY5ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwMzc1ZmRkMTlhNWIxMjBiY2JiNzgwOGI1YzBmNjAxOTQ1NTgzNTUxZjY1MDBjYzU3ZTlkY2I2Y2UxMzBhYTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1e9328d880754490b194ea0204369ea6",
+      "statement": "boss.js 的启动流程为：initCounter() 建立与 ISOLATED 的连接，BossHelperCtx.new() 通过 getRootVue 轮询 #wrap.__vue__（300ms 间隔、20 秒超时）取得宿主 Vue 根实例并初始化 workflow，向宿主 $router.afterHooks 推入回调使每次路由切换调用 ctx.onMount(to.path)，最后 await run(bossHelpCtx)。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useVue.ts#L6-L33",
+          "version": "repo-lines-v1:sha256:bca7154e3c6e95b1cf52c579f9f711b5a863f65920583f118a13f7760d1af076:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4M2Y0NTQyOWVkNDA0MDYyMDcyNzY5ZGYzMmFjODE4ODU2NzJlN2RlMDc5OWI1NWFmOTA2NmY1NmU5NGJjNzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlNzI0OTNjN2RkMzgwMmYyZmRlMDc5Y2E0ZGYxNjJhNjcyMTQ3OGVkZDU3NzJmYWFkNjcxMDM4YTk0ZTA1ZjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRjM2FjMmE3YTMxYjQyYjE5Y2Y2ZTE0ZjYyMTJlZTk3MWZhYzRiOGJhYThlZDY4ZTM5M2ZlYTUwODUzZjY3MGQifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L173-L178",
+          "version": "repo-lines-v1:sha256:aa07551eda1986d8d589cb92e4361606e691288df65f46d1c5c8417037d2895d:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGU1YjcxZDFkYWNkOTc5NTE2MTZhOTkxZTU1ZGM2OTE4OWNkOWQ5OTY0YzUyYjZmNmJiOWY1ZWQzZTViNDkyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTdkODYzMmU1NGU5Mjk4YWJiOTU4NzI3ZTJkNTE0MDhhYmFmMTM2NjAzNTM3OTEwMTQwYWJmNjViMzBhYjYxMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzEwN2Y5NTE0MjMwN2VhOTM3NjNlOTc5NzljZTc3ZDAzNjEyODc0NjhlYTgyYzExMWMwZGQ1NjE2OTNmZDE4OSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L496-L523",
+          "version": "repo-lines-v1:sha256:796c43760b0ef9de450628065e6be347a53254f13c83966743c629c7e05ce8fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwOGI2ZWZjMjIxZTZhZjk0ZWIzZDg2ODIyYTVmNTVjODNlYzg3M2I4NmRlNWYyN2UyNGNmYzk2NzA2OGNmNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MjY3OTM1ZmM2MzM0NjVkODQ4YjQwYTRlZDY5NjdlN2I3YTMyM2Y4MWNkNTNjMTEwYWUyMTAyOTY4N2FhMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3NGVmYzJjMWE0YjU1MTQ0MjdjYzM1OTQ1MDVmYjhiNjBmY2Q2NzUzMjAxODQ2YTE1YzExODM4Yzg3YjIxYjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk0N2NlNzM0ZDFhYTVlMGUyOThhN2I1MzMyM2Y3NDNhZTlmMmI2ZTZjY2NmMzI1ZDZiYzAzMTI1MWNjZGJiMDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2505eba2685b43cc81ef7dcc3aab2f6d",
+      "statement": "onMount 先探测 boss-helper-job 面板是否已存在以便幂等返回，否则移除旧实例、在 .job-search-wrapper/.job-recommend-main/.page-jobs .page-jobs-main 前插入新的自定义元素，依次执行 _initPage/_initPageChange/_initJobDetail/_initClickJobCardAction/_initJobList 与 initNetConf，再建立 GeekChatClientManager 并 connect，同时调用 removeAd() 清理宿主广告位。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L25-L44",
+          "version": "repo-lines-v1:sha256:7f945d1a944fc42cad57f7a039a532097c9c9114fca88a2f5e146d396f885f79:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5NTdhMDdhYzZmODIyN2UxZTZjMzM1ZWQ1MWU5NjFiZWMxMDIxOTQ1ZjY4ZmQ2NjMwY2EzNDlhN2Q3NzgzYWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYjc2NjlmZDNiM2E0MDI1NmI1MDg3NTE4MzhhZGFmYTQyZjQwMjdmNjBmYjBjNmIxOTA0ZDU1NzFkMjMwYmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2MTU0MzBjODFkZThkMzYyNTRkODg4OTZiYjQ2ZTk2NGJiYTY1YjgxMTk5MGIyNmQ3MDhlYzZhMmRlNmY2ZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxZmVhYjY0ODg5MWExODc2OTI1NGI3ODg1ZTMwYjIyMGFhZmQ2YmIxZjAwOWQ0NjZjODkxZTYyMTJiYWU0YmIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L261-L305",
+          "version": "repo-lines-v1:sha256:1845e97ee9272b1d9b7ebf87cc0b9756f4ce03855192f0d114af750cf9c7a262:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzYTQ0ZTRhODZhYjg2MTU2YmQwNjg2Y2MyYzBiMGNkNTRhYjk2Mzg4YjY4ZmNhMTlmN2I4OWNmNzEzNTVlMTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmY2VhNGU0YzYwMWVhYzk4NjY2YmI4YjY3OTI3NmZjZGQ0OTIzM2RlOTcwZTI3NDc3MDdkZTg4NTI5NTM0MDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkxOGZhNTA1ZTFjZDM0MjYzMzgxN2M4ZWEzYWIxNzkxNjUzZDM0YWQ4ZWJmZmEzYjM3MWM2ODNjOWVjNDJjNzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9aa176fddfd74c3dbc677baca9586c04",
+      "statement": "宿主数据通过 useHookVueData/useHookVueFn 在宿主 Vue 组件的 pageChangeAction/searchJobAction/onSearch/clickJobCardAction 上挂钩子读取 pageVo、hasMore、jobDetail、jobList，并依赖 window._PAGE 等页面全局（类型在 src/env.d.ts 的 Window 扩展中声明），这是页面脚本必须运行在 MAIN world 的唯一原因。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L408-L435",
+          "version": "repo-lines-v1:sha256:f056616f3fb14dd794ac409e0acc28c7f5d40fd36d936e5d1d74b4efddeb271d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlOTc3YjIyYTVkMjFjOTRmN2YyOGM2NDVjMzBhYzg2ZjZlZWRhZTk0ZDE0YTYwNTAxMjliZjc4NjU2MjJhMDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxZDZmZTM4NWZkZmJhNzllN2ViNjhmYTYxMmE5NTBjMDZkOGZjNzFiZjUzMzY2NmRiNDJjYTNjNGQzYjA2NzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzN2YxYzhiNGFkNGYwMGI5NTEzOWU2NDE5NzdkZGRhNjFhYzIzNmRiYjM4OTVjZGJjOTVmN2E3MjU2ZTYwZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0MWQzNjZjZWNkMGM1OTFhZTUxMjMyZDNkNjhjMDZlZGFiZDUwMjY3Y2I5ZDUyYmIxY2QxZjc5MWE5YTdkNDgifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L46-L52",
+          "version": "repo-lines-v1:sha256:9cd855bd4ba30351e5f74aeb864d65d8fd61ea1979b5a9276e01286b734378e7:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTYzYWFlMzlhZDU5ZmFmMzJkM2EwNDU4Yjg5MzQ2ZThlODhlOTFmZGQ0MDQ1NDAzYTg4YTA2N2ViNTYyOTk2MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTdkMDk2NGViOTZmM2ZhY2I2MjhkNjA3YTI4NTZjZDVjODk0MTM2YTNkOGNiM2Y2OTE1MGVkZmMxMzg5ZDk5OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjkwYTIwZTRiODZjMTU5NDhhNzNlMDkxY2ZhMjZkNGY2NTlmN2I0ZWRlNjFjOWEzZDcwM2QzMjdhMzVmYzgxNyJ9"
+        },
+        {
+          "resource": "repo://src/env.d.ts#L1-L43",
+          "version": "repo-lines-v1:sha256:92184097ede0d028291c57ee3b136e3f1733d028aa7ae9ca90f65e8faefe8891:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZGU1ZWY4NGUxNGYxOGUxNGJhMjAzMzdhYmEyZDVjOGUxNDA3NTQ1ODVlMzFmNmIzMDQ4YzQyOTgwN2FjYTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5NjhlOTljZGNmMGM0ZjVkYzFhZmVjODAzNGI0NjcyYTE4YWVmNWQ5YmVmMjcwNWI2MDViM2U2NWZjMWZmMWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1a3b449256c944c3a157614bfee203fe",
+      "statement": "src/index.ts 的 run(ctx) 注册 boss-helper-job 自定义元素，connectedCallback 内 attachShadow 并把 main.css?inline 注入 shadow、用 createApp(App).use(ui).provide(HelperKey, ctx) 挂载到 #app-root；disconnectedCallback 中 app.unmount() 并清空 _vueApp 以实现干净卸载，注册完成后执行 await ctx.onMount()。",
+      "evidence": [
+        {
+          "resource": "repo://src/index.ts#L1-L47",
+          "version": "repo-lines-v1:sha256:fd404e83e670ee7005b9f46c9a8e3ef79281e326ff6ccd762bbc9c8f73ad6a43:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwODQ5OTI1ZGI1N2U4OTJiMTMwY2UyMGIwYWU1NmU2MzA1YWNmNmY1ZTE1MzY5M2RlZTNkZGNiYWJkMmMwZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_08520661c8514b83b92aa802a3df7b1f",
+      "statement": "src/entrypoints/boss/inject.css 由 content.ts 以普通 import 引入，作为 content-script CSS 生效在宿主文档上（覆盖 #boss-helper-external-wrapper 与暗色模式下的 #header.header-v2），这条路径与 shadow DOM 内的面板样式互不相通。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/inject.css#L1-L20",
+          "version": "repo-lines-v1:sha256:4b42cbd181d24fe7f9c5ca01028d9a1627441276c822fb628778160ad2d38b27:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllNTc1MWRjMDMwOWE3NWMyOGZhZjdkZjIyZTZlOTllOWNiZTY4ZDVjNGZjM2I0OWM4MDRjYTYyNWRjODg2NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2NDllYzY2ZWRjYTc3YTBmOWZmOWUyODQ4NDE3YzdmNWFhMWRkYWYwOTY4M2QyYmU1YmM0NGVhYjExNGY4MTMifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/inject.css#L116-L145",
+          "version": "repo-lines-v1:sha256:b7fe9d4df1051d68a446230ba69afb8f35d8df1f7aac06c22bd52dc5c83112b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyODAwZTdmZmEyZDUyMThkNGI4NzgxNWRjNDM5OTQyMGJjNmE2N2E2ZDA4OWVhODZkYTU5MjcyMmU4YjZhYzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/content.ts#L1-L6",
+          "version": "repo-lines-v1:sha256:3a6da96a23ebc6d3767e83f1b83be747e75b99ab441212486ea393e2eb463909:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTBlMWIzNjhiYzBmMzdlMjc2OGZkNzJhMTU0MDdjY2ZhN2FjNDk1MTYxODU3YzBjMzk3MmNmYjA5ODFmOTZmMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzAzNmJkM2JlMzM0NDRjZTJmZTg1ODkzZWNkM2I2NmE1ZDcwZWMwNjVmNzE5OWM2ZDJkNTdkMzcxZWUwOTc5ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmNjNjkwN2FiOThmMzRiMzBkM2E3NjRhODljZjEzMDNkMGI0ZjQ5ZmU2NTI3YzM1MTVhOTcxYjkyZmMwYzRlYiJ9"
+        },
+        {
+          "resource": "repo://src/index.ts#L11-L20",
+          "version": "repo-lines-v1:sha256:24013846307a7bd0dc10bb58a4633c07554127f7aa246a42e9679c2e2efe49c1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlNDVlMjFjYTc2NmYxOGE3ZmMwOWUxNzU1MTNmNWY4Y2IwOTVlNTQ4ODc1ZDgyODRmYzg5MjJjMDdiNjcyNjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwNTI4YmFhYjZiZGFhMTZjMGIxN2FjN2VjMTdiZjEyNGE0ODgwYTQyMTkzYzUxM2VkNDMwZGNmZWM0YWFkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzZDdhODU5OTVlZmM2YzhhMzRjZjc1M2JmZmJkYjMzMTlhYTViMWQ4MmM3YWJmMjk0NWZhZGI4NTFlMzNmMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1MzI5YWRlZTVjNmE1ZGU2MjFkYTNlMDMxNjQwZTFmZjE0MjVjYmFkMWVhZGVlNzdmNjg2NGI4MGZjODFmMTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a6f9142889db4b06bef2b842c384defc",
+      "statement": "options/main.ts 不走 run()：先按 prefers-color-scheme 在 document.documentElement 上设置 dark/light 类并监听变化，再调用 initExtensionCounter()（用 InjectBackgroundAdapter('popup') 直连 background，没有 ISOLATED 中间人），随后动态 import('./App.vue') 并挂载到 #app；失败时把错误文本写入 #app。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/main.ts#L1-L23",
+          "version": "repo-lines-v1:sha256:d4324c95aa1b8f9c564181ab8792d479392efca1a22fc79d290eb11e2aa30937:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwODQ5OTI1ZGI1N2U4OTJiMTMwY2UyMGIwYWU1NmU2MzA1YWNmNmY1ZTE1MzY5M2RlZTNkZGNiYWJkMmMwZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxNmY2ZTdlOTZkYzI2YjcyMjNiMGQ2ODA5MDVkZTZhMjQzMjU4OTNhZmVhZTAwMzQ2MTMyYTVjZDhhZWQyNjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L199-L216",
+          "version": "repo-lines-v1:sha256:5b509471afddbffafe7f3325d184e0144adfc571946435084bd976951fb9a65d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3M2UyMjZkOWNmMzIyZDQ2M2RiYWI2OTdlZDFlZTJjMGUzZjYyNmQ1NzBlM2Q1OTQ5YmE5NTE2NmIwZDIyMjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L22-L25",
+          "version": "repo-lines-v1:sha256:b7ab1d29f1ff56ce86e2c2daa82d29a75dd7ba6b705dbd159d7ce9de2a685fcb:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2RhZDBiNTI2NjcwNGZjYmQzMTQ2NjhhNDUyZDViNGQwYjE5MGM3Y2VmMWMyYjRmNmY3YWMxMzA1YmZmMmI2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODhiN2IwZTIwYjk0YmJmMTcxZTNjYjJmNDc4MTU5MmNjM2VmNTNhYTBkMmVhYWMwMmJmYzk5YThjMzA1YjhhMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGU3ZGIwNzIzNDY2MGMxNjlmOGFiZmJkYjY1NmFhNjU4YmIyM2I5NTU1MDVhNmY1NmI3ODc5MjBiOTY1ZWRjZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2e821169c3d649f8b8392a2af3104759",
+      "statement": "options/App.vue 构造一个替身 HelperContext（固定 key 'boss'、空 jobList/jobMaps、workflowRunning ref、空 onJobCardClick）并 provide(HelperKey, context)，因为配置组件通过 useHelper() 注入上下文，而 options 页既没有网站会话也没有岗位数据。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L83-L96",
+          "version": "repo-lines-v1:sha256:2c85eead93848c429d504a5d9e448271151ed518042df978d691f64b46b2bb39:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZTdlM2VkYmRjNjdlZjVjZDliYzEwMTJiNThlYzViYWJmZjRlYjZhNWM3ZmMxZjljNWZlM2M0NjJmNGFiZTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2MGM2ZWM5NTdiNjU1NzFhZmNjZWUxNmI1OTIwZDVjODc3ZGIwNGQ1ZDMxOGFhOTk2YTI4NmY3ZTlkMTRlYzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzMDA4MGMxZTRmNGQwZmFkNzYyYmE2OThlYWQ0ZjBiODY4NzJhYWM4ZjAzNjRlMzViMzMyNWRkNjg3NDZmZDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_86ecb3a768624d59aeebd7b94753a958",
+      "statement": "wxt.config.ts 用 srcDir 'src' 与 outDirTemplate '{{browser}}-mv{{manifestVersion}}' 把每个浏览器产出到 .output/<browser>-mv3，并用 @wxt-dev/module-vue 提供 Vue 支持；tsconfig.json 继承生成的 ./.wxt/tsconfig.json 并补充 @/~、@@/~~、#build/ui 与 devlog-ui 的路径映射。",
+      "evidence": [
+        {
+          "resource": "repo://tsconfig.json#L1-L21",
+          "version": "repo-lines-v1:sha256:df4724ede7e830db7e7f4faf8e0a3d59c4f666ab28034959b0e72ddd7f64b6fc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L50-L53",
+          "version": "repo-lines-v1:sha256:75ad91440d1dd5e27f7bcb28c6b248bfb43f22976a8b02755b717bf087210fdf:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWY4NDc1MTM4NDU1ZmQ2ZjJhYTlmYzM0MzUxNTMwNWY1MTVlNDgzZmQ4MTg4MzQyNTA4ZGJiZWFiNjY0OGVhOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTJjOWE3NjZhODA4YTJjNzM5MDkzM2Y2OTMxODk5NWY5YmU4ZWM3ZjVmM2JkZWMxYzU2MmRmZjdmNWNiMzI5OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmE3NTAzNmYyZDEwYWNjZTQxYjg3YjgyMTNlYjc5NmZhMThlODBhZDA4OGI3MTg0NTM4MjJmYjZjMDA2YTJiOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzcxMzQ5NjlhNzhmYjMyMjU0ZTNmYzE3NTZiMWI5ZTkwMmM0Mjc2ZDY1MzQ1ZDQ2NWFjMTNjZjU1MWZmOWQ5OCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e77ff307cb9b49f391b556535df7de3d",
+      "statement": "extKey(browser) 决定 manifest 的浏览器差异：chrome 使用 key 公钥，edge 的 key 被显式设为 undefined 因而不输出 key，firefox 使用 browser_specific_settings.gecko.id（UUID）并把 strict_min_version 锁到 109.0；未知浏览器或空值返回空对象，因此更换 key 会改变扩展 ID 并影响升级路径。",
+      "evidence": [
+        {
+          "resource": "repo://wxt.config.ts#L9-L36",
+          "version": "repo-lines-v1:sha256:0f2f501ec3b17b7219da3f994eb575299bb980026ec0bce5b20e4f8d4d33a671:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmZjcyZjQ1ZDk1OGNmYWNkOTEwMzZlNjI3ZWQyOGY5OGQxZDkxNDQ0YzVmNzUyYWI5ODA5OTFkNDU1NDA2YmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgyYWU3NDJkZGRjMzU1OTZjOTM0YWUxZWRkZTZhMDc2NGVjMjYxYjBiY2M4OTEzMzQyYzM3Y2U3MWQzYTcyMDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUxZmExMjIzNTRiYWI5ODc1MDk0NzY0MDFkZGZjYmVkZGUzYjdhZDVmZDUxZTJjYjNiN2FiMWI1ZGZiZDlhYjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7c15062ac6154b68ab8bd4bbd6cd8c31",
+      "statement": "manifest 配置声明 default_locale zh_CN、name/description 使用 __MSG_extName__/__MSG_extDescription__、权限仅 storage 与 notifications、host_permissions 覆盖 http/https，并把 boss.js 与 content script 共用的 matches（*://zhipin.com/*、*://*.zhipin.com/*）注册进 web_accessible_resources，使 injectScript 可以注入该脚本。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/content.ts#L12-L13",
+          "version": "repo-lines-v1:sha256:ce59dd53fdc49bbb5ff77665a6d4c839e01bc5742ba5e241280ac9d4fcccb5d5:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE2OGIyZDVlYzQ1MzQwMDQ5MjJlM2YxNzliMmE0NmM4ZTEyYmI5YWY2ZDdhMjFhOTkwNzQxMzM2ZjlmYjViNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjYyMjBhMWIzODllNDJjNzk2NmRlNjQzYmM1NTNkY2ZlNWU5MjhmNTc0OTA0MGFmNzJkMjE4ZmQ2Nzk4MjQxYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjJiZmM5YWQzMGUyMjMzNDExZWEzZWQ2NjA5ZmU3ZTc0MGZmYTJkNjI1ZDc0OTQ2NWUyMmM5ZWY2M2FhNjM3OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWI1YmZjYWUxYzRiNjU5MDIxNjEwZmRmMjRmYjFlNzNmYTU5MzA0YWE3YThmOTBjMmY2Y2VkMWM1NGI2ZmYzYiJ9"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L146-L159",
+          "version": "repo-lines-v1:sha256:51143f31dbd617b2eac36f4f9a248256f0fd96d909192f1d75bc32ff02ce3ef0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2NmQwZTYxYjYyMGUxYjU0MTViNDYyMTdkOThmMDE4N2JmNTFiMGNmYTEzYzRkMzZmYzQ4MTNjNTY4NDlhOWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmODEwOTQ2YzA1MjQ2NDNmMDNiZTYxMmQ5YzQ3NmVjYTE5Y2UzMmZhNTQ1NjdkNjk0MDAwMTBhMjBhYWE3YTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiN2JjZjc0NmEyZGMzMDlhYmJjNWJmNzE2YTdiMTkxMWU1ZGJlOTJkNmUzN2QwZmVmMzJlZDAxOGFjMjY5ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY0YmE4OGZlNzM2NTgwNWY3NTc2MzNkNTkyY2I4ZWY5NjJmMGMxM2Y2OTYxMWE1ZWZiMjI2OWY3MzZhMjEyZDAifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L8-L8",
+          "version": "repo-lines-v1:sha256:d1807b9e74628316428a4c484d67e5535a7fe4cfeadc15b418c8d10e71e9ace1:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDE4MDdiOWU3NDYyODMxNjQyOGE0YzQ4NGQ2N2U1NTM1YTdmZTRjZmVhZGMxNWI0MThjOGQxMGU3MWU5YWNlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDE4MDdiOWU3NDYyODMxNjQyOGE0YzQ4NGQ2N2U1NTM1YTdmZTRjZmVhZGMxNWI0MThjOGQxMGU3MWU5YWNlMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjc2ZjMwOWUxNmM5ZWVkZmQxMTdlMTYzNGQ4NTc5NmUwMDBiZmFhZDhmZTU5MjQ5MDNmMjBjNDk1YzZhNjRlOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjI4MjRlOTFmYmI4NGU5NzJmYjdjMjJhOGFhOTI4NDc4ZmFmYzFlYzI1OGU4NzUxZWUxNTg2OTEzMTczNDI2YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_abc85f62f68d487da23138471ed7de9d",
+      "statement": "Vite 层做三件事：resolve.alias 把 devlog-ui 指向 workspace 子模块 packages/devlog-ui/src；define.__APP_VERSION__ 注入 package.json 的 version（由 VITE_VERSION 消费）；ssr.noExternal 列出必须预打包的 webext-webext/nuxt 依赖；插件为 vueJsx、关闭 colorMode/router/prose 的 @nuxt/ui vite 插件与 tailwindShadowDOM（Tailwind 需注入 shadow DOM）。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/index.ts#L11-L11",
+          "version": "repo-lines-v1:sha256:488771fe7c6bb44a8dcd08a4dade992a23590083a782ba38085333dbd143dd6c:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg4NzcxZmU3YzZiYjQ0YThkY2QwOGE0ZGFkZTk5MmEyMzU5MDA4M2E3ODJiYTM4MDg1MzMzZGJkMTQzZGQ2YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg4NzcxZmU3YzZiYjQ0YThkY2QwOGE0ZGFkZTk5MmEyMzU5MDA4M2E3ODJiYTM4MDg1MzMzZGJkMTQzZGQ2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2ZmNDdlNmVkODg2YmE4M2Q2N2RjNjAxMmVlNGUyODU2NWY4MDRmN2UxMDk4NWUxNTY3ZGQ3YWZiZTcwYmM0YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjM1MzczMmMwZDk3YjExN2QwOGViYmRkYTA0OTQ1YzQ1NWJkMzlkMzkyZjJmNGFlNjFhZWEzZWI5MzAzODQzMiJ9"
+        },
+        {
+          "resource": "repo://src/index.ts#L11-L20",
+          "version": "repo-lines-v1:sha256:24013846307a7bd0dc10bb58a4633c07554127f7aa246a42e9679c2e2efe49c1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlNDVlMjFjYTc2NmYxOGE3ZmMwOWUxNzU1MTNmNWY4Y2IwOTVlNTQ4ODc1ZDgyODRmYzg5MjJjMDdiNjcyNjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwNTI4YmFhYjZiZGFhMTZjMGIxN2FjN2VjMTdiZjEyNGE0ODgwYTQyMTkzYzUxM2VkNDMwZGNmZWM0YWFkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzZDdhODU5OTVlZmM2YzhhMzRjZjc1M2JmZmJkYjMzMTlhYTViMWQ4MmM3YWJmMjk0NWZhZGI4NTFlMzNmMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1MzI5YWRlZTVjNmE1ZGU2MjFkYTNlMDMxNjQwZTFmZjE0MjVjYmFkMWVhZGVlNzdmNjg2NGI4MGZjODFmMTUifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L55-L72",
+          "version": "repo-lines-v1:sha256:8b35571df6827d6aabba2201a58124ae536940f643709dc6d3a4f762e3c70992:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyNDdhZTEyNGI3OWY1NjRkNDA2NTE2ZTllOWJmZWI0YmMxZmM0Y2RiYTRjOGZmMTEwYTA3MGQ3MjZhNzEzYTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwZmQ3NGFlNjJkZDdlNDY1ZDA2ZWQ2MTZjMmZkMDZhNDZiZjI5ZGMzMjBlZjE0NGE2N2FlMzE2NzFkM2VlZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyOWM2ZjllMGRmZmVmZDI5NzIyZjU4MDgyMjUxM2U1Y2E0NmMwOWI3YjcyZDg0NTA2MDZiZWY3M2U3MmVlN2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjExOTk0OGU5YjNhMmNjNzEwNTMyOTM4MWRhNmE2ZDdjNzgxODRiNGEwNGQyZGFmNDQ3NWE4ODZkNjAzNWJkNjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2ff575b396e94c06aab2bb78b10fa3ce",
+      "statement": "webExt.disabled 为 true 关闭 WXT 自动启动浏览器，开发需手动加载 .output/<browser>-mv3；npm run build 用 run-p 并行执行 build:chrome/build:firefox/build:edge，firefox 目标一律追加 --mv3，zip 脚本按同一矩阵生成产物并由 CI 在 tag 上执行 bun run zip 后剔除 *sources.zip。",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/main.yml#L20-L36",
+          "version": "repo-lines-v1:sha256:7898728844697e60018c55fb3c08b31460ccc44a712e36320f0b92a4d0e3dd3a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljZDZmZjRlNTYwOGNiYThlYTdlNjc3OWYxNzIyOTRjMWI2YzIzMmVhMmI0NDJiNDJhMzZkNjVmMGNjNGZhOWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5YzA5MTgzNGRjOWEzOGFlMjQ2ZTFmMDU1YjM4ODAxNDg0NDk5MDY5MGEyYzliNTNiODgwYjk2Mjc4Y2I2ZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc4ZWQwMDhhYzZkOTM3NjAyNzBkMGMzZjdhZWNiYWU0OTdmNDgxNzVmOWY3ODUwMTI0NDg1Y2U3MWEzMmVkZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhODU5OTY2NDBhY2JmM2YzNDRhZTkxNDU3ZWM2NjkwYzM4NGVjYWI5NDU5ODUzYjE1ZTRkMGRmMzQ5N2QxZTkifQ"
+        },
+        {
+          "resource": "repo://package.json#L19-L26",
+          "version": "repo-lines-v1:sha256:98799b2ee042310938b6516665b35f98ff01f13a2aa63d20ab87c923ccfa70c4:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjQ2NzllMWZkMmUyNGMyYzQxNmU0MDk1ZjZhNmJkODdhMjk0NTg0ZWJiODRhZDI3ZGNiNjEyOTY1MDI1OGY1OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzUzZjhiODllOGFlMGZhNmEwYWVjMmE4ZmJlZDllNGY1N2EyNjA2ZjFkZmNlZDEwZjZlMTQ4YTcxODY0ODM3NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWVkYTA0OTFjMmFiYzIwZDZiZmRiMmNhZTAyOTlhYmIzYjI4YTFiZDdkMTNjNmMwYjJjYzhmZGE5MTg4MDIzYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWMzMTQxYzZiMWE3NzQ5YWE2ZTQ1YThmZDcyYzJmNTBmMDdkNjJjYTM3NDNhMDUwOTBhOTA1OTE2NmYyYTM4ZiJ9"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L152-L154",
+          "version": "repo-lines-v1:sha256:c1bf06da7392463e9b11cb15b9d867564fed173b65fd584b1fa7fa7ed1fba56b:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjMwNWI2YjJiNjZkZWU3OGY4M2Y0YzdkZjk4ZGEyNTUyZGMyODYxNzBiNmFmYjIwMDNiNjU0YmI5YzEyZGFmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDk1YjhjNWJmODYzNzQzNjcxZGVmM2Y2MzBlYjIzMmQ1OWE3YTYzNGEwNzBmYzQzNmVlYzM3YTg2NzRlNmMzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjA5Y2I2MjM3ZGI3YWQ2YWI2MDdmNTQzYTYyY2MwMTVjZDlmMWZmZTEwNjMxNzNlYWE2NGEwYjBiMTJjZmQ2YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDJlYjhiYmM0MTc5ZjliYWFlYTgzNGZlMDYzMjAxN2FiYmNkNmEzOGNkZTMzZThiOTY3ZDBhOTQzZTliZDk2NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b350e74742764e83ac9db544020025d7",
+      "statement": "新增一个页面注入脚本需要：在 src/entrypoints 下新建 defineUnlistedScript 入口，把构建产物名加入 wxt.config.ts 的 web_accessible_resources[].resources，在 content.ts 中再次 injectScript 并（若需要 counter）用该 script 元素 provide 一个独立 namespace 的代理，必要时在 src/env.d.ts 补 Window 类型；限制注入范围应在脚本内判断 location 而不是放宽 matches。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L496-L515",
+          "version": "repo-lines-v1:sha256:336d1c3a20add01e939e607ff769501e9d6317591609aaeb5ff7791c79a3e83c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwOGI2ZWZjMjIxZTZhZjk0ZWIzZDg2ODIyYTVmNTVjODNlYzg3M2I4NmRlNWYyN2UyNGNmYzk2NzA2OGNmNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY1Y2ViODczYjk4ZmJlMDQ3MDc5MTVkNTQyNDc4YjU1YWYyN2EwYTJhMmFjZDI1MjliMjkzYzNkNDNmYzhkNDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3NGVmYzJjMWE0YjU1MTQ0MjdjYzM1OTQ1MDVmYjhiNjBmY2Q2NzUzMjAxODQ2YTE1YzExODM4Yzg3YjIxYjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJkOTBkOGM3MDY1MTFiM2JmOWU0MWE4ZDQ1NDIyYzRkYzdhOWFiOWNjNWY3YWI4MDYzOGQ0NDQ3Y2MyZmIxYzAifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/content.ts#L24-L29",
+          "version": "repo-lines-v1:sha256:19e565ef94a5ccbaecf0c0422e471ee419be6ffd0d2137bc5d827e441db1d47c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDBiNzE3ODZlYTg4ZjY0MzJhMGYzMTk4NTZiOTA4MWU4YWQ2YmI2ZWU2ZDk5ODgwNDdiY2QyZDMyNmI0MGM5NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFjYzUyMzRhZTRjMzRmMTNlZjM0YzE1NTY0NWQxNmMyMThmMmE4NjU4ODIzYzkxMWFmZTIyNGM2MzM4OWNkZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDc5NmIzNWE0YjY2MTFhY2QyMGZiMWZlMTc2NDNjYzQ1NzcxNjQ5MGI3NmI4MTBmYTUyNjJiOTcyMmM5MDJlMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTNhYjI4MjFmODdjYzBjMWFhOWJmMzI2OTQ1MGMzOWQ3MTNjZjllZDhhZjhhYjIyMDViZWRlZTQ4NWZjY2FlMyJ9"
+        },
+        {
+          "resource": "repo://src/env.d.ts#L1-L43",
+          "version": "repo-lines-v1:sha256:92184097ede0d028291c57ee3b136e3f1733d028aa7ae9ca90f65e8faefe8891:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZGU1ZWY4NGUxNGYxOGUxNGJhMjAzMzdhYmEyZDVjOGUxNDA3NTQ1ODVlMzFmNmIzMDQ4YzQyOTgwN2FjYTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5NjhlOTljZGNmMGM0ZjVkYzFhZmVjODAzNGI0NjcyYTE4YWVmNWQ5YmVmMjcwNWI2MDViM2U2NWZjMWZmMWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L146-L158",
+          "version": "repo-lines-v1:sha256:c511a40fd53576ffb3efc099f677f84c3fbd351155063d57951af6975b4dcec2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2NmQwZTYxYjYyMGUxYjU0MTViNDYyMTdkOThmMDE4N2JmNTFiMGNmYTEzYzRkMzZmYzQ4MTNjNTY4NDlhOWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM2M2Q1MzVjZTM4MDYzZDZiNGM1MWQ4YzM4NmE3ZjliM2U1ODBhMTRhMTBjMDdiMTk4ZGZhZjE5YzkzYTNiZmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiN2JjZjc0NmEyZGMzMDlhYmJjNWJmNzE2YTdiMTkxMWU1ZGJlOTJkNmUzN2QwZmVmMzJlZDAxOGFjMjY5ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwMzc1ZmRkMTlhNWIxMjBiY2JiNzgwOGI1YzBmNjAxOTQ1NTgzNTUxZjY1MDBjYzU3ZTlkY2I2Y2UxMzBhYTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ab0aaf4f52584276b920c486daf47b9a",
+      "statement": "四个入口都经由 WXT 生成的 #imports 获取世界级 API（background 与 message/background.ts 还从同一模块取 browser），而 wxt.config.ts 中 `// imports: false` 处于注释状态，说明 WXT 自动导入保持开启。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/background.ts#L1-L6",
+          "version": "repo-lines-v1:sha256:fe04a139c197401beed3f501d6a2711275b445e4013d99fcd00ef602dd7cc110:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTBlMWIzNjhiYzBmMzdlMjc2OGZkNzJhMTU0MDdjY2ZhN2FjNDk1MTYxODU3YzBjMzk3MmNmYjA5ODFmOTZmMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVkYzg5NzE3ZjEyMjEyMTk3MTU4NWEyMTBkNjg1MzBkMjk5ZjkxZDJiMzg2MWI4N2FlMTQ5MDJlNmQxNWI1OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGE2NmQzMWE1ZDNkMGMzOTgyZmZkNjZmZDBhMTRmNmViYTEwYmI5ZGZjZDRhZmE1ODQ0OTdhYTVlNzMyMjdhYSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L1-L3",
+          "version": "repo-lines-v1:sha256:0d9d0b3c35daa3c499783bd9abc5eeb5fe6223c6d4680f6b8bbb104470eb6ba0:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDc1ZDAzMGYwYTE2OWJlMThhNGRkMWFmOWM4NzVhY2UwNGE0NzljMWNjZDFkZWQ1MTE1ZjVlNjAzOGE5ZjMwNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2YwOTZhOGE4YTlmNDRjYTA5OWUxMjkxZjhhZmI2ZDI3ODJlMWU5NTA0YzFjNWU3NWFmODQ5NzYxNTllNjNiMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDk2OTM4N2MyMzJkNDA5Y2ZkYTAzMGVlYTY3NmMwNjU1Nzk4ZmVjZGE0MTBiMTZmNjdkMDIzNzVkMGQwMTIzYiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/content.ts#L1-L3",
+          "version": "repo-lines-v1:sha256:b81dfc23c691ef6f62332ecbfad911f970b4f6dc9b264161687fd4f3dd0829a0:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTBlMWIzNjhiYzBmMzdlMjc2OGZkNzJhMTU0MDdjY2ZhN2FjNDk1MTYxODU3YzBjMzk3MmNmYjA5ODFmOTZmMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTIyODk1Y2UxOGQwYmJjNzBiNzkyMjVhOTQ0OWEzZDk2NDg1NGRhOGFjN2ExZTJhMzg5M2I2NTg3ZGQ5YjQwOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2Y1NTFlZGFjMGM4NDQwMGVmNTQ0NGMyYTkzZTZiYTA1OGQ5MzJiZGRlYjNmNGQ4Y2I4NTVmZjk1MThlNzBlMSJ9"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L4-L5",
+          "version": "repo-lines-v1:sha256:f11574bc7dd29729d66230e6bd743c9a2f82c704ab391cc98742b7c228f5a4d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGYzOWYzMTg2M2M1Nzk2NjEzZWZhNmI0MGZiNDExNjcwYzlkNjNiMzZhZjg5ZDc0Mzg3NWMwMzYxMWJjNjBiMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTg5NTFlNTgxZDc2ODJhZDgyNzMwNzFmOWEwYzhlZjZiZTc3MjFjMGE0NWMzNmYyMTc4MTU2NGRkYzk3Yzk4NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWRiYWJhYTE0OWU5YzFmYjBlZmM4M2VjZjRiZGE4OWUzYzUwZWVkYjhmNzI4M2ZhNjcyZjNhMTA3MDhjMDliZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjM0YzE0ZjExNzcxNjU2N2Y3NmEzMjkzOTY5YWY1OTIzNTAyNTkzZGI4YzU3ZmU0NjljNTk0NTU1ZmY2Y2NjZSJ9"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L39-L39",
+          "version": "repo-lines-v1:sha256:297ccf8eabd1935ce1828d40e048c083e2fcfa642e9517f29307e821098e4405:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjk3Y2NmOGVhYmQxOTM1Y2UxODI4ZDQwZTA0OGMwODNlMmZjZmE2NDJlOTUxN2YyOTMwN2U4MjEwOThlNDQwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjk3Y2NmOGVhYmQxOTM1Y2UxODI4ZDQwZTA0OGMwODNlMmZjZmE2NDJlOTUxN2YyOTMwN2U4MjEwOThlNDQwNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzA1ZjVlMzdjNjIxNjRiMGMzZjMxYjVkMzFlMzIyNWQ1NmU2YmYyODY5NjA5YmNlNTFhMDVkMjcxZjEyMjRjYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODhkZDEwNmNkODQwZGNmZmMyZjhmMzlkM2RkYmFjZDNlMjU3ZWZmMWVkMDBmYzhlOGYzYTA2M2Y3YjIxY2FkMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7c944d95302242f4b6de4eaffbbd5d58",
+      "statement": "background 的 ProvideBackgroundAdapter 依据消息 meta.injector 分流回包：injector 为 content 时按 meta.url 查询标签页并逐个 tabs.sendMessage，injector 为 popup 时用 runtime.sendMessage；InjectBackgroundAdapter 的名字参数默认为 content，options 侧传入 popup。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L158-L216",
+          "version": "repo-lines-v1:sha256:c92ffd452bde989b8147cd200379e5ab0db3aee8b5b337c4bee892553a539eef:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViNTgwMzUwZjJkNTdiMzRjZmU3OGZiN2YzMzljNmMzOWRmYjFkOWQ3MDkwNjBlMDU4YmYxMjUwYzk3ZjQ1YzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L22-L27",
+          "version": "repo-lines-v1:sha256:0fb7a84d62eccdcba29fca48ebb7001d78a8b2fa416a9eb0b29043249f29b4cd:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjg2MTY1MGU0NzgwZmQyMjBhOTdkNjllMmRhYzE4N2MwY2M5Mzg3NGFjMjg0ZjE5YmIwYzAxYzQ5N2M1NGFkYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODhiN2IwZTIwYjk0YmJmMTcxZTNjYjJmNDc4MTU5MmNjM2VmNTNhYTBkMmVhYWMwMmJmYzk5YThjMzA1YjhhMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWVlY2U1MDQxYzczMWJmZTlhNGM2NGUzOTNiZDg2Zjk4NjdjN2VjZTE2MmNlNDRlMDZhNzczNjk3ZjNjNjc4ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b47a19f7bc614a188b4aab00d5c74191",
+      "statement": "src/message/index.ts 的 initCounter 与 initExtensionCounter 共用同一个模块级 _counter：initCounter 绑定 __boss-helper-content__ 代理并以 document.currentScript 为传输载体，initExtensionCounter 直接把 BackgroundCounter 代理包成 ContentCounter，因此每个运行时世界只能初始化一次 counter。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/index.ts#L12-L27",
+          "version": "repo-lines-v1:sha256:7def0c6758b4bf851158409e3219bf0407337016aee84f62b2ebf83f058e1a08:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkMmQ3NDU2YjAyZjUwZmFlMWY0YzUyNjc3MzUzMTIxNmUzYjJhMTFkY2U5ODI3Y2QzODcyNWZlZmJlMGM1MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4NjE2NTBlNDc4MGZkMjIwYTk3ZDY5ZTJkYWMxODdjMGNjOTM4NzRhYzI4NGYxOWJiMGMwMWM0OTdjNTRhZGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmYzg2YzI4NzQyODZiOWVhODg1NWRhODgwNzRjMDJkMWExYjA0ZmQzOWI1NDgzMDEzYjcyYjVkZjUxYzgzOWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlZWNlNTA0MWM3MzFiZmU5YTRjNjRlMzkzYmQ4NmY5ODY3YzdlY2UxNjJjZTQ0ZTA2YTc3MzY5N2YzYzY3OGQifQ"
+        },
+        {
+          "resource": "repo://src/message/index.ts#L29-L56",
+          "version": "repo-lines-v1:sha256:9965517d7c59611524c7404a72f2bc34ec698ce8e82e36fdcc025594a650f562:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRlN2RiMDcyMzQ2NjBjMTY5ZjhhYmZiZGI2NTZhYTY1OGJiMjNiOTU1NTA1YTZmNTZiNzg3OTIwYjk2NWVkY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2Zjg1OTM1Y2Y4ZjAzNmIzODRlZjhmMmU5ZTI5NGZjMmZhNWYxYzQ5MWU4MGFiYzg2ZjVlMWRkYWQ3NjViMjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_277b6eebec7142869cbdc46fcedf1db6",
+      "statement": "WXT 的 entrypoint 由 src/entrypoints 目录约定推导（boss/ 目录产出 boss.js），web_accessible_resources 只登记页面可加载的资源，因此新增 MAIN world 脚本不必在 wxt.config.ts 登记 entrypoint，但必须把产物名加入 resources，否则 injectScript 注入 404。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/content.ts#L24-L29",
+          "version": "repo-lines-v1:sha256:19e565ef94a5ccbaecf0c0422e471ee419be6ffd0d2137bc5d827e441db1d47c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDBiNzE3ODZlYTg4ZjY0MzJhMGYzMTk4NTZiOTA4MWU4YWQ2YmI2ZWU2ZDk5ODgwNDdiY2QyZDMyNmI0MGM5NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTFjYzUyMzRhZTRjMzRmMTNlZjM0YzE1NTY0NWQxNmMyMThmMmE4NjU4ODIzYzkxMWFmZTIyNGM2MzM4OWNkZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDc5NmIzNWE0YjY2MTFhY2QyMGZiMWZlMTc2NDNjYzQ1NzcxNjQ5MGI3NmI4MTBmYTUyNjJiOTcyMmM5MDJlMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTNhYjI4MjFmODdjYzBjMWFhOWJmMzI2OTQ1MGMzOWQ3MTNjZjllZDhhZjhhYjIyMDViZWRlZTQ4NWZjY2FlMyJ9"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L140-L151",
+          "version": "repo-lines-v1:sha256:44b78a5cc33117c877db51293811e15b15bedfdccafd7fcaeceae009a5f4739a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxMWUxZWQ4MGQyYTI1NDZkMDg5YTY2YjI2NDE1ZDBhMmM1ZTljYmI5MDg2NmZlZWZhMzJkNWNmZTljNjU3OTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkYzhmMzUyZGIzODc4NTBlMDNjZmMzMmViZDVhMDMyYjRiNzhhOTQ3M2I0ODY3YTFiYjZmYjA1ODE2ZjNmZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNhYmYyYzU1NzAzNDE2OTA5NzY3ZmQ4NzM0NjkzYjIyNDBmZDM3ODU0NDk4NWE0NDhkN2NlYmViYTFlMzExNTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxYmYwNmRhNzM5MjQ2M2U5YjExY2IxNWI5ZDg2NzU2NGZlZDE3M2I2NWZkNTg0YjFmYTdmYTdlZDFmYmE1NmIifQ"
+        },
+        {
+          "resource": "repo://wxt.config.ts#L37-L44",
+          "version": "repo-lines-v1:sha256:3f743ced4db4d8fd876b9466c38907454ba56f98679891f9962d67f567e83edf:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNiNWNmNzZlODdjNGFhNzZiY2M4YWYyOWJkYTllYzYxMWJiNjI5ZDNkZWU4MDk5YzQ0MTkyMzMxMTc2ZTA3ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzM1OWFjOGVhNGQyYzBjZDU2NTUyOWIwMzJjZjUxYzQ2NjdmYjc2MTI2YjgxYmIwNWQxNmFiMzI1NTc5MzM2ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzlmMWRmNGIzYTg5ODJhMzIzOTMyMTUyMTUxMDcwYTVlOTZjMWQ1NTEyZGNjMWJlNWU3N2EzMmU2ZWM2YTJhYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTQxMDM2MjQwMmVjMjA0N2JmN2Y5NDdhMTU3NzIyNjk0OTE3ZTU2NTQ5MmRjNjM1OWVmNDk0ZWMyYzM0OTkwNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0f097c9816c24aa88a4ead5ca03521b5",
+      "statement": "自定义元素 boss-helper-job 必须由 MAIN world 的 src/index.ts 的 run() 注册（document 属于页面，content script 无法创建页面元素），且标签名与 #app-root 被 onMount 的存在性探测和 Appearance.vue 的 shadowRoot 查询硬编码引用，改动需多点同步。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/Tabs/ConfigItem/Appearance.vue#L73-L80",
+          "version": "repo-lines-v1:sha256:c1aa69b4e15bdcb9e447338e49f7f3da426a95c413ca6cda5eb6a19bd0a03ce0:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2RlODlhZDRhY2VkODI2NTEwZjRiYjI0Nzk1ZDIxMGEwMTk0OTBiNDVkNDhlMTg5MDcyODI3ZDk0MmM3OTVjMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzc1MmMxZmRjYWM0NWUwOGY0NWU4ZjY2NTM4OGM5NGNkNGRjMGViYmVmNGU5ODYxOTI2MDczMWIzYjI0ZGU5OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjM4YWVjMGE3ZjY5N2E1MjlkNjdhOGU0N2Q3OGRjNzViM2U4ZGI5YThkNjc5MTkzODM2N2VkMzhkZTViYTQ2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDllMjMyYTAyOTdhZTQ2YWM5NjJhMjlhZWYxNTg2N2M3NzUwYjIyNzZmNTJhY2I1NDgzNDEyZmIyNzRkYTU3MiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L261-L282",
+          "version": "repo-lines-v1:sha256:7fb05df8d3fe5691cfa581f9c37701bcf96f5a0271e488733f3ca7bb0c4af87f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzYTQ0ZTRhODZhYjg2MTU2YmQwNjg2Y2MyYzBiMGNkNTRhYjk2Mzg4YjY4ZmNhMTlmN2I4OWNmNzEzNTVlMTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2NGFhZTQ3MWEzY2RiNjQxNjc4ZTBhMDA0MjY5MDM4ZWNkYzE5YzQ0ZmVmZGNjYTMxZmZlNGE4NjdjZGQ2OTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhmZjczMmNmNGE0YWRiNWYxOGQxMDcwNjM4MGI2OTAxNTdlYzUyN2ViYTkwNzUwNzc2ZjhlNzAwZWYyYjVhOWQifQ"
+        },
+        {
+          "resource": "repo://src/index.ts#L28-L45",
+          "version": "repo-lines-v1:sha256:3af931cdc5edfa72372e939fd6a069a5ee5d07d23d8b100ba75baa1808d1e7c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVlMGQzNzU0N2FkZDliYmFjYjdiM2Y0NTc3YzQxYzQ2NmM4OTk2ODlkNWE5NTA2OWMwZDQ2OGJkZjJhOTAxYzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwMmE4M2VlZDFhNzAyZjI5NzVhNDVmZjE1MjI2N2IwNGZiYTFiNDI0NDAzY2YxOTJiN2RhNTNmOWQwNzVlZTYifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T12:30:35.415Z"
+  }
+}

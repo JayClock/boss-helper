@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:48c582c204bf107661cf41e473b2a2877448f695de5b258af92dfa6084562453",
+  "claims": [
+    {
+      "id": "claim_8e87a9c64de343ffbab23b6fa726e8c0",
+      "statement": "HelperContext is created once per page and shared by the UI and the workflow: run() mounts App.vue in a shadow root, calls ctx.setShadowRoot and app.provide(HelperKey, ctx), and each workflow handler receives the same instance as TaskContext.helper.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L360-L372",
+          "version": "repo-lines-v1:sha256:89086c44e7fa81fc5250d7453115867250ea792da76ffad6fb2b5b567d3d22e7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczNjc0OTgxZWY1M2IyYTJjOTBjZDNmOTY3OTFkOWRhNTVhODMzMzAzM2RlMjBkNjQ5NTdiZTlhODQzNmM1ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg5NTEyODM3MjM0NDFhYmFkYmNkNmIzZmUyZWI2N2FlNDEzZjhhNWM2NGZjNzljMmIxNDg1N2ZlMzdkMjk1YjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBkNzA3NjM0ZDMxZWY5ZWYzZDJkYjk4YmMwYmExZjFhNWM3ZTE2M2Y3MWRlNjFmYTdiNTRkZTUxMDFhMDVkODIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L22-L34",
+          "version": "repo-lines-v1:sha256:478cded03e14231ca93c85f2bb8c81392be44c589fef43e2a7a6eaca90a5a8c4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY1NGFhY2QwMTFiZjQ3NWI1YzRhMWQxZDhkZGU4Y2QxMWJkYjNkYTgyZWYzMmZiNDY5ZTAwMjJhODcxYWRlNmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyODM3ZWUyZGE0Mjk0ZWYzOWUzMjc4YzBmNGQ3Nzc2NWVjYzkxZWY3NDVhNzU5YTQ0MmRlZjk4NDM5NmZiN2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNiZjBkYWY1ZGE5ZDQyZjZmNTNiM2U5NjBhZTM5OWU4ODdkMzRjZTE4ZGNkMmI3NDkzODM0NjIxNjM0ZDhkYzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViYzE3NzkyOTczZTc3ZGMxODQyZDgzZjg3ZjgwNGVjY2U3MWIwZDMyMDc4YjYyOThlYWY5N2RmNTc5ZWJiZWQifQ"
+        },
+        {
+          "resource": "repo://src/index.ts#L10-L46",
+          "version": "repo-lines-v1:sha256:aa613d2d27f0c7e561954e7808b35b50a91e0da7301a1abe6a76f821610174ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlY2UwYjhlZGY2MWNjYzdkNGM4OTU3OWQ3MmFiOWQxMmVhOGZjMDhhYmMyZTAyMzdmMWRjMjNjMTRjMGZhY2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1YzQ1MTA4YzkzYmFjNzZmMTEzZDdkYWEwMDNiY2I0OTY1MjhmNDg0MzI0MzVmMGI2OGYxNmU5OTE1YmM3OWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4M2I5ODRkODA4ZTBiZjI5YmU5ZDE4YWMwYTkyZDBhYTk4NjRjZmZjOWUyZmZhY2FhNWMyMjQyNGQ4MWE1MTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a00884f12f5747e69ca361ad26f878de",
+      "statement": "The abstract HelperContext constructor eagerly builds the shared collaborators conf, accounts, models, statistics, chatModel (new ChatModel(this)), cache and jobCache (both partitioned by a getAccount closure reading accounts.activeAccount), logs via extendRef, reactive jobResultMaps and a null workflow.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L36-L104",
+          "version": "repo-lines-v1:sha256:5b744c7849003f975f70a2f38630641f3c89bef4b0fb3d1bcf76b5623243cea5:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhMThjNGUxZDIyNTZhNmM4NTljNzcwYTJlODJkYzFlMTM2ODA5MDFhZmZmOWE3YTQ5MTEwYzYwZTNlZTMzMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkZmJiODgxZmEwYTE0YzdiOGQxNDdkNjUwZDM0YWQ5MDQ4YzliM2EwMmEzZWU0MmUyMzMwMWE3MzI0OGE3MTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiZDhlYzdjYTI1NzkxMzM1MmM5NTNhMjdiOGZlNGNiZWQ5MTVjYzZiYTgyOTI5ZTA1ZmZkYjJhMWE5YmRlMDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzNzg1NGUwMzlmOTc1Y2I4ZDhhMTg0MGUzY2QzYmEyMWM5ZjVjMzQzZjQwMjJlZTQ5YzZhNWI2Yjk3ZTc3ZGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0575946454db460ea6e21dc53bd55cf4",
+      "statement": "workflowRunning is derived from workflow?.status.value === 'running', so it evaluates to false before any workflow instance exists.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L32-L35",
+          "version": "repo-lines-v1:sha256:27a82b79b23cf450ba27413af6ffbaaf8a6b106084e4d62d574a22a4c926bcda:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWNiYTBkMDU1M2RiMDFlYmI1NWMzYWM3OTk2YmVlY2Y5MDNhMmRiNDNiZGFjMmE5OWZlMzc3OWViOWZmZDU4YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzE5ZmIxYmU4OTQ5ZDRlYmI4MTEwMjQzYTBjMjU4NTIwMWUzNzg3Y2I4OTE0Mzg5YTcwM2VjODczZGFiMzYxZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIzNjA3ZmE0OGE1NDJiNzgzOWUwNzQ0ZmVjMGEyNTdhNmRhZDhmYmM4OGFhYjk1N2QyNjFkYjQyMDQ4YmIwYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTk1MGFiYTdmNDkwNWNiYTMyYzdkOWVmMjUwNGQxNDQ2OTdmYzAzMTRjMDdhZGQ0NTI1NDc3YWQ0OGRiODc2YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e4a496f821c1403a9dcbb8936dc544f6",
+      "statement": "A synchronous watch on accounts.activeAccount invalidates all per-account state on account switch: it clears jobResultMaps, clears workflow stateMaps/drafts/manuallyFiltered, resets each jobMaps entry state to {}, then calls restoreJobCache for every jobList key to repopulate results from the new account's cache partition.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L89-L101",
+          "version": "repo-lines-v1:sha256:f32c99e0b7b1477e3cc8e2b87c451e92e399967270435f39711bd0ddb347ff8e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5ZDY4MWM2ODllYzc5ODc1ODM3YWViMDBkYmJlZGU1NmU1MWYwZTIwZjJhY2I4NTQyYTkxYmVjZDY1MzYyZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMyYzljNDk2ZTcxMTM5MjdlOTYzNTQ4YWQ3NDY1Y2FjZDU5NDE5OWI1OWU3ZDdlMDVmOWI0MWM1MWI1N2U2YzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1M2FkNjIwNDFkZTc4ZjNlZDVkMzM0NjYxMDI4MWUzMGIyZTBjZDU5Yzg0ZjA1OWRjYjUwZDc4OGY4YzQzMGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7821583426ea430da1230301a2333785",
+      "statement": "restoreJobCache only runs when formData.useCache is enabled and the key is absent, and re-validates after the async read that the account is unchanged, useCache is still on and the key is still absent before writing the cached TaskResult into jobResultMaps.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L103-L121",
+          "version": "repo-lines-v1:sha256:9244c324114b8392f3bfa4fcca5f55a7c39de854e605c5b5d9a263ed9734f96b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3NWQyMWMwNzdmZTE3Yjk5ZDU2ZGMzZTQyNDIwNjQ0NmNhZGU1MTUxZjQ3Y2JlY2NjZjNiNDJkMDdjY2JhOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4MTUyMjVmZTVhMzhmZTRiZmY4YzkyODhiNGEzOGI2YzA4MjU1OTc5N2E5MTMyNDFkYWFmNzFiZTg5MWRiZDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_060cc21d2b71498e9db03a4479cf5d4a",
+      "statement": "Cache partitioning is resolved per call: HelperCache and JobResultCache read getAccount() each time they compute a storage key, so a single cache instance automatically targets the newly selected account's slot after a switch.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L24-L26",
+          "version": "repo-lines-v1:sha256:9b76fc500d240b2d3014086c32e4c0e390ce1f58ce92bf35056f9b0111388651:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTJiNzc1YjU0NTYwZTQ0MTdkZDUwOTUyYmU1N2U5M2QwM2RlYTk0YWE1NTRlNTFmNzQ1N2FiOWUyNDEwZDhmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDlkMzQ2OGM1Y2QyZTA4MTkwNjdlNDI2ODg4MjZjMGIwYjBmOGY5MmIzMjNhM2ZiMzQ5ZDc1N2MzOTczZTkzZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDI5NGRiMTQyYTdmNjdhN2E2Mjg1OTliODVhMDRjYzA5YjM4MzJhNDI4NTNhNzM5NjliYjdiYThjNzE1OWZhOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTBjMDg2OTJkZjg5MjgxMTdhMjNlZGFlODRiZjlkNmEzNGU1NmI1M2M3ZjgxODRmM2E1NmVkNTBiMDBiODYwOSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L24-L27",
+          "version": "repo-lines-v1:sha256:61faf326ace40195be0efe14ad6190889f353f1b9cef7257cca75cf3f2abef32:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGZkYzY0MDE4ODg4MTdlMTRmMjFkN2Y4NWEwMzY3ZThmYTY4ZDMwMWFkYjQ0ZmI0ZGNkMWJiNDg0YThmYzc3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWE0MjAyYzRmZTg4YzI1ZDk4Y2ZiZWMzOGVmZDQ0NGQ1NjEyNWZkMjIxNDdmOWM3Yjc1NGU2NjAwMTFiYjQ5ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzRkOGNmM2EwNmMyNjkwN2U3NzBkMWU4YTYyY2UyOTAzNGI2M2IwYTNhMzRiYTg0NzU3M2E1ODhlY2Y0ZWFmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzM4ODUwMTNiNDUyZmEzNDliYjU4MzlhMDIwMjQzMTdmNDlmMGViOGQ5OTVhZjEzYTI2YTlhZDM1MjQ0YmQxYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2fa2e0629bed45fc8878b3fde623f99c",
+      "statement": "Manual per-job actions are serialized against the workflow by two signals, jobActionBusy and workflowRunning: fetchJobDetails coalesces concurrent requests for the same key and throws when either signal is set; deliverJob rejects when the workflow is missing or running or jobActionBusy is set, clears the manual filter, and surfaces workflow.errorMessage/result.reason on failure.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L127-L169",
+          "version": "repo-lines-v1:sha256:5ec19fdf29f078d99c48d13a1f0fbd3730efb7d3252202123da67208ce69ea54:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0MjZlYjA3M2YzZWZlODk2MDQwNTg2YmVhNWZlODdmODQ5OTg3ODEzNDQxMjBkOWIzZGIzOTcyZjY2YzczYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3MTM1NWMwNzhkY2VkNTlkMWRiM2M5NDkyMjUwOWNhYTliZGVhYzVkZTk2MmY2NDMwNjJiMTA1N2M5NzgyMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdmYTM2ZmViMjgwZWVjYjVmNjFiY2FlNDYyOTJmYzVlYTdkNTRjNGZmZGExN2ViZTFjMTRkOWE3NTFhMGUzMDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_493cfb3e98c1423089acc5000055e034",
+      "statement": "BossHelperCtx.start returns immediately while jobActionBusy is true and lazily creates the workflow if it is missing, and App.vue disables the 切换账号/切换预设 buttons (with switchAccount/switchPreset re-checking) while workflowRunning is true; manual fetch/delivery disabling instead lives in useJobActions, which combines its own busy ref with workflow status into blocked.",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L248-L266",
+          "version": "repo-lines-v1:sha256:bd88148574fa54892aaeddd057437046b4eae22b2bf949f345142a83b692b9c2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNzE5NGMxNzI3ZmU4NTAyNGY5ZjVmZWM1ZTg5NTgyM2JkZDIxMjczOTFhY2M0ZmJmOWE5MWVjYzczYTQ1NTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwOTRiYmZiODgxNzg0NTgwNDdhNzlkZGVkZTMyNTMxODg0ZDZmZmE0ODg2ZDBiMmI3M2E0YzA1YzJkOWVjMmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc5M2UwOWRhMGE3YjM4OTk0ZDg2OTYzYzc0OTc0ZDkxNDgwYjYwZDQ4MGM1MGZlYjE3YzI5NmQ3OTZjODUyYzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyNWE1MzMxYjc0NDhmNGFlODY5ZjRlZjNlNmVhOTFkODk2ZDY3ZGU3MWRkNjFkMzU3ZmZhZDY3NjBhNDk3NWYifQ"
+        },
+        {
+          "resource": "repo://src/App.vue#L50-L64",
+          "version": "repo-lines-v1:sha256:f6b57ac828a4ebde85bee989eac8eed783e4da3a1822e02a767735e55ae46152:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1ZTM2Yjc2MjA4Y2IzMjJjZGIzYjc2YmI4ZjkwNGM4YjJmYjk0MDcwYmJkODI2YjEyNmExOTE2NjZhMTYxNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZWI5ZmM1YzgyN2M3MWY3MzEwNThhZTk5ZDdlY2Q1NGIwNDdhODkzNDFlMjFlZTU4MjFjNDYwYzIwOGRkMWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5ZThkYjM0ODUyMGNjNTY2ZTlkOGM1NmViNzJkMTJmMWYyY2JjYWM1OWRjNGIxODkwMGMwOTAwY2IwMDcyYmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc4ZTg5YjZiNGRiNmMxYmEyNGU1NTI3MzJjYzEwNjRlMGNmMDY2MjlhNGQzYTk5MmYyNGFkYjA2MTdjMmI2ZWUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useJobActions.ts#L12-L50",
+          "version": "repo-lines-v1:sha256:3ae2fdc44ef1f9e27588c93679da0ef66292d1f0ce3e108258a6644e371ae601:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5NzM5YWM5NTFhMDJjOGZjZTY2ZTdiMTQ2YWEyYjhjMWFkYWRhMTUwNjY5ZGM4NjUwM2ZiYmRmNDBjNjI4MGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5Y2Y5YWJmNzk5ZjA0NmU2ODFlNWRmZTQwODE2NDVmMjMwMTkwMTQ2MzM2ZTg2OTM3ZTA3Y2YzMWFjZmFkMDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3ZDIyOTdkNDVkNmU5MmYxNWNjOTM2YzdjNTUyYTQ1MWY0ODg4ZTYzNDA0NmE2M2E0NDAyNThhMTQ4NzFjZjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyMmM5MmRlMzM4YzM1ZjhlYjE0OTQ3M2ZjYjQ2MDdmNzY3Y2I2ZGU2MjQwYzNmZGEzZmQ4YjcwMzRjZGFjNmYifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L204-L209",
+          "version": "repo-lines-v1:sha256:0815d7d60ad958366de56ec80a7299571e1bf0576dd94137e1548ee3ea59677f:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTk4YWM0NTE4NzUzZmIxMTNkNmRkMjdhMTBiOGQzYjQ4ZWJjNTRkMjJjNDg1MDlhZjQ2Y2ZhNzM1YjE4Y2FkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTcwN2I5YmQwOWVhZmJhMmY1NDY4ZGE3OWYyYWYzODEyYjA1OTU1MGNmNjZhMjhjODIyNmM5NDhmM2MzZjY1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjM1ZmVlOTUzZjM3ZmYzYzU1OTA0ZDRlOGYyZGFhYzIyMmQwNmRkMTc2OWZlNmJlNTQ5ZGU4ZDE0ZjQxMWJjMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGEyZGZkMTliMGI1NjMwOTc1ZWRiMDJiYTdkNTMyNjgxZWU2N2E3NDFkMjM5OTYzMzU1ZmYxMDFkNDYzN2ExMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0609db86cd3d4a0bb240e62965250b60",
+      "statement": "The subclass contract is a fixed set of members: jobList, jobMaps, onJobCardClick, hasJobDetails, loadMoreJob, onMount, start, sendMessage, getConfigItems plus uid/userInfo/key/label, generic over self type C, raw data T and extra state S; onJobCardClick defaults to throwing 'Method not implemented.' while the Boss workflow's 岗位详情获取 task delegates to it.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L122-L126",
+          "version": "repo-lines-v1:sha256:578471c7d23fade51aaf7efa679e29397337e9dca7f3c3479b94792a5e8b341f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzVmMDBkOTBjZDdiMTA1ZDExYjdkMjM0ZjJhMzM2ZTM5ZTYxYzRiZjZmM2NmYTllMjJlMWE2MWJiMDM0ZjE1ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDM2OTc0MjllZjQ0Y2I4MTc3MzFkZDdiOWQ4NzQxYjAyMWQ0ZGNkYmUwZjU1MDI2YzYxYTVkMDkxOWIxYWM1MCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L160-L181",
+          "version": "repo-lines-v1:sha256:aa2676678e8201aea9ef885fd17ca2dd5ef95183408b2d5f66fbf963c5d28c84:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4OGJmMGZhYWU0NDZmMjExNDQ3Y2E4N2E4ZDVhNGRhYTAwNmQyMTdiNzE1YjAzZWVhYTYwZmU2ZDk0ZjNkZjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxMTFmN2M0Mjg4MTUzMGJlZTJkMDQ1NTU5ZjZhODQ5YTgyZmI3OGFkYzRjMGQxNzY1ODUxZjAwZjM4ZmM2ZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwMGNhZDQ5M2ZiY2E4YTU0MzIwNTQ0MTUyMTE5ODc4MWYwM2ZkMTg0MGNiMTdkM2I5MTU0Y2QyMWU3NzFmZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5ZGQ4NWRlMmMzZGExMzI4ZWViMzkyNmRhZGEzYzYxZDJmNWRiYzRiNjc4NTE5Mjk3MDM2ODkxYTJlMGMxOGEifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L28-L30",
+          "version": "repo-lines-v1:sha256:80e82dac0d6bff411cd0b3e8bba7f46456c18b75829fbfe181f579b3337b7088:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTk1MjJjYTE4YjE0NTMzNWJjM2E0NDQwMThlM2ZmNmM5NDZkMGIxNzdhZjBmNWIwY2Q4MWI2ODk2NGRlYWVjNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2Q3ZjkzODA1MzRmZTNmNmZmYWQ5ZTc1NzViZjkzMWY4N2JlNjE5OGEwYjA0MjVkMDcyZGZhMTFiMDUzNTE0YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmYwY2M4N2JhZWE0YjcwZGY0ZjYwYzMyZTM5Y2FlZTdjYzFjMjZhMTY0YzEzN2RjMzg3MjQwNGU1ZDk2ZmFmNCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L39-L48",
+          "version": "repo-lines-v1:sha256:df10a7014977810060ee9d34b29856d150bce8d3044c9f5f0987a0a2d08c3394:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmYTg1NTU5MzI5ZjBiNWM4YjRkNjViYjNlMjAzY2VkNjRmZGNiMzEzNGQ3YjhkN2VhYjgxYjNlNGQ2ZmE3OWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4ODUxNDBhYjc0OWZkZTljMzM1YjZlM2UyNmU0NTYzYTY4ZjczZGUyNjIyZGYyZmUyNjFjMTE0YjA0MDE5ZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzNjQxNzFlNjkwODQyMjYxNDA3YzZmMTVlMzljMzE2MmM2ODM5ZmM0MzU5NzI5NTFlYmEyMDJmYzhlMDg4ZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAxNGRhYmNjMDI3N2EzZjdlMmNmN2Q1OGQ2MDZlNDI1YjhjZTRhNTBjZGNlZDYyNGFmNDE1Y2Q0ODhlMmRjNzQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a9c5b1bd236b4acdae2aae0b8ed3b3e4",
+      "statement": "Adapters can defer expensive per-job data by using createLazyObject proxies; reading an uninitialized proxy throws DependencyMissingError, which the workflow catches to run the missing dependency task and then retry the handler. Boss uses this for rawData.detail and rawData.boss and reports readiness through isInitialized in hasJobDetails.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L340-L355",
+          "version": "repo-lines-v1:sha256:7532679a9c71d45fa600c6a4c702cd97e04381089a99dd1d9c4d9da66d286b4c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyMDU5NGM1MDdkODQ0YzFjZGVmZjY5ZDNlOGM4Yzc4ZGYyZDI2NmQ3YzQ2ZTNlNjhlODAxNWI1ZDhhZjJlZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5ZTA1NDZlMThmYWU4NDJhYjhlNjU4OTA2ZTE2YzBlMTk1ZTBlZTljNzc1N2Q2YjE0MWMwMmEyMDUyOTBkZGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3NWEzNDAxNWE3MzRkYTFjYTBmOTkwMjQ5ZmU5YmYyOWVkNDNkNTQwOGQwNDA3YWY0N2FhMmY1Mzg1ZTc3YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzN2ZhM2YxNWViZWE0NGRmNmE4YWNmODk4MjExODkzZjFkODc3YmJkNGRkZTRjNzZjZTNkM2FlYjQxODY0OWQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L196-L230",
+          "version": "repo-lines-v1:sha256:ab36ec7a0da291f72da9c227cf6c7933dcb3ac37798735b328b56c72c9ae94cc:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMGNkYjk3MmE3YmZiN2VkMjQ2ZjlmZjY3MjM4NWU1NWY0OTY4ZmMxMTA0M2RjNWI2ODRkNTFkZmEzMWRiY2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwODU1MWNiYmFiZGVhZDRiYjc5ZTkxNjI2ZjJiMGRkNWJmMGRmZTU3YmZiNTlhNjQxZTUwNmMxNjJkYTJjMzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkOTM2ZjY3Y2FmNGQ2ZmUwNTRhMjUzNDc2Y2M1ZTI5MDQxOTgyYThjYzc0NDFhOGE3MzQ3ZTMwZWIzYjViZTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L312-L315",
+          "version": "repo-lines-v1:sha256:6892b5f15aea848b97df5854eb858fb7da93b5a1ed71dea686be2f3522dcbf48:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTRmNjZmOWMzNTYxZTkxYzk1Zjk5ZmQ0YWUyZDEzYzRiNGRhN2I3ZjY3ZDQzOWVkOTBjMTVhY2Q3ZTJmODM2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjY2YzY3NzM2ZjliZTk3OTE5ZWRjMTYyN2FjYTRlN2EyMzRhYWJmOWUwYWI0MjllNjIyZjQ5YmRmYmRhYWZkZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDMwYmM2OGJlMDkzODg5MjkwMzcxZjM3NzUxZGFhYjkzODlkM2U1ZTNmZDRlZjhjYjYwYjM4YTlkMTFmZjU3MiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_73c2aff1f2204cf4823a3cdd3339037d",
+      "statement": "BossHelperCtx does not fetch job lists itself: it hooks the host Vue component's reactive fields and methods via getRootVue/useHookVueData/useHookVueFn (which wrap the property setter), feeding pageVo, hasMore, jobDetail, jobList and the pageChange/clickJobCardAction/searchJobAction functions.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useVue.ts#L5-L80",
+          "version": "repo-lines-v1:sha256:04f34a9fa2d5668aae7878515babeeb7786583188d977bc76fb11a000aa60fcb:eyJzZWxlY3RlZExpbmVDb3VudCI6NzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0ZTU3ZDBkNWRmYmRmOWIwYzlhMzk0YzZjNTQ5YmZlNDU3YTQwYjExNzYyZDE4N2JhNTIzYzAxMjVlNWVhMDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmOGYzZDlkODY0MTJkMjUxZGQ5ZWNiNjkyZTViM2Q3ODNhZDVlYzk5NDY3YjM5Y2ZhZjc1MDE2MjIxZWEzYmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxZDUxNjMxZmVkMmQ0NzRhN2Y4ZWE1NDFlNDdjYmU2OWRiMmNlNTRjNmI5MjQ5MWY1NDJhZGIwNGMxODRhMjUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L462-L505",
+          "version": "repo-lines-v1:sha256:fc670c17ea7970ac954abae35ad7ef35fc169ffa9c1908da28e6732f991d4490:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjYjcxMWQxYmE3NjkzMjQzYzllZTU2NDhhODdlN2YzZDE2MGQ0YjlmZmM1N2FmMWYzZmZhMWQzMDQ5NTUxN2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5YTk5ZmY2OTg5ZTM3OTQzZDI0Mzk1ODc5YjY3YzA1NmRlMjJlZDZjM2RiZjkxNDU3OGFkNTU2NDgwYTU5MTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwY2IzMjA4MDljOWIzNDI2YzliYjVlZTNkMTI5YmQxZjNjOWY1ZjFjMjk3MjYyMDQ1MTY1ZDIyMDVmZWM3YjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmMGE0M2NmYzEzZjZjMzMxMTY4NmQ1MzAxYmY2Zjc1NmYxNzVjYjY2OWM1YTNiNzQwYzVkOGY0NWVlYTZhNDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_56d42deba9c54d4cadeb1e0dd48d9c50",
+      "statement": "The patched jobList hook normalizes host items into JobData (key boss::encryptJobId, companyId/hrId for dedupe), maintains the raw _jobDataMap with lazy detail/boss, restores per-job cache, and rebuilds jobMaps entries preserving existing workflow state.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L380-L437",
+          "version": "repo-lines-v1:sha256:21cdbf50908b10b5275a620f5556f758dfc9b16acc3f4ced47c4277f1bb16efe:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMmU0ZTVhZDRiMjcwZDNkYTBlMDllNWZjYmIyZWE1NjBjZjFjMTVhOGI2NWQ1MzkzYjU2ZDE2ODVkZWU2OTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5NDYzODc0MDg2ZWMyMGUxOWQ4OWM5MDg1MGE2ZTNhNTNiNDdkMzYwNTViZTQ0OWI3NzAzYzk0YTU1OGU4ZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyODZiN2RmZDM0ODdiOWU1YzNmMzYyMmM4ODg0ODAzYWVmNjA5MzEyYjJjNmM2MDlmOTNjMGMyZWE0ZmRkMjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8ac6fe9781d24b32a1f6153b2c463215",
+      "statement": "Boss loadMoreJob advances the host page and reports no-more-data by returning false when the list length and first encryptJobId are unchanged or when the page-change call throws, which makes the workflow stop paging.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L559-L563",
+          "version": "repo-lines-v1:sha256:6c466915fe62bd4591ec6f8c82c2a06b8a68cd3f4f35c165f159f44e20caada4:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDFkYWMxZWFhMjFhOTdhYTlkNjM4MGY3YWYzMzU2YzI3YTcwMTllNTc5NmE0ZjJjMDhiNTZmMmEwYzBhNjYyOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjQ3NWU5NGE5MDRhYzQ5YjMxNTRkNDY3MmE2NmU4NjI5Yjg2ZGFjNzRlM2UyOTM3YmU2OTI3YWUzZGExMWM1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzdlZmRlNTVkZDM5YTdmMmExZGQ4NTRjYTQ3MWViM2IwZmVlNzQyZDRkNmVmZWE2ZWEyODU2OTdjMWFkN2E3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGQwMGNmZTkzYWFiNjRmYTRiZjJjM2U3NTcwZjA2N2UzMTEwMTI4NGViNTkwYWNlZjYyOGQ5ZmQ2YmNjNDYwNCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L178-L203",
+          "version": "repo-lines-v1:sha256:9636b713e12e2216eca46b28d55f0a261b87c3bdce4c9a32a22b2f43f59be7a2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNhNjk5MDdkM2Y1ODc5YTBkMTkwNGY4ZTkwMmEzNmMwNGE1ZjliNTUwMmZmMGI2NmYwZDRhYzY4OWM0NjMxOTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwZmZmNWMzNjM0MzcxNmZiYmIzODZhOGM5MjI1NWJkODcwMTlhOGY4YTYxNDU2ZTJmMWRmMTRhYzQzMTAxNzUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e93f97b9235d4223a7c69adedd8ed68b",
+      "statement": "Boss onJobCardClick clicks the host card, waits up to 60s for a jobDetail with a matching lid, then enriches jobData with description, address, coordinates, activity, boss certification and brand fields taken from the detail payload.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L317-L378",
+          "version": "repo-lines-v1:sha256:1704a28a3a876aa6549c67212e8c485f232fe4a69d5ac386f564b64bcb651bf0:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlOTBhMTQyMDE1ZDdiZTE0YzcxMWIxMzQ3YTg1ZDFlZjliMGM4MmQ3YzIyNTJmYjNlZTdjNGRkYzVkOTI4MWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2NTVjZWI5ZTc4ODllNWM2NTRiYTc3NzJkMWY5YmNlZjE5YWZkZDdlZDg1YTAzMGI0ODk1M2YwZmNmZDg0MjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM1NDM2ZDRhNmQ0M2IzYzVmZWFmYWYxNjQ5OWNlOWUxYmU2OTE0ZjFiNjkyMWEwNjk0NmEyNmY0NmRkNjIwNzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_befcdc6b999f431191ecc3a43a9414e8",
+      "statement": "Boss onMount is idempotent: it returns if the boss-helper-job element already exists, otherwise replaces the stale element, inserts a fresh one ahead of the job list container, removes ads, runs the page/detail/click/list initializers, starts netConf polling, applies the appearance margin and connects the chat client.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L267-L306",
+          "version": "repo-lines-v1:sha256:099bd2d19eaf48bf83d5893a86cbecab854734063cd0016c2624dccb00a2c18e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjYTIwNDI5YzdhZGJjZjY2ZDg2MmE4NGEzNzBkN2MyZWEzMzhiMzkyYmNiNDc4NTQ0ZWIyNDMxZmIzZDhmYzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEyMjZhZTE5Zjk1YjFkYTg3ZjA2NTFlMzVkOGQ1OTE2YTU3MTUwZmRmZWU2ZTYyOGZjZmQ5OGJjZjAxNzZmNzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1ZWU3N2E5MjI4NDk5M2Q4YjMxYjJmYWM3ZGI3ZWY5YWNhMDJhYTkyYmY0MmExYmExMWFlZmNmZWY5ZDRiMWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4d1558f4c9b1485db936802afc771f53",
+      "statement": "Bootstrapping builds the context from the router hook rather than rebuilding it: BossHelperCtx.new() constructs the ctx, resolves the host root Vue instance and creates the workflow, then each router afterHook calls onMount(path); run() finishes with a first onMount.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L171-L176",
+          "version": "repo-lines-v1:sha256:07126185a102541ac65cb65d5fb0cca87372370c8a6b0438662216b23dffc974:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjg4OThmYzJhYzRkN2I3NjZiMTY5MzAwM2VjYTFmM2VjOTg1ZGQ3NzU1NDc0MWY1YTQwY2FhZTE0M2E1OWZlMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDExMTZlZWQ3NWVmNzA5Mjg4NGZmZDY1YTJhYzk1NTBmZDFkNzljNjU0M2E3YWIxODMwNTQzMmE3YTNhOGNjOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2Y5MzNjYjYxMTMyNDU5NzNiNGE3NzBiNjlmZGVjYmQ3ZGNiNGI4OTRkZjc5OWU3YzdlMjBkNzc1YTBjOGUzOSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L512-L525",
+          "version": "repo-lines-v1:sha256:768b91f3ba79a595a852ad1d7ff859e7ccac5062e8b3ad16598b8743512d7672:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4MzE1ZTNkM2IyZDdjNTM0NjY1YzBiNjVmOTQ1NTNmYmMwMWE2ODFlZWJiNDYzMjcxMzdmMWMwZWQ5YTkyMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5OWIwMmM0ZDIyNjg4ZGI2OGFkN2IxMGRlZGZjOGFiZDMyM2I3ODliYjliOTJkMzVmMmRmYjg4MzUzMTA4ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4OTNkZjE1MjI1OWFjODk3ZGM5YWMzYThiMjAwN2YzMTg2Y2IwMzdmNWUyY2Y3Nzc5MzQ3MWY4YjZlOWU5YTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUifQ"
+        },
+        {
+          "resource": "repo://src/index.ts#L44-L46",
+          "version": "repo-lines-v1:sha256:0918d9d3180f17c0cd60aa43bc2daf795dab3defd214ffcd0361ad04047da981:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTYyNjc5MzVmYzYzMzQ2NWQ4NDhiNDBhNGVkNjk2N2U3YjdhMzIzZjgxY2Q1M2MxMTBhZTIxMDI5Njg3YWExMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzVjNDUxMDhjOTNiYWM3NmYxMTNkN2RhYTAwM2JjYjQ5NjUyOGY0ODQzMjQzNWYwYjY4ZjE2ZTk5MTViYzc5ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODQ2ZWQ2YWNmNWY2OTFkYWVkYmYxNzZkMzJlMDJmOGI1MjI2ODFmZjE3YzlkNjcwOTgzNjVhMzE3NTI2ZjU2NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c7aa4b332c2a4868bdc5d624c98dc203",
+      "statement": "Boss sendMessage publishes chat messages through GeekChatClientManager, uploading image buffers obtained from counter.getImage first and assigning a fresh clientMid per message so repeated sends are not treated as duplicates.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L210-L262",
+          "version": "repo-lines-v1:sha256:7008c805fd02b02e662a2533b527b9d26d08bb482c1659c06fe86a54946c4fe2:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2MWFiMTc1MTQwN2ViOTE3NWE3ZGVlYjZiN2MzNmE4ZTMzYTRlN2VhZThmMDhlOTAzMGFhNjg5YmUwZDcxMTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ1YjkyNWM2OTFkNmM5YzMyZjQ5MmYwNGUzZGNjY2M0ZWI3ODgyMmY4ZDUyZDE1NmZiZjBlZDI4OGJjYmNjMmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2Yjg4ZTAyZDJiZmYwOGNhYzFhMTM3MTdkYTE2N2U4ZmFhYjg0NGFmYjNlNmMyMGRlYzNkYWJkZDMxZTViMWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_823b4cb8785649b9b4211d69d41626bc",
+      "statement": "HelperKey is a module-level Symbol injection key and useHelper throws 'useHelper must be used within a HelperProvider' when no context is provided, which is why the options settings page must provide its own stub context; the custom element name boss-helper-job is hardcoded inside run().",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/index.ts#L8-L18",
+          "version": "repo-lines-v1:sha256:59769dc151474c81588c29048a93c184350ea8364ded69692e19810c07141e1a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4NmI5YmFmY2ZmMWJhOWZkNWJhMGY3YmRjODFiMTEwOGQ0ZjdlOGFjOTU5NThmYTBkOGU3YTZkYjQ5NjgwNDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiYzJhMDFhMmM0NTc1NWMzMjFhMDU4MDkxNjlkZTZmODcxN2I5ZDE4OWU1YWI0MzU4NzU2MTM3OWVlYjdhOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue",
+          "version": "repo-file-v1:sha256:cd5d0d936cf7475f8e90234cfc877cf81de99066f4d7c1d3eaef109f9c3a9067"
+        },
+        {
+          "resource": "repo://src/index.ts#L10-L46",
+          "version": "repo-lines-v1:sha256:aa613d2d27f0c7e561954e7808b35b50a91e0da7301a1abe6a76f821610174ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlY2UwYjhlZGY2MWNjYzdkNGM4OTU3OWQ3MmFiOWQxMmVhOGZjMDhhYmMyZTAyMzdmMWRjMjNjMTRjMGZhY2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1YzQ1MTA4YzkzYmFjNzZmMTEzZDdkYWEwMDNiY2I0OTY1MjhmNDg0MzI0MzVmMGI2OGYxNmU5OTE1YmM3OWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4M2I5ODRkODA4ZTBiZjI5YmU5ZDE4YWMwYTkyZDBhYTk4NjRjZmZjOWUyZmZhY2FhNWMyMjQyNGQ4MWE1MTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_35e01168739146e58b26bfcc49eead99",
+      "statement": "The base class derives site-independent side effects that adapters reuse: notification() sends an OS notification only when formData.notification is enabled and the document is hidden while always adding a toast, initNetConf() fetches immediately then polls every 5 minutes, and stop()/reset() silently no-op until a workflow exists.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L183-L225",
+          "version": "repo-lines-v1:sha256:37085e0e4e64e0c9b585722e83067fb815943ccff0f7a10f063d216ac9f5da00:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmZTA1NGVhNjA0YjI4Y2IxZWJiZjc4MDE3YWZmZWI1M2E1MWYyNDgzY2JhNDFhYjQwZTQzYjQwZTI1ZDc4YzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiZjEyZDg0MjQyZGJiNmRiZjcxZGVlOGM3MWNhZThmOTA2MDBjMTRkNDkzY2ViNzQ3NzcxNWMzOTI4MWM1MTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEwODE2Y2IxMjJmMzQ1ZDYyZmQ3NTIyNGE5NjUzZjAyOGU4MWUwOWU1MmZlNmU3MWM1Yjc4NDk5MWI3N2ZmYzMifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/netConf.ts#L58-L72",
+          "version": "repo-lines-v1:sha256:94e06c7456d33b36b1466d36af816ebef44ed70502b0604a49f79181a1a948d6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwMjlmNGIyZWFkZWRkMTY5ZTgwOTI1YTUxZGZkZTk4MDY0Yzk3M2Q4NjAwZDMyZmViNzhlNzIzNTUxYzRhOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmNDg3MzQ2OWEwMTgwMjhlMWUyNjNhMjk2MTk2NzhlZmYyMTk2Nzg2ZDdlNjgxY2ZiYmI2NTY0MjQ0NWM3YWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1YWFkNGNlYTMwY2NjMmQ4ZjgzMWJiYzYxNWQ1OGQyNjE1OTNiYzZkOTBmZDZhYzg0MTRmODQzMzY2ODY3YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljYjJkNjExMmQ3ZjZmZTBlY2YyNjAyMzUxZmYzZTA0YjBkMjFlM2U4MmQ4MGY0NzUzOTRhOWVmZDdiYTkwNDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6c832f62eb1c4b8199cbbbc75a02c09a",
+      "statement": "The HelperContext constructor must not read subclass members: TypeScript abstract getters (uid/userInfo/key/label) can be satisfied by plain subclass fields that are only assigned after super(), so BossHelperCtx creates jobList, _jobList and the _jobDataMap map before calling super() and assigns them afterwards.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L22-L36",
+          "version": "repo-lines-v1:sha256:11a38b66993fc75e476571b6c83802e0feb6335c8024a4b28478df653fd533b8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY1NGFhY2QwMTFiZjQ3NWI1YzRhMWQxZDhkZGU4Y2QxMWJkYjNkYTgyZWYzMmZiNDY5ZTAwMjJhODcxYWRlNmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhMThjNGUxZDIyNTZhNmM4NTljNzcwYTJlODJkYzFlMTM2ODA5MDFhZmZmOWE3YTQ5MTEwYzYwZTNlZTMzMTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNiZjBkYWY1ZGE5ZDQyZjZmNTNiM2U5NjBhZTM5OWU4ODdkMzRjZTE4ZGNkMmI3NDkzODM0NjIxNjM0ZDhkYzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzZjUzYjk4YmRhYjA2YjRmNDlhM2M3NWIwZWMyM2JlYzA4YWRiNTZjMDhlMGRjNjE3Zjk3ZjNlMDdiZTAxNWYifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L119-L150",
+          "version": "repo-lines-v1:sha256:06891253fc4fd5db59ae62d11c432e02ddc8bc0f7911dd2f8238ab6f306ecec3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3NjcwMzE4ZGU1YTBmNDQ2MTVhMTJhZmI1MmU3NWM3MWRmNTVhZTM5MDk2ZGIyZjIxMzdiZThhNGUzZjk4NTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVkMWIxYzdkOTA1ZDJkMzkwZjUwM2Y3NzY2ZjE1YTg3NjZlM2FhN2ZiMzIzYmQ0MmE0NGFkZWZmNWIxZWRiMDMifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L154-L176",
+          "version": "repo-lines-v1:sha256:47a4e51a150a62fb1d8f5809c19084ddef9e2fe3bbd5718f3a81e6f718634cce:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhN2VlMWU5NTQzOGNhOTcxYmJmMzEzMDBhMDZlNDBjMWFkZWY2NWY5N2Q4MTYwYjQxMGZkNzczZDEzMGU0NjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4ODk4ZmMyYWM0ZDdiNzY2YjE2OTMwMDNlY2ExZjNlYzk4NWRkNzc1NTQ3NDFmNWE0MGNhYWUxNDNhNTlmZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVkMWIxYzdkOTA1ZDJkMzkwZjUwM2Y3NzY2ZjE1YTg3NjZlM2FhN2ZiMzIzYmQ0MmE0NGFkZWZmNWIxZWRiMDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdmOTMzY2I2MTEzMjQ1OTczYjRhNzcwYjY5ZmRlY2JkN2RjYjRiODk0ZGY3OTllN2M3ZTIwZDc3NWEwYzhlMzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4c311317f84244ea98b7076105b08c77",
+      "statement": "Consumption of the contract is uneven: App.vue and its child components never call getConfigItems(), label, key or userInfo (the configuration panel is built in the options page directly from useConfigSections), so those abstract members are a contract and extension point rather than an active UI data source, while App.vue does read netConf, statistics, workflowRunning and shadowRoot.",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L130-L160",
+          "version": "repo-lines-v1:sha256:c1392fe37840924c069ee282b90c73ef7d4d868ea817dd8bdfe76f40de1177df:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2NzRmMDU1ZWVjNWZmYWYxZTdkNWUwMDE2M2Y5NTUyMzk2MmYzZGU3NmQ2MjVjZDhhODJjNmVhMTg0OTg3MTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM3OThkZTM2MjhlMTM1OGI2MDk1OWU0YjJkNTc1Zjc0OGRlNjA1OTkwNmY2YThmMjVjYjQ1NDAzNzlkZGQ3ZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA2NmNmNjBjNDNjMDVlNzg1YWNhMWMzN2MzY2FmYWVmMmUzZDk2N2E2YjJhMDE0ZWYyZTA4NTk0YjgyNTc4MjkifQ"
+        },
+        {
+          "resource": "repo://src/components/Tabs/ConfigItem/Appearance.vue",
+          "version": "repo-file-v1:sha256:91e9a14a7bb24335a4f2476be7254160ddea410d61edeb2e71ff2ede2ab59b04"
+        },
+        {
+          "resource": "repo://src/composables/conf/sections.ts#L7-L9",
+          "version": "repo-lines-v1:sha256:7d255aac8b013a80a2ab2e82d04db6545d86c6e861911f1d3e427d8381004de2:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWE4MDU5MTA1NWNlNmQzNGFlYTY5NWEzMDNiODcwNzQzYTgwNWJhYzhjMWUzMTIzN2U5YzU0Yzc5YjUyMzM5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjE2ODFmYTY1OGVkN2JjYmM0MzMxZGI0ZDRhMTA4OGY4NTkzNTY3Y2VhMjY3NzVhYTlmMWFhOWYxZTJlOTFhOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTY4ZTM2MGI5ODBkMjc2NDE0OGQzZDU0YjNiZDc1ZTFkZWQ5ZGVmYjg2M2E3MWRkMzRlYWE0ZGY2MjdhYjg5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2YyMWE2ODExZDAwYTgxOTU5ZmVjNGMwMjZjOGJjOTMwNmYzODZkOWI2NTU2NDFjMWU4YjE0ZjdkMWNlNjQ1OCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ff47948b86284106bbf39e5bfdff5a27",
+      "statement": "HelperCache and JobResultCache must be given a lazy partition closure such as () => accounts.activeAccount.value rather than a snapshot string, because every storage-key computation reads the current active account and a snapshot would keep writing to the previous account's slot after a switch.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L24-L26",
+          "version": "repo-lines-v1:sha256:9b76fc500d240b2d3014086c32e4c0e390ce1f58ce92bf35056f9b0111388651:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTJiNzc1YjU0NTYwZTQ0MTdkZDUwOTUyYmU1N2U5M2QwM2RlYTk0YWE1NTRlNTFmNzQ1N2FiOWUyNDEwZDhmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDlkMzQ2OGM1Y2QyZTA4MTkwNjdlNDI2ODg4MjZjMGIwYjBmOGY5MmIzMjNhM2ZiMzQ5ZDc1N2MzOTczZTkzZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDI5NGRiMTQyYTdmNjdhN2E2Mjg1OTliODVhMDRjYzA5YjM4MzJhNDI4NTNhNzM5NjliYjdiYThjNzE1OWZhOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTBjMDg2OTJkZjg5MjgxMTdhMjNlZGFlODRiZjlkNmEzNGU1NmI1M2M3ZjgxODRmM2E1NmVkNTBiMDBiODYwOSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L86-L88",
+          "version": "repo-lines-v1:sha256:32c9c496e7113927e963548ad7465cacd594199b59e7d7e05f9b41c51b57e6c5:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWRmYjhjYzhiYzdkZWIxMzRiYmI1M2I3OTcwYTQ2NjFhNWM3OWM1ODVlZWFjZTJiNzQyZDZiZmJhOGUzMTE3OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzJiNGQ0ODgzYzZhOTFhODA1ZGZmMDdmOGNiM2JlZmM5NWViMDIxMjAwYmU3MGJkYTVhNGIwNDM5MmJjZjdlOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTQxN2E4Y2Q5MjY0NzAwZTkwNzVmZDlkYzQyOTVlN2IxODc5ZmUwZmM3YjdiOTBjODVjNzNlNzc2M2Y4YjU3NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGZmNjRiYWJiYmQwZWJiMGZjMjdlZWFiMTdlY2UyY2RmNDYyNDZlYjg4NzAyMGU3MDkxYjBmMTU5MDEyMDBlMSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L24-L27",
+          "version": "repo-lines-v1:sha256:61faf326ace40195be0efe14ad6190889f353f1b9cef7257cca75cf3f2abef32:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGZkYzY0MDE4ODg4MTdlMTRmMjFkN2Y4NWEwMzY3ZThmYTY4ZDMwMWFkYjQ0ZmI0ZGNkMWJiNDg0YThmYzc3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWE0MjAyYzRmZTg4YzI1ZDk4Y2ZiZWMzOGVmZDQ0NGQ1NjEyNWZkMjIxNDdmOWM3Yjc1NGU2NjAwMTFiYjQ5ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzRkOGNmM2EwNmMyNjkwN2U3NzBkMWU4YTYyY2UyOTAzNGI2M2IwYTNhMzRiYTg0NzU3M2E1ODhlY2Y0ZWFmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzM4ODUwMTNiNDUyZmEzNDliYjU4MzlhMDIwMjQzMTdmNDlmMGViOGQ5OTVhZjEzYTI2YTlhZDM1MjQ0YmQxYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a1ae4f08fe8847e2997355257bea97f0",
+      "statement": "A lazy proxy must be created with an existing pipeline task id, and a handler that throws DependencyMissingError is retried only once after the dependency task runs; Boss keeps the list-derived jobitem refreshed on every list update while detail/boss remain lazy until the 岗位详情获取 task calls onJobCardClick.",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L352-L360",
+          "version": "repo-lines-v1:sha256:07ce12ed9dbb534de0c425a559bf44d8de43384bc49b2ae109473f62d923321c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzA4YzJhMzRlNjdhZTczN2YxZThhZDVkM2EzYzYyMzBiNjA3MzdhODdkMDRjZmY1OWU3NTA0YTgzMWU5NGYzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzM2NzQ5ODFlZjUzYjJhMmM5MGNkM2Y5Njc5MWQ5ZGE1NWE4MzMzMDMzZGUyMGQ2NDk1N2JlOWE4NDM2YzVlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWY2ZTRlMTA3NDEyZDkyMTQ2YTQwODJjZGE1OWYzZDFlOTc4MjI2YTQzZmJjZjI4NjlkNGEyYjQ0ZDQzMmEzMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjQzOTA5NGY3YmFkNzJmMGM3NGIzNmIyZmExMGEzZjA2OTk3OTdhNGRiMDE5ODBjNWNiMWM2Yjk4Y2Y4ZDE0OCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L180-L216",
+          "version": "repo-lines-v1:sha256:1402ce6a63025447afe7c1928944080996693a088172b1b12eaec6eaf90dbc50:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NDk2ZDk2YzE3YzBiOWM2ZmZmYjY5NzcyMGU1NmYyNDU1NzgwMjEyNTI4YWJkMDYxNTY4ZDNkZTg4NThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNmE2MTgzYzQ3YjJhODdmNThlOWU1YWUxMzFmYTIwNzgzYTM3NzFlOTA5ODA0OGEzNzQ4YjVmZTMzZmZlNTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3Y2Q5N2MwOTQwZWZmNmJkZGRkYmFlMmZiYjFlZGIzOTExZTdjNzc3OTI3Y2Q5NGE1ZjY3MTNhY2U3Zjk0NDgifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L380-L397",
+          "version": "repo-lines-v1:sha256:874e54f338177c5d22365492afc08d4f242c2a1aaeb5e2026bb0fb05d491e010:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMmU0ZTVhZDRiMjcwZDNkYTBlMDllNWZjYmIyZWE1NjBjZjFjMTVhOGI2NWQ1MzkzYjU2ZDE2ODVkZWU2OTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0Nzg2ZWJjYzljOGE3OWE2MmY2MThjNjYzMjNiMzRlMjJkYTVjYzc4MjI0YWVmZGIxODVhNmFiN2JiZjNlY2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5NDYzODc0MDg2ZWMyMGUxOWQ4OWM5MDg1MGE2ZTNhNTNiNDdkMzYwNTViZTQ0OWI3NzAzYzk0YTU1OGU4ZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1NTA1OTNkZTM2ZDY2MWRjY2MzMWYwMTA4MDFhNzM2YzNiNmRjNmY4MDNjY2MxZGZmMDQ5MjlkOWY3N2I0OGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8272b68507ac48e5a94ff5a57bfb728f",
+      "statement": "Boss item normalization derives JobData from the host list item: key boss::encryptJobId, encrypted ids turned into job/boss/brand links, companyId/hrId for dedupe, and fallback labels 经验不限/学历不限 when the item omits experience or degree.",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L55-L118",
+          "version": "repo-lines-v1:sha256:658db918ac096509cef776effbad54e63bc720b29d87faf8e679dfbdd85e957c:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzNTRiZWI0MmFmODFiOTNjZWU0YzI5Mzg1YTcyZjI4NjVkNjdiZTljZTdiNzk5MDgzM2FjZTM4OGY1M2Y2N2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxOTU5ZGM1Y2I3ZjdiMzFhOGI0NzQzZjY2YWNmMDk5OGNhMmVhMmEwMTE5YThlMDkyYWM4YTFiNWQ1ZjVlMDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4OTMyYmRlMmY2N2QxZmIwM2NiNjg4N2QzNTVmZWYzMTc1MjMzOGE5ZDczMTdlNmMzNmI4NmEyMGJmNzQ4NTQifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T11:46:27.311Z"
+  }
+}

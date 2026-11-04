@@ -1,0 +1,9 @@
+# OpenWiki 阅读边界：以下路径不会被读取、扫描或写入文档
+node_modules/
+.wxt/
+.output/
+dist/
+coverage/
+*.log
+bun.lock
+pnpm-lock.yaml

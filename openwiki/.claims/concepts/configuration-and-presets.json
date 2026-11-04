@@ -1,0 +1,696 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:1feae19640ae8fc4149e1ea0848ae97769055ea173784a19fc34a3ef96b66042",
+  "claims": [
+    {
+      "id": "claim_6226b16480ab4ce8bf6e135f290ff2ad",
+      "statement": "配置状态由 src/composables/conf/index.ts 的模块级单例持有：formData 是可修改的 reactive 副本、defaultFormData 是合并与恢复默认的唯一真源、formDataPreset 是可写 computed，useConf() 只是把同一份状态的操作包成闭包返回，因此所有调用者共享同一份配置对象。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L298-L315",
+          "version": "repo-lines-v1:sha256:b2eecd17d11f201d128332564cde4c57bdf61180590c59d5d70dc6faf935fa63:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2MDVhNGE4NDBiNDNhNjRjNTkwOWNlMTE2NzFlM2QyZDcyMjkxN2ZjZTY4NDc1MGJmYWYyOGY0ZjllYWFjOTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L35-L46",
+          "version": "repo-lines-v1:sha256:5c6306496b86a55fb0176e3dc4fe1d7492b0d890959d9ba5aee3b76692ad7941:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyOGZhNzU4ZTU1Y2UwMGM3MWNlNjI5ZDk5MDc1YmRmOGRlYmZhZjY4ZTBkNmU3MzMwNjE1NTM1MDRlNjQzNzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjZTU4YjJiYmU4NTU5OWZlZWUwYWQyZWFmODJjMWM5Y2NiYTk0MjAyZGNlNWMzN2ZjNDI3NGUyZmI3YTI5ODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2NWM2NTQ3MDE2NTQ2Mzg4MjRmNzY4YWUwZWI5YWNhMGMzZmM5MGE3YzdkMDMxM2IyYWI1ZTFiNTRmZGEyZDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_179b15ccd37f494a9761a95f4811379d",
+      "statement": "formDataPreset 的取值是三级回退：会话级 selectedPresets[activeAccount] → 当前账号对象上的 preset → 'default'；为其赋值会写入 selectedPresets[账号]，显式切到 'default' 会以字符串覆盖而非让回退生效。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L38-L45",
+          "version": "repo-lines-v1:sha256:0f5bcd308c266956ba417bbc91a164e511a8e45f4fe68385c1e3090cdba18046:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmQwMGE4ZDY5ZWUwNDAxODY1MTc1Yzg1MGQ2M2QwOWZmMTE5NzRmYzIxNmIxMGNmMzdlNDYyNmNlMWJhMjhiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGE5N2MxZmMzZmMwZTllNzc2ZWJjNDkwZmRjN2M1Yzg4MzNkMjVhMTk2NGUzYjdhM2M2MmE0YzNiZWZkMTgwNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzYxYjhlZDY1NzI2ZTg2M2Q4N2E4M2M0MWNhYzMxOThiZGYyNDFiMjljZTM5NDU2MGM5YjJhYTUyODgxZDU1NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTI4YjQ5NGExNDhlMjIwMjY3ZjBmMTVjOGM4ZGRiMjU2YjE0NzgwZDE0ZWMwOThjZWY5MzljMDVmNTFiNWY0YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8b820b0318ba4b63a16147ffb6182ca3",
+      "statement": "formDataKey() 把当前预设映射为存储键：非 default 预设用 local:web-geek-job-FormData-<presetId>，default 预设沿用无后缀的 local:web-geek-job-FormData，从而让老用户无需迁移即可继续读到原配置。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L51-L57",
+          "version": "repo-lines-v1:sha256:ba9f7283c599b867e80772212c8b919aa4cd173ee3e84afb0ea8b6f9346791f3:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTFiMDI2OGVhZmJjOGFiOTNlMjYyM2U2MGE4YzNkOTMwYjY0Yzc1NzE1NDc2YTIzNzc0NmY3ZjI0ZmRhMWUyZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDNmMDQxYTM5MTAxNTczNTExNmYzNmEwOWJjODRjZWZiYjI0NTk3MGZhMjZlZDQ4YWRlZDg2ZDEwN2FkYTU0OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzE5M2U4ODA2MGQzM2QyYWZhNWE1MjhlOGMxOGFhZmI4NzIwYjRjMDExOTMyNTE4MzE5YjIzNDMxNmMxODU0OCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_46fff70081f84985a9b8665939d6ca02",
+      "statement": "formDataKey() 只被 useConf 内部的 init/confReload/confExport（读）与 confSaving（写）使用，因此 FormData 的全部持久化都集中在这五个入口。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L160-L225",
+          "version": "repo-lines-v1:sha256:d4afba412fa70fbd73d69c79513dd8c162afbb325b7309cbdded8e9aaeb651de:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkMzk4OTMyOTk2ZTk4ODNkZjk0OWQ2YWZjMjVjMGZkNjA3YTU2M2ViOWUzNTczZjJmMTQyM2NmYWQ1Nzc0N2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlNzM5NGQ3NzU3ZTkyNzRjMzYzMWI5N2Y3M2IxZjE1ZGUwYTU2NThhZTE2MTg4NjMyZjdlYWI2MTUyYjJjYmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bf956f6e8fba443e8b0d26a1515f01f9",
+      "statement": "confInit() 的顺序是固定的：先 await accountState.init()，再按 formDataKey() 读取磁盘配置，然后做版本迁移与 deepmerge(defaultFormData, from)，最后用 Object.assign(formData, data) 就地覆盖而非替换引用，以保证已被 HelperContext、App.vue 与各配置组件持有的 reactive 对象不断链。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L163-L181",
+          "version": "repo-lines-v1:sha256:b7768b479b2f91a89c8e646c67ff5130292f92832087ed821a4a77bcf153dc94:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0MzA5ZTRiOGI4OTEwOWFmYTlmNTJhZDRkZGJjOWExMTk5MWI3YjQzOWVhNmIxZGM5ZjQwY2NiYzllODkzYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjOTA2OTY3YzgwOTIyMTk2ZWIwMmFhNjJmZmRhNDk1ZjNiMGZiMDEzNjM0NzViOGEzYWU4ZjExYWViNTVlNDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9e1d2cd124344285876a640b25d65a43",
+      "statement": "FROM_VERSION 是 [version, 迁移函数] 的升序数组，formDataHandler 从数组尾部向前遍历，遇到 from.version（缺省 '20240401'）已 >= 当前项 version 就 break，否则执行迁移并无条件把 from.version 置为该级 version，因此 version 是单调推进的水位线而非最终版本号。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L142-L156",
+          "version": "repo-lines-v1:sha256:f84cc842be5ad692114923bcc7c4715325086ee142bda6308baf8bcb3889eabc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyM2MzZmMzYjZlZTExMzViNTZmNzE4NzcxMjBkZTE2OWVkMTc1OTUxZWMyYWY2YTBkNGJkOWE2MWY5MTRhZTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlYzJmOWI3OTlmZmZkNmY2NWMwZDc0ZmFjOGY1M2E4NWM1OGI5Njg2OGY5NjFlMTIwNDNmMmVmMjMxYjgwZGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwMGFjZDY1NzgxYmYwMzk4ZTMzY2IzMTdiMzk0N2I4OGJmYzU0YmI4Y2QzZTdkMzdjYTVlNGZiMDQ2YzU0MTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkMzk4OTMyOTk2ZTk4ODNkZjk0OWQ2YWZjMjVjMGZkNjA3YTU2M2ViOWUzNTczZjJmMTQyM2NmYWQ1Nzc0N2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd9f0d2e01e6470d8932eaa3b6342623",
+      "statement": "当前迁移链含三级：20250826 把 salaryRange.value / companySizeRange.value 从 'min-max' 字符串拆成 [min, max, false] 三元组；20260521 把 aiFiltering.prompt / aiGreeting.prompt 从字符串包装成 [{role:'user',content}] 并用默认提示词补齐缺失值、给 jobAddress 补 include:true；20260718 把扁平的 delay 对象展开为 delayDeliveryStarts/delayDeliveryInterval/delayDeliveryPageNext 并删除 delay。defaultFormData.version 为 '20260718'，即链尾。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L58-L130",
+          "version": "repo-lines-v1:sha256:d9a941270aba9c512f436a0eb7322c5c42325941c81517aab7872f484b44814e:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxODkyZGFmN2RkODcwMTdjNjhjYjE2MTYxMzEwZjJhZTNhYzk2NjM0MTk3YTI0M2E5Y2FkYWFmMjIyNmYwNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5MDY4MGZjYWMwOWEyOTlkN2EzNTRlYmJlMzMzODdiYzUwZDA5MDBiYjI1ZGM3ODkyNmFlYjMxZmI0ZTU2ZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3OTJiNjg2MzIyZGMwOWEyMDA3MzZlYWU4MzI2NzdmNTI5Mzc1OTFjYTBkNGE2NTk0YTM0MGE0MjNmNTYwNzkifQ"
+        },
+        {
+          "resource": "repo://src/composables/conf/info.ts#L180-L185",
+          "version": "repo-lines-v1:sha256:32f9b629fdf2aeb06d2c85cd5e56feccb1689c98559e996035eda8c535ce4b16:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQwMzBiOTk2ZTAzMWNhZTIzY2NlNmY4ZTljMWQ0NTc1NDBmNmYzNjgwNjI4NzViZjllMTNlOTAwZjI0MjlmMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2NlMmU0NGEzMDNmNWE4MGVjMDg1Y2YwOWE4YzMzNjllYjg3YWIxNTkwMWE5M2NkNDExNDc5ZDU1YmY3OGNhYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_50866a87c85e42e1832dbbdc0af2715c",
+      "statement": "迁移链不负责补新字段：新增 FormData 字段必须在 conf/info.ts 的 defaultFormData 中给出默认值，由 deepmerge(defaultFormData, stored) 兜底，否则老用户读到 undefined；只有需要从旧结构改写字段时才追加 FROM_VERSION 条目。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L172-L174",
+          "version": "repo-lines-v1:sha256:c6475b45e9ba5d40b693dea913dff7d1381785a16db2ddb294be145664c04fa0:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjFiNTFhMTY0OGMzNjQ3MjczZTM3MWRkZGJjNjYwNjQxNzRjMjFjM2E0MzM1OGNhYTA2MjQ1ZjYwNzU2OWI5MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjk4OTFiYjQwMDJiMjRjZDMzMTgyNjk3NTEwYzEzNWE2ODhkYzk0ZTI1MWM1ZjE3NDU3OTUzNDQ1ODhkZmFlNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDU5NjNhNjUyZjY0ZTAzYWQyNDI0ZWY4YThjZjBiODU1MzJmZTc1MTYxNDMzMzY3YmY3N2FhY2E4MzMwNTI2MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGJhMGIxMWEwOTM2ZWI5N2MwNzdjNjlkOTBlMDQyNjgwOTE2M2ZhYjdmMmU3MGNlY2VlNWU1Yzc3ZWJmMzM1YiJ9"
+        },
+        {
+          "resource": "repo://src/composables/conf/info.ts#L1-L10",
+          "version": "repo-lines-v1:sha256:86ccb65c19edc7d570290c4bb962e69c2c75f2974b0c333277afa3940128be9d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlZTMwMGNkYzNjYmUyYjE0MWQ0ZmZkZjY1MjM4NTllMWZjMjk5OWRkYWZlYmYwYmYzOGYwMTBhODQ3N2IwYTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyOGEwZWMwMjNlOWM1MjgwZjE1NDVhZDQ4OGRkYjY0MWMwNWJlOTQyN2M1NmExMDhiNTE2OWZlMmMyNTU4YmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_26a0d102edba4208a5b232c656015b9f",
+      "statement": "formDataHandler 用 try/catch 包住整条迁移链：失败时弹 error toast 并记日志，然后返回未迁移（或部分迁移）的 from，confInit 继续做 deepmerge，因此坏迁移的后果是旧结构加默认值兜底，而不是配置加载失败。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L139-L159",
+          "version": "repo-lines-v1:sha256:9935707f0b8e6440830be34e4fd310a0611758ac0a2b907326add322d2f94e6a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4MzU1MmFiNTcxNDk0YjM5OWIxODE5OTYyMmRiZTNiMzgyNmViNjFmY2QxZjc0Y2ZiMTJhYmNmODhlNGY3MjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMyZGNmMTE1ZmI4MjdkNTUxNGRiYTI5MzZhMTI0NTM5ZmMwM2Q2Njc1ZDg2YjUyM2U0MDJlYWFhYTg4ZWIxZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk0MzA5ZTRiOGI4OTEwOWFmYTlmNTJhZDRkZGJjOWExMTk5MWI3YjQzOWVhNmIxZGM5ZjQwY2NiYzllODkzYWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4f28918807e24292adcaac207859fd05",
+      "statement": "在 useConf 暴露的五个动作中，只有 confSaving 会写盘（storageSet(formDataKey(), jsonClone(formData))，失败时 toast 后 rethrow）；confReload 从磁盘重读并就地合并；confExport 导出的是 defaultFormData 与磁盘值的深合并；confImport 只把迁移后的 JSON 深合并进内存；confRecommend 与 confDelete 只就地改写内存。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L183-L225",
+          "version": "repo-lines-v1:sha256:a61be7410a2d380740ef216c374b1da329b6fa6382702befd339330ff539d0a3:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyODg3N2M5YmRkYzkxNWU2OGQ1YTRlMjMxOTA0NGZjNTA4ZWM5MzNlOGFhYmM0NDYwZGFkZWE4Nzk3MTAzYzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlNzM5NGQ3NzU3ZTkyNzRjMzYzMWI5N2Y3M2IxZjE1ZGUwYTU2NThhZTE2MTg4NjMyZjdlYWI2MTUyYjJjYmEifQ"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L227-L271",
+          "version": "repo-lines-v1:sha256:c7b6175771757f1fbb7c424afcdcd7c39b3586dd38f80975078dd823887532b0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4ZTFiOTRkMjI2YzA5ODAzNDY2M2I3NDJmZDAxYzY5OTdlY2YxODNhYzc3YzBlNzU1MjNhNjJjMWVjYzNiYTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyMTU5MDc0ZDhiNDFiOGFjZmZiMjljOGQ0N2MwN2Q3YzE0MjNiODgzNWQ2Nzk2NTg4ZDIxZmFiODkwNGViMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljNzlmNjZkZTFhMGY2NmIwZWU2MzVhNDc5OTI2MTJhMzZkMjA2YWEyMzcxODY0M2E4ZTFjMDQxYzM5YTNkZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1ZjM3NTRiNDFhZjBkNzhjYWJlOWJiNzZmNGNjZTExNTIzOTkxMDAyZDc0N2Y5NWU2ZTdkZjk5NGUwNGM0MTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_03e48a83c4ab4a07ab2dbf2c323eb173",
+      "statement": "confRecommend 只把一组白名单键重置为默认值（deliveryLimit、activityFilter、friendStatus、sameCompanyFilter、sameHrFilter、goldHunterFilter、notification、useCache、delayDeliveryStarts、delayDeliveryInterval、delayDeliveryPageNext），刻意不触碰筛选集合、AI 提示词与外观偏好；其 toast 明确提示不会自动保存。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L227-L256",
+          "version": "repo-lines-v1:sha256:1140e6e4d5b35d1f5195e185c03a726aa0e47fa54cdfe247ec98536667222d04:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4ZTFiOTRkMjI2YzA5ODAzNDY2M2I3NDJmZDAxYzY5OTdlY2YxODNhYzc3YzBlNzU1MjNhNjJjMWVjYzNiYTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljNzlmNjZkZTFhMGY2NmIwZWU2MzVhNDc5OTI2MTJhMzZkMjA2YWEyMzcxODY0M2E4ZTFjMDQxYzM5YTNkZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiZTg5MjFlNjhiNzgyNzQ5ZGM2ODE2ZTk3MTgxNmMwOTc3NzEwNDJhNzQzZWY3MmJiOTU2ZmM5ZDU1OGU1ZTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_87d0926bfe0b49a6906372c8498da17e",
+      "statement": "confDelete 只把 defaultFormData 深合并进内存中的 formData 并提示需手动保存，并不删除任何存储键；要真正清空磁盘必须再保存一次，或用 confReload 恢复。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L258-L268",
+          "version": "repo-lines-v1:sha256:097177e9e879a964fc369f74578cb7f5ff9983712437b4871923ef14490c55d5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiNGI5ODkxZjQ0ZTJlZTc3OGY3NDFiMGM1MjcxNzczZWY2MjFhZTRkNWE0MDQyNmFlYTIwZGNhZGQwZDYwNGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4NjIwZmEyOWIzY2IzODcxYTU1NmMwZDA0ZGQyOTljNDA5NjlmYWI3NDJlZmI4NGQxMzk2ZDk3ODgwODhhZTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljNzlmNjZkZTFhMGY2NmIwZWU2MzVhNDc5OTI2MTJhMzZkMjA2YWEyMzcxODY0M2E4ZTFjMDQxYzM5YTNkZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhmMWYzNTg2ZjlkZDIzZmRjZWZmZmRlN2YwYjhkMDBiOGFiMDg4MDJiNTg3ZGE1Mjg2NTRlOGEzNWY5NDhhZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_122e0189fd2644b2bdee63e06ccc9310",
+      "statement": "confImport 与 confExport 语义不对称：导入是把迁移后的 JSON 深合并到当前内存配置（嵌套对象逐键合并、数组整体替换、缺失键保留内存值），导出则基于磁盘值构造完整配置；options 侧栏的“导出当前配置”不调用 confExport，而是直接导出含未保存编辑的内存快照。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L210-L225",
+          "version": "repo-lines-v1:sha256:cc1761718192d19c4574cccacfff79f1613787295e86f1326788cd8ac9824f3f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlYWJiMTNhNTA3ZDVkMjQyODM2NDU5ZDI3NTkzMzhmMTFlMGRhYjYwY2FjNmYzZjQ3Zjg2ZmNiMGU5MzczOGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlNzM5NGQ3NzU3ZTkyNzRjMzYzMWI5N2Y3M2IxZjE1ZGUwYTU2NThhZTE2MTg4NjMyZjdlYWI2MTUyYjJjYmEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L278-L287",
+          "version": "repo-lines-v1:sha256:897c52ab563dff263e2926252900cef17f2ea9ef5315c50d2674f5fb79a99731:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlYWQ0YmMxZjJlNjZkYmQyMzcwN2JjOTRlNjVhZTU3MjQ4N2NiN2NiYjc0OTEzMjg4MDQ0OTk4NDU2NTczNTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlYTc5ZTkyNjJmY2ViMTg1ZjgwMGU4M2ZiNzlkYWE5NjdkN2JjMDQzZmI4ODM5MzNlMmFhYWFmZTlkYmFkNzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ2OWJiM2FjZjU0NjRmNzI0ZjUxNmJiZWJmZWEzMzVhOWY0Y2IxZWJmNDU2OThjOGE5ZWZjYTZlNzg2ZTVjZTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNTIxNmNkOGExOTUxNGNhODA1NWJlZmFkMThhZDBiNDgyYTBiNDM5OWJkZmE2ZTEwMGI3MDViMzVmODJjNWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a53687d3b8014b20a3cabd6f2e11300b",
+      "statement": "importJson 只做形态校验（必须是 .json、parse 后类型标签为 Array 或 Object），失败时 alert 并让 Promise 永不 resolve，因此用户取消或选错文件会让 confImport 与其调用方的 busy 状态一直挂起直到页面重载。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/jsonImportExport.ts#L1-L40",
+          "version": "repo-lines-v1:sha256:ae7a9cd743b06bf12aab5cb9974f9be6433e0b132a9e7b6e51bce6b3e7ba2e29:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxMjliNTlkODdkODE4YjlhM2YzMjA5NWFiM2FiMmUzZGIyYzQ5NmM3MGIzNzFmYzRlMmFlNGVkZTYyYTg5OTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d0309932f5e1437ab1eb0151ce5713d6",
+      "statement": "deepmerge 只对 plain object 递归：数组与非 plain object 一律整体替换，因此 FormDataSelect.value、customGreeting.value、aiGreeting.prompt 等数组字段是整体覆盖而非元素级合并；clone:true（默认）返回新对象用于从磁盘构造配置，clone:false 就地修改 target 用于把配置应用到现有 formData。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/deepmerge.ts#L1-L70",
+          "version": "repo-lines-v1:sha256:22f3b53188ffca726bf65020e62ee039b937f136c18677fb9340212abfa96162:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3YzEyZWQ4OGIxYjdlZjU3MzU1NjFiZDc1OTYxMWM2NTlkZDIwYTg5MDMxMTA3NjlkNThiNzY4YjU1NjAxMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4NTZkYjQwNGFlZWE4NGI5NjA2YjczODE2OWUzZTZlMmQ4NzI5MzUxNDI0ZTZjYjE4YzE5ZDYzOTk3MzU1YTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmYmQxZDU1YjZiNmY5NjAzNGFhOTliMThlYjZlNzZkODY4YWQzNTE0ZDFkNTA2YWQ5M2M1ZjA1M2M0YTM1NDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b58f71f2494843ba893c52ef5ad0f66f",
+      "statement": "deepmerge 会跳过 __proto__ 键以防原型污染，而 jsonClone（JSON.parse(JSON.stringify)）用于 formData 初始化与落盘序列化，因此 FormData 中不可 JSON 表达的值（如 customGreeting 图片项上的 File）在保存时会静默丢失。",
+      "evidence": [
+        {
+          "resource": "repo://src/types/formData.ts#L85-L100",
+          "version": "repo-lines-v1:sha256:baeed2615c3454e8372955da7847ba07ba99300379bd9587df93e79d6a656c85:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMyZWYxZTc0ZDlhM2EwODVjNGYzOGEzOTNjODA5NWFjYzQ0MTk4MTEzMTU4OTE1YTkxNmM3MTAwZjE4NTlhY2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRmYzRmYzRmYzZkZTI4MjFmOGE3NmViNDYwOTE4Mjk5YWQ3N2FmNDJiZDI3N2UwMzRkYTdiZmFiMTc3NGU2YmMifQ"
+        },
+        {
+          "resource": "repo://src/utils/deepmerge.ts#L52-L58",
+          "version": "repo-lines-v1:sha256:cdbabe029ca9598011354e641559125a753e7eaf06461f1e7f8445c9a1d567bb:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjdkZGZkZjQzNzVhYThhNjgxMDNjNTEwMTY3ZGJjNmE4OGQ1ZmFiZjNmNDQyOTkzYmM4MGYzMDI5MTUzNzdlNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWQyNTY5MTQzYWYzNWU4MjdhODk1YjVlNmU0NDczOGEwODJhMjhmZmU5OTQ4OGZlYTU3M2FlYWNlMWVmN2Q0MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGYwNjE4NWQxODJhNmM5YTkwZDgyMWVlZGFhY2QyMTk3Y2Q2YjQwZjYyYzQ4MTY3NzIyMjY4NDE3NjlhMmE3NCJ9"
+        },
+        {
+          "resource": "repo://src/utils/deepmerge.ts#L70-L72",
+          "version": "repo-lines-v1:sha256:2b280a4769b67d3c349a80d34eb31a05646669bde5c0f02ab2d1799491d7ab0f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDg1NmRiNDA0YWVlYTg0Yjk2MDZiNzM4MTY5ZTNlNmUyZDg3MjkzNTE0MjRlNmNiMThjMTlkNjM5OTczNTVhNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjc2NjAzYmFmZmM0NmI3MGU1ZmIxZWM0MTBhNmRhMjE2YzIwYTZmYWU5ODczM2I5ZDA5ZDllYzFjOWRkM2NiNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8589270a329444d2ac4f6e4c77f42b8a",
+      "statement": "configLevel 由 formData.configLevel 的四级枚举（beginner/intermediate/advanced/expert，默认 beginner）折算成三个布尔量，规则是 order[级别] <= order[当前级别]，即 beginner 三项全 false、expert 三项全开，且没有 beginner 门控——基础项永远显示。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L269-L280",
+          "version": "repo-lines-v1:sha256:24ed99d0b683e8948b2145a5f4773888ad078f63276bfab4d5c3d0a80c8b765b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmOTY4OTU4MDk5YTliMjYyZjY2ZjA5MTU4NTlhODQ5YjQ5YzEyMDg1ZTlmMTk3NzcyZjVlMjU1NTM1ODk5YjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhZjg1MzAwYThiYmRhMWZlOTczNTNjN2M1ZTM3NDk1OGIwMTJjNmRjMmNiZmI4Nzg5ZWFiYTNkMGNhMjJlYWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyYTU4ZDE4YTk0NzI2NGM0NmRjOTY2NmU1YjViYzhlNjA0NDdjYTU5NThlZGFkNDFkM2JjNDM0YzEyN2RlZjQifQ"
+        },
+        {
+          "resource": "repo://src/composables/conf/info.ts#L3-L4",
+          "version": "repo-lines-v1:sha256:bf1db039fc9796692c7c0ea660f93321e3e6765351d633570a2fde0355db4d72:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzg3NjhmNmI0ZjNiOGQ3ZWM3ZGYyNWFiYjg2ZjU3OTU0ZGEwOTBiOTgyNDFhNjZhNTQ3OTRjYWRjODdhYzJiMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTEwYmViZTNiNmFkNjUyYTJhMWEyYWI0OTU2YTcyYWU4NjRmMDc5ZjRhNzY1ZWM5MjE4ZTAyY2RjZjYzNjk0MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTFjZjVlY2MyMDA0YmUxZWNjNThhMzAzMWU4MWFlYWE1ZWI4ZGY5Y2RjOTI0YzRiYjYzZjJjZmI3Y2ZlZjExYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2JhY2JjM2NkODJhYzgyNjY4Njg3OTRmZmJmZTU1ZDBkNjZlOGU1Nzk4ZmY4YjVmMzM0OWEzYjg0NjlhOWY2MSJ9"
+        },
+        {
+          "resource": "repo://src/types/formData.ts#L13-L16",
+          "version": "repo-lines-v1:sha256:66366df817cb378075866360fe6c8bd854dad5a350a296009b064dc64392be13:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2M0MzU2OTY4ODhiMzA5NzQzNWFkOTYzYjdjYmQ2ZTU0NjI0Nzc1YTI4MDMzNGFhZmU3ZGE1YzJiNmFmNWZjNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE5NTI2NjQ1ODljYTVlZDg1NDM4YjkyZGE4Zjk1ZTA2NTFlZDNkNDg2MDE5ZmQxMzBlODliMDk2Y2FjNTUzMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzg2ODFhYmFlMzZiOWI0YjU3OWM1MjNhYWNjYzMwZTQyZDIzMThkODViZmQyNzE2MDcyMjYwMjRlNWZhYzk5ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODVkNDk5YjNjYTJjNzU1Mzk2MGRlYTM1OWZjMGY0YzFlNjc2OTM3NjgwMDUxZTVkMDZmYTNmNGI3ZDM4ZmM2NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0ab7e58b95e94890b47a23d191031582",
+      "statement": "configLevel 门控在 useConfigSections() 中以 conf.configLevel.xxx && {...} 的形式表达，关闭时条目值为 false，因此消费方（GeneralPage.vue 与 options App.vue）必须显式 filter(item => item !== false) 过滤掉整个 section 与侧边栏导航项，漏掉过滤会让 false 流进渲染层。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/sections.ts#L6-L10",
+          "version": "repo-lines-v1:sha256:c7ac1abaea31669e4f1fe96b97f8a4101f0402f48467c5b8b3439e678eb46d61:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDQ3NGJhMWJiMTk1Y2U1NzZhMWFkZGQ0ZGRjMjIwMjU2OWUwOGZiYzRjNTM5NGMyZDM3MjU4MjEyZTZkMjA3MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWUxMGQyYjcxODgwZjJkYjdmZjhlOWQ2ZTgwOTA4ZWU0MzlhMTYwOWUwNzA2MTE5ZDMyNTVhODRjOTViOWQ4YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjViMzZlNTg2MDQyY2MxNjM0OWMzYjdlYTQ3ZDRiNjZlY2NjMTYxMjViNDExNGY0ZjhkMDJiZjM3MGFhMmNjYiJ9"
+        },
+        {
+          "resource": "repo://src/composables/conf/sections.ts#L60-L100",
+          "version": "repo-lines-v1:sha256:1e8a8e6892c016af8d91c5deddac521703748fbd1cbfca99aa5becd28ad5a6d4:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxNWJmNDljMDUxZmJlODIyYTUwOTJkMzljNDQ3ZTUwNTkzYzAwZDcyMjY4ODZkNWI4YWY1NmM2YzQ1ODdiMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmZmMwODAwNDgzOTllMGYxNWNiZGUxNTAwZDZlMjYwNDA3M2YwMzJjYmQ0Y2YzOWNjNTQxOTRlOWZjMTE0NjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY2MTYxNDAxY2VlM2RhOGEyYTk5NmUwNzM5MTE2MzJlZTE3YjcwM2Q0ZGIwOTZhZTRlM2U1YTI2ZjExZTQ4NjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkYzFhZTFlYTgxMjAzYzZiY2JjYzYzZTcxYjdlZWNhODg0YWI2ZDNkNDBiY2ZjMGUxZDRjZTViNGFhMzI4M2EifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L42-L44",
+          "version": "repo-lines-v1:sha256:d88f11de86db87d586f10bb3ccadecd0c01e337e5aff06c4e482fed0c8ff09f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWVhMjVlNjJmYzkyMjZlMGE4NmNhM2MxZWU2ODc5YjYzMjM2MGZiMzU2OWNmMjE5ZjZlMDE1NGE1OWRiYzUwOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjYzMjg0YmU4NmUzMmEyMjc0Y2MzOTAxMjA0MGFlMzk4NTk5MDc5MTI3ZjYwOGNiNGM2ZjBlOTBmZjBkZTNmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2MyODU3OTAwNmQxMTk2MmIzYmYxN2QwMmEyNTEzYzFmOGE5MjZmNjYzM2UyYjlmNGUxYzUxMWFlNzRhMmZhYSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/GeneralPage.vue#L8-L11",
+          "version": "repo-lines-v1:sha256:602d25c572f100809dd02ad5f14b576464e44cd4f25bf6357e86d429ed0650b7:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODdkNWM0YTA5NmM5NDM0N2M1NWUzYTIwYmE4ZWE2ZTNhNjBjOTE2NmFiY2FkNTNkZjgxMmU3MTRiODkxMDc3ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWQ1MzZhODJjOTEwMGZmNTYwNmVjOGE3ZjFmN2RlNjJiZTE0NGZkZmIwNWZiNWU0NmI5MjMxNzk5YTk4NTA1ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTcxYjA3NTliOGMyY2EwZTYyNzY0N2I3N2Y1NDc5Mzk5NzA1ZWVkM2Q4MTJjODI2NjgxMDljNWI5NDFlMjc4ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2I3ZjVkMDExMjIyNTQ0OTI5ZDllMmVhYzYxYWM2NmQwYjY2Njg2ZDA2YzY3ODk2NjgwNTdjMDBiYWJhNmM4OSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9082466220f34c868b5de77bfd5fa166",
+      "statement": "门控分布为：intermediate 控制 jobAddress、salaryRange、companySizeRange、activityFilter、sameCompanyFilter、sameHrFilter、整个“招呼语配置”与“延迟配置”section 以及基础设置里的投递数量；advanced 控制 bossGoldMedalHr、整个“地址配置”section 与 SalaryRange 的高级档位按钮；expert 控制 CustomGreeting 的专家 UI。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/sections.ts#L60-L200",
+          "version": "repo-lines-v1:sha256:9c71a15542e8d14ec719090096e7f40c0f4fe86f725093f1496d5eddeb23799c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIwMTViZjQ5YzA1MWZiZTgyMmE1MDkyZDM5YzQ0N2U1MDU5M2MwMGQ3MjI2ODg2ZDViOGFmNTZjNmM0NTg3YjE0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJhODk3ODk1YWZiMGQ2ZDUwYTQ2Zjg2NTY4MDNjOGRhMGQ0NjI5NjI2MmFhMTNmZjJmMDQzODIwNDczY2Q1YTc3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJmNjE2MTQwMWNlZTNkYThhMmE5OTZlMDczOTExNjMyZWUxN2I3MDNkNGRiMDk2YWU0ZTNlNWEyNmYxMWU0ODYwIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIxN2IxY2U2ZjBmZjA2MjNkOGZiZjAxZDM4OWZhMzVhN2VlNDExMmExNTQ3ZTAxOTM3YjFiMmNlMTZiYWY5M2Y3In0"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/ConfigItem/CustomGreeting.vue#L118-L122",
+          "version": "repo-lines-v1:sha256:514dd2416a8d65e10b055d92c53922fd1d3a10e8f4f669e4f5ecfd7b60226c2c:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWIxMDYzYzRkZWE2OGEzODE2NjExMGJhZDJkMzM4YjRkNzJlMDJkMzdiZTA4MTVhNzg0NTFlOTkzMzJkNmRmZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDFmMDRhNTQwNTRjOWVhY2VhZDE2N2Y2YjQzN2RlMTZiMDM3MjFlODlkMjgwYzU3ZjAxMGVkOGNiYmQ1MzU0MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTdhM2FiODQ0MDcwZWViNTBhZjA1YzBiMDdmY2U3ZjdmMWRhNThmMWJlMzRhYTBhMDNmMGU5ODQxMTgwMGQ1YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzJhYTMxNWUzOWJlZjhmMzM4NThkZjUwZDNlNjU2MWYwNGQzOGNlNGQzNTE3NGFmMTc4M2RiODUxOGQ1YzE3NCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/ConfigItem/SalaryRange.vue#L40-L48",
+          "version": "repo-lines-v1:sha256:0400135dbaf9f87b22102d9dc0d687dd7746e68d1f8462024197dd03a8f26af1:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmEyMjA1NGM5ODg4ZDU4OTdhOThjMmM2OThkNmQ3ZGY2NTI0OWMxZTBhOTYwN2ZlZjU0NmJiNTU0Y2RlZTM3YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjM0NWI1N2MyNTQ3ZTY4MWM3YWFlOWQ5ZTk4OTYxYWI1ZDRmOGVjZmQzMTczNTUxNTdjM2MzZDJkZTE2YTRjZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzI5NTc3YTlkOTBmNjA3Y2NiYTYxMTI4NGI3ZWU5Zjk1MWUwNjMxMWYwYmRjMjVhZjFjYTQ1ZjQ4OTk4MWE2OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDg3NjE1ZmU4NjFjM2YzMTY1MjAxMzBkN2VjMjBhZTY2YmEzZjQwYTkwYjM4OWQzODQxMGM3ZGU3ZmI5NTA4ZSJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/GeneralPage.vue#L40-L46",
+          "version": "repo-lines-v1:sha256:87fe53d79b194a2195c21267e42c4301ef5abf2fce18f017a1e8659007846d90:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDA1MzJhMmFlMGIxMDYyMjY5ZmY5YzZlNzAyMzZkZGFiMDc3MGE5MjM1MjgxZDRmODA5MWUxOWY4Mjg0YWQ3OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmJhY2VjM2FlMjk4MTM2NWNjODAzZmI5MTkxZTU5MWIxYzI1Nzg1MThiYjQ3ODkyMmYyNTZmNWFiNzY3YThkOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDBkYTdhNDQwZTQ1MzE4YTdlODdiNjFlY2RhYzlhYzkzY2FjYjI1NzRlZDZmNzUyMjA2OTgyMzcyY2VjMGY5ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzdjNGUzYTRiYTgwZjVlYjQ5YzRlYzlhMGRjYTAyMjQzZDExYTVlYTFiNjgwN2NiMDk0M2FkMmY2Njk5Y2NlYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b05d534bc7384aa0a6f5dc9e18d69837",
+      "statement": "configLevel 保存在 formData 内（因此随预设而不同），且只是显示门控：降低级别只隐藏 UI，被隐藏字段的值仍然存在并继续参与筛选与投递。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L269-L280",
+          "version": "repo-lines-v1:sha256:24ed99d0b683e8948b2145a5f4773888ad078f63276bfab4d5c3d0a80c8b765b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmOTY4OTU4MDk5YTliMjYyZjY2ZjA5MTU4NTlhODQ5YjQ5YzEyMDg1ZTlmMTk3NzcyZjVlMjU1NTM1ODk5YjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhZjg1MzAwYThiYmRhMWZlOTczNTNjN2M1ZTM3NDk1OGIwMTJjNmRjMmNiZmI4Nzg5ZWFiYTNkMGNhMjJlYWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyYTU4ZDE4YTk0NzI2NGM0NmRjOTY2NmU1YjViYzhlNjA0NDdjYTU5NThlZGFkNDFkM2JjNDM0YzEyN2RlZjQifQ"
+        },
+        {
+          "resource": "repo://src/types/formData.ts#L15-L16",
+          "version": "repo-lines-v1:sha256:f4850694d66a393059427e978c8cae306c688f2ce6e2d38cad24b82883fae89e:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzVlMmU2ZDY2YTdjOWRhYmFlNjBlOWM2ZDAzNjk3YjM2Y2QwNmRiZjM4ZWE1ZTM0YjA1M2ZjZGIyZmYzMDYzZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE5NTI2NjQ1ODljYTVlZDg1NDM4YjkyZGE4Zjk1ZTA2NTFlZDNkNDg2MDE5ZmQxMzBlODliMDk2Y2FjNTUzMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWIzOGM2ZTIyZjVkMzFkZDQ2NDQyM2ZhY2Y3NzE5NjdkMTBiMzEwNGJlODE2ZDY0Y2E2Y2IwOTMxYWM0ZGY4NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODVkNDk5YjNjYTJjNzU1Mzk2MGRlYTM1OWZjMGY0YzFlNjc2OTM3NjgwMDUxZTVkMDZmYTNmNGI3ZDM4ZmM2NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a5481eeff9954d149a4cac2ca5019a04",
+      "statement": "appearanceConf 是独立于预设与账号的全局配置：通过 useStorageAsync('appearance-conf', 默认值, ExtStorage, { mergeDefaults: true }) 自动持久化，mergeDefaults 保证新增外观字段对老用户有值，其字段由 Appearance.vue 逐项施加到宿主页面 DOM。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/Tabs/ConfigItem/Appearance.vue#L1-L124",
+          "version": "repo-lines-v1:sha256:a6b25db9be7b06b9c9af4634ddabf5d5ca846545a157ef85581e559fdee4d829:eyJzZWxlY3RlZExpbmVDb3VudCI6MTI0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI1MTVjZmVkMWFhZDdlY2Y5ZTdkOWU2OTc1YmZhY2I5YTc4NjIzMGM3YTU0ODA3ZjNjY2RhYzcwZDEzNGM4NzQ0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwMWZjMjhjOGQxNGU0NTdkOTA3YmE1MTExYTExN2Y1MTA0YTgzODJiOGRiN2EwMjZkMTFiZWEyZGJiZTYzMjRjIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJhYTI5Mjg1YWNhODBiMGFlMzRmZjYyZWI5ZjhmZmNlODJiMmRlYWZiOWNmMmE1YzAwNTAyNDVhMTQ4MDk0ZjM2In0"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L16-L33",
+          "version": "repo-lines-v1:sha256:2e45ff6503ab86e7da3caea6ea9e8dec03e60fc6bd8a833454848edcb4eafe36:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwOWQ0ZmQ5MzEwNWJlZGU2NDRkZGZmYjZkZjE5ZjQ2Y2QwMmM1NGY2YWZhZjA2MDYyMWYyZjRiNjEwMzg4NDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmMDJhYWNmMjgzYTA5ZDkyYTUxZTZjMjQ2YjkyMTA4NTNmMzU5ZTZlMDEwMWJlZmQ4NDk5NGEwN2ZhYjQ1MTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4MDcwNDk2M2NiYzk1Y2M0Mjg0ZWI0ZjRjODcyZDQ1MWRjNjgzNzllNGRhYzdkNTMwMTY5ODM5NDllMjI3YmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkwMDc1ZmE0ZTYzMGFmOGM3MWJhYzNhMGI1Mzc5MDhkYjY2NDZjNmRjMjc4YzE3OGEzYTMyMGU1NGFiYmYwM2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0ba4b43d2cfa4863a2f40c018e5d66d9",
+      "statement": "账号模型为 Account { value, label, preset }，默认一个 { value:'default', label:'默认账号', preset:'default' }，列表存于 local:HelperAccounts、当前账号存于 local:HelperAccount；createAccount 用 crypto.randomUUID() 生成 value，默认账号不可删，删除当前账号会把 activeAccount 拉回 'default'，setDefaultPreset 只改账号对象上的 preset 而不改变当前生效预设。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useAccounts.ts#L1-L58",
+          "version": "repo-lines-v1:sha256:d6e60f0104a2d6554c38842d09b4ae1347027fd5c1c291b30a279b0693eb76f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjY2E2M2U5NjNhOTY4M2M5YzlhYzE3Zjk0YWRiNzM3MGU5YzIyZmNjZDQ1N2Y4MjU3MmE1YmQzY2I3YWVhODkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_05d57a9ee195415694863356214260db",
+      "statement": "切换预设与切换账号被工作流状态串行化：App.vue 的 switchPreset / switchAccount 在工作流运行中或正在切换时直接返回；switchAccount 的顺序是 accounts.init → 选下一个账号 → statistics.updateStatistics → conf.switchPreset(账号默认预设) → model.initModel，以保证统计分区与配置同时切换。",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L50-L77",
+          "version": "repo-lines-v1:sha256:ef109e1c144662e9f24cb6033d6bd3e0d4a986bb9b8a7875fcfe2d35db9d6692:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1ZTM2Yjc2MjA4Y2IzMjJjZGIzYjc2YmI4ZjkwNGM4YjJmYjk0MDcwYmJkODI2YjEyNmExOTE2NjZhMTYxNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5ZThkYjM0ODUyMGNjNTY2ZTlkOGM1NmViNzJkMTJmMWYyY2JjYWM1OWRjNGIxODkwMGMwOTAwY2IwMDcyYmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA2NjZlOWEzOGZhNTA1OTM3MTJlMzI4ZjYzYTQ2NDA3MDA1ZmE2NWMxYTlhZTU5MTg5NGIzNzM1NzE3NjIwMTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_decb47ca646946bfb466524aad9230ec",
+      "statement": "switchPreset 先写 formDataPreset 再 await init()，失败时只 toast 与记日志而不回滚 formDataPreset，因此切换失败后 UI 显示的预设名可能与实际加载的配置不一致，需要重试或重载页面才恢复。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L283-L297",
+          "version": "repo-lines-v1:sha256:2c72c48bd215edf6bf43f97b7b2c22042537de3c37227f7f416150f7dc01bdcd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljZmZmOGU1N2I3ZmQ5MGM2ZTgxZjU5ZTkyMjkyZmFhOGI5N2UzZDFlNDQ3ZWU3NDJjYTU5ZjVjYjQ4ODRiOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhZDE3OGNjMzZiMmMyZDRiNmY5ZmY1OWY0Nzk0M2UzNDJhMzY3ZmU5YzVlMGY3Y2ExMzc1ZjA1NzM2MzZkZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0ZWFiNDAzNGUyMTI4ZTNlN2MwNTE1Mzk0YjkxY2VmMjViZWI2MmM2NGI3NGVlNGEwNmFiZjg1MTRlNTk5ZWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_21b6bad351e748cd90354f85e212e909",
+      "statement": "预设列表本身存于 local:FormDataPreses（源码拼写），默认 [{ label:'默认配置', value:'default' }]；新预设 id 用 Date.now().toString() 生成且不复制当前配置，因此首次切到新预设会读到空值并得到纯默认配置。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L20-L28",
+          "version": "repo-lines-v1:sha256:4d113ed1c14062071c0b7e3baac2ee120252961033c76cd004770acdefebc45a:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTFmMjVkMjYyMTkyZWFiOGY2ZmQ2NWU4NjU5ZDY2NTM3YjIzNjI3MmQ4Y2ZmNGYzNTczMDFhYTUxMTg2MzNjNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTRkN2ZmYjAxODJkYzMxMDI0OWQ0ODRhN2RhYmI2MDI2MGRkNTA3ZTQ5YmIwNjQzMmQ4YWZjMzliNWFlMjVmMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTkyM2QxY2UzMTNlMzZhNjcwMThiZjE5NDVjNGUwMmI3NjE4M2U1NjY4YWUzN2Y5NjRmYzczOWYwMmYzMzUxYyJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/ManagementPage.vue#L24-L36",
+          "version": "repo-lines-v1:sha256:ec96aa084b0a4005611f3cea8780066c09d71f76a03cf73879a5f43756a8065f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhNWEyODY5ZWIzNGZiZWRhZjk3OGYwYjQwNGI4NmUwZWQwMTY1M2I0NmE2ZmVlZmM5ZjJmOTZiNzU4NDkwODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFjZTljYmI2YWMyOTlkZjQxOGNiODU5NTQ0MGM2YjEzYzBjZjg4YTcxODNmM2E4MjhiNzZiOTc4ZDRlNzk4YjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyMTYzNGZiNWI2Y2ZjNGQ0NmVhNTZhMDI4Yjk3N2YyODM4OTE5ZGMzZWE0NmU0YzY1ZTQyNGJiMzk0MjQ3OWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ca733902dd5a405b9527a57d99d1d22b",
+      "statement": "删除预设时，除从 local:FormDataPreses 移除该条目、把引用它的账号默认预设改回 'default' 外，还会向被删预设的键写入空对象 storageSet('local:web-geek-job-FormData-<id>', {}) 而不是 storageRm，源码注释说明这是为了防止已删除的配置在预设 id 被复用时重新出现。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/pages/ManagementPage.vue#L38-L51",
+          "version": "repo-lines-v1:sha256:760e807868e663e7f6e0e484e2b63fad9bcb26183b79668a9e43360668d2f38c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmYTA3ZWZmMjY1NWI2YTllNjkzMTQ5OTBkOGQ3NTczM2JjM2E0YWIzM2Y1OTQxODQ3ZDc0MmZmODYxYmI3NGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2YjMzY2VjZmE4ZTRjMzdmNDhjNDc5NTgwNWIxMmRjYWY4ZmU5NTlkMTBhMTA4YzIwNGE0MzEzMGYyM2Q4OTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwZWUxOTBlMWYwYmU4NzEwZjBiNzg2YzMwMjc1MTY3M2EyNDRlNDVmM2M3ZTFiMDc4ZGYwYjNiZjA3YzFhYzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ebdb430dac894514a08bc919d3e8762c",
+      "statement": "预设与账号在存储键上的参与方式不同：预设只影响 FormData 的键（local:web-geek-job-FormData[-<preset>]），账号则影响统计与缓存分区（useStatistics 的 key(base, account) 生成 local:web-geek-job-Today[-<account>]、local:web-geek-job-Statistics[-<account>]，HelperCache/JobResultCache 按 activeAccount 取槽位），因此换预设只换筛选/投递参数，换账号换的是历史数据与去重分区。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L51-L57",
+          "version": "repo-lines-v1:sha256:ba9f7283c599b867e80772212c8b919aa4cd173ee3e84afb0ea8b6f9346791f3:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTFiMDI2OGVhZmJjOGFiOTNlMjYyM2U2MGE4YzNkOTMwYjY0Yzc1NzE1NDc2YTIzNzc0NmY3ZjI0ZmRhMWUyZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDNmMDQxYTM5MTAxNTczNTExNmYzNmEwOWJjODRjZWZiYjI0NTk3MGZhMjZlZDQ4YWRlZDg2ZDEwN2FkYTU0OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzE5M2U4ODA2MGQzM2QyYWZhNWE1MjhlOGMxOGFhZmI4NzIwYjRjMDExOTMyNTE4MzE5YjIzNDMxNmMxODU0OCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L85-L86",
+          "version": "repo-lines-v1:sha256:d0014e300abf97c4fdddee682635174646571d207d84a76a6b7d7923f5bf9c2a:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTNiMWNlYzhhNjhhYTdhYjI5MTZlYzU4OWQyMzEwMGVlZjkyYWIxZjZhMmI0NWRiNGMzN2ZiZDhkN2Y1OTY1NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWRmYjhjYzhiYzdkZWIxMzRiYmI1M2I3OTcwYTQ2NjFhNWM3OWM1ODVlZWFjZTJiNzQyZDZiZmJhOGUzMTE3OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2I0YTI4NWU2YTE4Yzg5N2VmMjQzZGQwZDk5MGFmMzFkMGNjYmY2OWE2MzlkMTQ3MTNlYzY0YzgzNDliNzFjNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTEyN2I5YzIyMTEwNjk3ZmE5ZTNiNzQwNTQzZjdhNTlkNmI3NTYxODdiMzIyNmZjNDk3MTBmYTNlNDc5M2E3NCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useStatistics.ts#L10-L30",
+          "version": "repo-lines-v1:sha256:7e2b2f652cd905af599cdd039d77b60065e1f35261745e04ae6423bf2ca73f06:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1YmExYWUyMjk2MzBlNWYxNTYzMDVkZjA4NTdlMWNhZDAxNjIxMTgyNGU3ZTU3NGEwMTdlNTYyYWE0Y2NhMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxNmEwMzhmMjA0ZDEzNGRiMjI4MmRjZjZiY2EwNWI0YTQ1MjgyNTQxOTU0YTM1YTFlM2Y2N2Q3NTZmNWZlYWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5MzY0OWU3YjE5ZTVlZThjNmI2NWJmOTYyMjExYTFkNjAyN2YzZDNjYmYyY2VmNDQxODk4NGI5OTMwODRkOWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b9388c457a024451973d58d8600d7fb5",
+      "statement": "`confInit()` 的加载顺序固定为：先 `accountState.init()`（保证按当前账号/预设派生键），再 `storageGet(formDataKey(), {})`，然后 `formDataHandler` 迁移，最后 `deepmerge(defaultFormData, from)` 并用 `Object.assign(formData, data)` 就地覆盖，从而保持所有 `v-model` 绑定的 reactive 引用不变。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L160-L186",
+          "version": "repo-lines-v1:sha256:0bbadb92a57c4c2ddebf9851f2dfcff7b2da853b5e70fc5de51de989cd87ef35:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkMzk4OTMyOTk2ZTk4ODNkZjk0OWQ2YWZjMjVjMGZkNjA3YTU2M2ViOWUzNTczZjJmMTQyM2NmYWQ1Nzc0N2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5MTQ2Mzc5MzEyODU4NTcyMzI2ZWFkNGNkYTliZTQzMmJiMDU5ZGMxOTg0MTBlMTQyODcxZjE1MzgxMjI3NzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_441e10b861274b79877f3f732c2c52b6",
+      "statement": "`confInit` 只有两个调用点：内容脚本 `App.vue` 的 `refreshConfiguration()`（挂载 + window focus，工作流运行中或账号切换中跳过）与 options 的 `initialize()`（与预设列表、模型初始化并行）。",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L99-L105",
+          "version": "repo-lines-v1:sha256:3dfed0a37ed2c49fe7b1fe95017a200cb0a33405809e361b74ac65b7af05ae7d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODViZTc5MTRkMTBiYjljNTMzYTgzMWIyZTJiNzY5MjFlMGZkZmI2NTAxYTI1NGJlYzVlNWQwY2YwYjk1MGY4NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTg4MzAyM2JhZjU0Y2NkZmVjMGZlYmIwZmIwYTNiOTVhYjhmOTMwMTlkMjc2MmZlNjdmYzU2NTdhMmNlOWI1ZiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L119-L124",
+          "version": "repo-lines-v1:sha256:9cc5701c64659eb64a5533a4ecebaa97aa75dbc883aaf02ed3bb97f747a31f34:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDAzNGUwNWU1YzY4MjFjMjZlZTAyM2VlNTJmODMyOTRkODQ1ZGUyZGViYWFjNzQ3OTg5NTdkNGJjNjQwNzg2YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjUyNzYzYzg1OWY1NDhkODFlZDFhNWEwMmFjOGE5NDY1YTViMTNlZGYwYjA0ZjE4ZDE0NTliMDhhYmEyNjQ4NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ef786eb2211b4762b830b35dce02da16",
+      "statement": "`FROM_VERSION` 迁移链从数组尾部向前遍历，若 `from.version`（缺省 '20240401'）已 >= 该级 version 就 break 结束整条链，否则执行迁移并无条件把 `from.version` 置为该级 version；因此 `version` 是单调水位线而非最终版本号，`defaultFormData.version` 为 '20260718'。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L144-L160",
+          "version": "repo-lines-v1:sha256:8bb00010c4a8041e190bfb79463cb50e68d91d948f4eb2194cae926b3a301bb8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyMjE4NjVmZjk0YTY4NjZmZjA3NDRlZjRiODZmMmNjODM4ZGVhMGIxZjRlZTUwZDc1M2U5NzdmZDgzODU1ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwNzA5ZGI5OTYyNDA5MmYwOGI2OTAwMTE1YTMyNzkxY2RlNTBmOTIxNDMxMDIwMTE2YTViNDc0NGE5YWM0ZjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhZjk2NzIzNGU0ODUwZDJhZWMzOWVhMGFiMjNlNzJjM2ZjZDIwM2VmZjFiOGI5ZjE2YzlmZGQ2ZWRkMGQ3NTMifQ"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L66-L67",
+          "version": "repo-lines-v1:sha256:314aa88ec5d2a3c6184058f35ef7a13833c9254c8877b2721821db47b3f746ee:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzcwMTEzYWI5N2RhYWYxOGJjNjNmOGVhNDY2NjE0NzI3OGI2YmVlODg3OWMzYTg4NWE4NTVhMjFiMjliMzAwZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWY3NTQzYzA5Zjg5NjVmMzVlODU1ZjI2NzQxZmJhMGNhNjA5NDZkZWJmZDA4NDMyNjI2YTdhZWZlZjMyMmE0YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjEwY2I1NGIzZWVkZTNiZGRlZDczMDZhNzkzNDA5ZTMyMjNkNWQwOTJkOGJmYTRiNjIyNTQ2N2QzMmI1NWRhMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWJiYzA3ZTNkYTk1N2FhNjY2NDM1YWVmMzA1NTdjNDAyYTg3MzNjN2NmZDE0MGYxZjRkZGU0MzlmOGUyNjJhMSJ9"
+        },
+        {
+          "resource": "repo://src/composables/conf/info.ts#L182-L184",
+          "version": "repo-lines-v1:sha256:2693c7471dce71d856062aeb34027ae8fdd13882b67c05e3294d00d261f3cf47:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzFmZGIzNTY0ZDUzMmFmYzNlYTgzMjQ4MDJiNTY2MDczNTY0ZDQ2ODI1MzhjZWIyOTVmMmIyZGFiYWRiM2ZiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzhiY2U5YjhmNzBjYjIwZDM5YTk5M2Q5ODc1MWQ4Y2U5Zjc0Mjk0M2MyY2VjYTVlMGNhOGMzNWEzYWQwMDlmZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTM0N2IxMDc0OWRhM2Y1MTY3ZGE0OGY3NzBjMjMzYzcwMDFmNWIxMDAxYjBiMjhkMWZkYzExYjVlZGI0ZTFiOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_54e3fb98937c49d59e861e6fe591fdd5",
+      "statement": "迁移函数抛错会被 `formDataHandler` 的 try/catch 整体捕获：记录 `用户配置初始化失败` 日志与 error toast，并返回当前的 `from`（出错那一级未推进 version），随后 `init()` 继续做 deepmerge，因此坏迁移的后果是旧结构 + 默认值兜底而不是加载失败。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L144-L163",
+          "version": "repo-lines-v1:sha256:425a02fa64c1426c7eba9861078edf9256c80a14e71d596159312975a91de4a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyMjE4NjVmZjk0YTY4NjZmZjA3NDRlZjRiODZmMmNjODM4ZGVhMGIxZjRlZTUwZDc1M2U5NzdmZDgzODU1ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwNzA5ZGI5OTYyNDA5MmYwOGI2OTAwMTE1YTMyNzkxY2RlNTBmOTIxNDMxMDIwMTE2YTViNDc0NGE5YWM0ZjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1NGE4MzQzMTYzY2E4ZjBmMjdhOTBhYTAyN2MzNDY3ZTc1NDI3OTI1YjQ2NWM5ZDQ4NjdlNGNjZTY4Zjk0MWYifQ"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L170-L172",
+          "version": "repo-lines-v1:sha256:a34a6a49418da1f9daf98003a289899026210c93b6a0696f192c2e50119b885e:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTdiMWQ0YmM2Y2MzY2VkNjAzOGNmMWE0ZTU1OGMwZTkwMDRhZDY0NTQyMGZkNDFiOGE1ZjMyNDk1YzMwY2JmOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjFiNTFhMTY0OGMzNjQ3MjczZTM3MWRkZGJjNjYwNjQxNzRjMjFjM2E0MzM1OGNhYTA2MjQ1ZjYwNzU2OWI5MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzAxZjIyNjdmZmI2ZjAwZjgyOTljMDUzMmEyNjIxNjUyM2MxODJhY2RiMzM3YzkwNjQ1NmQzZjRkZTVlMWU5MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzNhZTg2Y2E2YmIxYjg2ZmFlYzY0Y2Q4NWU4NzI2NzMxNDAxOTUwZDA4MDZiNGRmYjg0YjBjM2ExYTc1NmJlMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_666bf5c877f74dafb4ffabc592708390",
+      "statement": "`version` 为 '20260718' 的迁移把扁平的 `delay: { starts, interval, pageNext }` 键名变形为 `delayDeliveryStarts` / `delayDeliveryInterval` / `delayDeliveryPageNext` 并删除 `delay`，但当 `from.delay` 缺失或不是对象时直接原样返回，这些字段只能靠后续 deepmerge 的默认值兜住。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L127-L141",
+          "version": "repo-lines-v1:sha256:ce9e28c1c251a27416801bd5e8d683e9486447751b7245af77122ba8c0d68709:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkZmI3MGNjZWMwNjQzNzI1MzAyYzM5MmM1YjNlZjVkNTE4OTY2ODA0ZmUxMTRlNTE4YjY2YTc1YjM5ZWMyNzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1MGQyMzU0ZWViYTU1OTAyZWViYzJhZDNlMjVmY2MxZWJhZWY1M2MzNTIwOTViNmI0MzA2ZWYxZjU2ZDRkN2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFhMDk0M2I3YWQwMGE3YTBmODhhMTM4ZDQxMzFkZDk1Y2E0YWQ3ODc3YTg0ZWNjYWJjOTQxNTgxM2EyNGJhZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEyYjQwMjFjZDE3NDZlNTJmMmNjYzljNDFjOWQzNDVhYjMwNTY3ZDljOGQyMjYwN2JkNzU4N2UxZTBlNDJmMTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_970eb1973e3841fbab6686b4487cd2b6",
+      "statement": "迁移链不负责补新字段，新增 `FormData` 字段必须在 `conf/info.ts` 的 `defaultFormData` 中给出默认值（`FormData` 带 `[key: string]: any` 索引签名，TypeScript 不会发现缺失引用）；只有需要从旧结构改写字段语义时才追加 `FROM_VERSION` 条目并同步抬高 `defaultFormData.version`。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L172-L175",
+          "version": "repo-lines-v1:sha256:6c43711bc4a7317608c93877766ae589d0700c7d68c0422716247ed5ba214533:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjFiNTFhMTY0OGMzNjQ3MjczZTM3MWRkZGJjNjYwNjQxNzRjMjFjM2E0MzM1OGNhYTA2MjQ1ZjYwNzU2OWI5MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWJhMTNlMTUxYzE3OGIwMDUyMjgyZmVhNTNjMDJkYzZiODBkOGE4NzQwNDdkZDM1YjFlNmUwNzVlMjUxYmRhMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDU5NjNhNjUyZjY0ZTAzYWQyNDI0ZWY4YThjZjBiODU1MzJmZTc1MTYxNDMzMzY3YmY3N2FhY2E4MzMwNTI2MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzZjZjVlYTNiMDg3MGFjZjRiNjYxYjg4MWQ4ZGYyY2JjOWViNzgzMDQ3ZjNlZDI0ZWRiYmRlNWRiNTJiNTEyMyJ9"
+        },
+        {
+          "resource": "repo://src/composables/conf/info.ts#L4-L182",
+          "version": "repo-lines-v1:sha256:97cf0d4a950c1afbca11fe548a77dffd47f93859b4bfc579f744782951013f0f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTc5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5MTBiZWJlM2I2YWQ2NTJhMmExYTJhYjQ5NTZhNzJhZTg2NGYwNzlmNGE3NjVlYzkyMThlMDJjZGNmNjM2OTQwIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJjMWZkYjM1NjRkNTMyYWZjM2VhODMyNDgwMmI1NjYwNzM1NjRkNDY4MjUzOGNlYjI5NWYyYjJkYWJhZGIzZmI0IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIzY2MwMzkzMDc5YjRiNWY0NGUzMzVkZGRlOGUxNTcwYzQyNGJlYmZjM2UwMWMyZDFmNTI0M2YwYmEzZDk3MzE4IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJiMmUzOWRmOTU2OTA1ZmZjNGM5YTZjMDU1ODkxNGIyZmRlZDhkNDUwMGZmYzMwYmQ1ZTEwNjgyMzgzNDIxYmRmIn0"
+        },
+        {
+          "resource": "repo://src/types/formData.ts#L60-L62",
+          "version": "repo-lines-v1:sha256:f003c405ef07af7c2f37460f6bbc90f92a7cebe89714f92629c17a612c181042:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGU4YmMyMTNiMjY0NTI2NzlhMmJhMzdkYTMzYzdmZWFlOWU2ODkzZDk4NGUxZjFhZTg5YzBhZmU0OThjNWNkMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjg0YTY1YzcyMDZlMjUzMjZmYTQ3MTMwYjA2ZTYwMWFiNTVjNjk2OTViYmJmZmZhYTAzNmQwMGFmZmYwZDRkNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjNhYjAzNmYwM2RmYjczYTA5ZmQ3YTcxYmUyYjIwNGU0MGQxMzNlN2Y1MGIyNDYwYTJiYTJkNDAwY2MzMDU1ZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a72e6664d0ae41dbba4b2023fc1cb997",
+      "statement": "在 `useConf()` 暴露的配置动作中只有 `confSaving` 写盘（`storageSet(formDataKey(), jsonClone(formData))`），写失败时 toast 后 rethrow 给调用方；`confReload`、`confExport` 只读，`confImport`、`confDelete`、`confRecommend` 都不自动保存。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L183-L255",
+          "version": "repo-lines-v1:sha256:14751462f6ca09c8e20fc79d9584240186169b1cb4454c4aa12fa652538156be:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyODg3N2M5YmRkYzkxNWU2OGQ1YTRlMjMxOTA0NGZjNTA4ZWM5MzNlOGFhYmM0NDYwZGFkZWE4Nzk3MTAzYzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY4MTczYTI0ZTRlNTFjNDU1M2M4ZjMzYTdhNGRiNmFhMTlhOGMzNDYyMmZjODVlMzU2NGQ0ZTUxMTJhYzhkZmYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_486a66b876cd455087ed83d76e335778",
+      "statement": "`confRecommend` 只把一份固定白名单键重置为 `defaultFormData` 的值（`deliveryLimit`、`activityFilter`、`friendStatus`、`sameCompanyFilter`、`sameHrFilter`、`goldHunterFilter`、`notification`、`useCache`、三个 delay 字段），刻意不动筛选集合、AI 提示词与外观偏好。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L227-L255",
+          "version": "repo-lines-v1:sha256:84e4418b8ba324f1268b3f41214c757fd389784b5a500e50dd9adfe4207ea7b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4ZTFiOTRkMjI2YzA5ODAzNDY2M2I3NDJmZDAxYzY5OTdlY2YxODNhYzc3YzBlNzU1MjNhNjJjMWVjYzNiYTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljNzlmNjZkZTFhMGY2NmIwZWU2MzVhNDc5OTI2MTJhMzZkMjA2YWEyMzcxODY0M2E4ZTFjMDQxYzM5YTNkZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY4MTczYTI0ZTRlNTFjNDU1M2M4ZjMzYTdhNGRiNmFhMTlhOGMzNDYyMmZjODVlMzU2NGQ0ZTUxMTJhYzhkZmYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_930afb12bf294a99911bdbdde8deaae2",
+      "statement": "options 页脚与侧栏实际只用到 `confSaving`、`confInit`（重载走 `initialize()`）、`confRecommend` 与 `confImport`；`confExport`、`confReload`、`confDelete` 没有任何 UI 入口。侧栏「导出当前配置」直接 `exportJson(JSON.parse(snapshot()), 'BossHelper配置')` 导出含未保存编辑的内存快照，而不是调用 `confExport`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L126-L136",
+          "version": "repo-lines-v1:sha256:20250550971b2df3cf7479645b2cf4d82530086605c4d706d678f61ef4f02681:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExMTQwMmQzNzJhMGM3MzM2NGE3N2Y4N2MyZGQzNTA0ODY2ZDVjY2Y3MTI5ZTM3YWJlNTFiMTI4NzQxNmEzZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5NTZiNzE2MDhhYzg5NTRjMGQxMzAzYjE3YmFkOTkyZDM3MGRlNjRkM2IzYmYzNWQ3ZWYyYzA5MTc4YTQ0MzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmZWUyODIyOTljOTUyMTY4ZTE5NjQ3NTA5ZWM2YjcwZTgwOGE5M2M3YjM3ZmNjYzZjYzBkY2Y4YTJlNjM2YWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1MzU5ZDI2ZmQ3NWNlZjZmOWE3ZmY1ODhiMWY5ZjViYThiMjU0ZDhiMmM5MzNhMDgxYThmMTgyNDkxNWMzMjcifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L286-L310",
+          "version": "repo-lines-v1:sha256:b4e1f553c324c347a6b8e9ee2f1f9501498278d6dbb2f1fe42e351d82f33f3ac:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkNjMxY2Y5YmU0YjIxNGM3ZTlmMDc1NTAyMTQ0NDBhZDk3NWU1NDNkMjA5Yjk3N2Q0ZWM2MWNiNDI0ZGI1MTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1MTg2ZTU1NTJmNzI1OTk3NjY3Y2Q3MzE2YWQ4ZjJiYmQ2MzU1N2JmZTViMDNmMWE2ZTEwMjU5NzM3NmI0YzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2ZTNhODU4ZTc4NGY5NjkxNjM3ZjFjMzJhODA3MjhmMDgxZDI3ZGM4ZWNmOGM4NmZkMzBhZTE0ZTIxODhjNjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyN2M3MzUzYjMxY2FlZDE5NzI3NTIyNjhmMGM3ZTI2ZDJhYjFkMzkxN2VkZWNiMzljMzZjMzI1MmJmNjI4YWEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L322-L345",
+          "version": "repo-lines-v1:sha256:9645ae442d0a74c77c89de09af3bf97fecff355008be6b1b6b38193b4ffb8f99:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyZjNjZmQxMWRhNjE1MDE5N2FjZWVkMDg0MDZhYzY0YjA1MDM0MGRlN2JjMDQxMjRhNGNiN2VmYTY3MTM0MGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzZDI4ODg5YmM2YmIyMTA5NDIwMWE2YzcxZDE4ZjA1YjFmOGY5ZDdmMjM1Nzc5MzE1ZGE0Mzc5MjgzNTVhMTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk4MWYzNGYwMzBiM2EzOTRhMzA5NDU2M2UzNGUxYWEwNTVlMDUwNGY0MDc3ZjU4ZWIxNTE1MWRiZDdkOGJlNTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkNWFhYTBjODg4NzI3NWFiOTRkNWZiOGFlMTdiZDU4MjJlNDRiMGIzMThmODVmYmVkODViMjRhNzFkZDYzZmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_256c0b8eb5814d84b1cb60c7cb554291",
+      "statement": "`importJson` 只校验扩展名为 `.json` 且解析结果的类型标签为 Array 或 Object，失败时 `alert` 并让 Promise 永不 resolve；因此用户取消或选错文件会让调用方（`confImport`、模型导入）一直挂起。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/jsonImportExport.ts#L12-L40",
+          "version": "repo-lines-v1:sha256:bba75e74350f4fd9c138cc79a39155ea7249313b7dc658ab064a776d8e32b17d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5ZDA0NzdlNjc3ZTMzNmFhMWRlODZjOTVjOGM2Nzg5MGQxZDVhMmVhODk4YTZiMTYyYmY5MGFjMGIzNjhlYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQyMTI1NmU2ZjVmOTVjZDZkYTA1MDY5MjNiNTg5YjFmNWVjMzEyYTU2N2JiNzBjZmI4YTE2NmZiZGM0OTQwOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d26e015ff8f74ce8a8e6f5008b495fcd",
+      "statement": "`deepmerge` 只对 plain object 递归（数组整体替换，因此 `salaryRange.value`、`aiGreeting.prompt`、`customGreeting.value` 不会被元素级合并），`clone: true` 返回新对象、`clone: false` 就地修改 target（让 Vue reactivity 生效），并跳过 `__proto__` 键以防原型污染。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/deepmerge.ts#L3-L69",
+          "version": "repo-lines-v1:sha256:77523a39ef943cda83366275217fea9375723f58877044dda1d2eecf1e1493fb:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzODFhYTVmYzgwNjM4ZWUxOGU1NmQxODA4M2ZlZjAxMjZlOGVkN2JlZTk3MDZkNTdmMjA5NzA4ZGZiOWM2MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzNjI4ZGFmZTI4NjMyNmYwMDFhZjQ5NmUzZmRlMjM3NTBkMjYzYmZhYTc2YTAwOWEzYzk3YjY2NjI4ZjcwYjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJiMjgwYTQ3NjliNjdkM2MzNDlhODBkMzRlYjMxYTA1NjQ2NjY5YmRlNWMwZjAyYWIyZDE3OTk0OTFkN2FiMGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_24fca8fea2e444a2aa15b06697a5643a",
+      "statement": "`jsonClone`（JSON.parse(JSON.stringify)）用于 formData 初始副本与落盘前序列化，因此 `FormData` 中不可 JSON 表达的值（如 `customGreeting` 图片项的 `model?: File`）在保存时会静默丢失。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L185-L185",
+          "version": "repo-lines-v1:sha256:0b802728d70ff1e1626bd665225eb0ff481a14d0d55abe7df8ec793a3ea20223:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGI4MDI3MjhkNzBmZjFlMTYyNmJkNjY1MjI1ZWIwZmY0ODFhMTRkMGQ1NWFiZTdkZjhlYzc5M2EzZWEyMDIyMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGI4MDI3MjhkNzBmZjFlMTYyNmJkNjY1MjI1ZWIwZmY0ODFhMTRkMGQ1NWFiZTdkZjhlYzc5M2EzZWEyMDIyMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2M5MDY5NjdjODA5MjIxOTZlYjAyYWE2MmZmZGE0OTVmM2IwZmIwMTM2MzQ3NWI4YTNhZThmMTFhZWI1NWU0OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzBmMGEzN2Y5NDU5MWI0MWI4NjAyNjg4MmM3ZmNmOTRmYzAyYzU1N2ZiNDRhOWM1ZWQ4YWNhMGQ1Mjc1OWE4YSJ9"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L38-L39",
+          "version": "repo-lines-v1:sha256:22be39650f808c1c5dd04c2a0ec483c7ea30fade6c93be44d18c9d9bf3b279c3:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmQwMGE4ZDY5ZWUwNDAxODY1MTc1Yzg1MGQ2M2QwOWZmMTE5NzRmYzIxNmIxMGNmMzdlNDYyNmNlMWJhMjhiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzIyMzk3NDYwNDUzNWNkOTllMzMzYWVhZmViYzJiYTZmOWM4ZjE1NmNkMmNkNzY3NGNmNjAzMmQ0ZTUxMzk1MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzYxYjhlZDY1NzI2ZTg2M2Q4N2E4M2M0MWNhYzMxOThiZGYyNDFiMjljZTM5NDU2MGM5YjJhYTUyODgxZDU1NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjY4MmRlNDAxMDdlOTcwZTJiZDE3OTIyYTg0YTgwMjRjZmQ0NzQ2ZGM0NjE5NGZkNWQ3NGE1ZDIyYjBlMjI0ZiJ9"
+        },
+        {
+          "resource": "repo://src/types/formData.ts#L125-L135",
+          "version": "repo-lines-v1:sha256:5da724fe1355004f3685bc13c847f5b17c6a2a915c5dfb9d837d5aebea61a861:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlhMmY2NjYyNWQzNDgwOTNhYzBjNGJhM2U5MWY1OTJmNjVhNTY1ZTc1MDM4OTkyMWM4MmRlNTM1ZjVjODU5N2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxODFjNDRjMmUwZGE4N2E5MmMwM2U0NzUxZmQyZThkZDE5M2NlMmE2NjIxM2RlODQyNjIwOWMxNjM2YTRjNzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlMGY2MjFkMWJiOWEyMzIzZGRlMTI1YjczZmNiOTUxYmNlM2MyNWFmODczNDk5YTA3NGE4MTRiODQ2NjI5ZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/utils/deepmerge.ts#L69-L72",
+          "version": "repo-lines-v1:sha256:4774a1aa85ce5d5d651a308777d788e62f7135f4d22cba5795b473a8d5e231d3:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDY1Yjg4NDkzNTMyMDkyNTdkNmU0NDRiODY4MzdjNDA0MDE1OTFhZTJlNmFiOTlmODNhZjdmYzIxODg0ZTkzZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e3bf38eac08e4b21bc75fa8f4ad9077e",
+      "statement": "`configLevel` computed 把四级枚举折算为 `intermediate`/`advanced`/`expert` 三个布尔量（`beginner` 全 false），`useConfigSections()` 用 `conf.configLevel.xxx && {...}` 表达门控、关闭时值为 `false`，消费方必须 `filter(item => item !== false)` 或 `v-if=\"item\"` 才能避免 `false` 流入渲染层。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L257-L270",
+          "version": "repo-lines-v1:sha256:a7c49476c47da58566281962edcdd3cbc39f011f2433d37f6f7b03f1e84fc8bc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkNTJmOWZiYmVlNTFiNjg0NDU4NDc0MjRiNGI3YjQ0OGMxMDExYTlmM2EzMjdiYTYyZTAwZWRhNTI2MGZlNzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgxNDE4NDY2ZDM0ZGViYjc3ZDBmYTFjMTllNjYxZWFlMGI0Y2Q1MDM2ZTI0ZjZkMDA2YWYzN2MyNDFlMTc5ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyNGQ0NGUyMzAyN2QyOTUzNTEzNDUxYjllNzYyYTI3NTliYzg1ZWE5M2MzYjI5NTcyMjAwMTc1ZTdjNTI5MDcifQ"
+        },
+        {
+          "resource": "repo://src/composables/conf/sections.ts#L9-L66",
+          "version": "repo-lines-v1:sha256:c778c155227ec656afbcf34ae3ad75d876267b434bd496b59675beb81307fa3d:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxNjgxZmE2NThlZDdiY2JjNDMzMWRiNGQ0YTEwODhmODU5MzU2N2NlYTI2Nzc1YWE5ZjFhYTlmMWUyZTkxYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxMWQ3Njc4ZWZmNTFkYmMwZDQxNTY1ZGYyYjhkOTNlMGQwODZiNDBkNzQ2ZjdjZmNkOGE0ZTE2ZGZlZjU3YzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlYjAzOWQ3MmY2MzE1MzhlNmJjZjNjNThhYjdjNmE5OGJmMmVmZjNlNTdhNGJmYTYyZWEyODVmOTRkZDAzMWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzMTVjNjY1MTdhODI1OTMyZjNkMzFjZmI1MjljYmIzNTNhYjI2MzE0YzhmNmQ3ZDVjYjc5Yzk0YTAxYzAxOWIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L52-L52",
+          "version": "repo-lines-v1:sha256:27e5788d5d9d73d24a81dbc0a5a74bfa82c9c3b3af99e52af796e90b468a8a3d:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjVhNjU1ZWIyMTUyMGVjMjdiODhlODA5MDM5NmU4MTkxMTU5M2IxNDg4ODhiM2Q5NDhlODk0N2UyZDYxYzQyZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODY2NGFlNDVlYzQ4ZDRkNGFkNGJmNjJhZTYxYjJlMjNmNzBmMGNhNDMxZGUzNDNkNmIyMGQ5NGI0ZGY4OTNiZCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/GeneralPage.vue#L9-L9",
+          "version": "repo-lines-v1:sha256:77412f3340f5f7d7d3cbee3f41c1db9e8bd4d09687988eb9b63e4af8d38bbf8a:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzc0MTJmMzM0MGY1ZjdkN2QzY2JlZTNmNDFjMWRiOWU4YmQ0ZDA5Njg3OTg4ZWI5YjYzZTRhZjhkMzhiYmY4YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzc0MTJmMzM0MGY1ZjdkN2QzY2JlZTNmNDFjMWRiOWU4YmQ0ZDA5Njg3OTg4ZWI5YjYzZTRhZjhkMzhiYmY4YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDFiOTE0OTkxZmM2MjZlNjc4ODRlZjNlYTNlYjY5M2QzZDIwN2MzNjc1OTkxZDQ1N2FkNDEyZWFmZDg2ZWEzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjViNDA1ZjNmNGMzYTQ3NTMyMmZlYzBjZjVmZjJiMmRiYWY4MjQzYzk0M2ZlNGNiN2IwMDNiZGJhMmQ0ZmVkZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_713fa2c0005940b7b30a945e08933bb8",
+      "statement": "`configLevel` 只是显示门控而非功能门控：被隐藏字段的值仍然存在并继续生效（例如 `deliveryLimit` 在 beginner 级别下仍被头部投递计数与统计进度条读取）。",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L197-L198",
+          "version": "repo-lines-v1:sha256:6a54dd6ea52ac14ec95c50d746bda779a21554307045cb5e1355aaf5bf52e3e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWZlMGQ4ZTIzM2RlYjU2NTRiZWIxMGFhMWYwZmIwMDhmOTA4YTc5Zjc4YTQxODNhM2Y3MmE0YmEyNzE1N2U2YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDc0NjcxZGNmYjNiNGY5YWMxYmJmZmRmNDgwZTM3OTgyOTliODY4M2M0N2Y4ZTc2NGQzOTk1ZmFiODJmODI1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ3ZWM5OTdhYTE5ZGVkYTY4YTI3MjYxNzZkNzk2YzRhYTAzMWZjZGY1MmY5YjM1NmEyZjA2MDJiMTFlZTAzZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWQwZTgwMTNmZWZjMzg4YmYyY2E3NTI3Y2Q5YmQ3MGIwMzM4YTY4MzU2N2NlMzkxMzliODcxNDE5NWUyYmRhNCJ9"
+        },
+        {
+          "resource": "repo://src/components/Tabs/Statistics.vue#L193-L193",
+          "version": "repo-lines-v1:sha256:f5ff1ce8fc9c64b8432cc6475e8e8cf9412e634b670bd6288639082e0376ae0e:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjVmZjFjZThmYzljNjRiODQzMmNjNjQ3NWU4ZThjZjk0MTJlNjM0YjY3MGJkNjI4ODYzOTA4MmUwMzc2YWUwZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjVmZjFjZThmYzljNjRiODQzMmNjNjQ3NWU4ZThjZjk0MTJlNjM0YjY3MGJkNjI4ODYzOTA4MmUwMzc2YWUwZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTllZmJiNzQ0MjVkNWExYzZkOTUzMzE3ZmUzMWQwYzBlZGM3YTI1ZTM1YjM4ZTk4NTdhN2U1MTI2NTA2YTcyYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjU1MmZjOGU2MmNiMTM4OTUxYzZmYTViODIwZDI5ZDdlYzg5OTAzY2ViOWMwZDA5ZjNmNmMxZmNlMzE3NWFmNCJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/GeneralPage.vue#L42-L52",
+          "version": "repo-lines-v1:sha256:8fa4917e43da96046acb7976c6e710afd9934656455a05989e4b4e5d127d63d5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkYjQ3M2E4ZTdjNTIzMjdhOGM3NzI4Mjk5MTcxN2RlNjdhMDI0MGM2ODA0ZjY4NTNmYmMzNDk1NTlhNzA3M2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhNDE0MzY3NjZiMmY4YzRmZDcwNzZlOWE3YmUyZmIzYzI0NTcyODIyOGJjYjlkYzNhNzZmNTFhNWE0MGMxZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxZmEyOTI2NGY1YTIzZDc4MTJkNGNhOWJhMzM4N2Y2MzQ5MzFlZDUyZjEyMTgwYTRlNjc3NmFhMjhhZmM4MTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjExZjM4MDk5NTBiMTQ1YTZmYjU3N2RiZGRkN2RlMmI5Mjc5MmZmOGI4MzYyODRhNDlmMjExODI4OWU1NmVkZDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_827faa1e7c5f4bcdadd4db8602bbfe14",
+      "statement": "`useAccounts()` 是模块级单例：`accounts`（默认含 `{value:'default', label:'默认账号', preset:'default'}`）落盘于 `local:HelperAccounts`，`activeAccount` 落盘于 `local:HelperAccount`；`init()` 在 `HelperAccount` 指向不存在的账号时回落到 'default'，`default` 账号不可删除，删除当前账号会把 `activeAccount` 拉回 'default'，`setDefaultPreset` 只改账号上的 preset 而不改变当前生效预设。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useAccounts.ts#L11-L28",
+          "version": "repo-lines-v1:sha256:1955f78b4ed5575be18c03db6ba86213677744f86350c5a41266fb6caee7ee06:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiZTZmNjA3NTlhMzkyMTBlZTcxNTY1ODAxOWNjNjBiZGZhMWQ3NGY3YzQ1NDY5YmY5ZWQzMTQ2ZmQxYmY0YWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwNzg3NmZkMDU0ZTQzNjZiZjZjMjI1ZjFlOGExMmRlZjJjNDAyNGViMWI1YzJlNDBkYjlhOGVhYjBjMzQyNDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI3NjVkNTZhMzI0N2FlYmZmY2QwNWZlNzZlMjJkMmJlODdlMDRiM2JlYjgyNWJkMWQ3MTdmOTZhOTcxMmE5M2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwY2IwMjEwZDU5NTgxNjMwY2FmZDEwMDQ3MzI2ODkyYmYxY2ExY2VlMmFiZWJiMWU2OWE1OThjNWVmMDNhMTUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useAccounts.ts#L30-L48",
+          "version": "repo-lines-v1:sha256:5e37dc89efd6575e9b4e703243ef13e9c1615e6144ad95fabc16e17ddef2afa2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5NWZhMGYxMTE3YjVlYTQwNDM0MTQwZGRlMWEzNDBjNzIwZGRiZjMyNjIxMmUxOTE4MzhkNGIxNTZkMzE2YmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUwM2E4NGM3YTY1Mjc2MmUwMjhhMmY4NGEyYzBhYmY2OTMwMTAzZjUwMTQ3NzQzODcyZWEyMDRmZDhlZjFkMzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg0M2NiMzJhNTUxMDViNjYxNDgzZDczMWE5ZDA4ODZlZmI4NWZmZGYwNTBkYTBkODYzN2UyYzQ5Y2I2YmJiMmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_908a0136eca84122a382da8ba5d8566c",
+      "statement": "内容脚本 `switchAccount` 的执行顺序是 `accounts.init()` → 取下一个账号 → `selectAccount` → `statistics.updateStatistics()` → `conf.switchPreset(next.preset)` → `model.initModel()`，因为统计与配置必须同步切到新账号分区；HelperContext 在 `activeAccount` 变化时用 `flush: 'sync'` 的 watch 清空 `jobResultMaps`、工作流中间态与缓存分区。",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L60-L79",
+          "version": "repo-lines-v1:sha256:c0772d58b8ca6d2477bffe20752474292784d9103d342f7e5f1b7134ae87b33e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjNzg5NjFjN2YyYmJmNjQyMjFjMGMwN2M0NWE1OTkyNDM3ZjNhYTY0ZGQ2ODg4MmMwMzkxNzZlZmUxOGM3NGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2MTg4NDMzMjZjYTllODBjZTNjNjJiZGUyNTU5ZjRmNDA5MzJlYmMzNzA5OTQzYzhmZTk3OThmNzAzYjk1NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4YTQ5ODI4YTk4MjVlOTQyMGIwODBkOTc0Y2NhOGUyMTA3NjhkNzk2M2Y2NjYyM2Y1NTBiY2I1YjIyYjMzYTkifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L101-L115",
+          "version": "repo-lines-v1:sha256:937ab3d04ee20b70b78b982d5dae56e1a71c143a7745d951760f021c7b320b59:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhMjBhMzkzNmY3ZDgxMmU1OWQ3OTIxZWE4ZTVhNDQ0MjI1Y2ZiM2E3ZTVhN2ExMjg2M2M4NDg4ZTU0NTEzMGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzZjIwNTk0ZmZlMjAwYzAzMGJmNDRjNDFhYWVlMThiMzNlMTI5MTVmMjYwYTBlMmFmYjAzZWExNWY5NDQyN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViOWMyYzg5ZjMyNTA5ZTI0OTU5NGQyMjIzNTZhYTU4YTZmNjVmYWNjNTcwYTgwMzY0NGRkZjFjOWFhNzJkNWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_996c83faa8db4e0aafd30a586395b50c",
+      "statement": "`switchPreset` 的失败处理只 toast + 日志而不回滚 `formDataPreset`，因此切换失败后 UI 显示的预设名与实际内存配置可能不一致；内容脚本的两个切换函数都以 `workflowRunning || switchingAccount` 为前置守卫，工作流运行中直接 return。",
+      "evidence": [
+        {
+          "resource": "repo://src/App.vue#L50-L58",
+          "version": "repo-lines-v1:sha256:38b7d7b5ad640411b418cb980a6eb46568cf392cf5a2d3de66d83c6db9a7b7be:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzVlMzZiNzYyMDhjYjMyMmNkYjNiNzZiYjhmOTA0YzhiMmZiOTQwNzBiYmQ4MjZiMTI2YTE5MTY2NmExNjE2YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTllOGRiMzQ4NTIwY2M1NjZlOWQ4YzU2ZWI3MmQxMmYxZjJjYmNhYzU5ZGM0YjE4OTAwYzA5MDBjYjAwNzJiYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTFjM2UzZmY3YTFhOGYyZjUyOGJmODY3ZjRjODdjN2YzNjFhZDEwMjQwOTQ0MzQ4NTE5NDI2Y2Q5OGE4OGQzNCJ9"
+        },
+        {
+          "resource": "repo://src/composables/conf/index.ts#L282-L297",
+          "version": "repo-lines-v1:sha256:475737375397d3522e3e5da4a0c118d16bdc823a9ffcc524fd2170c9875d5382:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzZTdlZmRmOTEzNTU5NzhiMjU5NmI4Yjk2ZGI4M2VhNjVhMTRmM2Q0ZGZjNzdlNjBkZDBhZTM3NGZhZmU0YmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0ZWFiNDAzNGUyMTI4ZTNlN2MwNTE1Mzk0YjkxY2VmMjViZWI2MmM2NGI3NGVlNGEwNmFiZjg1MTRlNTk5ZWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3b499d8623cb4aa4924e9032c6441892",
+      "statement": "`ManagementPage.deletePreset` 先 `await init()`，把引用该预设的账号默认预设改回 'default'，再移除 `local:FormDataPreses` 条目，然后把被删预设的配置槽写成空对象 `{}`（源码注释：An empty slot prevents deleted configuration from being reused），最后若正处于该预设则 `switchPreset('default')`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/pages/ManagementPage.vue#L31-L46",
+          "version": "repo-lines-v1:sha256:5134d716a9b3123758396b00750872114b743f57c84c3223e3f7b68f8726c3f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOGU0YjIwNDk2ZGNlOWRhN2Y3NDdkZDAwMDM4ZDczOGZjM2EyZWRiOWRiMzI4ZWI1Nzc1ODA1YmU1Mjc2ZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwMzFkZTBlYWJlZjYzYzNiZmMyMWQzMjRlZWI3ZDYzYTE1ZDRkOWY0MWEyOTgxN2IzNzNkMjBiNzQyYWUyZjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE1MGY5YTAyMjMyNWFhYTVjY2RjYTBkMTU5NDcyNTlmMWY5MGQ1NGIyNmZkYTc4Yjg2MjVhMTIzMzkyNGE1ZjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0OTY0MTc0OWE1ZjgxMmVhZjVmZGE1YWIxNTY3MTk5MjUzNDk1MDI1ZTMxZDE5YTFlN2YyMjVmY2M2MmQyNjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1ff4d443edf34097bbf5ce201d8f4b83",
+      "statement": "`ManagementPage.createAccount` 把当前生效预设 `conf.formDataPreset.value`（含会话覆盖）写入新账号的 `preset`，这是预设与账号之间唯一的显式耦合点。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/index.ts#L43-L50",
+          "version": "repo-lines-v1:sha256:144ed1909d6c1eec083feec82f89e71878c3572adc48171fa752780b9df41746:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ZjM2JkN2E3ZmJjMDI4N2RmNjhlOGVhNDUwNDcxYjJjNTIyYTYwZThiYWIzMmY2NmU5MDdmYmQxMmUxNDllNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjY4MmRlNDAxMDdlOTcwZTJiZDE3OTIyYTg0YTgwMjRjZmQ0NzQ2ZGM0NjE5NGZkNWQ3NGE1ZDIyYjBlMjI0ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmM3MmUzMmY2MDNiMmM1OWM3ZWVlZGRlNzk2N2M4OTljMjQ2N2U3YTEwNmJhODlmNWVlYjMzMTI1YzU0MmI5ZiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/ManagementPage.vue#L48-L52",
+          "version": "repo-lines-v1:sha256:990c41ec6088d2aa4513b8f71e74510a044de9998efc9dc963a714cc0a85447b:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2NmZDc1MTk0NTEyMmY4NzI3MDc2YmRkMWU2OGNlMzA4MjJhNjA5MjMwZTIwNmI4Mzc1ZDVkMTY3MThhNmJiYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWQ2NzQ5YzdhNDhlNjMwNmY5NjgxYTU3YjRlYWNlYTUyNzllM2FhYjY1ODk5OTZlMWJlYjM3MjNhMTdmZDU0MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTg2YzBiOTIwODJmOTg1MTNiYTM1OTVjZDY1ODc1MWU2MWU2MDBlZDk5ZDc2YTM0ZDVhMjU5NzU0MTgzMmQ1MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1183e1a6a6e448378019f240dc4836fd",
+      "statement": "`ManagementPage` 的所有管理操作都经 options `App.vue` 的 `manage(action, reload = true)` 包装，默认在操作前后各执行一次 `initialize()`（`createPreset` 传 `false` 只重建模型），因此管理操作即时落盘，而配置表单改动需要底部「保存配置与模型」。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L150-L162",
+          "version": "repo-lines-v1:sha256:bdc0982a5a5ee6cd9ba3cabd239197c9282082eb04bfcbf81dff6a981660ac3f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1ZTM2Yjc2MjA4Y2IzMjJjZGIzYjc2YmI4ZjkwNGM4YjJmYjk0MDcwYmJkODI2YjEyNmExOTE2NjZhMTYxNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhMTI3MzZiYTgyMzg0MjlhNDYzY2E3ZWY3N2ZhMjZlYzY0ZTkyZDdhOWQ4MTdjNjY4NTlmZjExODAxN2Y1M2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjZjk1ZjJhMmZmNDU0NDJlMTM1ZDA0ZjY2ZmIyNTRiYTcwMTBlZTMyYmU4YjNhY2EwMDI3M2UxNzdkMDlmMjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxZWVlMDAzMjczY2E5NjgyYTE3OGRiNzc4MDU4ZWQ2NjMxNDA5NDFjNmVkNTY3NDI3MDI3ZWYxNjYzMWY1ZDIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/App.vue#L344-L348",
+          "version": "repo-lines-v1:sha256:bc3306059072f9026d8e1f698360410603ce536b3288e53d6592dd8b5c56d84e:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2QyNTgwMTEzMTZjMmRjY2M2NDk5YTRkZGQ1MzBiNDg5Y2ZkNzE2YjQ5MzQyZDg5OWIyMDI0NjZjNGU0ZmMwNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjYwYWNkNWYzZTFkNjBmZDlmZGQwMjE5YjQ5NTAxNDhjMTEwYzA1Y2U1OTJhMDY2ZjliZGQ4MDgyMzA5N2YyNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGFkMzQ5YjI5MjM0YTU1NDkxNmY0MzZiNzIzMWZmMDMzNzkzZTNiNTU2YWIyMjk1YzNjNzk2NjIwZWEzNTI4MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjM5YzFkMzMzMDU4ZTA4NDYzMDA1MDU1Y2JhMDllMTNjNDhiMzJjMjk4NTUwZjEzZGYwNWE3ZWM1YjAyNWI0NiJ9"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/pages/ManagementPage.vue#L19-L29",
+          "version": "repo-lines-v1:sha256:b67f75ed706526ae42670009fc798bee0852ddaec28c6a61a5baabb5b7514278:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0Yzg0OGZmNzE0N2UwYTg5OWU5ODQyNjMxYzgxYWMwODYxMTA2YjFmMDkyODg2MmY5NjY5ZDU3NzA4MWM3Y2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxNTZmMTllOGQyM2Q0YmZjZTYwMWRlN2M4NmU2NzNlZDQwOTlmMDQyZGRjNjA4NDBiYzkzNWZlYzNkNzg2ZjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjOTJmODI2YTEyMzA3ZWU1MjljNmQxMjFjYzNmNjI5ZjYzNDg1NTBmOGY3N2Y3YzBjMTljNjI5MzkzNDFmODAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkwODEyYTk0Zjk3YjY5ZDlhMGJjNTA2MTA1OGQ5OTE4ZDFkMjYzYTI1NDQwZDU5NjNmODViZTAyN2RmYzhhNzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c5527b1c93894a719a6d330e032afccf",
+      "statement": "账号参与 `local:web-geek-job-Today[-<account>]`、`local:web-geek-job-Statistics[-<account>]` 的键派生（default 账号用无后缀键），`HelperCache` 用 `\"<key>:<encodeURIComponent(account)>\"` 槽位、`JobResultCache` 用 `local:job-result-cache:<encodeURIComponent(account)>`，而 `appearance-conf`、`local:HelperAccounts`、`local:HelperAccount`、`local:FormDataPreses`、`conf-model` 为全局共享、不参与分区。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/cache.ts#L26-L28",
+          "version": "repo-lines-v1:sha256:72aae1f714bdc609a8b9aa75736f3095543fc03c8d12ea0231b615130a9442c4:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDlkMzQ2OGM1Y2QyZTA4MTkwNjdlNDI2ODg4MjZjMGIwYjBmOGY5MmIzMjNhM2ZiMzQ5ZDc1N2MzOTczZTkzZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTE4NmI1ZGEzZjIzNTg3NTRjNTY3OTEyYjQ0ZTAyNGU3OTVmZDkzMWNlMDczZTU0MWI3YjE3OGI0MjQxOTYwZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTliMjdhM2E1Yjk2YWZkMzVmOTQzZDM0NWE5ZGU5NDUwMjMwZGFmYjc0MTk5YmM2M2YxOWY3ZWU3OGNkNTM3MiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L27-L36",
+          "version": "repo-lines-v1:sha256:9a404017f1edd6d96510c20b48f70a63aa74caec671a9a96489088dc67c43909:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlhNDIwMmM0ZmU4OGMyNWQ5OGNmYmVjMzhlZmQ0NDRkNTYxMjVmZDIyMTQ3ZjljN2I3NTRlNjYwMDExYmI0OWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5MjE2NzIwZmRhYjg3ZTVkOGUyYzhlNGM5YTE5NzIyM2FiZWE2MGU4Y2Q2Mjg0ZTE2NTNjNGRkZjlmMWY3NDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4NTVjYTFhYThmZTZiZTNiMDZhN2Y5OWY5ZTU5NzYxMWE4MjE3NWRhNjJhZDg0ODJlZWJkZGRmMTQyNmZkZTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyNjI4MTBkZDBmNjQ1YjVlMzg5OWVkNWFmOThmZWMzMjY5OTJiNTNhN2VmMDVhYzRmZGEyMDE0OWE1NzkzYWUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useModel/index.ts#L10-L10",
+          "version": "repo-lines-v1:sha256:5c329a5bc84dc0606b081d45ecd3f66dd5eaf2443e810099bd1850ec19313712:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWMzMjlhNWJjODRkYzA2MDZiMDgxZDQ1ZWNkM2Y2NmRkNWVhZjI0NDNlODEwMDk5YmQxODUwZWMxOTMxMzcxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWMzMjlhNWJjODRkYzA2MDZiMDgxZDQ1ZWNkM2Y2NmRkNWVhZjI0NDNlODEwMDk5YmQxODUwZWMxOTMxMzcxMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGQ5YmNhOWViMGM4NDhlNGJlMzBiYWJmNjMyNDVhZjFlMzUyM2I3YzQzNGNjNGIxMmRjNjE4NjEwZDg4NWZlMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTBkOTRiOGVkZjk0ZDE5MzE3ZGM4ZjQ0ZWZlY2U2NDJkY2Q2ZDlmZDkwMzMxMmQwZTQ0YzZkMTJlZjM0YWMyOSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useStatistics.ts#L10-L11",
+          "version": "repo-lines-v1:sha256:cb17e5bac473e3cee2681152b0a3006b96d4cf7db36667cccbdf9327010a7600:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTViYTFhZTIyOTYzMGU1ZjE1NjMwNWRmMDg1N2UxY2FkMDE2MjExODI0ZTdlNTc0YTAxN2U1NjJhYTRjY2EzMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjgxMjQ1MzlmOGQwZjc2NTAwMDY5ZDZlZjA2MjJlNzk0ODI5YTNiNzY5OGYzMmY0YmE2Y2JmYzEzNTY0MzJiMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDE2YTAzOGYyMDRkMTM0ZGIyMjgyZGNmNmJjYTA1YjRhNDUyODI1NDE5NTRhMzVhMWUzZjY3ZDc1NmY1ZmVhZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDc1MTFhOTQxYTliNWVkMzBmZGYyMzRlMTFiNDA5ODc2ZDI1OTI5MjEwNDdhMWU0M2RkMWQ3OWNmZGQwMThjMCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useStatistics.ts#L26-L27",
+          "version": "repo-lines-v1:sha256:20bd696448168ef884cab421bcfd7f71fbe5eaaab1dab853eb8fa034f1611113:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDhiZjE5MGJkYzVmYmVlYjAyNDQ5MGYwYTE1ZmU1NWUxYTg3OTcwMDRjMjc1MThhOWMyZDJkN2I4YzAyMjJhYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk4MWVjZmM1ZjA2NjY0YzBlMWM2M2U2Y2YxOGJmOWU1ZmNlMmRiNjc2OTk1MTZmZTBkOWUwMmNhNGIzOTBmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDJlNDFmYzYxMTJmOGEyZDJkMzA3MTk4YjYzMWM0YjM5NzY1YzNhZjkwYmZhZDBkMDMwYmQwMDJlMzEyNWNhMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWVkZmNjZTcwM2ZkOTQ1NTA1YTk5NGMwYjZkOGZiNGYxMmM5ODQ1Mzg2NTY5ZjRlNzUyZjYxOGZhY2E2ODkxYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b76521b72552411696c3e43c9aebb760",
+      "statement": "该配置层目前没有单元测试：`scripts/` 下只有 feishu-sync、feishu-workflow、helper-cache、job-cache 的测试，迁移与预设行为的验证只能靠手工导出/导入/重载回归。",
+      "evidence": [
+        {
+          "resource": "repo://scripts/feishu-sync.test.ts",
+          "version": "repo-file-v1:sha256:0b2a9f6f3803c7800b7ff7a9d3f4e42da933bd0d5b1e252c076ab8cf39dc01bf"
+        },
+        {
+          "resource": "repo://scripts/feishu-workflow.test.ts",
+          "version": "repo-file-v1:sha256:17f5b92d0ab9fc5238293e81ee90b26078a22978bb00b5ef8be9f35d518dba1a"
+        },
+        {
+          "resource": "repo://scripts/helper-cache.test.ts",
+          "version": "repo-file-v1:sha256:fa924504e020fd530fd0fb7ece664f2145428cccf9f3c50b4b6c6523fd8dc31b"
+        },
+        {
+          "resource": "repo://scripts/job-cache.test.ts",
+          "version": "repo-file-v1:sha256:24dad89902ee154b8de0a8020503f785c5710079e2c33ba69cec2e9d987f8515"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T11:46:27.311Z"
+  }
+}

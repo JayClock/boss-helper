@@ -1,0 +1,412 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:7fc96fccb4342219c68460836b7d59db36db25921a00cbed04f8215e11df0192",
+  "claims": [
+    {
+      "id": "claim_3849bd01845d4a708bd68213fd61b95b",
+      "statement": "BossHelperError 是扩展的业务错误基类，携带 state（仅 'warning' | 'danger'）与 error_type: 'boss-helper' 标记，并通过 Object.setPrototypeOf(this, new.target.prototype) 保证继承链上的 instanceof 可用。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/deliverError.ts#L1-L11",
+          "version": "repo-lines-v1:sha256:70c8d867a39d17636e9ba987583a9fc50f585f7d2e0da860857a08fef92b4ac4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmM2Q0M2QxYjEzNDA4Njg4YzdlNjlhOTk5ZTc1MzA0MjkyZTc4YjI1YzIxZDQxNzg0N2RmNDhjM2UyNWE0ODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3M2MwMThkMTNjNDFmMWUwNGViYzAxMjg2ODAzYmZiYzkxMDBkMGZjYmM2NjQzYWI4ZWQzM2NiOTQyNjBhMzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_97bcaa3201c540f19a9197bc07ab2c0e",
+      "statement": "五个 BossHelperError 子类（PublishError '投递出错'、GreetError '打招呼出错'、LimitError '达到限制'、RateLimitError '操作频繁'、UnknownError '未知错误'）全部固定为 state='danger'，其 name 就是用户在日志中看到的标签。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/deliverError.ts#L13-L46",
+          "version": "repo-lines-v1:sha256:b4a46f62447548d13a82e907a04d70377b5f7e464b6b24b9a98aa90fd7075a06:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhM2U1MmM1YzgzNDE5ZWE2NjE4YjRkN2ZlZmMwYjI4NDBjMmJkODc5ZWU2MTk4NjYzYjYwNWZmYmUyZDhlMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_774a3705d7724c32a22b2a173f18034b",
+      "statement": "sendPublishReq 依据平台 chatRemindDialog 文案分流：'120位BOSS' 先发 chatremind 确认请求再带 cid=1 递归重试，'150位BOSS' 抛 LimitError，'操作过于频繁' 抛 RateLimitError，其余抛 PublishError；catch 中 BossHelperError 原样上抛而不消耗重试预算，只有传输类异常才 retries-1 重试。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L44-L115",
+          "version": "repo-lines-v1:sha256:9fcb351107e89192fd3b61ed194b50350a037946c67a2dd9c3016a5619e90328:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYmY5ZjYzYzc5MjM1YzU5ZTRlZTc2ZDViYTM5OTliMzMxNGUwODYxNTA2MDkzN2U1MTE0ZTc1OTkxOTJhOTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3ODg4NWM1ZmRiM2Y1YWExODBmZGNiZGU0ODFhZDY2ZGRhMTY2YWI0NTg0ZTZiNjMzY2FiODJjY2MzOWFiOWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwZjBmOGVmMDJiMzM2MDUzYTRiMDhhOTMyN2Y5NDYyMWZmNzk1OWI3ZjE2NTZkNTAxM2JhNTgwYmQ5MGQ3M2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4050b53b463441b198b54a082a54ccfe",
+      "statement": "getBossData 对「非好友关系」做特殊重试（带错误信息递归一次并消耗 retries 预算），其余 code 非 0 抛 GreetError；getJobDetail 不重试，仅用 AbortSignal.timeout(5000) 兜住单次请求并在失败时抛普通 Error。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L116-L165",
+          "version": "repo-lines-v1:sha256:783e08448440de6a48560fa5ff608d00441c3902f662051e606b1929cff19b4e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4OTU5MGYwMTFjZjg2OGRjYTk5NDAyMjY5YjUzNzE0Nzc5NTMwMmI4YjdiNjhiMjViNTc0M2NkMmQwYzA4ODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkOTFiZWQxYjA4OTg2ZmY0OGY5MzliMGI0MzEwY2Y5ZjYxYzk0YTQ3YmQ2ZDM5ZDAxMTBmZmE3MDQ0M2JhNDAifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L22-L42",
+          "version": "repo-lines-v1:sha256:38e497e722f780780100e7c36e5e14f1d5cf44dd4426574c795d90a03f0a7c87:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1ZTJkOThhM2ZjNTEyYzNkYzFlOWFmZTgwMjYzMGI3OTI3YTAxM2EyZGRjNzlmOTA3M2ExOWJjZTAxMmM2ODgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiYWE0MjFmZDY4MTU1MWFlMTNhZTFmZjQyM2Q2YWZhMDg0YzFiZWVhN2I0ZDY1NGU0YWUzYmZiNzJmMDhkZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQyYjYyNjYwMzc2M2YyMmMzMzIwMjI3NDE5YWI1NTZjN2Q4NTYyMDNhYTExOGEwMmVlZmMxZmFjZmE5N2JmNWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_91351a69487d42b9a4621f785a84d380",
+      "statement": "runGuarded 用看门狗保证任务一定 settle：超时以普通 Error（文案含任务 id 与秒数）reject，用户停止时以 WorkflowStoppedError reject；cleanup 同时 clearTimeout 并把自己从 stopListeners 中删除，成功与失败两个 then 回调都会 cleanup。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L231-L275",
+          "version": "repo-lines-v1:sha256:32c6d51d61af4d76ff74be345d91f567e421ee061ce8990b6502d8d5b92787b3:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxOWM3NmRlODgzMzQ0Njc0N2VhOGU1NjE1ZTE5NmRlYWZjMTdjMjg0MmUyY2RmMTdiMDg5YmY3Mzg5Y2NjNzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NGFiNTg1ZDIyNGExNzVjODgyMDNkZWUzM2Y4ZWZiZWE2NTEyMWVjOTQxOWM5MzZlZGU5ZTQzMGMyNTkxOGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4ODI1ZDk5ZmJkN2E4ZDFiZjllOTgyZmM0MmQ4Nzk3ZTY4NzFlYmRkOTFhMTJkMjdmZTY1NzIyOTNmMDQyY2QifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b32ab36311074ec5939c159c542a230b",
+      "statement": "任务超时预算由 resolveTimeout 决定：任务自定义 timeout 优先，其次 state==='ai' 为 120s、state==='request' 为 70s、phase==='delivery' 为 90s，其余 30s。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L277-L284",
+          "version": "repo-lines-v1:sha256:808e7227998cd39a0ea18f19d632f31a0e68b0f9634f86b8c3fecfefc3012d68:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjM0YjBjYTUyN2FiMzFiOGZkZDlmMjJjYmUzZDMyOTljYjE0NmVjYjY3ZjM1ZmYwMmI4MTNhMjQ0ZTFlODBkYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTg2NTFiNmEyODVkNDQ3Y2IwMDA3YWUyYTUyMTBmNzk4NmUyYmFjYzMwNjg4YWJjMjRmMjkyOGI4ZjRlYWNhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODYzMWZhMDliNjU1YjliNjk1NjllYTc0NzIzMzM2ZTdlNzM1ZDNmMDNjNjgzOTgwOGVkNjhjYzEyZmMyODJiMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTdkODYzMmU1NGU5Mjk4YWJiOTU4NzI3ZTJkNTE0MDhhYmFmMTM2NjAzNTM3OTEwMTQwYWJmNjViMzBhYjYxMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_cfe15aed0e41419d98ca350f9a89f744",
+      "statement": "任务返回 isSkip 或 status==='error' 时工作流 throw 普通对象 { workflowResult: res } 作为早退哨兵；runJob 的 catch 用 'workflowResult' in e 识别后直接 return，不覆盖已写入的岗位状态，因此过滤原因不会被误写成 status:'error'。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L376-L383",
+          "version": "repo-lines-v1:sha256:038bc478b45589d82499cc701b4a846b85489fcedb0a8a9aed3d85cc9bd7e9e9:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTNhYWMwNjkwODBhZjZjNmVjZTNiZjk1YjJjMTg1ZTMxNjRlN2U3NDQ1Mzc1NDE5MmJjOTRkNzIxZjBhNjI5MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyMmM0MmNkMTljNmQwM2Q4MDhjNDUyNzIwNTUyODI1YjdlYTFjNWI0OTFiMjE4NTExY2FjNzQxNWNmOWQ5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGQ3MDc2MzRkMzFlZjllZjNkMmRiOThiYzBiYTFmMWE1YzdlMTYzZjcxZGU2MWZhN2I1NGRlNTEwMWEwNWQ4MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTc3MDExMDZlMTIyN2UyYTM3NDgwMWNmNDVmY2Y0YjUzOTBlMGQ3MzI4NWVkZDM0MWE4ZjY0MTM1YjZmMzUzNSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L429-L437",
+          "version": "repo-lines-v1:sha256:f45f5a02627f86dab8c51b9145e9c94a7d0c23a5f4d7f4d4b67e6525837c6440:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTk4NzlhMDg4MmJkMjMwY2ViMmMxNGFkOGY0MmFmYTk4YjJjNjNhMTZlNzM3NWE2NGVkMjVjNzk5NDc0NDQ0NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjcyNDYwNzAyYTAwODQ0Y2E5YjQzYzUwZmM4MjQxM2U0ZjdmNTBmYTIxYzMzNzg0Nzg1ZGJkMTVkNDhjNjZlOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjk4NzJiYjkwZWY4Mzc2ZDQ1NDcxMDkwZTg0MmQ1N2M4MjQ5YjI3YTFkOWUyMDcxNmJjN2NkYzVhMjExMjRlMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_07a373df1e2741da810058ec402d0104",
+      "statement": "DependencyMissingError 由 createLazyObject 的 Proxy 在未初始化读取时抛出，runTask 捕获后查找对应任务并补跑一次；WorkflowStoppedError 优先重新抛出，依赖不可运行（!canRun(dep)）时也直接上抛以避免无限补跑。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L349-L358",
+          "version": "repo-lines-v1:sha256:fc18f2d3348685fe19fbc11063fb003e11d59ac1b66b658abd7108610fa4944f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4MDA1ZDU3MTA2YTM2MmViMDAwZGFmM2RhNDY3NGM4MmI1MThmZjVhMmUyZjY3ZWU4ZTc1N2EzMzNjMmFmNjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjNzRiY2ZiNWUyZjJhNGM0YWJlNzc4MzA4MzZjMjQ2OWY5YjlkYmJlNTZjODdkZjg4OGQ0ZDljOTVkMTFiZmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNhOWUyYjZlMzZiNGMyYzY1NGQ4NjA3NmZkOTZlYjEwOWFhZjA1Mzk3Y2U0YTFlNjRmYWM2MzU3ZmRhZGIwNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBmYzkzMGVkMGU1YzExYmIzNTcwZmFiZTk4YmY5MjZkMmJjMWRiYTk2ODc4M2M3MmYzZDA1MTczNGRkZjU3MTQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L180-L216",
+          "version": "repo-lines-v1:sha256:1402ce6a63025447afe7c1928944080996693a088172b1b12eaec6eaf90dbc50:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NDk2ZDk2YzE3YzBiOWM2ZmZmYjY5NzcyMGU1NmYyNDU1NzgwMjEyNTI4YWJkMDYxNTY4ZDNkZTg4NThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNmE2MTgzYzQ3YjJhODdmNThlOWU1YWUxMzFmYTIwNzgzYTM3NzFlOTA5ODA0OGEzNzQ4YjVmZTMzZmZlNTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3Y2Q5N2MwOTQwZWZmNmJkZGRkYmFlMmZiYjFlZGIzOTExZTdjNzc3OTI3Y2Q5NGE1ZjY3MTNhY2U3Zjk0NDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_757b1bfb91814b938dcc52c341310919",
+      "statement": "JobStatus 是有序枚举（pending, wait, running, request, ai, ready, success, warn, error），meginResults 用 jobStatusList 的索引在多返回值合并时取更严重的状态，并换行拼接 reason 与 msg。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L30-L60",
+          "version": "repo-lines-v1:sha256:4dc81011e22d657954ac38d52b48a77a79e31b46bbb33f708c1e45cae3f58975:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1NTY1YWM3NDM4ZmEyNTE0ZTVhY2YyODQyZDE0MzM2ZTk0NmFkNDA1ZDhiZjc0OTJhNGNmY2NmYTEyODM1YWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdkZmJmOThiZTVhMzdjY2ZkNmUzNzcwZGM2OGNlYWM0NTQ4MWIwNDhlN2EyMmM4YTUzNTk2NTAwY2MzNWI3MzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1OWEzZTY5NWIyZDVlMjQ5NWI1MWFhZTYwY2UyZmU1MDRmMmViNzE0M2NjYjFkZDFjMGUyMzY0MDkzZWFlMWEifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L46-L57",
+          "version": "repo-lines-v1:sha256:d34d973a48c63522e2a2ca45d04c9020a877e2ce213468885b666719d44040c2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiYWFjNzc5Mjc3MTc3YjYxZWRiYTg3MGYwOWY5ZjFhZWJmMmZmZWI0M2FiNDAyMGViMjUwOTEzMWUzODBjNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyODViNjVlOWI5ZWEwNDg0NzNlZTM5NTU5NDUzYTFjYzU1ZDQ1NDRmZGMxZmZkNGE2OGMxNTc5ZTkzM2NjMTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3MGJhYjNhZGE0ZGRiZTg0ZDE5MGFjNGRjYjBlOTA0NTU5OGM0YWUzMjE3YTY0MzdkZjM3MmRlY2EyYmE0NDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiNWFiZGMzYzIxMzk0NDQ2NGQ4NWMyZTMwZTI2YTUwYzBkMmJlMzk1NDhlYzliYjcwZDdiZWEwNTBhZGJkYjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9a4c40f9b9d445aba2b3012e4b2fe985",
+      "statement": "任务结果写回分两步：进入 handler 前先写 t.state ?? 'running' 与 t.stateMsg ?? '运行中' 占位；返回 status:'success' 且非 skip 时再临时改写为 status:'running'、msg:'投递处理中'，把「投递成功」的最终话语权留给 runJob 的 delivered 标志。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L335-L371",
+          "version": "repo-lines-v1:sha256:a40275c1b463f07a4f779701e2eb9c8300b78bea61ba210f95927cf78487e8bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkODI4ZDZiMGVhODkxODQ4ZjFkOGZjMmU5YWJkNDZlMWFiM2Y1MDkzMTEwOTgxYmE1MjQ1ZTUxZjE1Njk2ODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMDUxZmE4MTFlODgxMjVjOGViZWZhMjNlYTBjMTUwNzdiODFmNWJjODExNWRkYmZlMDQ1NWZkZThkMzYyZGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4MWFlMDAzZDNhOTQwMjVhY2E1ZmY0MWNmMTE1MmExMjFjNzdlZDZiODM2MWZiNTJiNGQ0NGU3MGFkNmNlY2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU4NzAzODU5YThhNjY0YTE5YmNlMjJlN2MxYjVkNGE4ZTQ1ZDcwNjMxNmM2N2M4ODA3MzI4NmI2NGNkMmQwMDUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L411-L419",
+          "version": "repo-lines-v1:sha256:e6343f5d40ff4144d90b0443ecc3b7a4c84493bd2a6c314031cdb7ddde927d1d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGYwNjg5YzA5OWRlYTE1ZDM0YTIyZjhhZjM3YTY5OTJkOTg1YTQ3ZDgwYzhmNDI3NDllMDFjZTg4OGQ2Yzc5MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3NWMzMzYxYTVhYTc1NmE1NDhjZDA5NDAyYjE2ODNlMWVjZmJhZGM5NTdmYWU0MmViOTQxYTRkYmJkMmVlYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGQ5NDRjNTk1Y2FmYWI0ZTY3NDU2YzM0ZGYxNDBmMWY0Y2EzNDk1MjVjY2JmMzFkYjZjZmI3MGQ5OWNkMTA4MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmQxZWRhYTUxYjBhNzg1NGU4Y2E3ZjBiZjMxYTJlMzdkNzRkNDRiMzllMWY5M2E2NGZkNTYyZDhhMjc5ZGVjOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1c760b6ad7da4d6dbad2be0d44fc8d2e",
+      "statement": "runJob 的 finally 无条件处理手动过滤、在 status==='stop' 时把岗位写成 status:'wait'、msg:'已停止' 并排入飞书同步；停止状态下还会立刻 flush 飞书队列。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L438-L448",
+          "version": "repo-lines-v1:sha256:7584d2b2b52d172ed253869dccf5afaba2fed96abfb84dbf80a6ac27e1d11d79:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1YTMzOTNkZjc0YjQxOWIyODc2MjQ3MGNjNmQxOTU4NTYzZTVlMmQwZTM2NGYzM2ZlNTk2N2VkMmNlNWI0OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2ZTdiZmIwYzVhMWQyMTBjZmVhMjA1YTk0ZmEyZTAwODg4ZTJkODRhZjI4Mzk1ZTE5ODgxYjgwNTMzOTZiMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQxYjhhYWE3OTg0ZTJhMmMyMDE1MjlmMzVhNjVhNjM3NWRhMzczNDNlYTE3Yzk2M2RmYWJkZGYxZjc5MTM1ZTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3b15452a1cb3401a98cca6cfbfb8c79d",
+      "statement": "真实异常（含任务超时与 BossHelperError 子类）落到 runJob 的通用 catch，被写成 status:'error'、msg:'执行失败'、reason 取 e.message；onDelivered 回调的异常则只 log.error 不影响已成功的投递结果。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L419-L437",
+          "version": "repo-lines-v1:sha256:4ae8b3d2c0715c08d73da0730ad9b8f3b96a11aed414d1f4ee0f0ed0d29b2300:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlNzVjMzM2MWE1YWE3NTZhNTQ4Y2QwOTQwMmIxNjgzZTFlY2ZiYWRjOTU3ZmFlNDJlYjk0MWE0ZGJiZDJlZWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5ODc5YTA4ODJiZDIzMGNlYjJjMTRhZDhmNDJhZmE5OGIyYzYzYTE2ZTczNzVhNjRlZDI1Yzc5OTQ3NDQ0NDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4OGIxYzY3YTViMzdlNmY3OTQzYjc4ODY2NzcwNmFlOWU4NDkxMDY3ZWM3M2FjMDcwZDBhMjQzNDYwNzdjM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI5ODcyYmI5MGVmODM3NmQ0NTQ3MTA5MGU4NDJkNTdjODI0OWIyN2ExZDllMjA3MTZiYzdjZGM1YTIxMTI0ZTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_91e0627ce3e2402d9158d87c60ccde74",
+      "statement": "rebuild 把任务定义阶段的抛错记录到 nodes 的 failed 状态并聚合成出错文案，同时 logger.error、alert 阻塞提示并写入 errorMessage，withRun 在 errorMessage 非空时抛错使本次运行根本不开始，因此配置错误是运行前失败而非单岗位失败。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L146-L153",
+          "version": "repo-lines-v1:sha256:c0f7f6e67a427c8d3e2dadcdb50743400e4c977c86f0b0ff522ec96ceaac1748:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmU0ZWJjMjY1MDdkZWNmMDA4MTI1NzFjZDBlOGNmNDJlNzBjNGU2ODZmZWIyYmNkNjA2NjE3NzA5ODk0YzRkZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGQ4N2FmYjI3YzNkYTE1YzQxYTdjOTQ1N2JiNTEyMjQ4YzI0NGQ1YzFjNmVmMDEwYzdiYWI3MTcyMDI2ZDIxMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmE3YzY0YTIzM2JhNTBmMjRlOTM2ZDM4OTkyMmFiZDEyMjYwZTA2NTQyZWNiOGEyYzYyYjAwOTY0ZGYyNGU0MiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L196-L211",
+          "version": "repo-lines-v1:sha256:ef01f6cb23d17dabb3df945b2ffc2ea2c83652bb61c3a8681bd51c115edcc36a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5MDUxZmU0MjM1YmZhMTNiZjhmNmQ3MjZkY2EwY2JjMjg0ZDM4ODZmNDkzZWVhMTRiNGFkYjAzMGE5MzFjNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjNTU2NzI2ZjQyYjc2MDlkMmNkY2ZhYzNlZjZhMGUyOTc5ZDE4YTRlMDRmMDJjMmJjMGEzODcxNDNlZWU4MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRlOWI3ODk5M2NjMjM5NDMxYWZmZDVmOGJmNjBlZjIzZjQ2YjQ2ODhiNmExZjZjYzBlMjk3ZmY0OTE0YzhiODQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L450-L470",
+          "version": "repo-lines-v1:sha256:274007a509703ce440722a266ff342f15004d0c1fdef5a30cf598bad596d030f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlNGFkMjJkODRhMDY2ODcwZDBhN2UxZDQ1MWNkYjdhOTY2YjZiZWIwYjRmMTdlYjg4YzM3MmMwYzczYjY1ZjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjOTgwYTQzMTE5YjMzZWY1NjJmNmNjOWU5MzNkZDU1MjNiMzVlMjhiZWUwZGVkYjVkN2FmYTYyZDI2NTdiMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmZGRiMzcyZGQ5M2FlNjcwYmRhOGZiNTk3ZGZiNTI5ZWRhY2Q0ZGQzZGIwNTA5OWExMDk2NGRjMWM2NTYzOGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjNjM5MDg4ZTY3NDVjNDVjODNkNmFkMjI0ZTJkMTFiMzRmZjExOWI2OTM3MjAzYWE1ZDdjNDY2ZmExZWUzNDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1b54a33ace4f4b3282e8abeb48bf91f1",
+      "statement": "Logger 由 src/utils/logger.ts 集中配置为 devlog-ui：日志通过 LogPersistence 持久化到 sessionStorage（最多 500 条，debounce 100ms），内存上限 1000 条，minLevel 取自 localStorage 的 __BH_LOG_LEVEL__ 且默认 'warn'。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/logger.ts#L1-L29",
+          "version": "repo-lines-v1:sha256:4ba2afeaeab76b61d76e9200538c6d69d66c82b9790accf23a71c43fd00cb95d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkY2I3ODk4YjliZmMwZTc2MDkxNGMwNjJmNjFhNWFhMDI5YzhjMTQ4NDUxODA1MjgyYTlkZDQxMmIzM2I4ZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2NTU1MDEzZTIwM2FmM2YwYWNkZmZmNGFlMzhmYjM5ZjIzY2E2MWZlMjRmZWE3ZjE2N2ZjMGI1MmU3ZDk4NzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_66d50f6f329041a38a7f302391b9e89a",
+      "statement": "__BH_LOG_LEVEL__ 由 devlog-ui 悬浮面板的 log-level 动作经 prompt 写入 localStorage 并即时 configure，而扩展侧 minLevel 只在 src/utils/logger.ts 加载时读取一次，因此手工修改需要重新加载。",
+      "evidence": [
+        {
+          "resource": "repo://packages/devlog-ui/src/ui/overlay.ts#L190-L203",
+          "version": "repo-lines-v1:sha256:bdfa9a755e9c4a827e6ee5ebd085b8db904519e291620e2a9677d86912f21a8f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2MTU3ZjQ4N2I4ZjcxYTc0NGFhYzg0MDYwZTdkZWRkMTIzZDZiZDIyMmQ0MWUzOWM5N2IwYzRjZTcwMmZlNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ2MjM5Y2NkOWMwY2YzNmE4Zjg4ZWUzNTdmMTBjOTEzZDAxZDAyNjdlYzk4YzdiNTAzODBjNDY0ZTdmNzk2MzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkMGVjOWI3YWQ3YTFhZDk3MjVmNDM0YmM3ZjFlYmM3NmIwMjU3MWVjMjgyOTU2MmUxYzdjNjc1ZDhjYmM0MjIifQ"
+        },
+        {
+          "resource": "repo://src/utils/logger.ts#L13-L20",
+          "version": "repo-lines-v1:sha256:fc54e4f17f9064d1b9d5af7ee6ce47e9f64100af421113f0d3353269f51b1072:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjBmMTVjOWJhMDdlNzA3MDQ1ZjhjMzdiMjhkYWM5Mzc1YTg3OTZmZjYwMjNjZTFiMTA4MDBkYjA5YTZjODM3YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODc4OTFiNjJjZjJhYmEyMDlkMmNkMjkxNTQ5YTZhNDgwZmFkMDY5Mzk4NWEwOGE2ODU3N2JiMjJlMDdhYmRmZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDZmZTc4MjEyYTc1ZWExNzdjOTUyOWE5M2JjZTUxODAxMjMwOTEyMGU3ZDM1ODM4NzZkNjQyYzNjZTdhOWUzZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2E3NzliYTFlYzYzOGQ2NzY1NTNiZWRkODMzYjZmMTZhMjFjNGI4NGZhMzE2MDNhNzgyYWVjNTM3NDJiYzQwZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8477f4bcbcd845799b630627cf10a1b6",
+      "statement": "HelperContext.logs.add(job, err?, logdata?, msg?) 把 BossHelperError 转换成面向用户的投递记录：state 取 err.state（无 err 时为 'success'）、state_name 取 err.name（无 err 时为 '投递成功'）；当前源码中尚无调用点，日志标签页挂载的是 devlog-ui 面板。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/Tabs/Logs.vue#L1-L13",
+          "version": "repo-lines-v1:sha256:c364119694bf579abc2f50f6c463db3c2cac2efbcbc16c5b1590ad832beb696d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjY2EzZWYxZTcyZDBhY2M3Njc3OGU2ZDYzOWRmYTg3ZDZiYThjYjhjNmViNTlkODg0ZjQwOTFhMmY4ZjU3NTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1MjI4NDBlZDVlYzU4YTM2MmYyMGI3MWI4YWViNjc1ZDdlZmI5NzQzOWM5MGMzZjYxNTVhZmVjNjUyODU5NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L40-L83",
+          "version": "repo-lines-v1:sha256:3f4949b5dca4c084f0113898e2ceb3f693f0f18577cecbe6cba9989a558f8140:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYzZjUzYjk4YmRhYjA2YjRmNDlhM2M3NWIwZWMyM2JlYzA4YWRiNTZjMDhlMGRjNjE3Zjk3ZjNlMDdiZTAxNWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA3NTRmZjdhZWE5NTU0YzExZmIzMTg5ODUwMDc3OTQ2N2Y4YTQ2YTg3YzUxNmU0NDc3YmE4MzFhNjBjZDllNzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_936fae84f3874e33aed979ebcd862011",
+      "statement": "toast 只承担即时可丢失的提醒（缺 token、飞书同步失败固定 id feishu-sync-error 以免刷屏、HelperContext.notification），alert 仅用于工作流构建失败，长期诊断信息统一走 logger。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L76-L86",
+          "version": "repo-lines-v1:sha256:dfb29c141a42a66c87ecb771b0b0d7c4fb960567e0ff5ec7d6de96ba9a91ca5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmNjBlMGE0MzdmYTAxMzQ3MzhhM2VlYTcwYjZkNTE3MzY5MTZmNDdmOTQ4ZjFhOGM1YjUwMDc2MmQzMzYxZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3Y2JjNmQ0Zjg5MDc5Y2Y1Nzg2ZGJkYjUzYjhiZGUxZGI3Mjg5YzA1NTQ2YmFhNjIwNWNhMjNmZTRlODE1MWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk1NDQyNzVjNmIwYmVjYzZjNzRkZTAwN2MzNTAzMjFjYjhiYWI3Y2QzZTM2NzZmNzE4NDc0OWVhNDQxODI0MGQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L198-L220",
+          "version": "repo-lines-v1:sha256:06a5853bef0185c2f72985f57247e2b0e04b0e76863ad0eba3a3566d6689bfbb:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhN2Q4ZDZiMzNmNjNkMGEwZjg2Njc5MTZhNGFjZWVjZjFiZGNmOTU2NTk0ZWQwM2JkMTEzYzQ0MTZmZTNlMDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY5NjQ4OGFhZmY4MzNlNWM1OTk5ZjZlOTM2OTQ1N2NhY2I2MWI1YmFmMjdiZjZjYWYzMzA4MzQzYWZhMGRhNzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljNzlmNjZkZTFhMGY2NmIwZWU2MzVhNDc5OTI2MTJhMzZkMjA2YWEyMzcxODY0M2E4ZTFjMDQxYzM5YTNkZTAifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L24-L30",
+          "version": "repo-lines-v1:sha256:f4124c06f3dfc80e1cb3ef2627562a3a714d1ee9d00300c10fa9ea2ca587af82:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzlkOTY2Y2ViY2JiYTAxYWZhMTBiMDYyN2ZkMDVlNWE4YzJlMTFmMjYwODQyOWFkMGJkM2FkNWJkMjQyOTNjNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjQ3NWU5NGE5MDRhYzQ5YjMxNTRkNDY3MmE2NmU4NjI5Yjg2ZGFjNzRlM2UyOTM3YmU2OTI3YWUzZGExMWM1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDYzMzZlYTE5NTRlMjA4MTUyOGIzNmZlZDA5OWVlMjIxMTRlYjMwYmY2N2UyMDdlYTU0NmFmNzdmOWEwZGM4MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjVlZmRjYmY2OGRhNzRmY2IyYzVlNDNjYWQ3YWQwZjA5ZDI0MGFiODVhZjBkY2JlNzU5ZmMyMGNhOWVkZTkxYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad587271e16045a3a9ad8e6e50d2537e",
+      "statement": "统计按任务维度累加为 statistics.todayData.value.tasks[t.id][res.status]，res.status 为 undefined 时不计数；投递成功另走 success++，activityFilter 与 repeat 为独立计数器。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L90-L101",
+          "version": "repo-lines-v1:sha256:a5c0f2a2c49fc325aa08cf816d069c88ff7163e410f580ac8ffe9b81f1226109:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiMjM5N2EzZWVlMTA0ZWViODFiZTM4ZGU1YzYyZjk3NzE1ZWVmYjM2YTFiMzFmZmI2ZDVjMGM5ZGViMzk5NzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlNjczYWJkNDU3YTk3ZWVhMTdhNjAwNjJlYjBmYWVhNmJkZjA5NDg2OGNjNmI4ZjhjMGViZGEyZjYxZWQ0MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhMmQ2YTc3ZTllOWNlYjdlN2QyMjA1OTM5NTBiMDIyMzE3MTlkMzhlYmEwMGM0YTFjODc5NjJjODEwNjY2MjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU3YzkwZmQ5MTRhNTJmNDE4NDE4OTdmZjIzNGRhN2MyMzdhNTQ2OGY2OGYzNGZiYWRlYjY5NzFlZjQ3NGI1YjYifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L372-L375",
+          "version": "repo-lines-v1:sha256:6d5122d296bee387c547fb63d62e5007a8efc1ad96c13c21013023dbd536be26:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUwMzJlOTY0ZDA5MzIzNTFlNWQxODUyNjkyODFiMTcxYTNhMDliMDhiMjg2ZTY2MWVhNDcwMzIzYzgyZWI0ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjdiODQyZWRiYmRlY2ZjYjAzODNjMjYxZTMwMmIxNThhOWE1ODZmMjg5MmNhYzZlNGNhZTAwMTdkMmYwMWUxYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGZmYzUzZjBjOWUzYTQ4OWI1ODZkYTE2Njg5YWI3YjhiMWIxNTU5MDU1ZTFhYTllYzQ1NWIwMGM1ZDUxMWE4MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGIzYTUzOWMxZWIzMDhhYTcwYjJiOGRjYTFiNmFiMzJiNGVjODQ3N2U3MTI4NDc3NTRjNTNiZTViODMxOTc1YSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L415-L418",
+          "version": "repo-lines-v1:sha256:cffc20891512a01cf243db3993406d85da933206fb4f7371f586f10ee9ad3580:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjkzM2I4YThjZWVkNmQzMmUzZDlhNjE3YzAzMTQ5YjI0NWQ1NGUxNGVkMmJjNzEzNmNmM2E1NTRjNTEwYTcyNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzQxMzk3ZDA4NGJlYmQ4ZjQ3NzhjYjA1ZjU5NjAyMmZkZjYwZDAwZGFiM2VlNWY2OThkY2U4NDY3Yjg2Y2IwNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2UwNzk2NTJiMzVmYzc1YmViY2NhOWJmNzFhNDVmZTlkZTAyM2UzZDUyZTFiZWQ1YmM5YTY0OGE4ZmMzMDZlNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWNlMGIxYTcyZjI1YWY5MjVlY2Y1OGM5ZjVkNzViY2M2NzcxZmM2NThhNDVjZDU1NzU1NjU1YWI5ZDk5ZDk5NiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5d2a3f624c6041e28b185f5bd7656593",
+      "statement": "岗位结果缓存只保存「投递成功」「筛选阶段 warn 跳过」两类结果（JobResultCache.set 对其它组合直接 return），筛选阶段的 warn 由 runTask 在抛哨兵前调用 saveJobResult 落盘。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L286-L294",
+          "version": "repo-lines-v1:sha256:4fac0613afc7a463d0dbf51d99741a96e9b41d7d3a422b4ede741f91bb4dc1dd:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODdiZDU5NWIwYTQ5MjIyNDU2MzczMmExNmYyOTEwODJjZDEzNDJhNjYzMzY5MWE1ZTM4YmZmNDVhY2Q1OTViZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzZiZDY2NGE3Yjc4ZTY1YjM2NWI0YWYxMTcxMGNhODZhMDc1ZmUzMzM5YjRiMjRmZTdlMTVhZDJjZDAxMDk2MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzkxNmYxNzgzYjMyNWViMzQyOGFkMjhiZGMwNDhjMzRkNjYxZGIwNjI4NmNiODVkZjNmNGY5OGRlMGRhZjg5ZiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L60-L74",
+          "version": "repo-lines-v1:sha256:b64f02ce3a414a0a032609be42c62af7f14b1f324eef3ca545d8e38168565a3a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4MzExZDk5NTBlNmFlNWE5NjE4MTEwZWU0YzMzZDY4MjY4MWMzNzE0NDZkNDEzMzBiNzY5ZmQzMmI2N2VkYzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5N2FkYWQ0YjY2ZmQyYjczOTkxZjNlYTczYmFiMzBjY2QyZjczNGQzZTRiNTc2NDkzMjAxZGE0OTQxMzNiZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_95c6b927ea2d4b2d80eea774c1652984",
+      "statement": "BossHelperError 声明了 `state: 'warning' | 'danger'` 且基类构造函数默认值为 `'warning'`，但内置的五个子类（PublishError / GreetError / LimitError / RateLimitError / UnknownError）都显式传 `'danger'`；没有任何内置错误是 `warning` 级。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/deliverError.ts#L1-L46",
+          "version": "repo-lines-v1:sha256:22248ccabd881ec160e15ebdb6ebfee787be512e60c1f9577ac1a7c7ad0f1d38:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmM2Q0M2QxYjEzNDA4Njg4YzdlNjlhOTk5ZTc1MzA0MjkyZTc4YjI1YzIxZDQxNzg0N2RmNDhjM2UyNWE0ODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4e76877e32be4e808f2b6d76a34ff201",
+      "statement": "`getJobDetail` 不重试、只用 `AbortSignal.timeout(5000)` 兜住单次请求，但在缺 `bst` cookie 时同样会 toast 并抛 `PublishError`——即 `PublishError` 并不只属于投递路径，读日志时不能把它当成\"投递\"专属失败。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L18-L38",
+          "version": "repo-lines-v1:sha256:cf2ec9223a31e4f01d7feb6f985c6231c9d43fe5c6dbf59962d53fef4bbf50ee:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNDQ3NTBkZDk4ODBhYjg1YTA1YTc2MGU3NmNlMmYyZjhkNzY3M2JhYzQ1ZWJmMTNlMDU5YjdlZDVkYjAyYWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2MGE0M2I4ZDkwZDM5YzEyOWI3OTcyNzM3NWNjZTk1ZmJiMDIwZGFhZmVmMzkzMjFmMDNiYWJiNzVjZTUyMzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjZTFhZTVmMGQ4ZWI3Y2Q2Y2RiMmUwZDRiMTBiMTM1NzNjNmUyZWYxNjIyOGVjODZiNDFiZjhmNGM0Mzk2NjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZDdhOWExNDkyNmMxMDZlZTQ0YTNhOWIxMTUxYWI0ZGVlZWEwY2E5N2FmYTYyYzk2Yzg5NjJlNmQ4MjFjYzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6eeb061924f84509adb97b2ffc7a5b8e",
+      "statement": "重试预算是\"总共 3 次尝试\"：`sendPublishReq` / `getBossData` 的 `retries` 初值 3，`retries === 0` 时以 `重试多次失败`（或透传的上一次异常消息）终止，每次传输异常递归 `retries - 1` 并携带上一次 `e.message`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L116-L160",
+          "version": "repo-lines-v1:sha256:a3d3743270087e82fa2da7b2879539018d1fb0ad57f08562941e6e9ec0d81543:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NGVmNjZjNTYxMDBjZDMwYTZhNzM5MDRlM2Q1NTY3MDI4ZTJiYjJiZTQ5NzQzNDY1Y2Y1ODYzZThiZGI3ODMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4OTU5MGYwMTFjZjg2OGRjYTk5NDAyMjY5YjUzNzE0Nzc5NTMwMmI4YjdiNjhiMjViNTc0M2NkMmQwYzA4ODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5YWE4NDllYzhjZTI4ODRlM2QxMDZkYmQzNGNhMWU1NmQyOTE1NGM4NDhlYjEyYjhiOWJjZGI2ZDgzY2JhMjEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/requests.ts#L44-L114",
+          "version": "repo-lines-v1:sha256:967393c4ebf71a04b1d71beb87a59ad132ba8806dfe6a92213070fafe6fdf497:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYmY5ZjYzYzc5MjM1YzU5ZTRlZTc2ZDViYTM5OTliMzMxNGUwODYxNTA2MDkzN2U1MTE0ZTc1OTkxOTJhOTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3ODg4NWM1ZmRiM2Y1YWExODBmZGNiZGU0ODFhZDY2ZGRhMTY2YWI0NTg0ZTZiNjMzY2FiODJjY2MzOWFiOWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3ZjVkNDlmMDQxZDdkZGNiMGFhM2I2ZWM2MGQyOWRhMGZlNzdiOTBiZTI3YmZlNjA0MmMzNjc1ZmE5NzExMjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ae078b537c7c40f39faa5834890f2b63",
+      "statement": "`src/utils/request.ts` 的 `RequestError`（`name: '请求错误'`）是独立于 BossHelperError 体系的通用 fetch 封装错误：无响应体、HTTP >= 400、AbortError（统一转成\"用户中止\"）与其它异常都被包成 `RequestError`，因此它不会被 `instanceof BossHelperError` 识别，在重试分支中会被当作传输错误处理；`isBackground` 时改走 `counter.request()` 并原样 reject。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/request.ts#L1-L12",
+          "version": "repo-lines-v1:sha256:66538d264a8e327526cf1ab3856f6926651ed847d12c02842874c3f91ccd27d7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmNGMxMjk0NDlkZWU2OWIyY2ZiZDFmOGZjYzRhZTQ5MzNhOGZmM2VmZDZiN2Q1MWZjYWVlMDI0NGRjYzMwNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0ZjhjOWVkY2U5ZjI4MzdjYzUwNmQyMTUwODM4ZTRlZGFjNGY1NDFhMzU0YWUwZWRmNTIxNmZlMjExNTQwYzAifQ"
+        },
+        {
+          "resource": "repo://src/utils/request.ts#L104-L175",
+          "version": "repo-lines-v1:sha256:e9e79f7fb9981b83f656a505857a404b03af6b2290a97f11feb5d83cdc60f770:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmY2Y4YmIyYmZlNDZkZGFjMWZlZjgyNjNiZWM1ZWE4YzQ2ZDQ1ZjMwMjJmZmRiODBjMGZjNGFiOGU1ODJhMWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhN2E2OTVlMTNiZmEzMjZlYmViNDdiMTNlNTM0MGQ2MzM3MzU1YjU1ODVkZGJlODAwYzVjOGVmOGYxMGQwMWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiZGExOTFlOWI4NzUxMDFmZDdlMGZiZDM4NGQ4MzdjNzQxOTQ0MTM4M2NiYjMyYzI4MTAwODAyOWY5M2JiY2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0ZjQ5ZmVlZmM0MDE0NjBiM2M3MzU3ODA0Yzk1NmI2YTRiMzRkZDNiOTMxN2M4ZGYwYTA4ZmI4NjNhMzdmNTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fbaa888971d745df9e570dd4b7780bb1",
+      "statement": "跨扩展消息边界的后台流式请求有独立的超时与取消机制：`BackgroundCounter.fetchStream` 用 `AbortSignal.any([controller.signal, AbortSignal.timeout(120_000)])` 兜底，`backgroundFetch` 在调用方 signal 已 aborted 时直接 reject `DOMException(..., 'AbortError')` 并在 abort 时调用 `fetchStreamAbort`，与 `runGuarded` 的工作流级看门狗是两个独立层面。",
+      "evidence": [
+        {
+          "resource": "repo://src/message/background.ts#L87-L122",
+          "version": "repo-lines-v1:sha256:16594a5dd57f0b2b45343e78b5114827f82a14fc9d23abd1df66bd52f8da254a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzZjg4YWE5YWZlZDM4NDEzNWFhNWMzODA4MDM2M2JlYzQwNmEzNTg2MTRlZDM0ZjU0MmU0NmEyMTg4NzkyNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4MzQ3ZGI2ZWE5MTg0ZjZhMzdkMTRkYTliNGI2Y2U2NTIzMjZiMzRjYzJjN2U5MzJmYzM1ZTM2ZmE0MDczOGYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZkMmVkZjNjY2QxOTY5N2QyYjYxZTFjN2FjYTRhYmZmMGI1Y2Y5MTJlOGQ3MmFkMjkwNjJmYjM1Y2M3MmVlNzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM2NDZkMDNlNDMyNzMwNTQyMjdiMzFkM2IxMmJiMDVmNDI5MjY0ZmRlMjJiNjhhZjMzMTMxMmQ5ZmRlNGMyMzkifQ"
+        },
+        {
+          "resource": "repo://src/utils/backgroundFetch.ts#L14-L67",
+          "version": "repo-lines-v1:sha256:117fce3286e9d1c08d96336b506c58568368df58b17580beffe7f8902ab00505:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhOTU0YzU4MDk0ODZkOGYxZGQ1OWQyOTliNmZmZDNhZjg2NzdkYWM2ZTc0NzRiODYyZjJiMTJlZjg5Nzg3NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3NDM1OTJiOGQ1NGRhZDM2Zjc3NmZkOWJkOGMyYmFmNWZkZTEyMjBjNzY0ZjczMGEyNzk4MjhlYWM1N2MwYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f83a2608726843e4af033ebb5e0f332a",
+      "statement": "`runJob` 的 catch 在哨兵判断之前先执行 `if (isBlocked(key)) return`（用户已停止或岗位被手动过滤），因此停止/手动过滤的优先级高于 `workflowResult` 哨兵与真实异常的状态写入。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L424-L433",
+          "version": "repo-lines-v1:sha256:176479033596fe29525ad6cf5a6b6370675d7ed1ab3c7b1138884c0a99fabfe1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwYWE0NDQyNjY0MDQ3NWZiYjFiNjFiNzM4M2ExNDRjNDI4YjUzMGExZWY5MDUwNGZjZTI3MTBlZDMzNzA2NjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkMGJkMGZjYWYxMzg3NzllNzFkOThhNzNkNzRmY2I0MzE3OGM0NDc5Y2FhMjM4ODU2YjRiODYxYjJkZTIzYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxZmExMWMzN2I2Y2Q0OTczNmFkMTlmNjRmNGM3NTViNmU0NTljMjU3MzM1MzI5NmE3Y2E3MGE5NDEzOTNiOGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxNTg4ZWEwYmQyNTA0YjE5YTRhYjg5ZmQyZjFjNzVhMDBlOTFkZjIwMjAxNTIzZWMyNThlNWQ1M2NlODc2NDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7ee7d184eba84206a20a58c7d0704369",
+      "statement": "`HelperConfigError` 是普通 class、不继承 `Error`，只在 `rebuild` 的错误文案格式化处落入 `JSON.stringify` 分支；它导致的构建失败会经 logger.error + `alert` + `errorMessage` 阻止本次运行开始。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L20-L25",
+          "version": "repo-lines-v1:sha256:51052b688e6f39b5e9d841cb28ba55021eb6d24643def2e163fe16d6f48fc73e:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzZiYWQ4ZGY3NDYzOTFkOTE3ZDk3ZGQwOWZkMWZlYjI5MDgwOGI5YWMyZTRhNTE2Y2RjMjA4MmJkMjUyNjhiMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmY0MjQ3MTQzZjUxOWQ2ZTJjNGZkNjU2M2JiYzkzODViNGE3YTRlMTg0NzFhZWYxMDNiMGIxMjM1YjI0MGU5ZiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L196-L214",
+          "version": "repo-lines-v1:sha256:c763c1da2731e5f0b295f56c3829ad39764286f605752d8f043eb1f03c1c280a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5MDUxZmU0MjM1YmZhMTNiZjhmNmQ3MjZkY2EwY2JjMjg0ZDM4ODZmNDkzZWVhMTRiNGFkYjAzMGE5MzFjNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0YzI0MmQ2M2FkODFhZTM2OGE5YzE2YzVkYTJlZTJlNjM2MzE1ZDcwM2Y0MjU0MWM4NzczOTE2Mjg1NjQxMWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjNTU2NzI2ZjQyYjc2MDlkMmNkY2ZhYzNlZjZhMGUyOTc5ZDE4YTRlMDRmMDJjMmJjMGEzODcxNDNlZWU4MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ1ZmIwZjcyYjhkYjE0ZTU3MDAzMDZhYTA0YTA0Y2MxMGI3YTE3MmExNmI1MzI1YzYxMTE4N2E2ZDMyM2RiOGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9e2739d4e49446a4af6be12fb7286927",
+      "statement": "`JobResultCache.set` 只持久化两种结果：`status === 'success' && !isSkip` 与 `status === 'warn' && isSkip`，其它结果被静默丢弃；`get` 命中后返回 `{ ...result, isCache: true }`，读写失败只记日志不影响岗位结论。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L262-L271",
+          "version": "repo-lines-v1:sha256:95b8fe65f3a3ebc224648dbd30fb19f150c78a5527ae6989ddae32576e3ac9ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3OThhYjJlY2M4ODk3ZmY4NmQ1ZTdkZDAyZDljOWYwM2Q0YjQyNmYwMDYxYzM3MDA0ZGI2OGFhYTU0YmQxMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NTEwMTQxMWJjZGIzYTUyN2RiMDhlMWYwNjM3MTdjNDhmMGFlNDU2MzdlNmI4YmIxNDgyYTliZDU5OGIxNmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNzA5YjM0OWU2MmY5NmJkNGU3ODlmMjIxNzdmMmJjMzhkZTEwY2U5ZjY3ZTIwNDhjODA3OGQ5YzIwZmNiMzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxYjJhNmY1NTJjZDJkMjY3ZGFjMWI2ZDUzZjY1OTVmNTYwMzMwM2I4MzM4ODRlNWIzMTViYTc5YzU0MmJlNWQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/jobCache.ts#L56-L74",
+          "version": "repo-lines-v1:sha256:5ef25afb76c8acca3e32733f4760e814214859a748af7ad28f973401bbf72dc1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2MWZjNDM3ZmMyMzczNWFjMjg2NDM4YTc0ZmQ0ODY1MDQyOWRkNjg3MGM0ZTcxZDU5ODE2ODU5Mzc3NjA4MWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5b30ba47c9ac4ce2a1675bf980662754",
+      "statement": "`useJobActions.run()` 是手动投递/拉取信息失败最终变成用户可见提示的地方：catch 中统一 `toast.add({ title: `${label}失败`, description: error.message, color: 'error' })`。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L152-L168",
+          "version": "repo-lines-v1:sha256:11531e0109c6f8b9a8844241178b7d9b85e48c35a265c4c5112bd54efc3c4386:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4Mzg0NTUwNGRlNzg2YmQ1NWY0ODEwOWI5YzRhNmNhYzhmYjQyZDBlYzMwZDNiMjE5YTQyMDdhODg4Y2RiZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyMDMxNmQ1MWFhODg4YTk4YmVmZTkxM2Q0ZTZlNTE3ODAxOWY5OTdlZmNjOWU4NDRmYjg5YzMwZDQwNDIzYmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3MDUxZGVhZmZmY2M5YjY0N2QwODdhOWZiNTczMTgzM2NmMGI3OTAxNTY2M2M3MjkxOTA5ZTMwZTRkNWRiNDQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useJobActions.ts#L15-L26",
+          "version": "repo-lines-v1:sha256:1224a0e3c2725a0e22cf0b078ed16593db6e7edc72fbb9723cac5f23cda0c14b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExZGY4N2E0NzMxNmM3MDhjNTUwMjA5OGU5YWY2YzQ0NTM0ZWI4MGJlYWRjZjYwNjMwMjhlZmNhODU5MzdhYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmNTQzMTE3MTlhN2MxMWY5ZGM3Y2EzZTE3YTcxMDQ4YTdiMDY3NTVhNzc4ZjMyY2IwZGEzNDA3ZjVmZDNkYTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjMzg2MTVkNjBkODI0NTI5ZTMzZmI1Y2YyM2Q0ZmI1NGZiOGRkYzcxYzhlNTU2MmZjNzFiOGEyNDEzMDYzODkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_08cf2c71a09946ca9896075adb4a0f58",
+      "statement": "`Logger` 的级别读取在 `src/utils/logger.ts` 中有 `'localStorage' in window` 与 `typeof localStorage.getItem === 'function'` 的双重守卫，`src/` 内也只有这一处读取 `__BH_LOG_LEVEL__`；日志面板由 `Logs.vue` 调用 `DevLoggerUI.init()` 挂载。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/Tabs/Logs.vue#L1-L13",
+          "version": "repo-lines-v1:sha256:c364119694bf579abc2f50f6c463db3c2cac2efbcbc16c5b1590ad832beb696d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjY2EzZWYxZTcyZDBhY2M3Njc3OGU2ZDYzOWRmYTg3ZDZiYThjYjhjNmViNTlkODg0ZjQwOTFhMmY4ZjU3NTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1MjI4NDBlZDVlYzU4YTM2MmYyMGI3MWI4YWViNjc1ZDdlZmI5NzQzOWM5MGMzZjYxNTVhZmVjNjUyODU5NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/utils/logger.ts#L1-L29",
+          "version": "repo-lines-v1:sha256:4ba2afeaeab76b61d76e9200538c6d69d66c82b9790accf23a71c43fd00cb95d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkY2I3ODk4YjliZmMwZTc2MDkxNGMwNjJmNjFhNWFhMDI5YzhjMTQ4NDUxODA1MjgyYTlkZDQxMmIzM2I4ZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2NTU1MDEzZTIwM2FmM2YwYWNkZmZmNGFlMzhmYjM5ZjIzY2E2MWZlMjRmZWE3ZjE2N2ZjMGI1MmU3ZDk4NzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_97ef2a58cf564d7096d20e0326c6876d",
+      "statement": "`createLazyObject` 的 Proxy 对 `__isProxy` / `__initialized`、symbol 属性与 `__v_` 前缀属性豁免抛错，避免框架探测触发 DependencyMissingError 补跑；`isInitialized()` 提供非侵入式的初始化判断。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/type.ts#L180-L231",
+          "version": "repo-lines-v1:sha256:31dadb216795251b86d43ec4983cd9f1c73992135b7e2ab0c88ee56dc629b75d:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NDk2ZDk2YzE3YzBiOWM2ZmZmYjY5NzcyMGU1NmYyNDU1NzgwMjEyNTI4YWJkMDYxNTY4ZDNkZTg4NThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNmE2MTgzYzQ3YjJhODdmNThlOWU1YWUxMzFmYTIwNzgzYTM3NzFlOTA5ODA0OGEzNzQ4YjVmZTMzZmZlNTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L392-L400",
+          "version": "repo-lines-v1:sha256:a6f5be0b13812263ffe8010c888e83a94149fb92b8bee7abc637bec39b079fce:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDM4MmYyNTI0MDExMmI2MTE0ZTNkMzE1ODhkNTY4MDE2MDVjZjExYjY1YWUwNzNmOTQ5OTRhM2JjMGE5OGYzMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWI0ZWNkY2JkMjQ1YjFlYTg1MWJlOTA4NGYxODFjNTdmZWY2MTAxNGQzMDUwZjY5NDhlNDA2OTQ3NTA2MDc5ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2FjMzcxOWM4MTcwMDM0MzE5NzdmYzE2MGRhNjRmOGM5ZTVmODgyYTM1ZjllNmNjMDBhODNjZGNkOGJkN2EwYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODE4ZWIyOGFmNTU3ZmM0NjA2YmNkMjZiMWJhODM0NTg5M2NlMWUxOWE5NTk1YzY1Yjg3ZmZjMTAxZWNiMjFmNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9590c364955149019a39513004480af4",
+      "statement": "飞书同步失败的可观测契约是：`createFeishuSync.flush` 在 catch 中 `logger.warn` 并调用 `onError`，工作流侧的 `reportFeishuError` 用固定 id `feishu-sync-error` 发 toast，同时保留待同步的 key/snapshot 以便下次 flush 重试；`add` 每累计 5 条触发一次 flush。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L73-L91",
+          "version": "repo-lines-v1:sha256:b96536024431b626dd3b302951f2b44aafd2c5778bdb10b03fa4c46ed8bf8407:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwZDEwNTU2M2U0Njg0MmViZDgzNDY0NjFiYzIwYTE3NGFkMWZjNzBmZGQ4MTM3ODdhMjljMGFhYjg0YjYyYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4ZGI3NDYwODE4MmNiN2NhNGQ5ZmJhNDlhMzk0OTlhN2YzOTA3YjRlYTAzM2IxNDkyYWQ1Y2YwYmVlZWVjZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNhNjZmNDhiNDFhN2QwZThhNTYwNGUzZGM5NzQ4ODU1MDZkZWM1NjhkMjk3MmNkNTU4MWQ1MjIyYWE4YjA4MDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFiNjA1YWZhYmI2YzA0OWU4NzE3OThiZjliZjkzYzNiOTA0YjkyN2I0Nzc0MGY4ZmI4ZGE3NTI4MWY5M2UxMzEifQ"
+        },
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L88-L138",
+          "version": "repo-lines-v1:sha256:3fbc7013cddca2da9afe6b935ce2ece2b5ac9be16d4b8d630a7a85bf42fcdcb7:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZmZmNDI3ZTkwZTIyZDM5MWRmMTg1YWYyOTkyNDM5Njc5OTQxMGRmMzk5YWVjNjYxMTUyYmYwZmM2NmI0NDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmN2M3ZWNiZDgzNjRlZmQ3M2RjMWY1M2U3OTVkN2QyN2FmYjk2MTk1YzNmNWNlOTU2ZWE0MTFjY2I0ODE4ODgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T11:46:27.311Z"
+  }
+}

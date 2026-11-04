@@ -1,0 +1,8 @@
+{
+  "updatedAt": "2026-11-03T12:42:18.274Z",
+  "command": "update",
+  "gitHead": "19f57bfabec9b12a5e88293814409713f4376f2b",
+  "model": "deepseek-chat",
+  "status": "interrupted",
+  "language": "zh-CN"
+}

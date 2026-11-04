@@ -1,0 +1,720 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:482b4be245125ff3cea1cbb43e8f4e2e36576c760e786d75479d8cf36ce575fe",
+  "claims": [
+    {
+      "id": "claim_70cbe420a23f40d8b581fa26597ed9f6",
+      "statement": "ChatModel 通过固定角色清单 `['system','user','assistant','boss','jd','filtering','greetings']` 约束 agent 与 UI 消息来源，并为每个角色创建带角色名前缀的独立 id 生成器；`createAgent(model, name, { json })` 在 modelData 中查不到配置时返回 false，由调用方抛 HelperConfigError，并以 `Output.json()` 或 `Output.text()` 决定结构化输出。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L21-L23",
+          "version": "repo-lines-v1:sha256:35a6704789e12da59c0b81da92cc759fc80ec4b57bcf17cafcc8d6b79f243329:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzEzMmI0OGZjNmIyNzRhMmRjNzg1ZjdhNDI1ZDA2YjM1ZGZhMmVhNTY5Yzc2NzRjZDJiMzA2Y2MzOGI2M2FiZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzkwNzgxMTJiYTk5NjkzNGRhZTBhMWNmYTlmZmIyOTY0NzVkNDFlMjMyODY5NDQ1NDY4ODExNWVmNDJjYmEyYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzZjNWIyMDYyZTQ2NzY3YjIxMDg2NWJjZDA1YzI5ZWFmMDc0ZmIzMjQxZjQ4ZmZjYzkzYWMzNzA0MGRjMjE2OCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L84-L120",
+          "version": "repo-lines-v1:sha256:a3c76b82c39fe813ccfa81778fb143da82a4a8c677fa21e054e9d03462fe4f48:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMWIxZjQzZjJiMmEzMjE3MjM4MWQyMWQ5ODA5MTk1OWQ5NDBiN2IwNmI2NDczOWI1MzYyOGIyZjY4MTc2MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0OGQ5MWZlOWJjNDAzMDI2ZjQ5ZGMzNTBkMjg4ZTcxYWY1OWM1NTQ4YTUwN2E2YzA3YjFkYjA3NzIxNjc3MWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU3MGZhOGRhMzM3ZmIxYWViMzk5Y2ZiMjFiNmUxZGQwOGUyMzY1YzEzYWU4NjNjMWI4ZWM5ODIzZjU5MWJmOTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_399747acf4c340778120ba53a3c4501c",
+      "statement": "ChatModel.chat 会为每个岗位新建 VueChatState 并先推入一条 uiRole 为 jd 的 system 消息（含岗位名、薪资、公司、地址、学历与完整 JD），随后按 modelConf.data.other.timeout 或默认 60000ms 调用 agent.stream，逐块把 reasoning/text 增量写入消息 parts，出错时记录 state.error 并最终抛出。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L121-L220",
+          "version": "repo-lines-v1:sha256:a75b5228eee23a2c968be2ca6c68087a704c27a0de636354cbbe09fec324c914:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIwMWJhNDcxOWM4MGI2ZmU5MTFiMDkxYTdjMDUxMjRiNjRlZWVjZTk2NGUwOWMwNThlZjhmOTgwNWRhY2E1NDZiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJjMTU0NjI5OTRlNTQyYWU4NWUyZjc0MDcxNzI1NmNiMGQ3M2FhNzAzZTczZjI0ZWY2ZmNlZTUwNDdmMjkyMDNlIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI1OTc5YTc1M2YxNjQyMDZiNGZkNmEyODBlMDc4YmQ5OTk5NzY5NGY0MTEzOTNlMGUzMjc1YjJkMDU4MmI0ODRjIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIzODhhNDBjYWNmNzY3MTE4ZjZlOGE2NjI3NGE2YmM3ODUzOTRhZDk3ODUwY2VlMDQyZTMzMmE0NTU1ZGMzNWU3In0"
+        },
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L300-L333",
+          "version": "repo-lines-v1:sha256:5ca05d44ef29fa31a3e7fec75844534764460ee0f669c12178ba6c71e5db850b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlN2JhZjA3OTQwZDZlY2E1NDRmODE1Nzg2YjFkYTM3ZTYxZGI0MGVhNTUyN2JmNGRhMWNhMTNlYmEyZDFmZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlNDdhY2ZjMzU4ZWNlZmIzNzY2OTQ3OGNmZjY4ZTE3YzhmNjRhZmM4MDg2ZjQyYmJlOTU1ZWNkYTExZDI2NWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3a897a8230a14fefa087957c141bf939",
+      "statement": "renderTemplate 只支持双花括号点分隔路径；路径两侧允许空白，归约时对带 __v_isRef 的对象取 .value（ref 解包），未命中（undefined/null）替换为空字符串而不报错或保留占位符，且只替换一遍、不做递归渲染与转义。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/ai.ts#L15-L29",
+          "version": "repo-lines-v1:sha256:3bb2f931aa23adebc76b007459ba53d81089ca8bffd1129b212dc8f14de6d7c9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2MTY4NjI4MTMyMzJiOTQzMDRmYmQ3YjFmYTg3MjhjZDVkMGE2YWRkMWZiNTI1YzUzZDViMDEwYTYzYjFjZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ef2d0b530bc94b10a6b267fdb08c388f",
+      "statement": "提示词渲染发生在两处：ChatModel.chat 只渲染字符串形式的 msg.content（复杂消息数组不逐项渲染），customGreeting 仅在 greetingVariable 开启时渲染纯文本或数组中 type 为 text 的项，图片项保持原样。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L371-L394",
+          "version": "repo-lines-v1:sha256:4c93f77f04d04cb2aa3b52a8535a5bdfbdef986ce1acd36a152b05c30745a5b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNWM4MjYzMmZjODJkNGIyYzM0MGY0MjU1OGJhM2RmYTMxYzc2NTVkZjZmY2MxNjhiNGZkY2U1N2ZhYzYwNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIwMjdjNWQ5MjNjMGM0NmU2NGRjYWRkNzk2ZDliZTkzMGExNWZlMDliNWY1ZGViZjMyNDAyMGM1OGQzOTRlZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1ODlkMzAxNmM4NDAyYjUyZDg5MDdhNjI4Y2QyOTgyMjBiMTcyNzc0YTJlNDk2NmIwNmQ1YTYzMmQxYWFlYjUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L140-L152",
+          "version": "repo-lines-v1:sha256:6619a07d57481c6274703dc43054db170da38b1a8fb980876f5c9df50e586988:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlOThmNjE1NGRmNzY4YTQ3MTI3ZDg5NDYxZjM3YjllYjdjY2YyMmVjMzdkNTE0OGQ2Y2EyNWJiOGY1MDYxZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcyY2ZkN2U0NDFlNzJmMTM5M2QyNTZhN2ExNDcxN2UyMmM4MDE3MjAyNmFjOWVjMGU4ZmM4NDViOGZmZjExZjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQyYWU0YWMzYzk1MmJhY2E2MjQxZmE2NzY3YWMxODIxZGExZmQwNjVkY2YwNDBkZjQzODI1N2UxM2QyNWU1ODYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bae152ed4ec84a58b02d92606eca05ff",
+      "statement": "parseFiltering 用 partial-json 宽松解析出 negative/positive 数组，把每一项的绝对分累加，最终 rating = positive 总和 − negative 总和，并拼出含分数与消极/积极理由的 message；handles.aiFiltering 在 rating 低于 aiFiltering.score（默认 10）时返回 taskResult.skip(message)。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L322-L345",
+          "version": "repo-lines-v1:sha256:09467217b966ed9e5774fe6af64ea7a9f33ef8ffc28ec5fb053ea67b7ac45163:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRmNmE3Y2I1M2IwNjE5NmJjMmRhMWRlMjYxNmY2Zjc2YWVkNDVkMzI2MzZmMDJjNzU5NjdjNjNmMmY4ZTViZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNmM2NWU3OGU0MmYxNTIxYTIxZDhiNDc0NTZlMzQyZDliZTRlNDQwMDUyNjg0ZWIxYjJkYmI2YTU5ODIxZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhZDE3OGNjMzZiMmMyZDRiNmY5ZmY1OWY0Nzk0M2UzNDJhMzY3ZmU5YzVlMGY3Y2ExMzc1ZjA1NzM2MzZkZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxZjk1NmFlMGM4ODU1ZTk2NGRkM2NmMzkzY2Q5NWIzNzNiNjgwNjJlNmI3OWQ3NGUwMmU3NmU3MWY2ZjIyZGEifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/utils.ts#L87-L111",
+          "version": "repo-lines-v1:sha256:ca41d1b4f7d241ede8989431d91e87f7a2250e4f562e1968b08973f1a1ca2831:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwNWZkY2I0M2UzNGNiMGMwM2VmNWY4ZWM4OTQzNDI4ODJiODhhOGRkZDgyNzQ4ODBmMGIzYmJkMThjYmMwY2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/utils/ai.ts#L3-L13",
+          "version": "repo-lines-v1:sha256:fd5bf711a2c675d188c19e15e1a3dbb2fdc727c1b79ea3dbf129ce2c74eecdeb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzNTU3NWFjMjJhY2Q4NDMyYTJhNGZkMTljNzM2YTBlN2QyYWFhZWRjNWRiZTBhYTQ4NjU3ZjQyNzVhNmU2ODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhMTFhMDFjZTQyZmY3ZDFkNDMyNmE0MTBiMGI3MDg3MjU0ZDQwZTk2MmQ0YTNmM2JhNzM2ZGI0OGE1MDkxMWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJiYTVkZDk0OTc5ODE1Zjc4NGVlMmY0ODc5ZjFmNjEyMjI4YmQwZGY3YWU3ZjFhYWZkNzliMTJhM2E1YmQzYmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_44554d68c4cc41ffb3ca27579d510001",
+      "statement": "parseGptJson 解析失败返回 null 而非抛错，因此 AI 筛选在模型输出无法解析时 rating 退化为 0，只要阈值大于 0 就会被当作低分跳过（fail-closed）；feishuSync 复用 parseFiltering 写飞书 AI筛选分数 列时显式 try/catch 以避免不完整响应冒充有效评分。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/utils.ts#L93-L110",
+          "version": "repo-lines-v1:sha256:85120d8e35573ede3d7d7910a704bff97cb9b45916150bfd14637abaabe0eeb7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MWQ2YzM5OTYxZTBjY2E3N2UzNWY5ZTU3NDk1NDdhZjgwZmZjOTg2NjAxMjkxZDM4ZmZjNTkwOWFiMmJiYWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmYzI1NmU3ZGM3MDc2MmVhNzYxNjljODhlZDg5MTQ5YjNmYzE2MTkwNmRhNDNiNTE1NzI2ZTBkYWQ3NGE5OTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAyNTkzNzBmOTBmMzIxZGU4NmRjOTRhYTBhNThkZTVjOWRlNzU5ZjgzNGJmZWFlM2QxZjQxMjVkN2FlOTdiMDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/utils/ai.ts#L3-L13",
+          "version": "repo-lines-v1:sha256:fd5bf711a2c675d188c19e15e1a3dbb2fdc727c1b79ea3dbf129ce2c74eecdeb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzNTU3NWFjMjJhY2Q4NDMyYTJhNGZkMTljNzM2YTBlN2QyYWFhZWRjNWRiZTBhYTQ4NjU3ZjQyNzVhNmU2ODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhMTFhMDFjZTQyZmY3ZDFkNDMyNmE0MTBiMGI3MDg3MjU0ZDQwZTk2MmQ0YTNmM2JhNzM2ZGI0OGE1MDkxMWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJiYTVkZDk0OTc5ODE1Zjc4NGVlMmY0ODc5ZjFmNjEyMjI4YmQwZGY3YWU3ZjFhYWZkNzliMTJhM2E1YmQzYmMifQ"
+        },
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L25-L40",
+          "version": "repo-lines-v1:sha256:c59670a84733db7330f6e3bb7a32c4230c8a2846163ee309e29e196e11f7389d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4ZjVhMGUyZmEzMDA0YzIzZGM1YWY0MzAzY2IxOTMyN2UyMjBmMTczYmJmZDJkNjJhMjY3OWIwMWJmMmFiOTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJjZTg1MDZiZWJjM2QyMDQyMjhkNjBlOGNkYWNlMGZkMzNkNDQzNTg0Nzc0NDhiMWYxYzNiYjQxMzJmNDZhNWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlY2E2MTcyNGVjNGI4NTQxMDY1YWI1MTM2YzRlMzEwMTdjZmUwODIzNTJkYzI3ZjQxODIwNmExNGFiNjNkZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE2MzdhOTlhNTczOGM2NzYzNDVlZDFhMDk1YjcxMGY1OWYzN2FjOTBjNmU4MDAyNmIzYjk1YTU3ZTNmMDExOWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7551b0e3712d42108677df6c256cd8cb",
+      "statement": "parseGreeting 有两种模式：json=false 时仅校验 trim 后非空并原样返回 greeting；json=true 时允许整体被 ```json 围栏包裹、必须 JSON.parse 成功且顶层为对象，greeting/reason/error 若存在须为 string、abilities 若存在须为 string[]，并且只有在 error 非空白时 greeting 才可为空，否则 greeting 必须为非空字符串。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/utils.ts#L37-L85",
+          "version": "repo-lines-v1:sha256:4eef0f7721584ce314c4d57b11a72f3296ea12816dad897f1e92ebfdb822c8a0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhMTQ5MzkwOGJmZGU1NDZlZWQ2NGQ2N2M3ZmIyMDhjNTc3MGM2MTIzZDI3NTJiOGIyMzJmNDhjOThhM2JmOWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzMzkxYjI2MDUyMjk3YWU4N2Q2N2YxYmJiY2ZmMzk5ZWY2NWExY2Q0NzQyODlkOWE4OTcyN2ZmZmE3OTYwYzUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ee0cdbb41a6348f59e1203dc00cee92c",
+      "statement": "JSON 模式下的 error 字段是拒投通道：aiGreetingGenerate 在 data.state.aiGreeting.error 非空白时返回带 msg 'AI招呼语过滤' 的 skip 结果，使该岗位在 generate 阶段被拦下而不进入投递任务。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L411-L437",
+          "version": "repo-lines-v1:sha256:255d0060ae921488806230bb148febbff4bb8c4a9c3e610ae372416a8c0401cc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzNmQxNThkZTNhY2QxMzczMTk0NDNlYjFkYWE0ZGYxOTI0YzU2NTQ3Mzc4ZWY3N2ZjNjRhM2IyNzhhNmY3M2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwNTRhZWVhYzFhN2JhZjU5NTE3NzMyZWM0MTRjOGZjYWJmMGExMDU3ODAzNjgwMjY3MGJmZmYyYmVlYWRiNDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmYmVlNzBlODkzYzBlYWE0OTAwYzM2ZDU5MTVlNTE5N2QwMjRjY2U5MzAzMGYxYmE1YmI0MGYyNmJkNzM5MDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY0OTllODhhNDBmMjhhOTYxOTg2OTUyOWEzZDZlYmZiZWM5YzMzMTcwOGQ0ODIwOTUyNjQwOWFkMGM0Zjg3MzcifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L439-L450",
+          "version": "repo-lines-v1:sha256:81412c1223467025b775c569ec8d92640b5316bbd345656a269e3ef71e751571:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjMTk1ZTUxMmExNTFjM2Y0YzBmMWY1MzczZjNjMjg2MWU0OGFhZjBkOGQ0MWNlZGM3Y2FkNWYyNWRhMTQ1NzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyY2U0NmE1N2U0N2I2NDE5MGRmYjM4YWEyY2I1Y2M4OWNmZmUwZDMxMDAyMWFhODlhOTVlNTdjZTc1ZjQyMmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjllMjc5NTc4NDQ1ZDY3NGUyN2JhMmFhMjA3NDE2MjRlYWQyNjNlNDZiZjQxNDc4NDA4Y2U5OTA5NmU0MmQ5MGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd0790d6b45149baa5853f7a4f4a09a5",
+      "statement": "AI 招呼语的 agent 与解析共用一个 json 开关：createAgent/greetings 使用 Output.json() 或 Output.text() 由 aiGreeting.json 决定，parseGreeting 的第二个参数也取同一配置项。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L322-L331",
+          "version": "repo-lines-v1:sha256:086df5bf459125e95f7ec8851587cce63266dc476278cb7c7be0ae0c269b61af:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRmNmE3Y2I1M2IwNjE5NmJjMmRhMWRlMjYxNmY2Zjc2YWVkNDVkMzI2MzZmMDJjNzU5NjdjNjNmMmY4ZTViZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5YjE5ODJlOGRkNzQ4MTE4MTQ2YjM5YTJkMDA2MmY0MDgxZTM0Nzc5Yjg2NzVjMjM0YzRmYjEyNGRjMzkzOTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhZDE3OGNjMzZiMmMyZDRiNmY5ZmY1OWY0Nzk0M2UzNDJhMzY3ZmU5YzVlMGY3Y2ExMzc1ZjA1NzM2MzZkZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEyYWIxMzU5MzMyN2RkZDgwMGRjZTNjZDlmMzMwZGM5YWI5ZDEyMzllNzc3ZGFlZTRkMTAxYTBmZDdjNTVmNTEifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L411-L436",
+          "version": "repo-lines-v1:sha256:301177ac200bca632b7ebd8a3e889bda5bd0c9af16dfdd90bf663704b1a56d50:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzNmQxNThkZTNhY2QxMzczMTk0NDNlYjFkYWE0ZGYxOTI0YzU2NTQ3Mzc4ZWY3N2ZjNjRhM2IyNzhhNmY3M2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlMzRkNzQ4YTMyYmIwZjNiNDUyYTA5YTc5MmJmMzcwMWFiOTI3ODIxNTM0NTk3NjgwYjRhMzA2NDk1ZDE1MDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmYmVlNzBlODkzYzBlYWE0OTAwYzM2ZDU5MTVlNTE5N2QwMjRjY2U5MzAzMGYxYmE1YmI0MGYyNmJkNzM5MDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5NGU3NWIzYWJmYzVmZDg3OTRjMjA5NDc3N2RlOGUyNWM1NThhOGFkMGFiNGUzZmYzOTkzYzIyZGVmOTJjZWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d6c1d6f5ab6e4c89be35ae31130403e0",
+      "statement": "只有 JSON 模式的招呼语才支持 beforeImages/afterImages：aiGreeting 按 beforeImages 图片、文本招呼语、afterImages 图片的顺序调用 sendMessage，纯文本模式则直接发送字符串；入口侧 sendMessage 对 image 消息用 counter.getImage 从 IndexedDB 取文件，失败抛 图片未上传或已过期，再 uploadImage 后通过 createImageMessage 发布，每条消息都重置 clientMid 以防被判重复。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L439-L475",
+          "version": "repo-lines-v1:sha256:98f8f280ce825a8e87a1a57e8e6f005d2fc538a94f6058dec4bb054eb66309a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MjY3OTM1ZmM2MzM0NjVkODQ4YjQwYTRlZDY5NjdlN2I3YTMyM2Y4MWNkNTNjMTEwYWUyMTAyOTY4N2FhMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyY2U0NmE1N2U0N2I2NDE5MGRmYjM4YWEyY2I1Y2M4OWNmZmUwZDMxMDAyMWFhODlhOTVlNTdjZTc1ZjQyMmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3NDg1OTMzMmZjYmU5NGNkMzM4MDZhNDk0YzI1MzdiNGVjNmE1NDQ0ODdjMmI1ZjJiOTU3ODM3OWRhNmYwZWUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L212-L262",
+          "version": "repo-lines-v1:sha256:f3bca33248502e49f1b9f4f54e78b9592ac6b44c18006c4d4f56081367876bad:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiZmEwNjc4YjA1ZGE3Y2ZkOTZkMDEzNjJjOTBiMDk2MzJjMzBhMjNkZjQxZjNkMDQ3NGUxM2MwZWMwMmU3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2MWFiMTc1MTQwN2ViOTE3NWE3ZGVlYjZiN2MzNmE4ZTMzYTRlN2VhZThmMDhlOTAzMGFhNjg5YmUwZDcxMTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQwM2M0YzA3ZGZkNTM2NThiYzdlNDE5NDY3ZWMwZGJlMGY5YTEwOGRmYTM0MWViZWNhYjYwY2ExYmRiNGFjMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2Yjg4ZTAyZDJiZmYwOGNhYzFhMTM3MTdkYTE2N2U4ZmFhYjg0NGFmYjNlNmMyMGRlYzNkYWJkZDMxZTViMWUifQ"
+        },
+        {
+          "resource": "repo://src/message/background.ts#L118-L140",
+          "version": "repo-lines-v1:sha256:1d663cd1de1324800ff459a41c5a2615888fbff3c3e5fdd7aecc2fd46d8622b1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmYTcxNmJiZWFhZDJmOWIyYzU5YTc2NzNkMGI4NzRjZDUyZTI0MmY5ODk0NjI3ZjdkNGY2ODdhNDczMzM4ZmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3ZjhjOGE2OTBhM2IyZDlkYjFiYmQ3NzM1Y2E5NDJhMWFjZTJlZWJiOWZhN2U4MGU1NjI3NGJjNDFmZjQ5NWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0YjY0YzIzYWQ0OWFlN2Q3ZmIyMzZkMjA3ZWE1MjcwODg2MmQyOTQxYjI3OGFmM2JmYTU3OTJiZTFiOWFkNzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8337966325a4521be19558d4ea658e5",
+      "statement": "工作流按模式裁剪阶段：filter 只跑 filter，generate 跑 filter 后跑 generate 阶段并停下，delivery 只跑 delivery，auto 依次跑三个阶段；aiGreetingGenerate 注册在 phase 'generate'，aiGreeting 在 phase 'delivery'。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L386-L414",
+          "version": "repo-lines-v1:sha256:9ae2fe8896008d4050f7505e088aa5e3aec8ac64a2e589d994de26c0a8a9faed:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjYTk4YWM3MmM5ZWY1ZmIxNWM4MTQwYTIyMzM2MTYzNjUzMmFlYTVmNjM0MWIzMzEzYmZlMzY5MWQ0MDhhNzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlhMzY0NjBmZTRmNWFiYTQzOGQwYTRhOTBiZDlhYzFhNzFmYTY0MDBjZGJlYWYyMWU0NjE4MjQ0M2YzNDgxOTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRkODdhZmIyN2MzZGExNWM0MWE3Yzk0NTdiYjUxMjI0OGMyNDRkNWMxYzZlZjAxMGM3YmFiNzE3MjAyNmQyMTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjNmEzNzJjMTU2NjdhMGM2Y2Y5MWU5MDkyMTJkNjhiZjE0NWM5NTVjZmQxZjlkYjUzZmRlNDViNTc4NmYyMzEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L118-L127",
+          "version": "repo-lines-v1:sha256:2f416509d3a05ae0560d5029aa5d1e1ac587c309774f6520e8f3cf7a9a5d2cd7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NzhlMjUwM2I4Y2YzN2EwNmY3ZDZmMGEzYTZiNmZlMzU2OTFmYmNhYjUwYjg3NzVjYWI2ZmFiYzcxYzU5MmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5YWY3ZDE0ZGI3ZmUyZDBlZTQ1YWY0ZWRhYWUxODAwMTVjNzg1NWI0Mzc0ZWFiNDYwODQzYzkzZTI3MDQzZjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyZmY5NWFlNzhhMmJkNjE2NzI3ZmRhYjljY2E5NjAwZmExZjY5NjViOGI5YjBlZjcyY2JjMTk3MzEzN2JhMDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4NDAxNDZkNzU4MmE1NzJiODgyNzg0MjExNGI5YWUyOWFjODcxNGY5OWE2NDQyODI5ZmRlMTI0N2RhZjkyMzIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L72-L76",
+          "version": "repo-lines-v1:sha256:bcd0bd034cefe1d6429ed3256e9a0e37d9c6e266a9e6662721217710041f9929:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTcyZGI5ZjUzN2U4Y2ZlNjFkYTQwNjg0NmNiNTRiNzgxOTk0ODZjNWRmZjZkODY0YjE1OWFhNjRmNzdhNmI0NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGFlZTA5NTU5NjhmNzY3ZDhjYTUzNjAzNjBhY2QxMmQyOTQxOGJjNDNjYjQyNmViYTUxNmZiODQyNTBhYzA1MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTQ5NDIwMTZmNjliZTZkYWNiMzdhM2U1MDg3MTIyOWMzMzE2MDM1NGMxZmI2ZmNhNTRhYWIxZDU0YjYxM2MxZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b3a392f02e8343ec9698515bb272f22f",
+      "statement": "generate 模式把生成的招呼语写入 drafts Map（以岗位 key 索引）并把状态置为 ready/待确认发送，然后直接返回不执行 delivery 任务；greeting 为空时抛 仅生成需要启用并配置 AI 招呼语，executeAll 在 generate 模式下也先校验 aiGreeting.enable。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L403-L408",
+          "version": "repo-lines-v1:sha256:416dc927548c9e8440ccd4200fc38d9dbba2cdeb4453e368eea925c37a26c470:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmQ2NDc3ZTgzNzMxNTgxZWE4OGY2ZDNiZmVkZGU1YTdlZDIyYzUyOWQxNzQxNGEwMjIwMmEwZDM4ZTU1Yzc1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWI1YzgyNjMyZmM4MmQ0YjJjMzQwZjQyNTU4YmEzZGZhMzFjNzY1NWRmNmZjYzE2OGI0ZmRjZTU3ZmFjNjA0MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjA5N2I1NWJmY2Y4ZmUyMjU2OTk1YjIwOThjYTZiM2U5YmIzODMyYjAxZTY2Y2ZlNGMyNDI3NTcyNDUwOWVkZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjg4OGEzYTNiMjI5YmQ1YTc4MzlhYjYyZGMwMWQzN2EyNmJiZTFkMDFiNTY1Y2I0ZjE3OGIxNDYxNzNlYWUwYSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L490-L495",
+          "version": "repo-lines-v1:sha256:2ff4b016198b59071ae4935e18e301af79917c2b5e588ee8d9b05efbb70ec1a3:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTAwNGQwYzc1NjViMjM3MjgxY2ZhZGI2ZjM4ZTA5MjkyYjMwZmI2ZmFhNzUxZDAxYTJhNmEyMDI0ZTA0MzRkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjdjNWI3NDJlMWMwOTdlZTdkMjk2ZjMwODJkM2VmYTAyYmU0Y2Y2YWU4MDNkNTM4MzhhOWM5NDk5YWIxYTEzZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzVlYzg3ZTk4NmMxNDNmYmM2YjQ0NWRiOTcyY2MzYzc5MDk3Y2Y4ZjgxYWRlOTllNDlmNzM5NjY3ZWYxZTUxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWU4ODJmYTBkMDBjNDNhYzFiYjBiY2MyNGYzZjMxOGQxNzY4NmM4MGVlYzg2OWI2NGUxNzk2M2RjYjA4MDYyMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_094d0a19bf7742499392cc46ef6f2274",
+      "statement": "草稿需用户确认或批量投递才发送：ChatBox 读 workflow.drafts 并允许就地编辑回写，发送时调用 helper.deliverJob 走单岗位 delivery 模式；executeAll 的 delivery 队列只包含状态为 ready 且不在 drafts 中的岗位，因此未确认的草稿会被批量投递跳过。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/ChatBox.vue#L36-L66",
+          "version": "repo-lines-v1:sha256:71d4f42536e2768fc24f45a4f5a0657deaa78be844b02d37b088232aa2bd1d34:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ODFmY2JiZTE2MTJlZWZhZjBmMzhmNTFlNGJkZGQxMWY5NDRmOWJlODhlNzMzNzQzYzVkNTYwMmM2MzUyMjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzZDhlYjhhODZkMWQ2OTczM2ZhZDU0MTY2MTdhYmJmNjg4MmQ5NzRhMDExYTEzZTk4Njk2ODlkOGRjNTJlYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4NzJkNTNhNmQ3Mjc1MjY5NWQ1ZDVlMjI0MDc0ZGUyMDBhMTdlOGQ1ZWM3NGJlYjY5NGM5N2I4NGRjYTg5YmMifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L496-L504",
+          "version": "repo-lines-v1:sha256:2177e0e387bc73fb709a41c95f14f2845b9d3cb4b21255185a24d2ad4ed0d0e5:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjZmNzU3MDQxMzU3ODRhMGYzYTg3ZGU5OTYxNWVkNjIzNmIzNTU5ZmQ4NDVlNzYyZDk0NWExYjcxMGU2YzM2NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZhZjM2ODIxMzZlZGMyYWI1MzE5MDIwYjZlNDUzZDdiMzkxY2M3MGMyNWQ5Y2E1M2JmY2RjNjMyZGZiNDJlMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTAxMDY3ODlkNGJmZDlkOTA5MTk3MTAwOWRjOTEwNGQ2OGJhZWQ4MTNjODBmMzFiMWVlNmMyMjIzZTBlMzgyNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWZlOGMyZTRkZGNkM2M0YTViNDAxNjdlZGI4MTdkMjEwMjA1YzNlNDllNTY4NDRjN2FlM2U3ZDhkYzllOTYyNyJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L152-L168",
+          "version": "repo-lines-v1:sha256:11531e0109c6f8b9a8844241178b7d9b85e48c35a265c4c5112bd54efc3c4386:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4Mzg0NTUwNGRlNzg2YmQ1NWY0ODEwOWI5YzRhNmNhYzhmYjQyZDBlYzMwZDNiMjE5YTQyMDdhODg4Y2RiZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyMDMxNmQ1MWFhODg4YTk4YmVmZTkxM2Q0ZTZlNTE3ODAxOWY5OTdlZmNjOWU4NDRmYjg5YzMwZDQwNDIzYmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3MDUxZGVhZmZmY2M5YjY0N2QwODdhOWZiNTczMTgzM2NmMGI3OTAxNTY2M2M3MjkxOTA5ZTMwZTRkNWRiNDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_79a21bc8fdd142499e954b0692be2f37",
+      "statement": "草稿生命周期有三个状态点：runJob 开头在非 filter 模式下把已有草稿写回 state.aiGreeting.greeting 并将 AI招呼语生成 标记为完成（避免重新生成），投递成功后 drafts.delete，切换账号时以 flush sync 清空 drafts 与 stateMaps/jobResultMaps/manuallyFiltered。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L312-L322",
+          "version": "repo-lines-v1:sha256:b73c561d0e18c0a6ada40edb12880f012fe676384baada25c5b4fb30f59e86f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyZDIzNmFiYzgzYWVkMGI4Zjg1OGU3MDQ1ZjQ1Y2IyZjY4NjVhZDBkNjdhOGVmNTdjM2M0MjZmM2E2M2M3MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NjYzMTA4M2Q1NWEwYjA3NDVlNDQyMmRlNGNlMGJlMWRhNjA3MWZhMzY4NTNhNGJkMWYyYjcxNTllNDFjMDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1ZmQ1MDhlMWUxMzViZTNlYzAwYjU0MjYwYzFkYThjMjE5NjA2NDgxMWY4NzdlYWQzZWY5MWY1MzY5MTM4Y2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1NjdlMzVmNjM3NDU3MzA4ZDM0MTA4YzRkMGY5Yjg2OWVlZDFkNjNkYjkxZmFmNmEzMGZlN2JjZjJkYzViODMifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L414-L419",
+          "version": "repo-lines-v1:sha256:3b1a8165c2016d1c5deaa49e16b1245c0b7fbbfcd603971eaebab904011dbc76:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWEzNjQ2MGZlNGY1YWJhNDM4ZDBhNGE5MGJkOWFjMWE3MWZhNjQwMGNkYmVhZjIxZTQ2MTgyNDQzZjM0ODE5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3NWMzMzYxYTVhYTc1NmE1NDhjZDA5NDAyYjE2ODNlMWVjZmJhZGM5NTdmYWU0MmViOTQxYTRkYmJkMmVlYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmRmN2E2YjVlMGJlZDc2MGRlYWQ4NTVmOTA4ZDU3Mjg3NGZjNjQ1M2NiODJlMDA0ZjlmZWRhMTU1YTBjODUxOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmQxZWRhYTUxYjBhNzg1NGU4Y2E3ZjBiZjMxYTJlMzdkNzRkNDRiMzllMWY5M2E2NGZkNTYyZDhhMjc5ZGVjOSJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L89-L99",
+          "version": "repo-lines-v1:sha256:07b2d4da605751de1bd1023a83145388c583964d20109c51c5cf7e7c18d40f05:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5ZDY4MWM2ODllYzc5ODc1ODM3YWViMDBkYmJlZGU1NmU1MWYwZTIwZjJhY2I4NTQyYTkxYmVjZDY1MzYyZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NzhlMjUwM2I4Y2YzN2EwNmY3ZDZmMGEzYTZiNmZlMzU2OTFmYmNhYjUwYjg3NzVjYWI2ZmFiYzcxYzU5MmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMyYzljNDk2ZTcxMTM5MjdlOTYzNTQ4YWQ3NDY1Y2FjZDU5NDE5OWI1OWU3ZDdlMDVmOWI0MWM1MWI1N2U2YzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ3NWQyMWMwNzdmZTE3Yjk5ZDU2ZGMzZTQyNDIwNjQ0NmNhZGU1MTUxZjQ3Y2JlY2NjZjNiNDJkMDdjY2JhOGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_59a44aeef98643afbd6eaa5c2833b30a",
+      "statement": "AI 任务的超时预算更宽：工作流看门狗对 state 为 ai 的任务给 120s（模型默认 60s 加缓冲），state 为 request 给 70s，delivery 阶段 90s，其余 30s；因此 AI 任务同时受 agent.stream 的 timeout 与任务看门狗两层约束。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L257-L266",
+          "version": "repo-lines-v1:sha256:744ffbd04132f4f5d8f904059d5208eaed6c8c188b8f7ad83f500e6815122de0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxODA3Y2E2NTQ5N2M0NTJkZTk0M2ZjMzIxOTVkZjljMDg3ZTBhMzJkMmRiMTJhZDc4Y2EyMDYxZWYyZjMzYzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNlZTNiMTRmYzIzMzFmMGE1YzkwY2Q3NDkzZTg3OThkYzJkMzkxZGUyMTg5NjgxYzZlOTY2ZDk4YzM0ODMwOWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhZjRiMGE0MThjMWZlNTdmYWYzNWIyYzVlZDllOGMwOTFjOWVlMzVkMDc4NzgyN2E1ZDRlY2RkM2Y0NTE2MTAifQ"
+        },
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L138-L145",
+          "version": "repo-lines-v1:sha256:cd1ee6c1ff66a32999c95ea7c8607d8e5575b28340bbc99b78184a0f0a91cbc7:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWRkNWYwZDU5Y2ZjZTVkNDY2YzMyOWM0ZmUyNGI5NDVmNjYzZjdlZjUzYjZjNTg1NDEyZDQwZmE4NTNhMDczNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGRiNTJlYzEyZDVhYWNjMTNhNjMyMjVhYzllMGMwMDljOTM3OGZhN2VkN2I5MjViYjgxNWE5M2ZmYjRkMzk4NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTMwNWUwZDI1NmRjNDY3ODhlN2QyNjg1ZGZhMmZmNDdlMWFlM2NhNTQ5NjFkZDQ3OWNmZTU5Yjg0M2Y3N2Y2YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2b969f1d7f9240e0910ce7c068146ce9",
+      "statement": "设置页的提示词调试面板复用与运行路径相同的 createAgent + chat 调用，并以 disableMessages: true 让测试消息不进入 states 和 jobs 队列，避免污染真实会话。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L125-L135",
+          "version": "repo-lines-v1:sha256:0edcc8f424353d363dfdf76f0e6e6b5124ef83aaac4e86bdaca65063e6959546:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwMTAyMTJmMzA1YmFmY2JiZjdhMThmNGVjMTkxNTU2OTVjMzhiZjViYmRmZjFmNTc2YWEwOTg3OTJiMTVkNGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmODk4N2M0MjQ0ZmQyYWIzYThhNWMyNDk2YWM0NWYyMjgzMzkxYzIyYTkwNzQxOTU4ODNkMTA5YzQ3YjJjZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiYzkxZTU5ZGFjMDgxZDEzNzA4M2FjYTRlOTE0Y2U4MWEzMTFmOWI0MTJiZDAwNjhkYWNlOWJiZWI1MDg4ZDYifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/LLMPromptEdit.vue#L262-L320",
+          "version": "repo-lines-v1:sha256:d7844ecec287aac998da43b7cb78705f6a08e10acb00a7b896da9d69c99900f2:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVjZDJiOGU0NWE4NWRiMjY4NjllZGMzM2ViNDE3MjIzYTBlZjA1MjdmMzYzZDMxODgxZGE0YTgxNTkzMGZjNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MzUxZTQ0ZTAxZWJjZmMyYzBkODBhMTNmMDZkNTIxMjZlNjg5NjBkZjhjNjI5MTM4ODRhM2EwOWQyZDk5YWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2N2JjZDI5MDg3MmUyOTFlMDlhYzVhN2ZiODVmM2RlNWZlZWQxYWQ3YjExZTIxZDY2MTViYmIxZjY2MTcxMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YWI4Yjc1Y2M2MTdlZDE4MWFiOTI4MDFlYmM4NmE0NzllOTZjMDkyYTc5N2QyNDUxNzc4MzkyYzdiZGRhZDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9eb336d46935424286dabc624525266c",
+      "statement": "JSON 模式是一份需要同步修改提示词的契约：设置页切换 JSON 模式时弹确认提示，要求用户相应调整提示词，否则会得到解析失败的 JSON 或把 JSON 文本直接发给 HR。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/LLMPromptEdit.vue#L40-L55",
+          "version": "repo-lines-v1:sha256:2c7078e05efdad86ecf8d607fd36813f59a8b4f7fce4f6ffb432ebc21051e416:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1YzcwYTFkNTU0MmQ1M2FlMjBkMjVjZDU0YTQxOWFlOTE2NDExYmIxYWM1Y2JmMGNjNGY3NzI4NjdjYWRkYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmNTljNWZmNTVkNjVhNmE0MTIzOWJhNzgxZjgxYzA3NWIyOTM4ZGNjOTg5N2VjYmI2NjZiZmZiYjU3NzJiNjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViZmYyZDNmMGU4NTNmNThhNjlhNmU4ZTZmMWFhYjcxMDMyZTExMGQyYTEwMjMyNWNlMTJhNWM2ZTgzMjY2YWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_321e52aa901a4a97879f056ed01651ef",
+      "statement": "Provider 级定制通过 ModelAdvanced 的 headers/body 经 createAdvancedFetch 在 provider 完成协议序列化之后再合并 headers 与深合并 body，因此无需 fork 适配器即可覆写协议特有字段；createModel 按 protocol 分派到 OpenAI chat、OpenAI responses 或 Anthropic messages。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/providers.ts#L8-L21",
+          "version": "repo-lines-v1:sha256:f5098ec4ed61cbb297c3aaea4c3ba1b57d57ffb831c38b9a76555fa0163c8fc6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhOTBiZjJkYjlhNmE5NDViODUwZDQxNmYzOGExYzE2MWRmZDUwMDljNGY2ZDA0ZDcwYzYzZDNiMmE1ZDBhMzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5YzI1Nzg4N2E3MDY5OTZkOTU1MWMwYmZlZjJjYmUzYWRiNDgxZTUwZjU3MTBhOTUzZGU1NTNkZjkzZTIwNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/utils/modelRequest.ts#L6-L32",
+          "version": "repo-lines-v1:sha256:d2ee052aa11ac7c809e1ea4aeb3a5b6c99648affcebf301e1578c439634d40b4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4YmRhZDdmNTM2N2ViMmM3YmFkZjdkNGQwYjA4NjJmOTFhZDQ0YTAwYTI0NmYzZjkwODZhYWIyODI2YzYwNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjNDUyYmFkMDZiMWE0NjBiZmNkY2MwZmRmYzhkMzljZjA1MTg5ZGM5ZDJiNGFiZGVlOTc5OTk3OGVmZmIzNTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a86331c542c945bda1cf454368e0a697",
+      "statement": "模型配置存放于存储键 conf-model，initModel 读取时对每条配置执行 migrateModelConfig：仅当 protocol 缺失时按已删除的 responses 布尔标记推断为 openai-responses 或 openai-compatible，并删除 responses 字段。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/index.ts#L10-L37",
+          "version": "repo-lines-v1:sha256:369246cb44aa79aa4dd52c6325b646eaccd2f382c61d0c323623a39e139631fe:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjMzI5YTViYzg0ZGMwNjA2YjA4MWQ0NWVjZDNmNjZkZDVlYWYyNDQzZTgxMDA5OWJkMTg1MGVjMTkzMTM3MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3MTgyZWY3NjY4NDY1YzJkODRjN2ExZGNmNDE3N2E4ODVlYjU2ZmFhZjY1YmQwMWFjZjkwZTRmMWJkMzlmYTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRkOWJjYTllYjBjODQ4ZTRiZTMwYmFiZjYzMjQ1YWYxZTM1MjNiN2M0MzRjYzRiMTJkYzYxODYxMGQ4ODVmZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkY2Q1NjhjZGJhNmVhN2MyOTdmOGRiY2U5YWIyOWM5OTlkZmU2MTc0ZDI2MTdhMGQ1ZjdlNTg5YzhkNzViOGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4262eb5202e3422ca28eb2ae98aef986",
+      "statement": "默认提示词在 conf/info.ts 中预置：aiFiltering 的 system 消息要求返回含 negative/positive 项（reason 与正整数 score）的 JSON，user 消息以 {{ jobData.* }} 变量引用岗位信息；aiGreeting 的 system 消息要求输出无前缀的招呼语字符串。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/conf/info.ts#L86-L166",
+          "version": "repo-lines-v1:sha256:ea2ace42029097ca6287696320e66b633e07feed739348d7c4c88270f92e7c90:eyJzZWxlY3RlZExpbmVDb3VudCI6ODEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVkODRiOGQ1YmE2OTQyOGFjOTNlNjY3MjQ4NTBlNzc0OGIxOTAzNjczNzg1Mjk3YzZlYjdiNGVmMGM3NTVlMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5NTU2YTkwY2ZjMmFmNzNmYjg0MDFhMjMxMGU3YTIxNzVkZjUyYTYxYTNhYmM0MmE5NDg0ZDI0YTkzYWY4MjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3NTA5MThmNjczNGMwNDg3MzdiOWFkYjNmMzdkOWQwZTI4OWVjMDgxNjk2NDIxMDBlMWQwYjU3NTczOTA3N2QifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c81bb0a1e26342a6acde842a1ccc8a2a",
+      "statement": "AI 招呼语（`aiGreeting`）在发送阶段、`delivery.ts` 的「岗位投递」任务以及 `aiGreetingGenerate` 中共享同一组守卫：`state.aiGreeting.error` 非空即 skip 并标记 `AI招呼语过滤`，`greeting` 为空则抛错；因此 JSON 模式的 `error` 字段构成第二道路径级的语义筛选。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L400-L467",
+          "version": "repo-lines-v1:sha256:8456ebb38720a3ffcd3d2c569f3456ac5a2110f65a01f6ddbe61d0bd8c2a3ff9:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0NmY4ZGZjOTY5NTdkMGQxODMzNTZhYTM3Y2ExMjM5Nzg2NTI1YTRmMjg5NTc0NjE4YmI1Mzk1OGI3MmEwMjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxNjEzYmYzN2FiYmM2MGNhZWMyMDBkMzcxMzNkOTJjYjNkMDgxMWUwMjkwMjM3ZDJkMjljNDRmZTZhODFjZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NmU2YmUxNGI2ZjdiYmFkMjE3NmQzZDBkMjdjOTA3ODA2MmYzMjFlOGI4MjA2Njg5NWEyMWJmYWYwNDAxOTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyMDQ0NTg1NDhiMzM4ODY3M2M2M2M4YTJkM2Y1OWZkZjg3YWVmNDVlMzVkOWQ2ZjljZTdlMmE1MWE4ZjU4YzgifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L78-L104",
+          "version": "repo-lines-v1:sha256:e97a5585ea551bdf265cd9ef8cabb3254c697efb0725efe1b78acde6ce18f211:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2MzNiZDRjMGY4ZjE0NzRkMWUwMmFmOTBhYWQ1YTE5ZGNlNDkwMmVlMDUxYzczNjM5OGRmY2E5NGJmNTI3M2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhNTU1YmNjNWQxOTFiNmZmNTQ1MjNjODk5OTE0NTE0MmRhZDE1NTQzOWM4OWQwNmVhMjAzNDE0Y2Q5ZGQ1YjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjOTYwZjM1MjlmZWIwYjU4Y2YxNzdiNTQ2YzZkZGUyNDg5Y2EyMTBiODcyMmIzNDFjYjY2MjVmOTZhZTlhMjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk5ZGEwMDNjMDgxMTcwNWZjOWUzOTcwZjNhMzVlOWE4ODcxYTQzNDlhYTlkMTAyN2Y4ZmQ3MTEzNmI0MjA2NzMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_523d70126cbf4dd1bbbe183d18e73119",
+      "statement": "`ChatBox.vue` 把 `uiRole: 'greetings'` 的文本块交给 `GreetingMessage.vue` 渲染，后者独立剥离 ```json 围栏并 `JSON.parse`，成功时把 `error` 显示为错误提示、`greeting`/`reason`/`abilities` 显示为结构化卡片，失败则退回纯文本——这条展示路径不参与任何业务判定。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/ChatBox.vue#L310-L330",
+          "version": "repo-lines-v1:sha256:a111b5c59b61b8439a945efff3c2b5934383f9ca195a6b6cf715661165f20caa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYWE2YTdmNGViNmM2OGMzMDRmOWQ2NTNkYmI1YzdmMzhhMTJiYmJkMWVkZTI2NGQzZjFlNGExMjQwMDNlM2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3ZWE5ZjUxZGIzZDI2Zjc2ZTFjNDYzOTFiNjQwNzEzMTBmYTY3ZWM2N2EzNWRkM2MzMjU3OWM4ZjhmMjVhY2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg0ZmJkYjgxNTZiYmRiYTVmYmM2MTk2Y2I4YzExNjY4NDRkMDkzNDczMWQ0YmZlNGJlYTJhZTYxNTNjOGRiMDMifQ"
+        },
+        {
+          "resource": "repo://src/components/GreetingMessage.vue#L27-L56",
+          "version": "repo-lines-v1:sha256:0de08cf21e044950cc992dc7efbbe7a90ed84b2b0032919dfc14e0502445251a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1MjI4NDBlZDVlYzU4YTM2MmYyMGI3MWI4YWViNjc1ZDdlZmI5NzQzOWM5MGMzZjYxNTVhZmVjNjUyODU5NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViN2YwNzJkM2M3ZWVlNTk0ZWQ4MTFlZDMyNmIzNThlYTNmMTUwMDUwMjZlNzNiODc4NjkwMGI4ZWVkNGI5ODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/components/GreetingMessage.vue#L9-L26",
+          "version": "repo-lines-v1:sha256:275174c96a171a4993f57ac6fffa282ddab910326dea6a5cdb59a703c4875e49:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViMDYyYTkyMjQ1NGVhM2YwZjFhNjg4NjY1ZjhhYTE5MWM5YzJlMjRiM2U4Zjc3MmIyYjBiZWNhOTgyNWUxYTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNjMzJmMDBhZWI5ZTc3ZTZmOTdkMDQ4OWEzY2Q2MWIyNjYyYjc3N2MzODcyOGNmOGI3ODM5NTI3MGJlZTMxNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3YTI0OTRhOTg1MmM3ZDFhNTg4NDI2Yzc3ZWZhNjY2ZTRiN2QyNGI2YWNkN2FhNDM3ODVhNTYxOTI3NzcwZjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_46e8beccfe224d1bb7fd5a584dbf55f5",
+      "statement": "批量投递队列与逐岗位循环都以 `drafts.has(job.key)` 作为跳过条件：`executeAll(..., 'delivery')` 只取 `status === 'ready'` 且无草稿的岗位，`auto`/`generate` 模式下同样跳过有草稿的岗位，直到用户在 `ChatBox` 中点击「发送并投递」触发 `deliverJob`。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/ChatBox.vue#L335-L375",
+          "version": "repo-lines-v1:sha256:bbf3c8de6786eed830052f5190ebc44191a0f5a3ac461058dfea262b6a3bd3ab:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3MDI0NzFjNzlkYTUzMWVhMDUyYmFlYWIwZWNkNDU2MmJiNjJmYWZhMzk2OThkYTRhZjhlNDBkMDQzMGVkM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1NzU1NGY0NjAxZTMwYjU3NDZmYzg0OWQ1NDM2ZmU5OTM1YjE2ZDFkZDhiYmM0ZTJmMWU1NDA5ZmFhM2VhYjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NDNiZjgwODhjMDY0ZjkwYzE5YTM5NDYxNWMyMzU4OWUzODljYTY3ZmVhOTIxOWFmMjk3YjUxZjljZDhmMTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0M2M1OWUwYzlmYmJlZWE1ZDVkZTI0ZDQwNDU1OGU0MjQ0ZWFlZDNmMDFjYWYzOWUyYTI5ZWM4MjMzYzRiZDQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L489-L545",
+          "version": "repo-lines-v1:sha256:da6a1120773eee2560703c42c1919898ec9467418bef97a428a460e881a12b75:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjNzU1ODFlNDEwMjBhMDIzZTEyNzYwNmJlZDYxM2M0NmZiMWE1NWFlODFjZTc1MDQ2NDliZTQ1YjRiNmI3MmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1YzdjMDhjN2NjOTNiN2RlMDk3Yzc0MGY4ZDMzMThiODM1MmNmNDM1MzJhYjUwZjAxZjIwOWVkZWM0ZjQ1YjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM3ZjZjNzZhYWM3M2Y4NTk4OGM0M2MwOTIzNjMxYjhjYmI0OGM5YTkwZTA2NzkwZTI0NTY4MzdlYjU3YjExMWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmYzVkYmY0ZWZkN2IwYmVjYmFkMzZkOTc1NzhkYWM1MGFjMjViMDlhNzk5NTEyYjdiODcxMGRlMTFlOTM1MWUifQ"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L152-L168",
+          "version": "repo-lines-v1:sha256:11531e0109c6f8b9a8844241178b7d9b85e48c35a265c4c5112bd54efc3c4386:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4Mzg0NTUwNGRlNzg2YmQ1NWY0ODEwOWI5YzRhNmNhYzhmYjQyZDBlYzMwZDNiMjE5YTQyMDdhODg4Y2RiZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyMDMxNmQ1MWFhODg4YTk4YmVmZTkxM2Q0ZTZlNTE3ODAxOWY5OTdlZmNjOWU4NDRmYjg5YzMwZDQwNDIzYmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3MDUxZGVhZmZmY2M5YjY0N2QwODdhOWZiNTczMTgzM2NmMGI3OTAxNTY2M2M3MjkxOTA5ZTMwZTRkNWRiNDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e3285f65cbf6412bae4e23772d831361",
+      "statement": "`aiGreetingGenerate` 在生成前 `delete data.state.aiGreeting`，因此本次提示词无法引用本次生成结果；`TEMPLATE_VARIABLES.md` 据此说明 `{{state.aiGreeting.*}}` 只对已执行过生成任务（如自定义招呼语）可用。",
+      "evidence": [
+        {
+          "resource": "repo://TEMPLATE_VARIABLES.md",
+          "version": "repo-file-v1:sha256:1e176d87e9afc34ebcd6d3476a049cbc97f923910ca95dd9f0c099f0191e1f0f"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L400-L415",
+          "version": "repo-lines-v1:sha256:ce5a85bc001acc65ed0d416383a0068d4ebad61aec12eb5c41fb6f87f0910db9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0NmY4ZGZjOTY5NTdkMGQxODMzNTZhYTM3Y2ExMjM5Nzg2NTI1YTRmMjg5NTc0NjE4YmI1Mzk1OGI3MmEwMjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxMWUxOWZlZjM3NWEzMDYzNjY4ODZlYTRmMTFlNjZlZGI2NzNmMGQyNGRiNzkwYzExZjU0ZjBkZDM0MjYyMjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NmU2YmUxNGI2ZjdiYmFkMjE3NmQzZDBkMjdjOTA3ODA2MmYzMjFlOGI4MjA2Njg5NWEyMWJmYWYwNDAxOTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwYTdkNDViZTMyODYxNmJlZTU3MGM1N2JiNDg1MWZlY2I2MjQ4MDY3NjcyZDAzMzE3OTRmODZkODY1MjFjYjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_415f3749fa854535b9ed9c75ba538242",
+      "statement": "`TEMPLATE_VARIABLES.md` 明确规定模板根数据为 `WorkflowData` 的 `jobData`/`rawData`/`state`，`LogData` 中的 `aiFilteringQ`、`aiFilteringR`、`aiGreetingQ` 等日志字段以及 `ctx.now`/`ctx.index`/`ctx.helper` 都不是可用模板变量；AI 筛选不把评分写回 `state`。",
+      "evidence": [
+        {
+          "resource": "repo://TEMPLATE_VARIABLES.md",
+          "version": "repo-file-v1:sha256:1e176d87e9afc34ebcd6d3476a049cbc97f923910ca95dd9f0c099f0191e1f0f"
+        }
+      ]
+    },
+    {
+      "id": "claim_1ab2d2cac90e46398727669b03b4ab5c",
+      "statement": "`parseGptJson` 在解析前会先剥掉整体 ```json 围栏并用 `partial-json` 的 `parse(json, ALL)` 解析，失败返回 `null`，使 `parseFiltering` 的 `rating` 退化为 0（fail-closed）。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/utils.ts#L87-L110",
+          "version": "repo-lines-v1:sha256:37ce0b160bb241ca0adf4dd7deceebad34339994e0c05b5d02c60db07aa5314e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwNWZkY2I0M2UzNGNiMGMwM2VmNWY4ZWM4OTQzNDI4ODJiODhhOGRkZDgyNzQ4ODBmMGIzYmJkMThjYmMwY2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmYzI1NmU3ZGM3MDc2MmVhNzYxNjljODhlZDg5MTQ5YjNmYzE2MTkwNmRhNDNiNTE1NzI2ZTBkYWQ3NGE5OTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/utils/ai.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:93aec51e272584adbe125a587c96d1e0449695952770022b5297348de9921dd3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5NmVkN2ZjZjI4NzFiYzA0MzQwYmY1ZDdmNDFkMWM2NjMxZjVkM2VkYjdjYWRmZThiMjUyZmEyMTRkOWU3ZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2Y2E2OTU2OWZhMTE1ZGY3ZTlkZmZiYjk2OTM1N2E3OTBlMzcyZTM4OTFkNzcwNjgxMDcyNDVlODMyYWNlYzUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_68fb14b83949483486e02440ea469bf5",
+      "statement": "`feishuJobRow` 从聊天状态中反向查找最后一条 `uiRole: 'filtering'` 消息，对其文本 try/catch 地调用 `parseFiltering`，并把 `rating` 写入 `AI筛选分数`、正/负项理由写入 `AI筛选-加分项` 与 `AI筛选-扣分项`，同时同步 `AI招呼语` 与其 `reason`/`error`/`abilities`。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L12-L82",
+          "version": "repo-lines-v1:sha256:9324e866030b1e64e6bd9ea24af6cfa676cfe24e478ae3a2cd98b0ad8290dfc3:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiOWNkMjJjYzExM2ZjMWI3ZTM4ZDhkYjVhYmMwYzdiNWNiNzliZjg3ZjlhZWJhMzY5ZjUwMzliZmE0MDcyMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1M2E2ZjA0Nzc0ZWY0NjNkNTIxMTgyMjI2ZDA4MWVmOGQ0NDEzNjkzNjY0ZDhhM2E5NTg5ODFkMTE5OWYyZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzMTcyYzQwOGY2ZTA1YmE0YzA3NTliY2QxNWJkOGU2MDVhZTk3NWQ4YzEzOTBhMmExMjIzMTExZmM3YjIyMzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5YjkwZmJmY2FiMjQ3OGVjNjI3NTVjYjNjYjM2MWY4ZWU3M2M4YmJkZmY5ODI4ZGJmNGRlYWI2YzcxZTk2ZjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e1d73e0b4069439a8879299be5005e0d",
+      "statement": "`sendMessage` 把字符串招呼语包成单条 `text` 消息；图片消息经 `counter.getImage` 取 IndexedDB 数据（缺失抛 `图片未上传或已过期`）后 `uploadImage` 上传并 `createImageMessage` 发出，其他类型抛 `不支持的消息类型`；每条消息都重置 `clientMid` 以避免平台判重。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/boss/index.ts#L212-L257",
+          "version": "repo-lines-v1:sha256:f9975b4e296509e9a1673d9f9488257d188f6011d6bd34fddb9cce188f57dd1f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiZmEwNjc4YjA1ZGE3Y2ZkOTZkMDEzNjJjOTBiMDk2MzJjMzBhMjNkZjQxZjNkMDQ3NGUxM2MwZWMwMmU3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2NDYyZjkyMmY1Njc0MjdjMWMzNGVjZjdlNGIzZmE3MmUyYTk5YjkxNDMyNGYwMmUzYzkyNDRiZjY0OWJjNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQwM2M0YzA3ZGZkNTM2NThiYzdlNDE5NDY3ZWMwZGJlMGY5YTEwOGRmYTM0MWViZWNhYjYwY2ExYmRiNGFjMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_683d621d3b414b5197ef95906f827851",
+      "statement": "`LLMPromptEdit.vue` 的提示词测试复用 `createAgent` 与 `chat(..., { disableMessages: true })`，按每批 4 个岗位并发测试，筛选模式展示 `parseFiltering().message`、JSON 招呼语模式展示 `parseGreeting` 结果并同时记录 `reasoningText`。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/LLMPromptEdit.vue#L258-L338",
+          "version": "repo-lines-v1:sha256:e40edd98b28e5de4f4cb517c488268bfdd9d7a88bc86d695f9ab56d38645dfcd:eyJzZWxlY3RlZExpbmVDb3VudCI6ODEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5ZmJkOTAzNWY4NmZmY2I0MzAwZTQxMDVmYmY1YmRlMjZmOWY3YjJmN2ZlNTliNGZmMjVjMjQxODY3MDI5YTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MGU1ODU0NjQ3NTM4NjkyYmNiZGM3YTE4YzgwNzgwMTk3MjRkZTkwNTcxNzZhZmY2ZDU5YWFjYzE1YmQwMWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYzNjI3ZTM2MjE3NmIwNGI5ZGQxNjliNzJhNmNkNjQzN2NkOWIyNGZlOWJlNDVkYmYxYWJlMjUwMTExZDBhZDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dbb3a955432e44d58d30693f591984ea",
+      "statement": "切换 `activeAccount` 时 `useHelper/ctx.ts` 以 `flush: 'sync'` 清空 `jobResultMaps`、`stateMaps`、`drafts`、`manuallyFiltered` 并重置每个 `jobData.state`，草稿因此随账号上下文一起失效。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L89-L102",
+          "version": "repo-lines-v1:sha256:ccd9c3692b1f42db507b8292a976ccf7516b8b8dee0d9b35779ae1b568e3b93f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5ZDY4MWM2ODllYzc5ODc1ODM3YWViMDBkYmJlZGU1NmU1MWYwZTIwZjJhY2I4NTQyYTkxYmVjZDY1MzYyZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMyYzljNDk2ZTcxMTM5MjdlOTYzNTQ4YWQ3NDY1Y2FjZDU5NDE5OWI1OWU3ZDdlMDVmOWI0MWM1MWI1N2U2YzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjOWIxZTA4MWNjZDA2MDBmMjU4NDFiNzg2YTUzN2JlNDMyMmQzNGNiMGQzMDE5NDA1YWUwMWFlZTI5OWM4MGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_442a55f8f6504668a13d1d4048459b86",
+      "statement": "`runJob` 在 `generate` 模式下取 `data.state.aiGreeting.greeting`，为空抛 `仅生成需要启用并配置 AI 招呼语`，否则写入 `drafts` 并把状态置为 `{ status: 'ready', msg: '待确认发送' }`，不执行任何 delivery 任务；`executeAll` 在 `mode === 'generate'` 且 `aiGreeting.enable` 为假时提前抛错。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L311-L318",
+          "version": "repo-lines-v1:sha256:f5c8c491aedb6b12466857d99825f72163560c92842ae803005ee3e6a5f84011:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmMxNDAxYzVmZWFjMWUwOTZlNWNkZWYyOTE4ZjlmYmQ2ZGQ0NGFhMjgwN2MxYzRhMWM4MzA0ZmFiOGZiNzM1NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzE2OTJiYTJjNDhhYzI5YTFiZTI4MzI0YWE0NGFkNjIzM2U2ZmNlODkyZjVhMDAxOWIzYjg1Y2E3Y2VkMDNiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDg1NjkzMzUzYjk3NTRmZWU5YzI3MDUzZTA3ZTA4ZjMwZDdjNmQyNDI2ZjY1MTVkYTdjNDY2ZjkyYmIwODE3NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzNmMDAyMGMxZTYwMjk1MzJhYWJjYmQyYTAxZmI3MGQ5MDMyZjg5MGYxZmU5ZmUzYWY5NTA2NWUzNGJhNjkwOCJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L400-L412",
+          "version": "repo-lines-v1:sha256:7953d7d63873a32c668932648288b480a93ef297e48fe71ca69307dd60cdf145:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzMGE1ZGQxZmMwZTAzZTE3NmQ3ZGM2YTJjZDFhZjQwMDU1NmZiNGRkZmI4ZGE5MjhjYTc2YTI1YWE2OWI4YjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzMTRhZmIzNTQyYzkwNWFhZGVjYTAzNTBkNzRmYTM4NjlkY2YyZGM2MGYzNjMzZDRkODc1ZmVkODI1MzYwZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhM2EyZWUzNjk4NWFlZWM1ZWMyZjYwMmZkMTg5M2E1ZDQ0MTRjMmZmMThiY2M0YTU1ZDQzNmI1NzU5YWQzNDAifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L489-L492",
+          "version": "repo-lines-v1:sha256:02b26061041002bfb124c01a344438bd1998a8998c4d94f1e59fea04edad9282:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGM3NTU4MWU0MTAyMGEwMjNlMTI3NjA2YmVkNjEzYzQ2ZmIxYTU1YWU4MWNlNzUwNDY0OWJlNDViNGI2YjcyZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTJmZjIwOGFmYzA5NTRiZTI2MjJhNWFkOTA4NzRiMTU2NzY1NzdmNmU3ODc4ODQzZTA0NjBkNDVkNzYyN2YyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzdmNmM3NmFhYzczZjg1OTg4YzQzYzA5MjM2MzFiOGNiYjQ4YzlhOTBlMDY3OTBlMjQ1NjgzN2ViNTdiMTExZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTAxMDY3ODlkNGJmZDlkOTA5MTk3MTAwOWRjOTEwNGQ2OGJhZWQ4MTNjODBmMzFiMWVlNmMyMjIzZTBlMzgyNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_82b2f19f60a146c99b13dac430fd7145",
+      "statement": "`parseGreeting` 失败（非合法 JSON、非对象、字段类型错误或缺少非空 `greeting`）会抛出中文错误信息，而不是静默发送；`parseGptJson` 失败则返回 `null`，由调用方以默认值兜底。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/utils.ts#L44-L85",
+          "version": "repo-lines-v1:sha256:94612dcdb14d352916232f24d41f99eda98974eb086c3389ef45ef9bef8a70fd:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMxNjZlZDU2NGNlOGQ2OTNiODhkOWE5NTA4YWJkNmZmZTMyMjZkNDk0N2Q0ZWRlZWRhODBjNzM4ZTE3ZmVmOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzMzkxYjI2MDUyMjk3YWU4N2Q2N2YxYmJiY2ZmMzk5ZWY2NWExY2Q0NzQyODlkOWE4OTcyN2ZmZmE3OTYwYzUifQ"
+        },
+        {
+          "resource": "repo://src/utils/ai.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:93aec51e272584adbe125a587c96d1e0449695952770022b5297348de9921dd3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5NmVkN2ZjZjI4NzFiYzA0MzQwYmY1ZDdmNDFkMWM2NjMxZjVkM2VkYjdjYWRmZThiMjUyZmEyMTRkOWU3ZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2Y2E2OTU2OWZhMTE1ZGY3ZTlkZmZiYjk2OTM1N2E3OTBlMzcyZTM4OTFkNzcwNjgxMDcyNDVlODMyYWNlYzUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b61dd9014e0644d3a76b56259e61977f",
+      "statement": "`parseFiltering` 以 `Math.abs` 累加正/负项分数、`rating = positive - negative`，并生成含各段理由的 `message`；`aiFiltering` 任务按 `rating < (score ?? 10)` 判定 skip。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L317-L350",
+          "version": "repo-lines-v1:sha256:db7c01ef06a68f6d4464bf9b4ad4285a1aaf65ab4a576eec861d3f08daee872a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMDY3MGYwMzQxZDZlYThiNDM2N2VjMGM1OTU1MjFhNGY4NTgwMzAxODM2MWNkMDFjNzIxMzdmYzgwNDY0ODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzYTBlZTYzOTk3NWQxZDJlMDFhOTU1YWU0NTNjZDFhZjU4Yjk1ZTM5MzFiNmNmYjIwYjYzMmY3ZTVmMGNlZDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjZDUwOTFhMzkxYzFlMDkzNmE0Y2EzYTUwZTA4ZmIxNThhYjFiYTI4MzNmYzU5NTdlN2E3MDM5OGZkNTFkNTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUyOWUwNDNhMmQzNzE5ZTk3YzFjYWYwZjVmN2M5MGM2MTRmZTMwYmJhMzM2Njk2NTQ5MmJhNDBlZTQxMmMwNmIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/utils.ts#L87-L110",
+          "version": "repo-lines-v1:sha256:37ce0b160bb241ca0adf4dd7deceebad34339994e0c05b5d02c60db07aa5314e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwNWZkY2I0M2UzNGNiMGMwM2VmNWY4ZWM4OTQzNDI4ODJiODhhOGRkZDgyNzQ4ODBmMGIzYmJkMThjYmMwY2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmYzI1NmU3ZGM3MDc2MmVhNzYxNjljODhlZDg5MTQ5YjNmYzE2MTkwNmRhNDNiNTE1NzI2ZTBkYWQ3NGE5OTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_15e24d00e8b94548941333829cbc3797",
+      "statement": "`createAgent` 用 `Output.json()` / `Output.text()` 区分输出模式，因此 `json` 选项同时决定 agent 结构化输出与后续 `parseGreeting` 的解析分支。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L97-L124",
+          "version": "repo-lines-v1:sha256:770ee57f04cd47b366923df07f928c2898802903d789f81be220693f5701d85f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5NzhlMjUwM2I4Y2YzN2EwNmY3ZDZmMGEzYTZiNmZlMzU2OTFmYmNhYjUwYjg3NzVjYWI2ZmFiYzcxYzU5MmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyZjQxOGMyMmE5N2UwNDY3ZjZjN2NhMWRlOWQ4MDU5MzA2NzliNDg5MTJkNWQ4NTk2ZDA2ODMzMmU1Y2RjMGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiZWY2ODIwODk3ZTQzNzkwYWIwNDAxNmIyYzE1OTc0ZTEzNTYyYWQ4YWZhOWE4ODkwNzQwYjNhNjhkN2QxMTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzMmUxY2I2MTMwMmM0NzU3MzQyYmI1ZWExYjg5MWNjYWFhODI0YzgzZTliYzMyYzEyNDM4NWFmMDE3Y2UxOTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_953b1f842e094d5cb065b74007cf6d14",
+      "statement": "AI 筛选任务在装配期以 `json: true` 创建 `filtering` agent，未找到模型配置时抛 `HelperConfigError('aiFiltering.model', 'AI筛选模型未配置')`（AI 招呼语同理抛 `aiGreeting.model`），使配置错误在工作流构建期而非运行期暴露。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L317-L340",
+          "version": "repo-lines-v1:sha256:feed0d7a70a70e0e4b2e3871a10293bb83e4dc17878ed9627ffdf5bc03ca22ba:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMDY3MGYwMzQxZDZlYThiNDM2N2VjMGM1OTU1MjFhNGY4NTgwMzAxODM2MWNkMDFjNzIxMzdmYzgwNDY0ODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjZDUwOTFhMzkxYzFlMDkzNmE0Y2EzYTUwZTA4ZmIxNThhYjFiYTI4MzNmYzU5NTdlN2E3MDM5OGZkNTFkNTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI5ZTRiZTI4NzdmMzE5MGM0MzE0YTJhNGZiMWE0OTE0ODk4MjM3M2Y2NmIxYzIzYjVmMGMyMDc0ZTMzMzRlZjQifQ"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L398-L402",
+          "version": "repo-lines-v1:sha256:81e85425039f066815356a2c1ce2c7750106491ca3c8e05c47e805e7f073f361:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDNmYzhhZTVkMmU5ZTc1MzgzZDdlNjAyZmJlMWE3NTFhNDhhMjQxYzdmNzAyZDU5NjI5NDM3ZTgzMTk0NzgwMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjI3YTdiNjA2YWU0NGU3ZDhiNzU4MWJmZGYxNTIyNTk3OWJiMDdmOTczNDI0MTQ2MDE5YzYxYjA2N2E4Mzk0OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTU4OWQzMDE2Yzg0MDJiNTJkODkwN2E2MjhjZDI5ODIyMGIxNzI3NzRhMmU0OTY2YjA2ZDVhNjMyZDFhYWViNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGQ3OGM0MjIzMTkzOTI4Y2RmYzk0Yjc5MGUzMDEyNDY2Njk3MmQzNGJlZTliMDZjYzExZDRiMzgwMmM4ODBmZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3c453e449849439599e336b5103a00c2",
+      "statement": "`ChatBox.vue` 对非招呼语的文本块在 `uiRole === 'filtering'` 时调用 `parseFiltering(part.text).message` 再展示，因此筛选理由在面板里是重新解析后的结构化文本而非模型原文。",
+      "evidence": [
+        {
+          "resource": "repo://src/components/ChatBox.vue#L320-L324",
+          "version": "repo-lines-v1:sha256:b6a8724af75e35e194ad0a2f729eb62026712fef7441e4b07896909e6f9aabe5:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTU3NTU0ZjQ2MDFlMzBiNTc0NmZjODQ5ZDU0MzZmZTk5MzViMTZkMWRkOGJiYzRlMmYxZTU0MDlmYWEzZWFiMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2Y5ZjRkMDYxYzZhMzdkMzUyN2NiYmE0OGU0ZDZmNzg0N2E4ZWRhMzI0YmE4MWZlNDUxM2YzNzk1Y2NhMDhkNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTIzZWYxMmRiYTVhNDYzMDk2YzY3NDZlOTkwZmQzODk4Y2NmMDBiZmM4YzAzZDc1Y2ZiM2VkZDZlNjNhN2Q3ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjM3NjQ3MTRlZjMxMDRmYmY1ODc1NTUwM2ZlMjQyN2YwMDRmZjdhODA3MDNiNTQ2MTg4ZDQwNzQ4OTRkOWRhZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4bd0f2303c9847c9aa33639c839a043a",
+      "statement": "ChatModel 固定角色清单为 system/user/assistant/boss/jd/filtering/greetings，该类型同时是 agents Map 的键，因此重新 createAgent 会覆盖同一角色的旧 agent。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L21-L26",
+          "version": "repo-lines-v1:sha256:b1a93ccd2974cadc1c1e9fc9d6188f19f86ff418dc6a6f331dbd8a6f30b37113:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzEzMmI0OGZjNmIyNzRhMmRjNzg1ZjdhNDI1ZDA2YjM1ZGZhMmVhNTY5Yzc2NzRjZDJiMzA2Y2MzOGI2M2FiZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGY0ZTJiZWQwY2UzZDQzMzQyZGFiZjA5MDY2Yjk2ODc3MTVmNDE0NTQ1MzE0NjY5ODg4NGIzZjdmZDBiM2ExMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzkwNzgxMTJiYTk5NjkzNGRhZTBhMWNmYTlmZmIyOTY0NzVkNDFlMjMyODY5NDQ1NDY4ODExNWVmNDJjYmEyYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGJmMjVhOWVjMjA5OGQ3MjM4M2QwNDQzNDYwODFmM2MxNTZlNTU0NzA2N2E3ZTkxMjVlNTRmNmM4N2I2NWQ3ZiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L96-L96",
+          "version": "repo-lines-v1:sha256:d70479091b6713aabf3dca1e786e01e70d5fd473fe0ed2b2381fc6fbaab0f481:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDcwNDc5MDkxYjY3MTNhYWJmM2RjYTFlNzg2ZTAxZTcwZDVmZDQ3M2ZlMGVkMmIyMzgxZmM2ZmJhYWIwZjQ4MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDcwNDc5MDkxYjY3MTNhYWJmM2RjYTFlNzg2ZTAxZTcwZDVmZDQ3M2ZlMGVkMmIyMzgxZmM2ZmJhYWIwZjQ4MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzUyMzA3ZjcyY2UyYmZjYjI5YmEzYTZlZjVlZjRiNjJlM2U5ZjQ4MmZlMmI5MzRiN2Y4YzRiNjIwMDQ1ZDhiMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2RlMjZhNGNiZWVhMWI4ZGEzYjU4ZGY3MzljMjBlY2VmMDA1MTc3ZDNhZjRjMjJiYzk1YWIzODY1ZDFjMDM0YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9ab2ad8d5aa241a29915ea11b55686d4",
+      "statement": "createAgent 只在 modelData 中找不到 key 匹配或 data 为空的模型配置时返回 false，调用方据此抛 HelperConfigError。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L325-L333",
+          "version": "repo-lines-v1:sha256:4f45b25ccb7857f381a03dbb6059e53b582100aaef7b49699afd2565bd4e8cec:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTRiYTQyMDRkZDZiYmNiMjMzYzY3ZTU0OGY3Yjc4MGY4NTQ0YmVlZTE3YzRkN2MwMzMzMTAwNzMxM2JjZDczNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2M4MjMyYmI4YTlmMzg1ZDM2MmI3MDAyNThhY2Y4YzA1NzZlZjVlNjc3ZGI1MTAwYjlkNmI0Zjc5NDMzYWFhZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmMzYjc4NGUzMGY3NDk1Nzg5NTM2ODlhOTU2OThjYjE2MGNjN2Q0YWYxYjQ3ZDBmN2JkZDBhNjkyZGE5ZjVhNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTIyMjAwNzQ0NzMxYmE2Y2VlN2IwNGRjYmMzY2Y0NWY4OGZkYTM1ZjUyODFkOTc3NDFmY2QzNjJlNjAzY2I3MiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L117-L124",
+          "version": "repo-lines-v1:sha256:402fed8ddf1360941f6b3b349fba472c5e70b2500e3e5229cd30b86cc2d34846:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjQ3NWU5NGE5MDRhYzQ5YjMxNTRkNDY3MmE2NmU4NjI5Yjg2ZGFjNzRlM2UyOTM3YmU2OTI3YWUzZGExMWM1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTJmNDE4YzIyYTk3ZTA0NjdmNmM3Y2ExZGU5ZDgwNTkzMDY3OWI0ODkxMmQ1ZDg1OTZkMDY4MzMyZTVjZGMwYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjMwYTE0MjQ5MTM3M2ZkYzY0ZTQ3OTAxNjU4ZTRjNTExYmVmMjU4OWJjZDdlYjM3OTczYWQxZmUzOWYyYzcyYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDMyZTFjYjYxMzAyYzQ3NTczNDJiYjVlYTFiODkxY2NhYWE4MjRjODNlOWJjMzJjMTI0Mzg1YWYwMTdjZTE5MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_bbf32a12942d4bab8be8f1de16a97e5b",
+      "statement": "chat 会把 uiRole 为 'jd' 的 system 消息作为岗位上下文推入新会话；disableMessages 为 true 时该状态不登记进 states，测试消息不会污染真实会话。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L163-L200",
+          "version": "repo-lines-v1:sha256:18bbf7782cae9e3abd6b2fc592f1e3841fb1f7a4d770a48f528f797da3498cc0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyMWQ4MmU3OGFlZGNmZDQ4Y2I1NzMxMWY2MGMyYjAxMWY1OWYxMTE5MTNlMjAyZTEwNDc4ZDM5NmIyYTU0MjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0ODkwMDYyOWM5OTRkYTk5ZTBiMzk5MTM5MGY2MDAyYjU0NTE1ZmRjOTk2MzA3MTkxZjBhNTllYjJkODM2NTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1NzEwYmI5NzhkODYwMGQyMTJkMmVjNzYxNzU5ZDhkNWRlOGNlYjEwNGU1NWJkNTIwNTExN2FhNmY3NTllZTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjNjM4OWVlZGQwMzBmNjQzMmQ1MDUwMjg1MDA1ZjQxNTBmNmQ0MjE2ZDc2ZDYyNzFlMjgzMGE5YjU0M2Q0MTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_70108754ae0e4e8ebbe3aa695fca27b8",
+      "statement": "chat 的流式消费在收到 error 分片时把 state.status 置为 error 并记录 state.error，流结束后只要 state.error 存在就 throw 给调用方。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L286-L318",
+          "version": "repo-lines-v1:sha256:53d9425052ac46736575494a9bcd80431b3715e491c6aa43070d10046fb6c331:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzODJmMjUyNDAxMTJiNjExNGUzZDMxNTg4ZDU2ODAxNjA1Y2YxMWI2NWFlMDczZjk0OTk0YTNiYzBhOThmMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlNGE3ZDM0NzlmOWI2MDIyZjljNWFjMWYyYjZhNzNiMDA2NzIzYzZjYzI4NDgxZDQ1YTFjYzM0ZDhmNmE5MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA2YWRmNGQ2NTgzMjhkNjUzMjE1MDM5MzNiZDQ0ZGVkMjI1NDdjMTg1NTVmZjcxNzMxODQ3YTQyNzJkMWFlMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk5NjNlMWQ0OTExZDk4MDc0ZmQyNjJmMjFlNWMzZDFhNmI2ZGE3Y2IxZDhkY2UwNzdlNDJhODZiMjUyMmNiMTIifQ"
+        },
+        {
+          "resource": "repo://src/composables/useModel/chatModel.ts#L324-L326",
+          "version": "repo-lines-v1:sha256:5e2f074695fb03bc7aad422261ab529d99f611e606c8091d186a973f8be81316:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzc4MjY0OTljNjNlNGVmMDdiMzcwZWEyZDM2MzM1ZTU3YWM1NTQ2NGNkZTVkZWZjM2I5OGNjMTAzZmM5YjQ5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTY0YTIwMTBhZjE1MThkYzgxNjBlMWI3NWU4MzA3OTUzNGZhNDYxZjdiNGIxMTk4ZjE2OTFkYWJiY2I0ZmUzMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDY4OWY1Njg2MjE3YjBkM2E4YjM4ZTRiZjYwZmY4ZTkwZDhjOGUzYzQ2ZmRjYzY1MTk1NjY5NjEwY2YyZTNkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjhiYTZkM2RmMzliMWQwNjQwOTJjYmMwMTNhOTgwNmQ4ZjYzZjM3ZTU2YmRiMWMyNmQ2NjE1M2M5Mjk1YWQ3MyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1e2c90112d5d43f5bd6ff8376bcf504e",
+      "statement": "renderTemplate 的变量路径字符集为 [\\w.]，因此下标与 length 可用，而方括号索引、函数调用、|| 与算术表达式不匹配、会原样保留。",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/ai.ts#L15-L27",
+          "version": "repo-lines-v1:sha256:df85d7bda9f826c7c4a53d6e655d5c3e34cac328240054f069a26eae8cb7674a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2MTY4NjI4MTMyMzJiOTQzMDRmYmQ3YjFmYTg3MjhjZDVkMGE2YWRkMWZiNTI1YzUzZDViMDEwYTYzYjFjZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4MWM3OWUzMzFiNjg3NGRjNjA3NDJmMTJkZmU0MWQ0M2RmZGJjNjA3M2RjOGQwZmNhNTRkNjk3ODlmNDgyYWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3ZTBhMGEyOTdiNmRlYzljZjdjMzRiZTJlMzgwMDdmN2RmYjMwODdjMzZkYjIxOTg0MTkzMTI3NTFhZmM0YTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6c814b96bcb34d1ca41d77976f7c9905",
+      "statement": "AI 筛选提示词在运行时并不持久化评分：分数与理由只出现在聊天面板 filtering 消息中，feishuJobRow 从该消息反向解析并 try/catch 兜住失败。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L334-L341",
+          "version": "repo-lines-v1:sha256:7a58aa5fb88d89f360476c47225efe706a4af29d10228438c5a1df5db766b146:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWI2MmY2MGQ4NTkwYTU3OWNmNDZmOGQ2NzM3OGM0YzU3MmI5NjJjZWNjZGI5MGM3YTVmN2I0MmI5NjA3ODJhNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWI2MmY2MGQ4NTkwYTU3OWNmNDZmOGQ2NzM3OGM0YzU3MmI5NjJjZWNjZGI5MGM3YTVmN2I0MmI5NjA3ODJhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTBjZDc3NzRlMDY1M2RkNmE3MDAyMGVkMzU4NGVkYWQxOTZlNWZlOGE0Yzc1NmE2NmM3Mjc4ODNhMWZjYTk2YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTdlMGI5YzIzYmZhYTk1OWJjYTIzZjViMmEwNzVkMDM0MGIwY2M5NTFkODUyZTFlNDg3M2I4YmExMWU4YWY3ZSJ9"
+        },
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L18-L32",
+          "version": "repo-lines-v1:sha256:99e532752918090bd5a27498bf30dba4c972ddfb7fcc60c5443a79f89adb32e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NDJjMGY4OWMwY2UwOTFjMTA3YWJlZmFmYzEwOGNmNGJjY2FjYTJiNGRjZmZiZDIyZGRkZDE2ZTAxOWJjZTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmODg1YmI4NWRjMjI1MTRjNzc1ZjUxMWM0MTc0NDMzOGY0MjI5M2M1YmQ4ZjdkOWZkNTRhNDRkNzJkMzVmM2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4MTM2NGE0ZmMxZWUyMWIyOThmYWVmYWY5ZjM4OGM2OTE1NTgyM2E5NDQ1MDExYTAxNTVjMzE2Y2YxZDhlMzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNlNmRlNTFiZTk5ODBlMDljZmExYTM3NzM1Yzc0YjZmOGQ4ZGUxMTZkNDkwOGNjMWIzYmQ4M2FhM2ZiNWMxN2EifQ"
+        },
+        {
+          "resource": "repo://src/utils/feishuSync.ts#L76-L78",
+          "version": "repo-lines-v1:sha256:220b744444b28edd23df83456628412f6e4e842540d64431e13204a3ad2bbffb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjNmZDEzZWZlYWJmNzY5Yjc1MzVhYjEwZGZjYzdhOTIwNWM3ZTVhNzMxMmY3MjkxMmU0ZTQ1N2RmMzA2ZWUxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzEzZjMyZGMzZDU3ZGVjMjFmMWUyNTFiOWIwNGUwYTFkNjQyZmEzN2M2NTFmMmM1MTJmNjI0NDA5ZTg2MzMzOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjI5M2VmOTU2YWFmZGM1NTQ2ZmFhZTJmN2Q0MmNkM2RlYjA1YmE3YzRkMGM0NjIzNmZlNThiMTExMmYzZjhjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzQ0ODMzZDM4NGQ0ZDc0Njg2YWI0YzY0MTNmY2ZhNDUyY2YzMDllNDRkYjU1M2U3ZGRhYWQ2MWU0NzkwMjgzNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_27cd58979ddc48feb6c2c5e93a9b5958",
+      "statement": "parseGreeting 的 JSON 模式按固定顺序抛错：JSON 解析失败抛 'AI招呼语不是有效的JSON'，顶层非对象抛 'AI招呼语JSON必须为对象'，greeting/reason/error 非字符串或 abilities 元素非字符串抛字段类型错误，error 为空且 greeting 为空白则抛 'AI招呼语字段 greeting 必须为非空字符串'。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/utils.ts#L45-L83",
+          "version": "repo-lines-v1:sha256:33feceae8117a92059662210ff4862af0bd279e7566c3f0493d62ca95bc612a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmZGNhZjkxZTFiMjhjOWZiYWRlYWUzZWUwMmJmNzAxNGVmYjRhYmRiZmJkMGFlOTI5MmFiM2YzZGQxNzAyZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxNjk5MzcyZGI2NTM2NjhhMDMyNTM3YWUxZjliNzU1NWIyMmI4YjZhY2IwZTI0ZjBkZjEyYTI0NGZjMjE0NjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVlZGFjOTk1NWM0NmQwYzkyZDQ4M2ExZjE5NjFlNTRjNzk5YTQ3MjQ0MDZkNjUxZjIyYzM2MDEyNjEyMGE5ZjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4052a6caa1cb428eb8d64e7741e4414a",
+      "statement": "error 是 AI 招呼语唯一的拒投信号：只要 error 非空白，greeting 可以为空并兜底为 ''，且拒投以 taskResult.skip 形式返回而不是抛错。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L434-L438",
+          "version": "repo-lines-v1:sha256:d6cc0406b26e032e99d160fb6e1c085ded469855c0c94b06e28ec18c3914e65f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmY2Zjk2YTM1Zjg4YTczNmU4ODI5MWYzYzgxNjlmNjM3NzdlZmM4YjgyMDlhYjkyMWIzMjdlMDFhODRlYzc0YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODgwMDVkNTcxMDZhMzYyZWIwMDBkYWYzZGE0Njc0YzgyYjUxOGZmNWEyZTJmNjdlZThlNzU3YTMzM2MyYWY2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWUyZGQ1YzljZTg4YTJlZTQ5NTk4YTY0OGIyOWQ4ZWM4MWU5YTMwMjlkYWVmMTFjY2U0OTlkYzEyMzMzYzI0ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODQ2ZWQ2YWNmNWY2OTFkYWVkYmYxNzZkMzJlMDJmOGI1MjI2ODFmZjE3YzlkNjcwOTgzNjVhMzE3NTI2ZjU2NiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useApplying/utils.ts#L72-L79",
+          "version": "repo-lines-v1:sha256:f643fc7e735a545ccba7c7e022b4c8e6c63ba1cd64809c4d7695b3a3dcabd8ef:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxODdmN2E3ZDkwMDQ2ZmEzODAyMGQyZTkxMmMyNzRhNmU3YmM0MGViZjZiY2E1NDdiNDdmMWM2MGEyY2FlNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDk1ZmEwZjExMTdiNWVhNDA0MzQxNDBkZGUxYTM0MGM3MjBkZGJmMzI2MjEyZTE5MTgzOGQ0YjE1NmQzMTZiYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDFiZjQwYjhjMTdiOWMwYjA1Njc1N2FjM2RhOWE0OWZjNmIzNTNjN2RjMThjY2U5YmNkNmM4MmY4MmU2MWIwNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTM5MzY1NTE5YTg5NGJiNjdhMjc2ZWRiMjc1Yzk1ODcxNjI1MTM0YzMxODFkODEyZWMxZjRlMWQyYzdmNGE3MyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ff0aa00d45b84c918710a3e2fbd26f53",
+      "statement": "state.aiGreeting 的守卫在三处重复：aiGreetingGenerate、delivery.ts 的岗位投递、handles.aiGreeting，都按 error 非空 → skip、greeting 缺失或为空 → 抛错处理，因此拒绝与失败都不会发出任何消息或图片。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L434-L469",
+          "version": "repo-lines-v1:sha256:fecbbc8481f3f43de9afa5cf5192f0bc39f414dd4244689c4ba4f9f81ff2565c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmNmY5NmEzNWY4OGE3MzZlODgyOTFmM2M4MTY5ZjYzNzc3ZWZjOGI4MjA5YWI5MjFiMzI3ZTAxYTg0ZWM3NGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2OTgyNTE3OTI0ZmU4ZDNlMTU2NjcxMTViMWY1YTIwMThlMGQ1NWNlNWEwMDFiMWUyZDVlMzFiOGIyNDEyMmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMmRkNWM5Y2U4OGEyZWU0OTU5OGE2NDhiMjlkOGVjODFlOWEzMDI5ZGFlZjExY2NlNDk5ZGMxMjMzM2MyNGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViZWVlN2IyM2E3MWQ3NDI2MDdjZTc2YWViN2Q0NDI1MTkyNjAwMmFjZDc3YmYwZGMyZmUzNzQ0ZmZkZTllOWUifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/boss/delivery.ts#L77-L95",
+          "version": "repo-lines-v1:sha256:627801a3f7462a4d4c2fc00cdefe6dce205b182c8ec310aa4dbdbb3e1a1deec3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyMDc4NmFhNWI2ODNiNzRhOWNiY2Y2ZWQ1ZmNmMzM0MzgwZDI5OTFjZDIzZDBmNDgzMTlhNTdlZjExOTg2MTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyM2JkZTJmNzlmZWNjOTAzYzE4NTNkNDdhZWQ1ZmJkOTVjZTExMDQ3YWVlMmNjYzZjZjRjOWVkN2M4NzkyNTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzZjk3ZWFhZTM1ZDFkZjRkNGFlYmQ4YmY4Y2U4ZmM3NjI4YTQ4YzJmZjg2ZDk3MmQxYjEyODY1ODMwYzc2ODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmYmY5OTYwNTkxYjI0ZjRjZjliMmJkZTM3OTUxNTU5YjQwYmE1OWEwNDA2YjJiNDU3ZDA0Zjk4MjA0Njc3YmIifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/GreetingImages.vue#L97-L101",
+          "version": "repo-lines-v1:sha256:5313db31f5ed1cf8436891c5494c8817dbb0bdedcdeb92bef042a1600b3fdca1:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjEzYmFhYmVhZGQ5MDY5MzY4ZGFkNWFhNGM3NjU3YWJlZWQ5MzNjNjJjMjQxYThhZDM5ZjVlNWMzZGIxZmFlNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTBjZDViNzdmYTE0MDVjNjllMzJlNTQxYTZlNjc1NDFiOWFmM2FkOTRmYWViOTY3YzY5MjNjYjU0N2ZlZWY2MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDgxNDg0N2M5NmQ0YmQwZGFjODFlNWMxNTlhMmVkNTk5NzE0ZDc1MDZlNGVmZWM0ZTE0ZDQ0ZDk1MjIzMzUzMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDUyZTNiZmQyYjFkYjkwZmE2NTViMzQ0YWMxZDJjZjk5ODU4YzRiYTVkZDg4ZmE2ZGU2YTY4MzQyNTVjMWMwZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5521da29707d468dbde39d592cf471f5",
+      "statement": "JSON 模式招呼语发送时按 beforeImages → 文本 → afterImages 顺序组装消息数组；非 JSON 模式直接把 greeting 字符串交给 sendMessage，因此没有图片消息。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L455-L468",
+          "version": "repo-lines-v1:sha256:198ff2baae41a5dcc78b15005dfb25b13981103960cb625206965cba71997d91:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2ZjM4MDliOTkxZWQ2ZGRjOTFjOGE5NWNmNDJkOTcyMTE2YTQyMGI5ZWJlODc0ZDVmMzQ5N2Q4M2RhYzQ4YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjZWRjMWJhYzBiNDg1YWRiMTYyYWY5ZDdjODcyMWU3ZmFhMGM0ZTAyNjY0ZjJiYWM0MTdmZjJkMGQzMmZhMzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZDQ2Zjg5MTI1MDEwZmU3NThjODZkMzkzZmI1ZGQwMWZmNjUxMWQyMGY5OWNiN2U1Yzg1M2Y1NmYxZDY5NmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjY2Y1NTk0NWIzOWJiZWJjOGRmMTkzZDE1NGQwMjE1MDViYzliNWUwZTBkNGI4OWNkOWFkOGE4YmVhNjdkY2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc3b31302b2d40d5ab3d9d7e42dcd14b",
+      "statement": "设置页只有 aiGreeting 且 JSON 开关打开时才渲染 GreetingImages 图片编辑器，切换 JSON 开关会弹确认提示必须同步改写提示词，并以 greetingJsonTemplate 展示 GreetingResult 字段约定。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/LLMPromptEdit.vue#L39-L55",
+          "version": "repo-lines-v1:sha256:cacc45d838367613b487369391ad2dd8b6222cc1721356d1863eb35140767e1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4NTlmYjE3NmIyNWM1MDE5NGQ5ZjE5ZDU2ZDZlZTdmMTBmMTY1OWZkY2UzMTk4OTM3NDU2MTAxZGU0YzBlOWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNjYTI3Mzc4OTM4YTZkYTJlMTVhMTNjNTk2YjIyODdjN2IzMWE3MTJhOGI0NTM1ODM3NGQ1ZmI4YmY3YjIzOTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViZmYyZDNmMGU4NTNmNThhNjlhNmU4ZTZmMWFhYjcxMDMyZTExMGQyYTEwMjMyNWNlMTJhNWM2ZTgzMjY2YWEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/LLMPromptEdit.vue#L497-L514",
+          "version": "repo-lines-v1:sha256:1ddd1e8c3c2caea226732cb3545bb62914744d718deeaea3e6f3648fc1e9a689:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4ZTRhZmMwMzIxY2E4OTZkMjM5MDZlZmZiZWRhMTAzNjZlMWZhNzg5ZjJjZTlhYjQ2YzcyZThiMDM5M2YyZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxY2FlMjMyNWE1ZTgxNDJiNDA2YmQ3MjIwNDZlNGRiZTAzODVmM2MxNjI4NDBlNDdlZDY2MTY5ZTFlYzZmMWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2ZDc3ZmFmYjE2MjU1ZTY3YjI3OTE3YjBmNGI4NjUxZDcxZTZhZDRhY2RkYWFmNGM0YWI1N2YyYWRjYzRlZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNlYTQ3OTkyZWI5ZjY2MDhmMWQ2MmE1YjM5MTJmN2U0MzVmZmViZGJlMTU0MzdjNTUxM2UwMWU1ZTQ0MDc2ZWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_de9fcf7a24964dde8be5e33b62730c52",
+      "statement": "runJob 开头若存在草稿且模式不是 filter，则把草稿写回 data.state.aiGreeting.greeting 并把 'AI招呼语生成' 加入 completed，从而重跑时不会重新生成已确认的招呼语。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L313-L320",
+          "version": "repo-lines-v1:sha256:e13334c6b7b25ccf8bd14470d1705fbf18e5d13a4ec6766f284f616e55acbcbb:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWIzOGZkMTAzMDA4YmU4NjdhOGMzMTNkMDI3OWI2MzUwMTcxYTYxMzQ0MzhmZTIzODI2MDMxZTRkZGY1ZmUxZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2Y3OTIyM2M5NDM2ZGRjMWMzN2RkYTY4YzRhMDE5YjM0OGQzZDkyZWQ3NjczMTU1ZDBjZDIyNDI5Y2I4OGQyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGIxMzI5MzM4YzA3NTNlZTJhNzQzYTc0ZTIyODUzNWJlOGMzMDUyMGJjMzNhYjZhMzU2OTBjZjBlMDU2ODhjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2QwOTAxOGE4ZWQ4NTcyYWNmNGNmOTFiNjhjN2Q0MzVhNGRmYzIyYWM4ZDA4ZDY0NjFiZmU0MmJkYjNlZmZlOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_cccadd98f87d4c5ca843b6625a65b003",
+      "statement": "generate 模式的收尾要求 data.state.aiGreeting.greeting 非空（否则抛 '仅生成需要启用并配置 AI 招呼语'），随后写入 drafts 并把状态置为 '{ready, 待确认发送}' 而不执行任何 delivery 任务。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L402-L410",
+          "version": "repo-lines-v1:sha256:b9ff5487e71fc042152e937cc51c593a8360ee368c0de775a6aaed7031f3f2aa:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGZhZTExM2FlMWM4OTE4MmMwMGFjMmMxY2JmNjY1NDQ4YTdhNWFkYjIwZTcxZWRmOTEyNmI4M2Y0MDdlZWI5YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzAyYmNlMzFjZjc4YTI5ZDBmZTU3OGI2MGI0MDVlMTJjMDZjMmI5ZjU5Y2QzMzI3MTM5ZmQ4MjhhYTc4MTY5NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDk5NGFlNTlhNmRjY2UwM2I3M2ViOGY0YmQ0ODU0OWM1NTJkMTVmNjkyZjU3YTExMmRjODUwMjQ1NjlhYTUyNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmRmN2E2YjVlMGJlZDc2MGRlYWQ4NTVmOTA4ZDU3Mjg3NGZjNjQ1M2NiODJlMDA0ZjlmZWRhMTU1YTBjODUxOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2f099b4b00894f0a8e62227ef3d88bc1",
+      "statement": "投递成功后 runJob 执行 drafts.delete(key)；切换账号时 ctx.ts 以 flush: 'sync' 清空 drafts 并重置每个 jobData.state。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L413-L418",
+          "version": "repo-lines-v1:sha256:ba8fa2f1fd4f402b864f013f0ead2459b667452fe5b6d7f1253235a24962bf84:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWI2MmY2MGQ4NTkwYTU3OWNmNDZmOGQ2NzM3OGM0YzU3MmI5NjJjZWNjZGI5MGM3YTVmN2I0MmI5NjA3ODJhNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzQxMzk3ZDA4NGJlYmQ4ZjQ3NzhjYjA1ZjU5NjAyMmZkZjYwZDAwZGFiM2VlNWY2OThkY2U4NDY3Yjg2Y2IwNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWQwNThkZmJhZDY5MmE4NDM0MDQwNDM4ZGUzMWZiOWQzODI4MjkxYTkwYTJjYjY4MzJlNWExNWM0NjZmYTlhOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWNlMGIxYTcyZjI1YWY5MjVlY2Y1OGM5ZjVkNzViY2M2NzcxZmM2NThhNDVjZDU1NzU1NjU1YWI5ZDk5ZDk5NiJ9"
+        },
+        {
+          "resource": "repo://src/composables/useHelper/ctx.ts#L90-L101",
+          "version": "repo-lines-v1:sha256:958f26a502689c5ac24abd28bfaf1ae28b9f6bff68b961746f96718a09996c31:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwZWNiNWFlZDc1MDEyZDg4ZGJlYzM0MzIxNjRiMTUwZmM4MmE3ZWQ0YWZiNDZkNzVlZDdlMmZmMzEyYWM4YTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxMjdiOWMyMjExMDY5N2ZhOWUzYjc0MDU0M2Y3YTU5ZDZiNzU2MTg3YjMyMjZmYzQ5NzEwZmEzZTQ3OTNhNzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1M2FkNjIwNDFkZTc4ZjNlZDVkMzM0NjYxMDI4MWUzMGIyZTBjZDU5Yzg0ZjA1OWRjYjUwZDc4OGY4YzQzMGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_64bf7de1e4c1477baa52bbcda4fa364f",
+      "statement": "executeAll 的 delivery 队列只包含 status 为 ready 且不在 drafts 中的岗位，generate 模式下未启用 aiGreeting 会提前抛错。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/index.ts#L490-L497",
+          "version": "repo-lines-v1:sha256:274c01afccf6ba102a2fb69ed4dd25df1cd55134d0e326806772afd40730980e:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTAwNGQwYzc1NjViMjM3MjgxY2ZhZGI2ZjM4ZTA5MjkyYjMwZmI2ZmFhNzUxZDAxYTJhNmEyMDI0ZTA0MzRkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTkwOWE1M2E2MThkMDI4ZTFkMzAwMGMwYTdhYmNlZWNiZTVmYjM3ZjRlNTExZWZlNDY2NDNmYWQ2ZTY2ODcyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzVlYzg3ZTk4NmMxNDNmYmM2YjQ0NWRiOTcyY2MzYzc5MDk3Y2Y4ZjgxYWRlOTllNDlmNzM5NjY3ZWYxZTUxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2FhNWZkOTUzYTA5NGU4NThiZDUxMzYxNmI4ZGMwN2M3OTg1NjgwZWQzY2MzYjNmN2FhYjE1ZTE4MTQxNjY0NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4b71efeb1ded44448fe6feeb763808a3",
+      "statement": "设置页提示词测试用与运行一致的 createAgent + chat(disableMessages) 分批（每批 4 个）调用模型，筛选展示 parseFiltering().message，JSON 招呼语展示 parseGreeting 结果。",
+      "evidence": [
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/LLMPromptEdit.vue#L300-L390",
+          "version": "repo-lines-v1:sha256:26ff2a1e53ad201b217bc793e80829850a045f3e887a0f38041867f6372b37d3:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyN2U4OTBkYWRlZTlhOTc1Y2YwN2NkYmFlNDVmZTI0YWJkNzFhYzY0YzI0MTdmMDY0ZDdhMDljNzViNjU0YzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgxZjQ5ZjNjOWE4ODdiNmY2YzBlNDY2ZjYwYWM2MzhlYWMwM2Q2ZGQ3ODg5NDAyODNiMzQ2MTY0NTA1MjA0NTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ0ZTNkZTdlODE1YWM2OTA5NWY5ZWYyNmUwYjNjZDZmODdiMjU5M2Y1NmY5NGFmMmNmNjE0ZDA2ZDA4ZDM1MTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_887b1c152a6048c292bb1e87d5d808bb",
+      "statement": "aiFiltering 固定以 json: true 创建 agent，用户不能在设置页切换其 JSON 模式；只有 aiGreeting 有 json 开关。",
+      "evidence": [
+        {
+          "resource": "repo://src/composables/useApplying/handles.ts#L321-L331",
+          "version": "repo-lines-v1:sha256:93da70e64462e429bc5725799c3b6b46baa7042a9f3e8cb54ebe0396b51d2ec4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5YjE5ODJlOGRkNzQ4MTE4MTQ2YjM5YTJkMDA2MmY0MDgxZTM0Nzc5Yjg2NzVjMjM0YzRmYjEyNGRjMzkzOTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxMTVjYTkwZTYwZGEwNzFlMjkyYjJjNjM4NTY4MjhmNmJiN2ZjYzc3MGU5MmE3YjNjNDA2MjMxMDkwYmRiZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEyYWIxMzU5MzMyN2RkZDgwMGRjZTNjZDlmMzMwZGM5YWI5ZDEyMzllNzc3ZGFlZTRkMTAxYTBmZDdjNTVmNTEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/LLMPromptEdit.vue#L337-L347",
+          "version": "repo-lines-v1:sha256:39a28516fff43d5ef198cf277cb4509c9c84dc63e52b21a4606a2e1e85184a8f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0M2I2YjQ0MWVmZmVjNWMzZGE3MzlhODlhOTBiYTQ0Y2I0YjJlYzhmM2VkOWY1NTFkZmM3MDIxOGY3NDFjMzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2ZWQ5MzhmNWM3ODIyMmY5Njc3Njc1YTNkMDExZGViNDhiMjFiNGU3NDA4ZGYwZjM5NmRmNjJkYmUwYWUxZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlhZWRkOTU0NmY4MzExMjk4NTJjNjI3YjZmNGY4ZWUwMDVhNTc2ZjQ1NzI3OWU0NTNjOTJiMmM2OWYyOTk5MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEifQ"
+        },
+        {
+          "resource": "repo://src/entrypoints/options/components/AI/LLMPromptEdit.vue#L36-L41",
+          "version": "repo-lines-v1:sha256:cd204f3b4a9604a580b697aff0c13201be1aaa397068287d52cd33815df4054a:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWRhN2Q3NTg3ZTliM2EwOWI4NjNlNGZjMjY0MzUwYzI0M2YyOGIxZjY0Yzc0MjYzZjRkMzhlMWFmN2YwN2U2YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTk0NGZiMTA4ODQyNDAyZjIyMzQ1NTQ5MGE2YTBlMjc2NzBjZTQ5NDI5NmQ0NTViZWExYmJjZGM4MTczMDc4NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTI3NTkxY2EyZjNhMzllYTY0YjU1NjJlNzk4ODZhYTgyMWM4MGQyN2JlYTFkOGJhM2IyMjg5MDQxZjIxYWVhMiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.3",
+    "at": "2026-11-03T12:30:35.415Z"
+  }
+}
