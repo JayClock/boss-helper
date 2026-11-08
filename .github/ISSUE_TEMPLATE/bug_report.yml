@@ -1,0 +1,56 @@
+name: 问题反馈
+description: 反馈使用中遇到的问题，帮助我们定位和修复。
+title: '[Bug] '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！提交前请先搜索已有 Issue，避免重复提交。
+        请勿上传账号、Cookie、Token、简历、聊天记录等敏感信息；截图和日志请先脱敏。
+  - type: textarea
+    id: version-info
+    attributes:
+      label: 版本信息
+      description: |
+        新版扩展：请在此粘贴反馈时自动复制的完整环境信息。
+        旧版扩展（未自动复制）：请从扩展管理页面获取扩展版本，并打开 chrome://version（Chrome）、edge://version（Edge）或 firefox://version（Firefox），手动复制浏览器完整版本、操作系统和 User Agent。其他浏览器请查看对应的版本页面。
+        仅复制与环境相关的信息，请勿粘贴版本页面中的个人资料路径、命令行参数或其他敏感信息。
+      placeholder: |
+        🧩 扩展版本：
+        🌐 浏览器名称及完整版本：
+        💻 操作系统及版本：
+        🎨 主题 / 语言：
+        🔎 User Agent：
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 请描述遇到的问题、实际表现和你期望的正常行为。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      description: 请提供可重复操作的步骤，并说明问题是否每次都会出现。
+      placeholder: |
+        1. 打开……
+        2. 点击……
+        3. 出现……
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 截图或录屏
+      description: 可将截图或录屏拖入此处，或粘贴上传，提交前请遮盖个人信息。
+  - type: textarea
+    id: logs
+    attributes:
+      label: 相关日志
+      description: 请粘贴与问题相关的控制台错误或扩展日志；如无法获取，可说明原因。请先移除敏感信息。
+      render: text

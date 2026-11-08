@@ -50,7 +50,8 @@ export function backgroundFetch(input: RequestInfo | URL, init?: RequestInit): P
         method: mergedInit?.method,
         headers: headersToObject(mergedInit?.headers),
         body: typeof mergedInit?.body === 'string' ? mergedInit.body : undefined,
-        credentials: mergedInit?.credentials ?? 'include',
+        credentials: mergedInit?.credentials ?? 'omit',
+        // 后台通过扩展主机权限跨域，保留鉴权头并允许读取响应。
         mode: mergedInit?.mode ?? 'cors',
       },
     })

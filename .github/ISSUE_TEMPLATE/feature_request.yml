@@ -1,0 +1,46 @@
+name: 功能建议
+description: 提出新功能或改进建议。
+title: '[Feature] '
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢建议！提交前请先搜索已有 Issue，看看是否已有类似讨论。
+        请勿上传账号、Cookie、Token、简历、聊天记录等敏感信息；图片请先脱敏。
+  - type: textarea
+    id: version-info
+    attributes:
+      label: 版本信息
+      description: |
+        新版扩展：请在此粘贴反馈时自动复制的完整环境信息。
+        旧版扩展（未自动复制）：请从扩展管理页面获取扩展版本，并打开 chrome://version（Chrome）、edge://version（Edge）或 firefox://version（Firefox），手动复制浏览器完整版本、操作系统和 User Agent。其他浏览器请查看对应的版本页面。
+        仅复制与环境相关的信息，请勿粘贴版本页面中的个人资料路径、命令行参数或其他敏感信息。
+      placeholder: |
+        🧩 扩展版本：
+        🌐 浏览器名称及完整版本：
+        💻 操作系统及版本：
+        🎨 主题 / 语言：
+        🔎 User Agent：
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 功能描述
+      description: 请描述使用场景、当前遇到的困难，以及希望增加或改进的功能。
+    validations:
+      required: true
+  - type: textarea
+    id: expectation
+    attributes:
+      label: 期望效果
+      description: 你希望这个功能如何使用、达到什么效果？如有替代方案，也欢迎说明。
+    validations:
+      required: true
+  - type: textarea
+    id: images
+    attributes:
+      label: 图片补充
+      description: 可将参考截图、示意图等拖入此处，或粘贴上传，提交前请遮盖个人信息。
